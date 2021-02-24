@@ -2,9 +2,11 @@
 Description of FEC Catwalk
 
 
-## Related Projects
-- [Robert S. Repo](https://github.com/LikeGunSmoke/FEC-Lab.git)
+## Contributors
 - [https://github.com/LikeGunSmoke/FEC-Lab.git](https://github.com/LikeGunSmoke/FEC-Lab.git)
+- [https://github.com/ashold12/FEC-Catwalk.git](https://github.com/ashold12/FEC-Catwalk.git)
+- [https://github.com/austinbkillo/FEC-Catwalk.git](https://github.com/austinbkillo/FEC-Catwalk.git)
+- [https://github.com/austintestut/FEC-Catwalk.git](https://github.com/austintestut/FEC-Catwalk.git)
 
 ## Table of Contents
 1. [Usage](./docs/usage.md)
