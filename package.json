@@ -4,8 +4,11 @@
   "description": "Front End Capstone (Austin K, Austin T, Alex S, Robert R)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint"
+    "test": "jest",
+    "start": "nodemon server",
+    "build": "webpack",
+    "watch": "webpack -w",
+    "lint" : "./node_modules/.bin/eslint"
   },
   "repository": {
     "type": "git",
