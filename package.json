@@ -1,0 +1,24 @@
+{
+  "name": "fec-catwalk",
+  "version": "1.0.0",
+  "description": "Front End Capstone (Austin K, Austin T, Alex S, Robert R)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FEC-Wozniak/FEC-Catwalk"
+  },
+  "author": "Austin K, Austin T, Alex S, Robert R",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FEC-Wozniak/FEC-Catwalk/issues"
+  },
+  "homepage": "https://github.com/FEC-Wozniak/FEC-Catwalk#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+  }
+}
