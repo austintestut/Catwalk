@@ -11,6 +11,6 @@ it('renders without crashing', () => {
 
 it('renders hello world header', () => {
   const wrapper = shallow(<App />);
-  const welcome = <h1>Hell World I am renderrrring!</h1>;
+  const welcome = <h1>Hell World I am rendering!</h1>;
   expect(wrapper.contains(welcome)).toEqual(true);
 });
