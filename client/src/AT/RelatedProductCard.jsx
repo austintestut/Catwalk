@@ -1,15 +1,22 @@
 import React from 'react';
 
-const RelatedProductCard = (/* props */) => {
+const RelatedProductCard = ({relatedProductData, productStyleData}) => {
+  let photoUrl;
+  if (productStyleData.length === 0) {
+    photoUrl = ' ';
+  } else {
+    photoUrl = productStyleData.results[0].photos[0].thumbnail_url;
+    console.log('resetting photo url to: ', productStyleData.results[0]);
+  }
   return (
     <div>
-      <img src="https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/story/taco-bell-and-pizza-hut-name-new-ceos.jpg?itok=tqtqYXTQ" alt="test pic of my preferred last meal" width="100" height="100"></img>
-      <div>Category here</div>
-      <div>Full product name</div>
-      <div>$$price$$</div>
+      <img src={photoUrl} alt="test pic" width="150" height="150"></img>
+      <div>{relatedProductData.category}</div>
+      <div>{relatedProductData.name}</div>
+      <div>{relatedProductData.default_price}</div>
       <div>star rating</div>
     </div>
-  )
+  );
 };
 
 export default RelatedProductCard;

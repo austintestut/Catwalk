@@ -1,11 +1,12 @@
 import React from 'react';
 import RelatedProductCard from './RelatedProductCard';
 
-const RelatedProductsCarousel = (/* props */) => {
+{/* Need to map over each card in data given */}
+const RelatedProductsCarousel = ({relatedProductData, productStyleData}) => {
   return (
     <div>
       <div>Related Products Carousel</div>
-      <RelatedProductCard />
+      <RelatedProductCard relatedProductData={relatedProductData} productStyleData={productStyleData} />
     </div>
   )
 };
