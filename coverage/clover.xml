@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1614396324092" clover="3.2.0">
+  <project timestamp="1614396324092" name="All files">
+    <metrics statements="13" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="1" elements="20" coveredelements="6" complexity="0" loc="13" ncloc="13" packages="4" files="5" classes="5"/>
+    <package name="FEC-Catwalk">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="example_review_data.js" path="/Users/alexshold/Desktop/rfp51/FEC-Catwalk/example_review_data.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="FEC-Catwalk.client.src">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="App.jsx" path="/Users/alexshold/Desktop/rfp51/FEC-Catwalk/client/src/App.jsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="FEC-Catwalk.client.src.components">
+      <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="Reviews.jsx" path="/Users/alexshold/Desktop/rfp51/FEC-Catwalk/client/src/components/Reviews.jsx">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="FEC-Catwalk.client.src.components.reviews_src">
+      <metrics statements="6" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="ReviewList.jsx" path="/Users/alexshold/Desktop/rfp51/FEC-Catwalk/client/src/components/reviews_src/ReviewList.jsx">
+        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+      <file name="ReviewTile.jsx" path="/Users/alexshold/Desktop/rfp51/FEC-Catwalk/client/src/components/reviews_src/ReviewTile.jsx">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

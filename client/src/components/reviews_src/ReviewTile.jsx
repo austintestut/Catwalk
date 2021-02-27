@@ -9,9 +9,16 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    debugger;
     return (
-      <p>{JSON.stringify(this.state.review)}</p>
+      <div>
+        <div>Rating *Star Count*:{this.state.review.rating}</div>
+        <div>User: {this.state.review.reviewer_name}</div>
+        <div>Date of review: {this.state.review.date}</div>
+        <div>Review Summary: {this.state.review.summary}</div>
+        <div>Review Body: {this.state.review.body}</div>
+        <div>Helpfulness {this.state.review.helpfulness}</div>
+        <span>///////////////////////////////////////////////////////////////////////////////</span>
+      </div>
     );
   }
 }
