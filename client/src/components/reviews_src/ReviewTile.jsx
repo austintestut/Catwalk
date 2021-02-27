@@ -17,7 +17,7 @@ class ReviewTile extends React.Component {
         <div>Review Summary: {this.state.review.summary}</div>
         <div>Review Body: {this.state.review.body}</div>
         <div>Helpfulness {this.state.review.helpfulness}</div>
-        <span>///////////////////////////////////////////////////////////////////////////////</span>
+        <span>-------------------------------------------------------------------------------</span>
       </div>
     );
   }
