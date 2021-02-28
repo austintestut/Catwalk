@@ -8,7 +8,8 @@ class RelatedProductsAndOutfits extends React.Component {
     super(props);
     this.state = {
       relatedProductData: [],
-      productStyleData: []
+      productStyleData: [],
+      relatedProductIds: [17762, 18025] // for testing
     };
   }
 
@@ -32,7 +33,7 @@ class RelatedProductsAndOutfits extends React.Component {
     return (
       <div>
         <h3>Related Products and Outfit </h3>
-        <RelatedProductsCarousel relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData}/>
+        <RelatedProductsCarousel relatedProductIds={this.state.relatedProductIds}relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData}/>
         <br></br> {/* remove this when incorporating everyone's components */}
         <OutfitCarousel />
         <br></br> {/* remove this when incorporating everyone's components */}

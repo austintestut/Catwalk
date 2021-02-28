@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import TOKEN from '../../../config.js';
+import TOKEN from '../../../config';
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class RelatedProductCard extends React.Component {
   // and make those ajax requests there
 
   componentDidMount() {
-    this.getProductInfo(17762);
+    this.getProductInfo(this.props.productId);
   }
   // productStyleData.results[0].photos[0].thumbnail_url;
   // get the category, name, default price
