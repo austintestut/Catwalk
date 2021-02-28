@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import TOKEN from '/config.js';
+import TOKEN from '../../../config';
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
@@ -8,14 +8,13 @@ class RelatedProductCard extends React.Component {
     this.state = {
       photoUrl: '',
       productData: []
-    }
+    };
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getPhotoUrl = this.getPhotoUrl.bind(this);
   }
   // make ajax request for each of those ID's, put data in state
   // (probably going to have to make each card in carousel stateful)
   // and make those ajax requests there
-
 
   componentDidMount() {
     this.getProductInfo(17762);
