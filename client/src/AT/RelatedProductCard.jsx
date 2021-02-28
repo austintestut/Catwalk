@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import TOKEN from '../../../config';
+import TOKEN from '../../../config.js';
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
