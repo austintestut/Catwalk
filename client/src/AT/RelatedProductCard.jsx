@@ -88,7 +88,6 @@ class RelatedProductCard extends React.Component {
 
 
   render() {
-
     return (
       <div>
         <img src={this.state.photoUrl} alt="test pic" width="150" height="150"></img>

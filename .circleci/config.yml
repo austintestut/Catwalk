@@ -8,7 +8,7 @@ jobs:
       - checkout # check out the code in the project directory
       - run: npm install
       - save-cache:
-        key: v1-api-token
+        key: v1-api-token-{{ .Branch }}-{{ checksum "config.js" }}
         paths:
           - /config.js
   test:
