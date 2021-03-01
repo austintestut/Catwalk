@@ -12,7 +12,7 @@ class ReviewTile extends React.Component {
   render() {
     return (
       <div>
-        <div>Rating *Star Count*:{this.state.review.rating} <StarStatic/></div>
+        <div>Rating *Star Count*:{this.state.review.rating} <StarStatic number = {this.state.review.rating}/></div>
         <div>User: {this.state.review.reviewer_name}</div>
         <div>Date of review: {this.state.review.date}</div>
         <div>Review Summary: {this.state.review.summary}</div>
