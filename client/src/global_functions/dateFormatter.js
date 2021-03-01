@@ -19,6 +19,6 @@ const dateFormatter = (string) => {
   const finalDate = `${month} ${day}, ${year}`;
 
   return finalDate;
-}
+};
 
 export default dateFormatter;

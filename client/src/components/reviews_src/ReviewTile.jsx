@@ -11,14 +11,15 @@ class ReviewTile extends React.Component {
   }
 
   render() {
+    const { review } = this.state;
     return (
       <div>
-        <div><StarStatic number = {this.state.review.rating} /></div>
-        <div>{this.state.review.reviewer_name}</div>
-        <div>Date of review: {dateFormatter(this.state.review.date)}</div>
-        <div>Review Summary: {this.state.review.summary}</div>
-        <div>Review Body: {this.state.review.body}</div>
-        <div>Helpfulness {this.state.review.helpfulness}</div>
+        <div><StarStatic number={review.rating} /></div>
+        <div>{review.reviewer_name}</div>
+        <div>{dateFormatter(review.date)}</div>
+        <div>Review Summary: {review.summary}</div>
+        <div>Review Body: {review.body}</div>
+        <div>Helpfulness {review.helpfulness}</div>
         <span>-------------------------------------------------------------------------------</span>
       </div>
     );
