@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - checkout
-      run: npm test
+      - run: npm test
 
 workflows:
   build_and_test:
@@ -21,4 +21,5 @@ workflows:
       - build
       - test:
         requires:
-          - build
+          jobs:
+            - build
