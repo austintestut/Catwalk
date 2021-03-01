@@ -1,17 +1,18 @@
 import React from 'react';
+import StarStatic from './StarStatic';
 
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      review: this.props.review,
+      review: this.props.review
     };
   }
 
   render() {
     return (
       <div>
-        <div>Rating *Star Count*:{this.state.review.rating}</div>
+        <div>Rating *Star Count*:{this.state.review.rating} <StarStatic/></div>
         <div>User: {this.state.review.reviewer_name}</div>
         <div>Date of review: {this.state.review.date}</div>
         <div>Review Summary: {this.state.review.summary}</div>
