@@ -22,7 +22,7 @@ class Helpfulness extends React.Component {
   }
 
   render() {
-    let {count, clicked} = this.state;
+    let { count } = this.state;
     return (
       <div>
         <span name="yes" onClick={this.click} style={{ textDecoration: 'underline' }}>Yes</span>
