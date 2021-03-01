@@ -49,10 +49,20 @@ class Container extends React.Component {
       method: 'get',
     })
       .then((data) => {
-        console.log('got this far')
         this.setState({ questions: data.data.results });
         console.log(data.data.results);
-      });
+      })
+      .then(()=>{
+        axios({
+          headers: {
+            Authorization: '1a0d4ed62459d133f7d51d2b376bd89639976abb',
+          },
+          url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/111326/answers',
+          method: 'get',
+        }).then((data)=>{
+          console.log(data.data);
+        })
+      })
   }
 
   render() {
