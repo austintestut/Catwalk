@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx'
+import App from './App.jsx';
+// addded overview, changed render
+import Overview from '../src/Overview.jsx';
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+
+ReactDOM.render(<Overview />, document.getElementById('app'));
