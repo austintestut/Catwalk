@@ -1,9 +1,9 @@
 import React from 'react';
 
-const AddQuestionButton = function({showModal}) {
+const AddQuestionButton = function ({ showQModal }) {
   return (
-    <button onClick={showModal}>Add Question</button>
+    <button onClick={showQModal}>Add Question</button>
   );
-}
+};
 
 export default AddQuestionButton;

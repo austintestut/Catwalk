@@ -8,11 +8,11 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
+      showQ: false,
       questions: [],
     };
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
+    this.showQModal = this.showQModal.bind(this);
+    this.hideQModal = this.hideQModal.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
   }
@@ -21,15 +21,15 @@ class Container extends React.Component {
     this.getProductQuestions();
   }
 
-  showModal() {
+  showQModal() {
     this.setState({
-      show: true,
+      showQ: true,
     });
   }
 
-  hideModal() {
+  hideQModal() {
     this.setState({
-      show: false,
+      showQ: false,
     });
   }
 
@@ -69,8 +69,8 @@ class Container extends React.Component {
     return (
       <div>
         <QuestionList questions={this.state.questions} />
-        <AddQuestionButton showModal={this.showModal} />
-        <QuestionModal show={this.state.show} hideModal={this.hideModal} submitQuestion={this.submitQuestion} />
+        <AddQuestionButton showQModal={this.showQModal} />
+        <QuestionModal show={this.state.showQ} hideQModal={this.hideQModal} submitQuestion={this.submitQuestion} />
       </div>
     );
   }

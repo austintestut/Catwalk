@@ -1,6 +1,6 @@
 import React from 'react';
 
-const QuestionModal = function ({ show, hideModal, submitQuestion }) {
+const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
   if (!show) {
     return null;
   }
@@ -16,7 +16,7 @@ const QuestionModal = function ({ show, hideModal, submitQuestion }) {
         <p>For authentication reasons only -  you will not be emailed</p>
         <button type="submit" onClick={submitQuestion}>Submit Your Question</button>
 
-        <button onClick={hideModal}>Hide</button>
+        <button onClick={hideQModal}>Hide</button>
       </form>
     );
   };
