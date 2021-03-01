@@ -6,7 +6,19 @@ jobs:
 
     steps:
       - checkout # check out the code in the project directory
-      - checkout:
-          path: ~/config.js
       - run: npm install
-      - run: npm test
+  test:
+    docker:
+      - image: cimg/node:14.15.4
+
+    steps:
+      - checkout
+      run: npm test
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
