@@ -1,15 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
 
+const StyledCarouselContainer = styled.div`
+width: 80%;
+background-color: red;
+`
 
 class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProductData: [],
-      productStyleData: [],
-      relatedProductIds: [17762, 18025] // for testing
+      relatedProductIds: [17762, 18025, 17763, 17858, 18076] // for testing
     };
   }
 
@@ -33,7 +36,9 @@ class RelatedProductsAndOutfits extends React.Component {
     return (
       <div>
         <h3>Related Products and Outfit </h3>
-        <RelatedProductsCarousel relatedProductIds={this.state.relatedProductIds}relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData}/>
+        <StyledCarouselContainer>
+          <RelatedProductsCarousel relatedProductIds={this.state.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} />
+        </StyledCarouselContainer>
         <br></br> {/* remove this when incorporating everyone's components */}
         <OutfitCarousel />
         <br></br> {/* remove this when incorporating everyone's components */}
