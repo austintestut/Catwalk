@@ -6,6 +6,7 @@ jobs:
 
     steps:
       - checkout # check out the code in the project directory
-      - checkout: /config.js
+      - checkout:
+        path: ~/config.js
       - run: npm install
       - run: npm test
