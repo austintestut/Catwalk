@@ -8,11 +8,10 @@ const App = () => {
   return (
   <div>
     <h1>Hell World I am rendering!</h1>
-    <QuestionList />
+    {/* <QuestionList /> */}
     <Reviews data={example_review_data} />
   </div>
   );
 };
-
 
 export default App;
