@@ -7,6 +7,10 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: npm install
+      - save-cache:
+        key: v1-api-token
+        paths:
+          - /config.js
   test:
     docker:
       - image: cimg/node:14.15.4
@@ -14,7 +18,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm test
+      - run: npm test -- --coverage
 
 workflows:
   build_and_test:
