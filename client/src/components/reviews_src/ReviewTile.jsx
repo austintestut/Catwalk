@@ -1,6 +1,10 @@
 import React from 'react';
 import StarStatic from './StarStatic';
 import dateFormatter from '../../global_functions/dateFormatter';
+import Recommend from './Recommend';
+import Body from './Body';
+import Summary from './Summary';
+import Helpfulness from './Helpfulness';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -14,12 +18,13 @@ class ReviewTile extends React.Component {
     const { review } = this.state;
     return (
       <div>
-        <div><StarStatic number={review.rating} /></div>
+        <StarStatic number={review.rating} />
         <div>{review.reviewer_name}</div>
         <div>{dateFormatter(review.date)}</div>
-        <div>Review Summary: {review.summary}</div>
-        <div>Review Body: {review.body}</div>
-        <div>Helpfulness {review.helpfulness}</div>
+        <Summary summary={review.summary} />
+        <Recommend bool={review.recommend} />
+        <Body body={review.body} />
+        <Helpfulness helpfulness={review.helpfulness} />
         <span>-------------------------------------------------------------------------------</span>
       </div>
     );
