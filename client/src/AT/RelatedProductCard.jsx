@@ -59,7 +59,7 @@ class RelatedProductCard extends React.Component {
         + parseInt(ratings['4']) + parseInt(ratings['5']);
 
         let rating = reviewStars / totalReviews;
-        
+
         this.setState({
           rating: rating.toFixed(1)
         });
