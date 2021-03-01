@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import QuestionList from './QuestionList';
 import QuestionModal from './QuestionModal';
-import AddQuestionButton from './AddQuestionButton';
 
 class Container extends React.Component {
   constructor(props) {
@@ -47,9 +46,9 @@ class Container extends React.Component {
       },
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=17761',
       method: 'get',
-      baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp',
     })
       .then((data) => {
+        console.log('got this far')
         this.setState({ questions: data.data.results });
         console.log(data.data.results);
       });
