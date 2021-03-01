@@ -1,5 +1,5 @@
 import React from 'react';
-import QuestionModal from './QuestionModal';
+import QuestionModal from './QuestionModal.jsx';
 
 const Question = (props) =>
   // eslint-disable-next-line implicit-arrow-linebreak

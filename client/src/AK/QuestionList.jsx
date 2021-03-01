@@ -1,13 +1,20 @@
 import React from 'react';
 import Question from './Question';
 
-const QuestionList = function (props) {
-  return (
-    <div>
-      Question List:
-      <Question />
-    </div>
-  );
-};
+class QuestionList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <div>
+        Question List:
+        <Question />
+      </div>
+    );
+  }
+}
 
 export default QuestionList;
