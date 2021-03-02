@@ -50,14 +50,17 @@ class RelatedProductCard extends React.Component {
     })
       .then((data) => {
         let ratings = data.data.ratings;
+        let oneStars = ratings['1'] || 0;
+        let twoStars = ratings['2'] || 0;
+        let threeStars = ratings['3'] || 0;
+        let fourStars = ratings['4'] || 0;
+        let fiveStars = ratings['5'] || 0;
 
-        let reviewStars = (ratings['1'] * 1)
-        + (ratings['2'] * 2) + (ratings['3'] * 3)
-        + (ratings['4'] * 4) + (ratings['5'] * 5);
+        let totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
 
-        let totalReviews = parseInt(ratings['1'])
-        + parseInt(ratings['2']) + parseInt(ratings['3'])
-        + parseInt(ratings['4']) + parseInt(ratings['5']);
+        let reviewStars = (oneStars * 1)
+        + (twoStars * 2) + (threeStars * 3)
+        + (fourStars * 4) + (fiveStars * 5);
 
         let rating = reviewStars / totalReviews;
 
