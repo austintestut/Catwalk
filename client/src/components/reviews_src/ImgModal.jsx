@@ -1,5 +1,6 @@
 import React from 'react'
 
+// MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class ImgModal extends React.Component {
   constructor(props) {
     super(props);
@@ -15,21 +16,23 @@ class ImgModal extends React.Component {
   }
 
   render() {
-    // let { url } = this.props;
-    let url = 'https://images.unsplash.com/photo-1511499008188-de491bbbae98?ixlib=rb-1.2.1&auto=format&fit=crop&w=988&q=80';
+    let { url } = this.props;
+    //let url = 'https://images.unsplash.com/photo-1511499008188-de491bbbae98?ixlib=rb-1.2.1&auto=format&fit=crop&w=988&q=80';
     const modalStyle = {
       // display: 'none', /* Hidden by default <<<<<<<<<<<<------------- */
       position: 'fixed',
       zIndex: 1,
-      left: '10%',
-      top: '10%',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      top: '5%',
       height: '100%',
       overflow: 'auto',
-      backgroundColor: 'LightGray',
+      backgroundColor: 'transparent',
       maxHeight: 'calc(100vh - 100px)',
+      maxWidth: '95%',
     };
     const modalContentStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'transparent',
       width: '95%',
       height: '95%',
     };
@@ -43,12 +46,10 @@ class ImgModal extends React.Component {
     };
 
     const imgStyle = {
-      border: '1px solid black',
-      borderRadius: '5px',
+      borderRadius: '2%',
     };
 
     const thumbStyle = {
-      //border: '1px solid black',
       borderRadius: '5px',
       padding: '5px',
       paddingLeft: '0',

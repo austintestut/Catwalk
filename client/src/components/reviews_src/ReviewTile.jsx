@@ -26,6 +26,9 @@ class ReviewTile extends React.Component {
         <Summary summary={review.summary} />
         <Recommend bool={review.recommend} />
         <Body body={review.body} />
+        <span>
+          { review.photos.map((img) => <ImgModal url={img.url} />) }
+        </span>
         <ImgModal />
         <Response response={review.response} />
         <Helpfulness helpfulness={review.helpfulness} />
