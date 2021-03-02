@@ -49,6 +49,15 @@ class ImgModal extends React.Component {
       borderRadius: '2%',
     };
 
+    const overlayStyle = {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      backgroundColor: 'rgba(128,128,128,0.5)',
+    };
+
     const thumbStyle = {
       borderRadius: '5px',
       padding: '5px',
@@ -59,10 +68,12 @@ class ImgModal extends React.Component {
     /* ---------------------------------------------------------------------------------*/
     if (this.state.open) {
       return (
-        <div style={{ ...modalStyle }}>
-          <div style={{ ...modalContentStyle }}>
-            <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
-            <img src={url} alt="" style={{ ...imgStyle }} />
+        <div name="overlay" style={{ ...overlayStyle }}>
+          <div style={{ ...modalStyle }}>
+            <div style={{ ...modalContentStyle }}>
+              <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
+              <img src={url} alt="" style={{ ...imgStyle }} />
+            </div>
           </div>
         </div>
       );
