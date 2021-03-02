@@ -43,6 +43,7 @@ class ImgModal extends React.Component {
       color: 'white',
       zIndex: 2,
       position: 'absolute',
+      textShadow: '0 0 1px #000',
     };
 
     const imgStyle = {
