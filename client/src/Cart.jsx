@@ -1,8 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledCart = styled.div`
+  background-color: green;
+`
+// position: relative;
+// left: 50%;
+// display: inline-block;
 
 const Cart = () => {
   return (
-
+    <StyledCart>
     <form>
       <h2>Cart</h2>
       <label>
@@ -26,7 +34,7 @@ const Cart = () => {
       <br/>
       <button>Add to Cart</button>
     </form>
-
+    </StyledCart>
   )
 };
 

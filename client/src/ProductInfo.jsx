@@ -1,6 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 import StyleSelector from './StyleSelector.jsx';
 
+const StyledInfo = styled.div`
+  background-color: blue;
+`
+// Experiments
+
+// display: block;
+// position: relative;
+// top: 100px;
+// left: 50%;
+// width: 50%;
+// height: auto;
 
 const ProductInfo = ( {products, reviews, styles} ) => {
   const ratings = Object.values(reviews.ratings);
@@ -12,7 +24,7 @@ const ProductInfo = ( {products, reviews, styles} ) => {
   stars = Math.floor(stars/ratings.length);
   //console.log(stars);
   return (
-    <div>
+    <StyledInfo>
       {products.map((product) => {
         return (
           <div key={product.id}>
@@ -34,7 +46,7 @@ const ProductInfo = ( {products, reviews, styles} ) => {
           </div>
         )
       })}
-    </div>
+    </StyledInfo>
   )
 }
 
