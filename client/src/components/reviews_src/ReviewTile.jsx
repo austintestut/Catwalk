@@ -6,6 +6,7 @@ import Body from './Body';
 import Summary from './Summary';
 import Helpfulness from './Helpfulness';
 import Response from './Response';
+import ImgModal from './ImgModal';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class ReviewTile extends React.Component {
         <Summary summary={review.summary} />
         <Recommend bool={review.recommend} />
         <Body body={review.body} />
+        <ImgModal />
         <Response response={review.response} />
         <Helpfulness helpfulness={review.helpfulness} />
         <span>-------------------------------------------------------------------------------</span>

@@ -2,7 +2,6 @@
 import React from 'react';
 import quarter_star from '../../../../images/quarter_star.png';
 import three_quarter_star from '../../../../images/three_quarter_star.png';
-// import star from '../../../../images/star-empty.png'
 
 const StarStatic = ({ number }) => {
   // const emptyStar = <i class="far fa-star"/>;
@@ -11,7 +10,7 @@ const StarStatic = ({ number }) => {
   let style = {
     width: '18px',
     verticalAlign: 'bottom',
-  }
+  };
   const quarterStar = <img src={quarter_star} style = {{...style}}/>;
   const threeQuarterStar = <img src={three_quarter_star} style = {{...style}}/>
 
