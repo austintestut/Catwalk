@@ -50,6 +50,12 @@ class RelatedProductsAndOutfits extends React.Component {
     this.handleRelatedCarouselLeft = this.handleRelatedCarouselLeft.bind(this);
     this.handleOutfitCarouselRight = this.handleOutfitCarouselRight.bind(this);
     this.handleOutfitCarouselLeft = this.handleOutfitCarouselLeft.bind(this);
+    this.renderRightButtonToggleForRelatedProducts = this.renderRightButtonToggleForRelatedProducts.bind(this);
+    this.renderRightButtonToggleForOutfit = this.renderRightButtonToggleForOutfit.bind(this);
+    this.renderLeftButtonToggleForRelatedProducts = this.renderLeftButtonToggleForRelatedProducts.bind(this);
+    this.renderLeftButtonToggleForOutfit = this.renderLeftButtonToggleForOutfit.bind(this);
+    this.checkIfButtonsShouldRender = this.checkIfButtonsShouldRender.bind(this);
+
   }
 
   componentDidMount() {
@@ -58,7 +64,7 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   renderRightButtonToggleForRelatedProducts() {
-    if (this.state.relatedCurrentlyShowingIndexes[3] >= this.relatedProductIds.length) {
+    if (this.state.relatedCurrentlyShowingIndexes[3] >= this.relatedProductIds.length - 1) {
       this.setState({
         relatedRightArrow: false
       });
@@ -70,7 +76,7 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   renderRightButtonToggleForOutfit() {
-    if (this.state.outfitCurrentlyShowingIndexes[3] >= this.outfitProductIds.length) {
+    if (this.state.outfitCurrentlyShowingIndexes[3] >= this.outfitProductIds.length - 1) {
       this.setState({
         outfitRightArrow: false
       });
@@ -79,6 +85,37 @@ class RelatedProductsAndOutfits extends React.Component {
         outfitRightArrow: true
       });
     }
+  }
+
+  renderLeftButtonToggleForRelatedProducts() {
+    if (this.state.relatedCurrentlyShowingIndexes[0] === 0) {
+      this.setState({
+        relatedLeftArrow: false
+      });
+    } else {
+      this.setState({
+        relatedLeftArrow: true
+      });
+    }
+  }
+
+  renderLeftButtonToggleForOutfit() {
+    if (this.state.outfitCurrentlyShowingIndexes[0] === 0) {
+      this.setState({
+        outfitLeftArrow: false
+      });
+    } else {
+      this.setState({
+        outfitLeftArrow: true
+      });
+    }
+  }
+
+  checkIfButtonsShouldRender() {
+    this.renderRightButtonToggleForRelatedProducts();
+    this.renderRightButtonToggleForOutfit();
+    this.renderLeftButtonToggleForRelatedProducts();
+    this.renderLeftButtonToggleForOutfit();
   }
 
   // slide carousel to the right
@@ -129,25 +166,25 @@ class RelatedProductsAndOutfits extends React.Component {
         <h3>Related Products and Outfit </h3>
         <StyledCarouselContainer>
           <div>
-            <StyledLeftButton onClick={this.handleRelatedCarouselLeft}></StyledLeftButton>
+          {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}></StyledLeftButton>}
           </div>
-          <RelatedProductsCarousel relatedProductIds={this.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes} />
-          <div>
-            {this.state.relatedRightArrow && <StyledRightButton onClick={this.handleRelatedCarouselRight}></StyledRightButton>}
-          </div>
-        </StyledCarouselContainer>
-        <br></br> {/* remove this when incorporating everyone's components */}
+        <RelatedProductsCarousel relatedProductIds={this.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes} />
+        <div>
+        {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}></StyledRightButton>}
+      </div>
+        </StyledCarouselContainer >
+      <br></br> {/* remove this when incorporating everyone's components */ }
         <StyledCarouselContainer>
           <div>
-            <StyledLeftButton onClick={this.handleOutfitCarouselLeft}></StyledLeftButton>
+            {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}></StyledLeftButton>}
           </div>
           <OutfitCarousel outfitProductIds={this.outfitProductIds} outfitCurrentlyShowingIndexes={this.state.outfitCurrentlyShowingIndexes} />
           <div>
-            {this.state.outfitRightArrow && <StyledRightButton onClick={this.handleOutfitCarouselRight}></StyledRightButton>}
+            {this.state.outfitRightArrow && <StyledRightButton onClick={() => { this.handleOutfitCarouselRight(); this.checkIfButtonsShouldRender(); }}></StyledRightButton>}
           </div>
         </StyledCarouselContainer>
-        <br></br> {/* remove this when incorporating everyone's components */}
-      </div>
+        <br></br> {/* remove this when incorporating everyone's components */ }
+      </div >
     )
   }
 }
