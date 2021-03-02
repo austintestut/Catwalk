@@ -14,7 +14,7 @@ height: 270px;
 width: 100%;
 position: relative;
 top: 18px;
-background-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(217, 217, 217, 1));
+background-image: linear-gradient(to left, rgb(255, 255, 255), rgba(217, 217, 217, 1));
 border: none;
 `
 const StyledRightButton = styled.button`
@@ -22,7 +22,7 @@ height: 270px;
 width: 100%;
 position: relative;
 top: 18px;
-background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(217, 217, 217, 1));
+background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(217, 217, 217, 1));
 border: none;
 `
 

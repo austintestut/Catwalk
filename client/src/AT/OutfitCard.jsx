@@ -68,7 +68,9 @@ class OutfitCard extends React.Component {
         + (fourStars * 4) + (fiveStars * 5);
 
         let rating = reviewStars / totalReviews;
-
+        if (totalReviews === 0) {
+          rating = 0;
+        }
         this.setState({
           rating: rating.toFixed(1)
         });
