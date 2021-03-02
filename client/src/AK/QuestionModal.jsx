@@ -5,6 +5,7 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
     return null;
   }
     return (
+      <div class="modal">
       <form>
         <p>What is your question?</p>
         <input maxLength="1000" />
@@ -18,6 +19,7 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
 
         <button onClick={hideQModal}>Hide</button>
       </form>
+      </div>
     );
   };
 

@@ -1,10 +1,13 @@
 import React from 'react';
-import QuestionModal from './QuestionModal.jsx';
+import AddAnswerButton from './AddAnswerButton';
+import AnswerModal from './AnswerModal';
 
-const Question = ({question}) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
+const Question = ({ question, showAns, hide, show
+}) =>
   <div>
     Q: {question.question_body}
+    <AddAnswerButton showAns={showAns}/>
+    <AnswerModal hide={hide}show={show}/>
   </div>;
 
 export default Question;
