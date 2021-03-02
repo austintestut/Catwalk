@@ -21,6 +21,7 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedProductData, produc
     (relatedProductIds[relatedCurrentlyShowingIndexes[2]] || null),
     (relatedProductIds[relatedCurrentlyShowingIndexes[3]] || null)
   ];
+
   return (
     <div>
       <div>Related Products Carousel</div>
