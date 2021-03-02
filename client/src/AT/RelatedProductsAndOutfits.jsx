@@ -4,8 +4,10 @@ import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
 
 const StyledCarouselContainer = styled.div`
-width: 80%;
-background-color: red;
+padding-left: 15%;
+padding-right: 15%;
+height: 226px;
+overflow: hidden;
 `
 
 class RelatedProductsAndOutfits extends React.Component {
