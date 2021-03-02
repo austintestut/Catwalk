@@ -1,13 +1,24 @@
 import React from 'react';
-import AddAnswerButton from './AddAnswerButton';
+import AddAnswerButton from './Buttons/AddAnswerButton';
 import AnswerModal from './AnswerModal';
+import AnswerList from './AnswerList';
 
-const Question = ({ question, showAns, hide, show
-}) =>
+const Question = function ({ question, showAns, hide, show, answers
+}) {
+  let myAnswers = [];
+  for (const [key, value] of Object.entries(answers)) {
+    myAnswers.push(value);
+  }
+  return (
   <div>
     Q: {question.question_body}
-    <AddAnswerButton showAns={showAns}/>
+    <AddAnswerButton showAns={showAns} />
     <AnswerModal hide={hide}show={show}/>
-  </div>;
+    <AnswerList answers={myAnswers} />
+  </div>
+)
+}
+
+
 
 export default Question;

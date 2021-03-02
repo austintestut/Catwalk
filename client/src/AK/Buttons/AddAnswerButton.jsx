@@ -2,7 +2,7 @@ import React from 'react';
 
 const AddAnswerButton = function ({ showAns }) {
   return (
-    <button onClick={showAns}>Add Answer</button>
+    <button onClick={showAns} type="button">Add Answer</button>
   );
 };
 
