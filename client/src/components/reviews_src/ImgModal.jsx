@@ -6,9 +6,11 @@ class ImgModal extends React.Component {
     this.state = {
       open: false,
     };
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  openModal(e) {
+  toggleModal(e) {
+    e.preventDefault();
     this.setState({ open: !this.state.open });
   }
 
@@ -16,31 +18,23 @@ class ImgModal extends React.Component {
     // let { url } = this.props;
     let url = 'https://images.unsplash.com/photo-1511499008188-de491bbbae98?ixlib=rb-1.2.1&auto=format&fit=crop&w=988&q=80';
     const modalStyle = {
-      // display: 'none', /* Hidden by default */
-      position: 'fixed', /* Stay in place */
-      zIndex: 1, /* Sit on top */
+      // display: 'none', /* Hidden by default <<<<<<<<<<<<------------- */
+      position: 'fixed',
+      zIndex: 1,
       left: '10%',
       top: '10%',
-      // width: '80%',
       height: '100%',
-      overflow: 'auto', /* Enable scroll if needed */
-      backgroundColor: 'LightGray', /* Fallback color */
+      overflow: 'auto',
+      backgroundColor: 'LightGray',
       maxHeight: 'calc(100vh - 100px)',
-      //borderRadius: '5px',
     };
     const modalContentStyle = {
-      //marginTop: '3%',
       backgroundColor: 'white',
-      // margin: '5% auto', /* 15% from the top and centered */
-      // padding: '20px',
-      // border: '10px solid grey',
-      width: '95%', /* Could be more or less, depending on screen size */
+      width: '95%',
       height: '95%',
     };
 
     const modalButtonStyle = {
-      //marginTop: '10px',
-      //marginRight: '10px',
       right: 7,
       top: 7,
       color: 'white',
@@ -53,13 +47,27 @@ class ImgModal extends React.Component {
       borderRadius: '5px',
     };
 
-    return (
-      <div style={{ ...modalStyle }}>
-        <div style={{ ...modalContentStyle }}>
-          <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} />
-          <img src={url} alt="" style={{ ...imgStyle }} />
+    const thumbStyle = {
+      //border: '1px solid black',
+      borderRadius: '5px',
+      padding: '5px',
+      paddingLeft: '0',
+      height: '80px',
+      maxWidth: '80px',
+    };
+    /* ---------------------------------------------------------------------------------*/
+    if (this.state.open) {
+      return (
+        <div style={{ ...modalStyle }}>
+          <div style={{ ...modalContentStyle }}>
+            <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
+            <img src={url} alt="" style={{ ...imgStyle }} />
+          </div>
         </div>
-      </div>
+      );
+    }
+    return (
+      <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
     );
   }
 }
