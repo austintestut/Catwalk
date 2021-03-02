@@ -17,8 +17,20 @@ const StarStatic = ({ number }) => {
 
   let decrementer = number;
   const makeStar = () => {
-    if (decrementer > 0) {decrementer--; return <i class="fas fa-star" style = {{...style}} />; }
-    return <i class="far fa-star" style = {{...style}} />;
+    if (decrementer > 0 && decrementer < 1) {
+      decrementer = Number((Math.round(decrementer * 4) / 4).toFixed(2));
+    }
+    if (decrementer >= 1) {decrementer--; return <i class="fas fa-star" style = {{ ...style }} />; }
+    if (decrementer === 0) { return <i class="far fa-star" style = {{ ...style }} />; }
+    if (decrementer === 0.5) { decrementer = 0; return <i class="fas fa-star-half-alt" style={{ ...style }} />; }
+    if (decrementer === 0.25) {
+      decrementer = 0;
+      return quarterStar;
+    }
+    if (decrementer === 0.75) {
+      decrementer = 0;
+      return threeQuarterStar;
+    }
   };
   const makeStars = () => {
     let stars = [];
