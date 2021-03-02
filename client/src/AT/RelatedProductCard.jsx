@@ -9,7 +9,7 @@ class RelatedProductCard extends React.Component {
     this.state = {
       photoUrl: '',
       productData: [],
-      rating: 0
+      rating: 0,
     };
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getPhotoUrl = this.getPhotoUrl.bind(this);
@@ -94,7 +94,7 @@ class RelatedProductCard extends React.Component {
   render() {
     return (
       <div>
-        <img src={this.state.photoUrl} alt="test pic" width="150" height="150"></img>
+        <img src={this.state.photoUrl} alt={this.state.productData.name} width="150" height="150"></img>
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>
         <div>{this.state.productData.default_price}</div>

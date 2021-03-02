@@ -6,43 +6,116 @@ import OutfitCarousel from './OutfitCarousel';
 const StyledCarouselContainer = styled.div`
 padding-left: 15%;
 padding-right: 15%;
-height: 226px;
-overflow: hidden;
+display: grid;
+grid-template-columns: 1fr 12fr 1fr;
+`
+const StyledLeftButton = styled.button`
+height: 100%;
+width: 100%;
+`
+const StyledRightButton = styled.button`
+height: 100%;
+width: 100%;
 `
 
 class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProductIds: [17762, 18025, 17763, 17858, 18076] // for testing
+      relatedProductIds: [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070], // for testing
+      outfitProductIds: [18076, 17858], // for testing
+
+      // currently showing products in carousel
+      relatedCurrentlyShowingIndexes: [0, 1, 2, 3],
+      outfitCurrentlyShowingIndexes: [0, 1, 2, 3],
+
+      // track first products for hiding left arrows MAY JUST BE ABLE TO USE INDEXES
+      firstRelatedProductId: [17762], // for testing
+      firstOutfitProductId: [18076], // for testing
+
+      // tracks last products for hiding right arrows MAY JUST BE ABLE TO USE INDEXES
+      lastRelatedProductId: [18076], // for testing
+      lastOutfitProductId: [17858], // for testing
+
+      // boolean for whether arrows are showing
+      relatedLeftArrow: false,
+      relatedRightArrow: true,
+
+      outfitLeftArrow: false,
+      outfitRightArrow: true
+
     };
+    this.handleRelatedCarouselRight = this.handleRelatedCarouselRight.bind(this);
+    this.handleRelatedCarouselLeft = this.handleRelatedCarouselLeft.bind(this);
+    this.handleOutfitCarouselRight = this.handleOutfitCarouselRight.bind(this);
+    this.handleOutfitCarouselLeft = this.handleOutfitCarouselLeft.bind(this);
   }
 
-  // componentDidMount() {
-  //   // this.getRelatedProductData(18025);
-  // }
+  // slide carousel to the right
+  renderNextFourProducts(indexes) {
+    for (let i = 0; i < indexes.length; i++) {
+      indexes[i] += 4;
+    }
+    return indexes;
+  }
 
-  // functions to:
-  // get related product ID's when given product ID (lives in state)
+  // slide carousel to the left
+  renderPreviousFourProducts(indexes) {
+    for (let i = 0; i < indexes.length; i++) {
+      indexes[i] -= 4;
+    }
+    return indexes;
+  }
 
+  // Related Products Carousel button clicks
+  handleRelatedCarouselRight() {
+    this.setState({
+      relatedCurrentlyShowingIndexes: this.renderNextFourProducts(this.state.relatedCurrentlyShowingIndexes)
+    });
+  }
 
+  handleRelatedCarouselLeft() {
+    this.setState({
+      relatedCurrentlyShowingIndexes: this.renderPreviousFourProducts(this.state.relatedCurrentlyShowingIndexes)
+    });
+  }
 
-  /*
-   need to change this to take the ID from the currently displayed product and search that instead
-   this is currently just pulling in normal data for a specific product
-   this will give us name, desc, category, price
-  */
+  // Outfit Carousel button clicks
+  handleOutfitCarouselRight() {
+    this.setState({
+      outfitCurrentlyShowingIndexes: this.renderNextFourProducts(this.state.outfitCurrentlyShowingIndexes)
+    });
+  }
 
+  handleOutfitCarouselLeft() {
+    this.setState({
+      outfitCurrentlyShowingIndexes: this.renderPreviousFourProducts(this.state.outfitCurrentlyShowingIndexes)
+    });
+  }
 
   render() {
     return (
       <div>
         <h3>Related Products and Outfit </h3>
         <StyledCarouselContainer>
-          <RelatedProductsCarousel relatedProductIds={this.state.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} />
+          <div>
+            <StyledLeftButton onClick={this.handleRelatedCarouselLeft}></StyledLeftButton>
+          </div>
+          <RelatedProductsCarousel relatedProductIds={this.state.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes} />
+          <div>
+            <StyledRightButton onClick={this.handleRelatedCarouselRight}></StyledRightButton>
+          </div>
         </StyledCarouselContainer>
         <br></br> {/* remove this when incorporating everyone's components */}
-        <OutfitCarousel />
+        <StyledCarouselContainer>
+          <div>
+            <StyledLeftButton onClick={this.handleOutfitCarouselLeft}></StyledLeftButton>
+          </div>
+          <OutfitCarousel outfitProductIds={this.state.outfitProductIds} outfitCurrentlyShowingIndexes={this.state.outfitCurrentlyShowingIndexes}/>
+          <div>
+            <StyledRightButton onClick={this.handleOutfitCarouselRight}></StyledRightButton>
+          </div>
+        </StyledCarouselContainer>
         <br></br> {/* remove this when incorporating everyone's components */}
       </div>
     )
