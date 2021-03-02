@@ -3,6 +3,11 @@ import axios from 'axios';
 import styled, { css } from 'styled-components';
 import TOKEN from '../../../config';
 
+const StyledCard = styled.div`
+border-style: solid;
+border-width: 3px;
+`
+
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
@@ -93,13 +98,13 @@ class RelatedProductCard extends React.Component {
 
   render() {
     return (
-      <div>
-        <img src={this.state.photoUrl} alt={this.state.productData.name} width="150" height="150"></img>
+      <StyledCard>
+        <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150"></img>
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>
         <div>{this.state.productData.default_price}</div>
         <div>star rating: {this.state.rating} out of 5</div>
-      </div>
+      </StyledCard>
     );
   }
 };

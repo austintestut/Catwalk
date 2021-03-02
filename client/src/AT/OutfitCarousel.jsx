@@ -3,14 +3,15 @@ import styled, { css } from 'styled-components';
 import OutfitCard from './OutfitCard';
 
 const StyledProductCardContainer = styled.div`
-background-color: aquamarine;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
-height: 226px;
+height: 270px;
 `
 const StyledProductCard = styled.div`
-margin-left: 25%;
-margin-right: 10%;
+padding-left: 20%;
+padding-right: 10%;
+margin-top: 5%;
+margin-bottom: 5%;
 `
 
 const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => {
@@ -22,7 +23,7 @@ const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => 
   ];
   return (
     <div>
-      <div>Outfit Carousel</div>
+      <div>YOUR OUTFIT</div>
       <StyledProductCardContainer>
         {productsToShow.map((productId) => {
           let card;

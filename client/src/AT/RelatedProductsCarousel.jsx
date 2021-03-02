@@ -4,14 +4,15 @@ import RelatedProductCard from './RelatedProductCard';
 
 // change height to auto to account for long text, but strict px makes it seem smoother
 const StyledProductCardContainer = styled.div`
-background-color: aquamarine;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
-height: 226px;
+height: 270px;
 `
 const StyledProductCard = styled.div`
-padding-left: 25%;
+padding-left: 20%;
 padding-right: 10%;
+margin-top: 5%;
+margin-bottom: 5%;
 `
 
 const RelatedProductsCarousel = ({ relatedProductIds, relatedProductData, productStyleData, relatedCurrentlyShowingIndexes }) => {
@@ -24,7 +25,7 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedProductData, produc
 
   return (
     <div>
-      <div>Related Products Carousel</div>
+      <div>RELATED PRODUCTS</div>
       <StyledProductCardContainer>
         {productsToShow.map((productId) => {
           let card;
