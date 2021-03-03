@@ -36,13 +36,17 @@ class ReviewSummary extends React.Component {
       paddingLeft: '5px',
     };
 
+
     return (
       <div>
         <h3>Ratings &amp; Reviews</h3>
         <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
         <div>{percentReq}% of reviews recommend this product</div>
         {Object.entries(ratings).map((rating) =>
-          <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />)
+        <div>
+          <span>{rating[0]} Stars</span>
+          <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />
+        </div>)
         }
       </div>
     );
