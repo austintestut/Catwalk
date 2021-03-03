@@ -9,16 +9,22 @@ class ReviewList extends React.Component {
       reviews: this.props.reviews,
       show: 2,
     };
+    this.addReviews = this.addReviews.bind(this);
+  }
+
+  addReviews(e) {
+    e.preventDefault();
+    this.setState({ show: this.state.show + 2 });
   }
 
   render() {
-    let { reviews, show } = this.state;
+    const { reviews, show } = this.state;
     return (
       <div>
         <div>
           { reviews.slice(0, show).map((review) => (<ReviewTile review={review} />)) }
         </div>
-        <MoreReviews show="yes" />
+        <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
       </div>
     );
   }
