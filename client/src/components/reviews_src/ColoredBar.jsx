@@ -1,13 +1,11 @@
 import React from 'react';
 
 const ColoredBar = ({ total, count }) => {
-  const spanStyle = {
-  };
   const containerStyle = {
     width: '200px',
     height: '12px',
     backgroundColor: 'lightgrey',
-    //margin: '5px',
+    // margin: '5px',
     marginLeft: '5px',
     display: 'inline-block',
   };
@@ -18,7 +16,7 @@ const ColoredBar = ({ total, count }) => {
     maxWidth: '200px',
   };
   return (
-      <div style={{ ...containerStyle }}><div style={{ ...innerStyle }} /></div>
+    <div style={{ ...containerStyle }}><div style={{ ...innerStyle }} /></div>
   );
 };
 
