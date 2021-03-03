@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
-import TOKEN from '../../../config';
 
 const StyledCard = styled.div`
 border-style: solid;
@@ -31,28 +30,20 @@ class RelatedProductCard extends React.Component {
 
   // get the category, name, default price
   getProductInfo(id) {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, {
-      headers: {
-        'Authorization': TOKEN
-      }
-    })
+    axios.get(`/products/${id}`)
       .then((data) => {
         this.setState({
           productData: data.data
         });
       })
       .catch((err) => {
-        console.log('ERR Axios request for product');
+        console.log('ERR Axios get product from client', err);
       });
   }
 
   //get rating
   getRating(id) {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${id}`, {
-      headers: {
-        'Authorization': TOKEN
-      }
-    })
+    axios.get(`/reviews/meta/${id}`)
       .then((data) => {
         let ratings = data.data.ratings;
         let oneStars = ratings['1'] || 0;
@@ -76,26 +67,23 @@ class RelatedProductCard extends React.Component {
         });
       })
       .catch((err) => {
-        console.log('ERR getting average star rating');
+        console.log('ERR getting average star rating from client', err);
       });
   }
 
   //get the photo url
   getPhotoUrl(id) {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, {
-      headers: {
-        'Authorization': TOKEN
-      }
-    })
+    axios.get(`/products/${id}/styles`)
       .then((styleData) => {
         this.setState({
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url
         });
       })
       .catch((err) => {
-        console.log('ERR Axios request for styles');
+        console.log('ERR Axios get styles from client', err);
       });
   }
+
 
 
   render() {
