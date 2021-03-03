@@ -7,7 +7,6 @@ class ReviewSummary extends React.Component {
     super(props);
     let { reviewsMeta, currentFilters } = this.props;
     this.state = {
-      total: reviewsMeta.recommended.true + reviewsMeta.recommended.false,
       currentFilters: currentFilters,
     };
     this.filterSetter = this.filterSetter.bind(this);
@@ -15,9 +14,10 @@ class ReviewSummary extends React.Component {
 
   filterSetter(e) {
     e.preventDefault();
-    let filterVal = e.target.getAttribute('value');
-    if (this.state.currentFilters.indexOf(filterVal) === -1) {
-      this.setState({currentFilters: [...this.state.currentFilters, filterVal]});
+    let { currentFilters } = this.state;
+    const filterVal = e.target.getAttribute('value');
+    if (currentFilters.indexOf(filterVal) === -1) {
+      this.setState({ currentFilters: [...currentFilters, filterVal] });
     }
   }
 
@@ -37,6 +37,8 @@ class ReviewSummary extends React.Component {
       return (average / total).toFixed(1);
     };
     const average = getAverage();
+
+    // Styles ---->>>>>>>
     let inlineStyle = {
       display: 'inline',
     };
