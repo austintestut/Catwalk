@@ -12,6 +12,7 @@ app.listen(port, () => {
   console.log('Server listening at:', port);
 });
 
+
 app.get('https://app-hrsei-api.herokuapp.com/api/fec2/:CAMPUS_CODE', (req, res) => {
   res.send();
 });
