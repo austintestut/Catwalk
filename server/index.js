@@ -11,10 +11,9 @@ const port = 8080;
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
-/* request body is JSON:
-  data: {
-    "id": "#####"
-  }
+/*
+ example: axios.get(`/products/${id}`)
+ don't forget to access data.data on your client side as well (see .then)
 */
 app.get(`/products/:id`, (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}`, {
