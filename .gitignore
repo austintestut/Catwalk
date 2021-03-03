@@ -1,8 +1,4 @@
 node_modules
 config.js
 coverage
-<<<<<<< HEAD
 public/app.js
-=======
-public/app.js
->>>>>>> e5f67e1c3ca44d5d04df30527dc73ba2e49eb8a7
