@@ -10,6 +10,15 @@ class ReviewSummary extends React.Component {
       total: reviewsMeta.recommended.true + reviewsMeta.recommended.false,
       currentFilters: currentFilters,
     };
+    this.filterSetter = this.filterSetter.bind(this);
+  }
+
+  filterSetter(e) {
+    e.preventDefault();
+    let filterVal = e.target.getAttribute('value');
+    if (this.state.currentFilters.indexOf(filterVal) === -1) {
+      this.setState({currentFilters: [...this.state.currentFilters, filterVal]});
+    }
   }
 
   render() {
@@ -36,7 +45,6 @@ class ReviewSummary extends React.Component {
       paddingLeft: '5px',
     };
 
-
     return (
       <div>
         <h3>Ratings &amp; Reviews</h3>
@@ -44,7 +52,7 @@ class ReviewSummary extends React.Component {
         <div>{percentReq}% of reviews recommend this product</div>
         {Object.entries(ratings).map((rating) =>
         <div>
-          <span>{rating[0]} Stars</span>
+          <span onClick={this.filterSetter} value={rating[0]}>{rating[0]} Stars</span>
           <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />
         </div>)
         }
