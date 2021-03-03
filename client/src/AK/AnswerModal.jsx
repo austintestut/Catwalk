@@ -14,7 +14,8 @@ const AnswerModal = function ({ show, hide, submitQuestion }) {
       <p>Send us an email!</p>
       <input placeholder="Example: jack@email.com" maxLength="60" />
       <p>For authentication reasons only -  you will not be emailed</p>
-      <p>Upload Your Photos: (Put photo uploader functionality here)</p>
+      <p>Upload Your Photos:</p>
+      <input type="file" accept="image/*" multiple></input>
       <button type="submit" onClick={submitQuestion}>Submit Your Answer</button>
 
       <button onClick={hide}>Hide</button>

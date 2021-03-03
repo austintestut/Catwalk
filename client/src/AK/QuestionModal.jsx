@@ -7,7 +7,6 @@ font-family: sans-serif;
 font-size: 1.3rem;
 border: solid;
 display: grid;
-grid-template-columns: repeat(5, 20%)
 `;
 
 const P = styled.p`
@@ -19,6 +18,8 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
   }
     return (
       <div>
+      <h2>Ask Your Question</h2>
+      <h4>About (the product name here)</h4>
       <Form>
         <P>What is your question?</P>
         <input maxLength="1000" />
