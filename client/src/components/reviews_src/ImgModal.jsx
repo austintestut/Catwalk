@@ -67,7 +67,7 @@ class ImgModal extends React.Component {
       maxWidth: '80px',
     };
     /* ---------------------------------------------------------------------------------*/
-    if (this.state.open) {
+    if (this.state.open && url) {
       return (
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
@@ -79,9 +79,12 @@ class ImgModal extends React.Component {
         </div>
       );
     }
-    return (
-      <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
-    );
+    if (url) {
+      return (
+        <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
+      );
+    }
+    return null;
   }
 }
 
