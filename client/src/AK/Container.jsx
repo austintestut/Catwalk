@@ -4,7 +4,7 @@ import TOKEN from '../../../config';
 import QuestionList from './QuestionList';
 import QuestionModal from './QuestionModal';
 import AddQuestionButton from './Buttons/AddQuestionButton';
-import MoreAnsweredQuestionsButton from './Buttons/MoreAnsweredQuestionsButton';
+import ShowMoreQuestionsButton from './Buttons/ShowMoreQuestionsButton';
 
 class Container extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Container extends React.Component {
       showAns: false,
       questions: [],
       questionsToShow: 4,
-      isMaxQuestions: false
+      isMaxQuestions: false,
     };
     this.showQModal = this.showQModal.bind(this);
     this.hideQModal = this.hideQModal.bind(this);
@@ -32,9 +32,9 @@ class Container extends React.Component {
   showMoreQuestions(){
     this.setState({ questionsToShow: this.state.questionsToShow += 2 });
     if ( this.state.questionsToShow > this.state.questions.length) {
-      this.setState({isMaxQuestions: true})
+      this.setState({ isMaxQuestions: true });
+    }
   }
-}
 
   showQModal() {
     this.setState({
@@ -87,7 +87,7 @@ class Container extends React.Component {
       <div>
         <QuestionList questions={this.state.questions}showAns={this.showAnsModal} hide={this.hideAnsModal} show={this.state.showAns}howMany={this.state.questionsToShow} />
 
-        <MoreAnsweredQuestionsButton showMoreQuestions={this.showMoreQuestions} isMaxQuestions={this.state.isMaxQuestions}/>
+        <ShowMoreQuestionsButton showMoreQuestions={this.showMoreQuestions} isMaxQuestions={this.state.isMaxQuestions}/>
 
          <AddQuestionButton showQModal={this.showQModal} />
 

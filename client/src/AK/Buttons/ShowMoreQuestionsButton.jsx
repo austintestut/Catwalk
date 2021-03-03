@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MoreAnsweredQuestionsButton = function({ showMoreQuestions, isMaxQuestions }) {
+const ShowMoreQuestionsButton = function({ showMoreQuestions, isMaxQuestions }) {
   if (!isMaxQuestions) {
     return (
     <button onClick={showMoreQuestions}>Show More Questions</button>
@@ -12,4 +12,4 @@ const MoreAnsweredQuestionsButton = function({ showMoreQuestions, isMaxQuestions
 
 }
 
-export default MoreAnsweredQuestionsButton;
+export default ShowMoreQuestionsButton;
