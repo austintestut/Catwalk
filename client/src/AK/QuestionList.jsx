@@ -1,20 +1,13 @@
 import React from 'react';
 import Question from './Question';
 
-class QuestionList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <div>
-        Question List:
-        <Question />
-      </div>
-    );
-  }
-}
+const QuestionList = function ({questions, showAns, hide, show}) {
+  return (
+    <div>
+      Question List:
+      {questions.map(question => <Question question={question}key={question.question_id}showAns={showAns} hide={hide}show={show} />)}
+    </div>
+  );
+};
 
 export default QuestionList;
