@@ -42,7 +42,7 @@ class ImgModal extends React.Component {
       top: 7,
       color: 'white',
       zIndex: 2,
-      position: 'absolute',
+      position: 'fixed',
       textShadow: '0 0 1px #000',
     };
 
