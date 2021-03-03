@@ -10,10 +10,9 @@ const App = () => {
     <div>
       <h1>Hell World I am rendering!</h1>
       <RelatedProductsAndOutfits />
-      <Container />
+      {/* <Container /> */}
     </div>
   );
 };
-
 
 export default App;
