@@ -20,11 +20,12 @@ module.exports = {
             presets: ['@babel/preset-react', '@babel/preset-env']
           }
         }
-      }
+      },
+      { test: /\.(png|jpeg)$/, use: 'url-loader' },
     ]
   },
   mode: 'development',
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx',]
   }
 };
