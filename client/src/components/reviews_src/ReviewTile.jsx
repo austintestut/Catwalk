@@ -21,8 +21,10 @@ class ReviewTile extends React.Component {
     const tileStyle = {
       marginBottom: '8px',
       border: '2px solid grey',
-      borderRadius: '2px',
+      borderRadius: '3px',
       boxShadow: '3px 3px Grey',
+      padding: '10px',
+      paddingLeft: 0,
     };
     return (
       <div style={{ ...tileStyle }}>

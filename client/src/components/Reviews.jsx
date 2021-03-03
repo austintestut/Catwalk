@@ -5,7 +5,8 @@ class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviewData: this.props.data,
+      reviewsData: this.props.data,
+      reviewsMeta: this.props.meta,
     };
   };
 
@@ -15,7 +16,7 @@ class Reviews extends React.Component {
       <div>
         <h3>Reviews</h3>
         {/* results is an array of reviews */}
-        <ReviewList reviews={this.state.reviewData.results} />
+        <ReviewList reviews={this.state.reviewsData.results} />
       </div>
     );
   }
