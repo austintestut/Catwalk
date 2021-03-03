@@ -18,8 +18,14 @@ class ReviewTile extends React.Component {
 
   render() {
     const { review } = this.state;
+    const tileStyle = {
+      marginBottom: '8px',
+      border: '2px solid grey',
+      borderRadius: '2px',
+      boxShadow: '3px 3px Grey',
+    };
     return (
-      <div>
+      <div style={{ ...tileStyle }}>
         <StarStatic number={review.rating} />
         <div>{review.reviewer_name}</div>
         <div>{dateFormatter(review.date)}</div>
@@ -32,7 +38,6 @@ class ReviewTile extends React.Component {
         <ImgModal />
         <Response response={review.response} />
         <Helpfulness helpfulness={review.helpfulness} />
-        <span>-------------------------------------------------------------------------------</span>
       </div>
     );
   }

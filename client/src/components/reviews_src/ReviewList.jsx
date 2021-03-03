@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewTile from './ReviewTile';
 import MoreReviews from './MoreReviews';
+import ReviewsSort from './ReviewsSort';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -19,9 +20,14 @@ class ReviewList extends React.Component {
 
   render() {
     const { reviews, show } = this.state;
+    const reviewTileStyle = {
+      overflow: 'auto',
+      maxHeight: '80vh',
+    };
     return (
       <div>
-        <div>
+        <ReviewsSort total={reviews.length} />
+        <div style={reviewTileStyle}>
           { reviews.slice(0, show).map((review) => (<ReviewTile review={review} />)) }
         </div>
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
