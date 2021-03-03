@@ -66,7 +66,6 @@ class Container extends React.Component {
   submitQuestion(event) {
     event.preventDefault();
 
-    // do somethin
   }
 
   getProductQuestions() {
