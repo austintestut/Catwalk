@@ -70,8 +70,9 @@ class Container extends React.Component {
 
   getProductQuestions() {
     // will need to change the ID parameter below to be dynamic, maybe use params obj
+    let ID = 17761
     axios({
-      url: '/questions',
+      url: `/questions/${ID}`,
       method: 'get',
     })
       .then((data) => {
