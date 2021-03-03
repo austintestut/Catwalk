@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
+import StarStatic from '.././components/reviews_src/StarStatic.jsx'
 
 const StyledCard = styled.div`
 border-style: solid;
@@ -92,7 +93,7 @@ class OutfitCard extends React.Component {
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>
         <div>{this.state.productData.default_price}</div>
-        <div>star rating: {this.state.rating} out of 5</div>
+        <StarStatic number={this.state.rating} />
       </StyledCard>
     );
   }
