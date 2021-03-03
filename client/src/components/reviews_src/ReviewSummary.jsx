@@ -14,7 +14,7 @@ class ReviewSummary extends React.Component {
 
   render() {
     let { reviewsMeta, currentFilters } = this.props;
-    let { recommended } = reviewsMeta;
+    let { recommended, ratings } = reviewsMeta;
     const percentReq = Math.round(
       (Number(recommended.true) / (Number(recommended.false) + Number(recommended.true))) * 100,
     );
@@ -41,7 +41,9 @@ class ReviewSummary extends React.Component {
         <h3>Ratings &amp; Reviews</h3>
         <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
         <div>{percentReq}% of reviews recommend this product</div>
-        <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={5} />
+        {Object.entries(ratings).map((rating) =>
+          <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />)
+        }
       </div>
     );
   }

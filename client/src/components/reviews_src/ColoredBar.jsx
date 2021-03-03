@@ -11,6 +11,7 @@ const ColoredBar = ({ total, count }) => {
     backgroundColor: 'black',
     height: '12px',
     width: `${(count / total) * 200}px`,
+    maxWidth: '200px',
   };
   return <div style={{ ...containerStyle }}><div style={{ ...innerStyle }} /></div>;
 };
