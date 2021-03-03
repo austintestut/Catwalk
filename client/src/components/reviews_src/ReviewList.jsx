@@ -1,9 +1,9 @@
 import React from 'react';
 import ReviewTile from './ReviewTile';
 
-const ReviewList = (props) => (
+const ReviewList = ({ reviews }) => (
   <div>
-    { props.reviews.map((review) => (<ReviewTile review={review} />)) }
+    { reviews.map((review) => (<ReviewTile review={review} />)) }
   </div>
 );
 export default ReviewList;
