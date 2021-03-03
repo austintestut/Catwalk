@@ -5,7 +5,7 @@ const example_review_data = {
   "results": [
       {
           "review_id": 202288,
-          "rating": 3,
+          "rating": 3.0,
           "summary": "Beatae cumque similique qui libero placeat incidunt quis.",
           "recommend": true,
           "response": null,

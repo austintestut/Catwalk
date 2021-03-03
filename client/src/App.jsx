@@ -6,13 +6,12 @@ import Container from './AK/Container';
 const App = () => {
   console.log(example_review_data);
   return (
-  <div>
-    <h1>Hell World I am rendering!</h1>
-    <Container />
-    {/* <Reviews data={example_review_data} /> */}
-  </div>
+    <div>
+      <h1>Hell World I am rendering!</h1>
+      {/* <Container /> */}
+      {/* <Reviews data={example_review_data} /> */}
+    </div>
   );
 };
-
 
 export default App;
