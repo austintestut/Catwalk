@@ -1,7 +1,7 @@
 import React from 'react';
 import Question from './Question';
 
-const QuestionList = function ({ questions, showAns, hide, show, howMany }) {
+const QuestionList = function ({ questions, showAns, hide, show, howMany, increaseHelpful, reportAnswer }) {
   return (
     <div>
       Question List:
@@ -13,6 +13,8 @@ const QuestionList = function ({ questions, showAns, hide, show, howMany }) {
           hide={hide}
           show={show}
           answers={question.answers}
+          increaseHelpful={increaseHelpful}
+          reportAnswer={reportAnswer}
         />
       ))}
     </div>

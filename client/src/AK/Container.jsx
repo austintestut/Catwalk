@@ -23,6 +23,8 @@ class Container extends React.Component {
     this.submitQuestion = this.submitQuestion.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
+    this.increaseHelpful = this.increaseHelpful.bind(this);
+    this.reportAnswer = this.reportAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -70,10 +72,7 @@ class Container extends React.Component {
   getProductQuestions() {
     // will need to change the ID parameter below to be dynamic, maybe use params obj
     axios({
-      headers: {
-        Authorization: TOKEN,
-      },
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=17761',
+      url: '/questions',
       method: 'get',
     })
       .then((data) => {
@@ -81,11 +80,17 @@ class Container extends React.Component {
         console.log(data.data.results);
       });
   }
+  increaseHelpful(event){
+    console.log('calling Increase Helpful')
+  }
+  reportAnswer(event){
+    console.log('calling Report Answer')
+  }
 
   render() {
     return (
       <div>
-        <QuestionList questions={this.state.questions}showAns={this.showAnsModal} hide={this.hideAnsModal} show={this.state.showAns}howMany={this.state.questionsToShow} />
+        <QuestionList questions={this.state.questions}showAns={this.showAnsModal} hide={this.hideAnsModal} show={this.state.showAns}howMany={this.state.questionsToShow}increaseHelpful={this.increaseHelpful}reportAnswer={this.reportAnswer}/>
 
         <ShowMoreQuestionsButton showMoreQuestions={this.showMoreQuestions} isMaxQuestions={this.state.isMaxQuestions}/>
 
