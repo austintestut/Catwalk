@@ -36,7 +36,12 @@ class Reviews extends React.Component {
     const { reviewsData, reviewsMeta, currentFilters } = this.state;
     return (
       <div>
-        <ReviewSummary reviewsMeta={reviewsMeta} currentFilters={currentFilters} />
+        <ReviewSummary
+          reviewsMeta={reviewsMeta}
+          currentFilters={currentFilters}
+          clearFilters={this.clearFilters}
+          addFilter={this.addFilter}
+        />
         <ReviewList reviews={reviewsData.results} />
       </div>
     );

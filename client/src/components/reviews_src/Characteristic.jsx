@@ -22,7 +22,7 @@ const Characteristic = ({ item }) => {
     borderRight: '6px solid transparent',
     borderTop: '12px solid black',
     position: 'absolute',
-    marginLeft: `${((item[1].value) / 5) * 237}px`, // 237 max slider left, 0 = max left
+    marginLeft: `${((item[1].value) / 5) * 237}px`, // 237 = max slider right, 0 = max left
   };
   const textContainerStyle = {
     justifyContent: 'space-between',

@@ -1,25 +1,37 @@
 import React from 'react';
 
-const Filters = ({ filters }) => {
+const Filters = ({ filters, clearFilters }) => {
   const containerStyle = {
-    height: '150px',
+    height: '130px',
+    position: 'relative',
   };
   const clearFiltersStyle = {
-    textDecoration: 'underline bold',
+    textDecoration: 'underline',
+    fontWeight: 'bold',
+    color: 'red',
+    position: 'absolute',
+    bottom: '5px',
   };
-
-  if (filters) {
+  const ulStyle = {
+    margin: '0px',
+    paddingLeft: '18px',
+  };
+  const liStyle = {
+    margin: '0px',
+    padding: '0px',
+  };
+  if (filters.length) {
     return (
       <div style={{ ...containerStyle }}>
         <span>Filters Applied:</span>
-        <ul>
-          {filters.map((filter) => <li>{filter} Star</li>)}
+        <ul style={{ ...ulStyle }}>
+          {filters.map((filter) => <li Style={{ ...liStyle }}>{filter} Star</li>)}
         </ul>
-        <span style={{ ...clearFiltersStyle }}>Remove Current Filters</span>
+        <span onClick={clearFilters} style={{ ...clearFiltersStyle }}>Remove Current Filters</span>
       </div>
     );
   }
-  return null;
+  return <div style={{ ...containerStyle }} />;
 };
 
 export default Filters;
