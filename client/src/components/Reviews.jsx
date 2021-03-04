@@ -47,7 +47,7 @@ class Reviews extends React.Component {
           clearFilters={this.clearFilters}
           addFilter={this.addFilter}
         />
-        <ReviewList reviews={reviewsData.results} />
+        <ReviewList reviews={reviewsData.results} filters={currentFilters} />
       </div>
     );
   }

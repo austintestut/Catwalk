@@ -7,10 +7,32 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: this.props.reviews,
       show: 2,
+      reviews: this.props.reviews,
     };
     this.addReviews = this.addReviews.bind(this);
+    this.setFilters = this.setFilters.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.filters !== this.props.filters) {
+      this.setFilters();
+    }
+  }
+
+  setFilters() {
+    let newList = [];
+    if (this.props.filters.length) {
+      this.setState ({ reviews: [] });
+      this.props.reviews.forEach((review) => {
+        if (this.props.filters.indexOf(JSON.stringify(review.rating)) !== -1) {
+          newList.push(review);
+        }
+      });
+      this.setState({ reviews: [...newList], show:this.state.show });
+      return;
+    }
+    this.setState({ reviews: this.props.reviews });
   }
 
   addReviews(e) {
