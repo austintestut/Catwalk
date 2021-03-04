@@ -2,6 +2,7 @@ import React from 'react';
 import ReviewTile from './ReviewTile';
 import MoreReviews from './MoreReviews';
 import ReviewsSort from './ReviewsSort';
+import ReviewTileContainer from './ReviewTileContainer';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -23,13 +24,12 @@ class ReviewList extends React.Component {
   setFilters() {
     let newList = [];
     if (this.props.filters.length) {
-      this.setState ({ reviews: [] });
       this.props.reviews.forEach((review) => {
         if (this.props.filters.indexOf(JSON.stringify(review.rating)) !== -1) {
           newList.push(review);
         }
       });
-      this.setState({ reviews: [...newList], show:this.state.show });
+      this.setState({ reviews: [...newList] });
       return;
     }
     this.setState({ reviews: this.props.reviews });
@@ -47,16 +47,12 @@ class ReviewList extends React.Component {
       margin: '10px',
       marginTop: '0px',
     };
-    const reviewTileStyle = {
-      overflow: 'auto',
-      maxHeight: '80vh',
-    };
+
     return (
       <div style={{ ...containerStyle }}>
         <ReviewsSort total={reviews.length} />
-        <div style={reviewTileStyle}>
-          { reviews.slice(0, show).map((review) => (<ReviewTile review={review} />)) }
-        </div>
+        {/* { showReviews.map((review) => (<ReviewTile review={review} />)) } */}
+        <ReviewTileContainer reviews={reviews} show={show} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
       </div>
     );
