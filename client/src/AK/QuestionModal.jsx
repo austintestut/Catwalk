@@ -21,7 +21,7 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
       <div>
       <h2>Ask Your Question</h2>
       <h4>About (the product name here)</h4>
-      <Form>
+      <Form onSubmit={submitQuestion}>
         <P>What is your question?</P>
         <input maxLength="1000" />
         <p>What is your nickname?</p>
@@ -30,7 +30,7 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
         <p>Send us an email!</p>
         <input placeholder="Why did you like the product or not?" maxLength="60" />
         <p>For authentication reasons only -  you will not be emailed</p>
-        <button type="submit" onClick={submitQuestion}>Submit Your Question</button>
+        <button type="submit">Submit Your Question</button>
 
         <button onClick={hideQModal}>Hide</button>
       </Form>

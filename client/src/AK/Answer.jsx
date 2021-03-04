@@ -7,8 +7,10 @@ const Answer = ({ans, increaseHelpful, reportAnswer }) => {
         A: {ans.body}
       </p>
       <p>by {ans.answerer_name}, {ans.date.substring(0, 10)}
-        <a onClick={increaseHelpful}>Helpful?</a>
-        <a onClick={reportAnswer}>Report</a>
+        <a onClick={function(){
+          increaseHelpful(ans.id);
+        }}>Helpful? {ans.helpfulness}</a>
+        <a onClick={function(){reportAnswer(ans.id)}}> Report</a>
       </p>
     </div>
   )

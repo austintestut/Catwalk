@@ -35,7 +35,11 @@ app.get('/questions/:id', (req, res) => {
     headers: {
       Authorization: config.TOKEN,
     },
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${req.params.id}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions`,
+    params: {
+      product_id: req.params.id,
+      count: 30,
+    },
     method: 'get',
     responseType: 'text',
   }).then((data)=>{
@@ -46,8 +50,76 @@ app.get('/questions/:id', (req, res) => {
   })
 });
 
-app.post('/questions', (req, res)=> {
+app.post('/questions/:id', (req, res)=> {
+  console.log(req.body);
+  axios({
+    headers: {
+      Authorization: config.TOKEN,
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions`,
+    method: 'post',
+    data: req.body
+  }).then((data)=>{
+    console.log('Posted!');
+    res.send('Posted your Question! ')
+  }).catch((error)=>{
+    res.send(error)
+  })
+});
 
+app.post('/questions/:id/answers', (req, res)=> {
+  console.log(req.params);
+  console.log(req.body)
+  axios({
+    headers: {
+      Authorization: config.TOKEN,
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${req.params.id}/answers`,
+    method: 'post',
+    data: req.body
+  }).then((data)=>{
+    res.send('Posted your Question!')
+  }).catch((error)=>{
+    res.send(error)
+  })
+
+})
+app.put('/questions/:id/helpful', (req, res)=>{
+  axios({
+    headers: {
+      Authorization: config.TOKEN,
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${req.params.id}/helpful`,
+    method: 'put'
+  }).then((data)=>{
+    res.send(data)
+  })
+  .catch((error)=>{res.send(error)})
+})
+app.put('/answers/:id', (req, res)=>{
+  axios({
+    headers: {
+      Authorization: config.TOKEN,
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${req.params.id}/helpful`,
+    method: 'put'
+  }).then((data)=>{
+    res.send(data)
+  })
+  .catch((error)=>{res.send(error)})
+})
+
+app.put('/answers/:id/report', (req, res)=> {
+  axios({
+    headers: {
+      Authorization: config.TOKEN,
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${req.params.id}/report`,
+    method: 'put'
+  }).then((data)=>{
+    res.send(data)
+  })
+  .catch((error)=>{res.send(error)})
 })
 
 app.listen(port, () => {

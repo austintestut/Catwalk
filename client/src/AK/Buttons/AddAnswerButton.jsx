@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AddAnswerButton = function ({ showAns }) {
+const AddAnswerButton = function ({ showAnsModal }) {
   return (
-    <button onClick={showAns} type="button">Add Answer</button>
+    <button onClick={showAnsModal} type="button">Add Answer</button>
   );
 };
 

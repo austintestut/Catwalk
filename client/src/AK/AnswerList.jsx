@@ -6,7 +6,7 @@ const AnswerList = ({ answers, increaseHelpful, reportAnswer }) => {
 
   return (
     <div>
-      {answers.slice(0, 2).map((ans)=> <Answer ans={ans}increaseHelpful={increaseHelpful}reportAnswer={reportAnswer}/>)}
+      {answers.slice(0, 2).map((ans)=> <Answer ans={ans}increaseHelpful={increaseHelpful}reportAnswer={reportAnswer} key={ans.id}/>)}
     </div>
 
   );
