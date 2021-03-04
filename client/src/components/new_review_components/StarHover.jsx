@@ -10,15 +10,29 @@ class StarHover extends React.Component {
     this.makeStars = this.makeStars.bind(this);
     this.hoverCount = this.hoverCount.bind(this);
     this.resetCount = this.resetCount.bind(this);
+    this.clickToggle = this.clickToggle.bind(this);
+  }
+
+  clickToggle(e) {
+    const { clicked } = this.state;
+    if (clicked) {
+      const newCount = Number(e.target.getAttribute('value'));
+      this.setState({ count: newCount });
+    }
+    this.setState({ clicked: !clicked });
   }
 
   hoverCount(e) {
-    const newCount = Number(e.target.getAttribute('value'));
-    this.setState({ count: newCount });
+    if (!this.state.clicked) {
+      const newCount = Number(e.target.getAttribute('value'));
+      this.setState({ count: newCount });
+    }
   }
 
   resetCount() {
-    this.setState({ count: 0 });
+    if (!this.state.clicked) {
+      this.setState({ count: 0 });
+    }
   }
 
   makeStars() {
@@ -28,19 +42,22 @@ class StarHover extends React.Component {
     let stars = [];
     for (let x = 0; x < 5; x++) {
       if (count > x) {
-        stars.push(<i class="fas fa-star" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} />);
+        stars.push(
+          <i
+            class="fas fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle}
+          />);
         continue
       }
-      stars.push(<i class="far fa-star" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} />);
+      stars.push(<i class="far fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle}/>);
     }
     return stars;
   }
 
   render() {
     return (
-      <fragment>
+      <div>
         {this.makeStars()}
-      </fragment>
+      </div>
     );
   }
 }
