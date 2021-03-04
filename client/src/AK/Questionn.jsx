@@ -10,16 +10,18 @@ class Questionn extends React.Component {
     this.state = {
       showingAnsModal: false,
       QhelpfulCounter: 0,
-      helped: false
+      helped: false,
+      maxedAnswers: false,
     }
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.renderHelpfulButton = this.renderHelpfulButton.bind(this);
+    this.renderSeeMoreAnswersButton = this.renderSeeMoreAnswersButton.bind(this);
+    this.handleSeeAnswersClick = this.handleSeeAnswersClick.bind(this);
   }
   showAnsModal() {
     this.setState({
       showingAnsModal: true,
-    });
-    console.log('state set: shown ans modal');
+    })
   }
 
   hideAnsModal() {
@@ -29,7 +31,6 @@ class Questionn extends React.Component {
   }
 
   submitAnswer(event) {
-    event.preventDefault();
     axios({
       url: `/questions/${this.props.question.question_id}/answers`,
       method: 'post',
@@ -39,15 +40,14 @@ class Questionn extends React.Component {
         email: event.target[2].value,
       }
     }).then((response)=>{
+      event.target[0].value
     })
   }
   reportAnswer(id){
-    console.log('calling Report Answer on answer:', id)
     axios({
       url: `/answers/${id}/report`,
       method: 'put'
     }).then((data)=>{
-      console.log(data)
     })
   }
   markQuestionHelpful(){
@@ -55,7 +55,6 @@ class Questionn extends React.Component {
       url: `/questions/${this.props.question.question_id}/helpful`,
       method: 'put'
     }).then((data)=>{
-      console.log(data)
       this.setState({QhelpfulCounter: 1, helped: true})
     })
   }
@@ -65,6 +64,17 @@ class Questionn extends React.Component {
     } else {
       return  <button onClick={this.markQuestionHelpful} > Yes {this.props.question.question_helpfulness + this.state.QhelpfulCounter}</button>
     }}
+  }
+  renderSeeMoreAnswersButton(){
+    if (this.state.maxedAnswers){
+      return <button onClick={this.handleSeeAnswersClick}>Collapse Answers</button>
+
+    } else {
+      return <button onClick={this.handleSeeAnswersClick}>See More Answers</button>
+    }
+  }
+  handleSeeAnswersClick(){
+    this.setState((prevState)=>({maxedAnswers: !(prevState.maxedAnswers)}))
   }
   render(){
     let myAnswers = [];
@@ -79,7 +89,8 @@ class Questionn extends React.Component {
         {this.renderHelpfulButton()}
         <AddAnswerButton showAnsModal={this.showAnsModal.bind(this)} />
         <AnswerModal hide={this.hideAnsModal.bind(this)}showing={this.state.showingAnsModal}submitAnswer={this.submitAnswer.bind(this)}/>
-        <AnswerList answers={myAnswers}increaseHelpful={this.props.increaseHelpful}reportAnswer={this.reportAnswer.bind(this)} />
+        <AnswerList answers={myAnswers}increaseHelpful={this.props.increaseHelpful}reportAnswer={this.reportAnswer.bind(this)}maxed={this.state.maxedAnswers}/>
+        {this.renderSeeMoreAnswersButton()}
       </div>
     )
   }

@@ -12,7 +12,6 @@ class Container extends React.Component {
     super(props);
     this.state = {
       showQ: false,
-      // showAns: false,
       questions: [],
       questionsToShow: 4,
       isMaxQuestions: false,
@@ -48,12 +47,6 @@ class Container extends React.Component {
     });
   }
 
-  // showAnsModal() {
-  //   this.setState({
-  //     showAns: true,
-  //   });
-  //   console.log('state set: shown ans modal');
-  // }
 
   hideQModal() {
     this.setState({
@@ -61,16 +54,8 @@ class Container extends React.Component {
     });
   }
 
-  // hideAnsModal() {
-  //   this.setState({
-  //     showAns: false,
-  //   });
-  // }
-
   submitQuestion(event) {
-    console.log('submitting')
     let ID = 17762;
-    event.preventDefault();
     axios({
       url: `/questions/${ID}`,
       method: 'post',
@@ -81,7 +66,6 @@ class Container extends React.Component {
         product_id: ID,
       }
     }).then((response)=>{
-      console.log(response.data);
     })
 
   }
@@ -99,17 +83,15 @@ class Container extends React.Component {
       });
   }
   increaseHelpful(id){
-    console.log('calling Increase Helpful on: ', id);
     axios({
       url: `/answers/${id}`,
       method: 'put'
     }).then((data)=>{
-      console.log(data)
+
     })
   }
   handleSearch(e){
     if(e.target.value.length > 2) {
-      console.log(this.displaySearchQuestions(e.target.value))
       this.setState({searchText: e.target.value, searching: true, displayedQuestions: this.displaySearchQuestions(e.target.value)})
 
   } else {
@@ -123,9 +105,6 @@ class Container extends React.Component {
 
   }
 
-  // reportAnswer(event){
-  //   console.log('calling Report Answer')
-  // }
 
   render() {
     return (
