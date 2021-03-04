@@ -10,7 +10,26 @@ class Reviews extends React.Component {
       reviewsMeta: this.props.meta,
       currentFilters: [],
     };
-  };
+    this.addFilter = this.addFilter.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
+  }
+
+  addFilter(e) {
+    e.preventDefault();
+    const { currentFilters } = this.state;
+    const filterVal = e.target.getAttribute('value');
+    if (currentFilters.indexOf(filterVal) === -1) {
+      this.setState({ currentFilters: [...currentFilters, filterVal] });
+    }
+  }
+
+  clearFilters(e) {
+    e.preventDefault();
+    const { currentFilters } = this.state;
+    if (currentFilters) {
+      this.setState({ currentFilters: [] });
+    }
+  }
 
   render() {
     //console.log(this.state.reviewData.results);

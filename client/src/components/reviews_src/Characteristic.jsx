@@ -4,7 +4,7 @@ import characteristic from '../../global_functions/characteristic';
 const Characteristic = ({ item }) => {
   // container width 249 px
   // each div 65 px padding auto margin
-  item = ["Size", {"id": 59528, "value": "3.2500000000000000"}];
+  //item = ["Size", {"id": 59528, "value": "3.2500000000000000"}];
   const qualities = characteristic[item[0]];
   const containerStyle = {
     width: '249px',
@@ -43,9 +43,9 @@ const Characteristic = ({ item }) => {
         <div style={{ ...barStyle, margin: '0 auto' }} />
       </div>
       <div style={{ ...textContainerStyle }}>
-        <span style={{ ...spanStyle, textAlign: 'left' }}>{qualities[1]}</span>
-        <span style={{ ...spanStyle, textAlign: 'center' }}>{qualities[3]}</span>
-        <span style={{ ...spanStyle, textAlign: 'right' }}>{qualities[5]}</span>
+        <span style={{ ...spanStyle }}>{qualities[1]}</span>
+        <span style={{ ...spanStyle, textAlign: 'center'}}>{qualities[3]}</span>
+        <span style={{ ...spanStyle }}>{qualities[5]}</span>
       </div>
     </div>
   );

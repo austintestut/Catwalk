@@ -2,6 +2,7 @@ import React from 'react';
 import StarStatic from './StarStatic';
 import ColoredBar from './ColoredBar';
 import Characteristic from './Characteristic';
+import Filters from './Filters';
 
 class ReviewSummary extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class ReviewSummary extends React.Component {
 
   render() {
     let { reviewsMeta, currentFilters } = this.props;
-    let { recommended, ratings } = reviewsMeta;
+    let { recommended, ratings, characteristics } = reviewsMeta;
 
     const percentReq = Math.round(
       (Number(recommended.true) / (Number(recommended.false) + Number(recommended.true))) * 100,
@@ -60,7 +61,7 @@ class ReviewSummary extends React.Component {
           <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />
         </div>)
         }
-        <Characteristic />
+        {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
       </div>
     );
   }
