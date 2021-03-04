@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled, { css } from 'styled-components';
 import StarStatic from '.././components/reviews_src/StarStatic.jsx';
 import starIcon from '../../../images/empty_star.png';
+import ComparisonModal from './ComparisonModal';
 
 const StyledCard = styled.div`
 border-style: solid;
@@ -16,7 +17,16 @@ position: absolute;
 top:0;
 right: 0;
 `
-
+const StyledModalContainer = styled.div`
+position: fixed;
+left: 0;
+top: 0;
+z-index: 1;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.3);
+`
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
@@ -24,8 +34,12 @@ class RelatedProductCard extends React.Component {
       photoUrl: '',
       productData: [],
       rating: 0,
-      otherUrls: []
+      otherUrls: [],
+      // comparison modal showing or not
+      modalShowing: false
     };
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleInnerModalClick = this.handleInnerModalClick.bind(this);
   }
 
   componentDidMount() {
@@ -92,12 +106,27 @@ class RelatedProductCard extends React.Component {
       });
   }
 
+  toggleModal() {
+    this.setState({
+      modalShowing: !this.state.modalShowing
+    });
+  }
+
+  handleInnerModalClick(event) {
+    event.stopPropagation();
+  }
   render() {
     return (
       <StyledCard>
-        {this.state.modalShowing && <ComparisonModal />}
-        <StyledStar onClick={this.props.toggleModal}>
-          <img src={starIcon} width="100%" height="100%"/>
+        {this.state.modalShowing && (
+          <StyledModalContainer onClick={this.toggleModal}>
+            <ComparisonModal
+              handleInnerModalClick={this.handleInnerModalClick}
+            />
+          </StyledModalContainer>
+        )}
+        <StyledStar onClick={this.toggleModal}>
+          <img src={starIcon} width="100%" height="100%" />
         </StyledStar>
         <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150"></img>
         <div>{this.state.productData.category}</div>

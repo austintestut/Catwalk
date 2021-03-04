@@ -26,16 +26,7 @@ top: 18px;
 background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(217, 217, 217, 1));
 border: none;
 `
-const StyledModalContainer = styled.div`
-position: fixed;
-left: 0;
-top: 0;
-z-index: 1;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0,0,0,0.3);
-`
+
 class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {
     super(props);
@@ -58,9 +49,6 @@ class RelatedProductsAndOutfits extends React.Component {
 
       outfitLeftArrow: false,
       outfitRightArrow: true,
-
-      // comparison modal showing or not
-      modalShowing: false
     };
 
     this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
@@ -75,8 +63,6 @@ class RelatedProductsAndOutfits extends React.Component {
     this.renderLeftButtonToggleForRelatedProducts = this.renderLeftButtonToggleForRelatedProducts.bind(this);
     this.renderLeftButtonToggleForOutfit = this.renderLeftButtonToggleForOutfit.bind(this);
     this.checkIfButtonsShouldRender = this.checkIfButtonsShouldRender.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.handleInnerModalClick = this.handleInnerModalClick.bind(this);
   }
 
   componentDidMount() {
@@ -140,17 +126,17 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   // slide carousel to the right
-  renderNextFourProducts(indexes) {
+  renderNextProduct(indexes) {
     for (let i = 0; i < indexes.length; i++) {
-      indexes[i] += 4;
+      indexes[i] += 1;
     }
     return indexes;
   }
 
   // slide carousel to the left
-  renderPreviousFourProducts(indexes) {
+  renderPreviousProduct(indexes) {
     for (let i = 0; i < indexes.length; i++) {
-      indexes[i] -= 4;
+      indexes[i] -= 1;
     }
     return indexes;
   }
@@ -158,37 +144,27 @@ class RelatedProductsAndOutfits extends React.Component {
   // Related Products Carousel button clicks
   handleRelatedCarouselRight() {
     this.setState({
-      relatedCurrentlyShowingIndexes: this.renderNextFourProducts(this.state.relatedCurrentlyShowingIndexes)
+      relatedCurrentlyShowingIndexes: this.renderNextProduct(this.state.relatedCurrentlyShowingIndexes)
     });
   }
 
   handleRelatedCarouselLeft() {
     this.setState({
-      relatedCurrentlyShowingIndexes: this.renderPreviousFourProducts(this.state.relatedCurrentlyShowingIndexes)
+      relatedCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.relatedCurrentlyShowingIndexes)
     });
   }
 
   // Outfit Carousel button clicks
   handleOutfitCarouselRight() {
     this.setState({
-      outfitCurrentlyShowingIndexes: this.renderNextFourProducts(this.state.outfitCurrentlyShowingIndexes)
+      outfitCurrentlyShowingIndexes: this.renderNextProduct(this.state.outfitCurrentlyShowingIndexes)
     });
   }
 
   handleOutfitCarouselLeft() {
     this.setState({
-      outfitCurrentlyShowingIndexes: this.renderPreviousFourProducts(this.state.outfitCurrentlyShowingIndexes)
+      outfitCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.outfitCurrentlyShowingIndexes)
     });
-  }
-
-  toggleModal() {
-    this.setState({
-      modalShowing: !this.state.modalShowing
-    });
-  }
-
-  handleInnerModalClick(event) {
-    event.stopPropagation();
   }
 
   render() {
@@ -196,14 +172,17 @@ class RelatedProductsAndOutfits extends React.Component {
       <div>
         <h3>Related Products and Outfit </h3>
         <StyledCarouselContainer>
-          {this.state.modalShowing && (
-            <StyledModalContainer onClick={this.toggleModal}>
-              <ComparisonModal handleInnerModalClick={this.handleInnerModalClick} />
-            </StyledModalContainer>)}
+
           <div>
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
           </div>
-          <RelatedProductsCarousel relatedProductIds={this.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes} toggleModal={this.toggleModal} />
+          <RelatedProductsCarousel
+            relatedProductIds={this.relatedProductIds}
+            relatedProductData={this.state.relatedProductData}
+            productStyleData={this.state.productStyleData}
+            relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes}
+            toggleModal={this.toggleModal}
+          />
           <div>
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
           </div>
@@ -213,9 +192,21 @@ class RelatedProductsAndOutfits extends React.Component {
           <div>
             {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
           </div>
-          <OutfitCarousel outfitProductIds={this.outfitProductIds} outfitCurrentlyShowingIndexes={this.state.outfitCurrentlyShowingIndexes} />
+          <OutfitCarousel
+            outfitProductIds={this.outfitProductIds}
+            outfitCurrentlyShowingIndexes={this.state.outfitCurrentlyShowingIndexes}
+          />
           <div>
-            {this.state.outfitRightArrow && <StyledRightButton onClick={() => { this.handleOutfitCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
+            {this.state.outfitRightArrow && (
+              <StyledRightButton
+                onClick={() => {
+                  this.handleOutfitCarouselRight();
+                  this.checkIfButtonsShouldRender();
+                }}
+              >
+                {'>'}
+              </StyledRightButton>
+            )}
           </div>
         </StyledCarouselContainer>
         <br></br> {/* remove this when incorporating everyone's components */}
