@@ -8,9 +8,12 @@ class Questionn extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      showingAnsModal: false
+      showingAnsModal: false,
+      QhelpfulCounter: 0,
+      helped: false
     }
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
+    this.renderHelpfulButton = this.renderHelpfulButton.bind(this);
   }
   showAnsModal() {
     this.setState({
@@ -53,7 +56,15 @@ class Questionn extends React.Component {
       method: 'put'
     }).then((data)=>{
       console.log(data)
+      this.setState({QhelpfulCounter: 1, helped: true})
     })
+  }
+  renderHelpfulButton(){
+    {if (this.state.helped) {
+      return <a>Marked Helpful!</a>
+    } else {
+      return  <button onClick={this.markQuestionHelpful} > Yes {this.props.question.question_helpfulness + this.state.QhelpfulCounter}</button>
+    }}
   }
   render(){
     let myAnswers = [];
@@ -64,7 +75,8 @@ class Questionn extends React.Component {
       <div>
         Q: {this.props.question.question_body}
         <p>Helpful?</p>
-        <a onClick={this.markQuestionHelpful} > Yes {this.props.question.question_helpfulness}</a>
+        {/* <a onClick={this.markQuestionHelpful} > Yes {this.props.question.question_helpfulness + this.state.QhelpfulCounter}</a> */}
+        {this.renderHelpfulButton()}
         <AddAnswerButton showAnsModal={this.showAnsModal.bind(this)} />
         <AnswerModal hide={this.hideAnsModal.bind(this)}showing={this.state.showingAnsModal}submitAnswer={this.submitAnswer.bind(this)}/>
         <AnswerList answers={myAnswers}increaseHelpful={this.props.increaseHelpful}reportAnswer={this.reportAnswer.bind(this)} />
