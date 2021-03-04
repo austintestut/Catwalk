@@ -33,7 +33,7 @@ class Reviews extends React.Component {
 
   render() {
     //console.log(this.state.reviewData.results);
-    const {reviewsData, reviewsMeta, currentFilters} = this.state;
+    const { reviewsData, reviewsMeta, currentFilters } = this.state;
     return (
       <div>
         <ReviewSummary reviewsMeta={reviewsMeta} currentFilters={currentFilters} />

@@ -35,7 +35,7 @@ const Characteristic = ({ item }) => {
 
   return (
     <div style={{ width: '249px' }}>
-      <h4 style={{textAlign: 'center', margin: '8px' }}>{item[0]}</h4>
+      <h4 style={{ textAlign: 'center', margin: '8px' }}>{item[0]}</h4>
       <div style={{ ...containerStyle }}>
         <div style={{ ...triangleStyle }} />
         <div style={{ ...barStyle, float: 'left' }} />
@@ -44,7 +44,7 @@ const Characteristic = ({ item }) => {
       </div>
       <div style={{ ...textContainerStyle }}>
         <span style={{ ...spanStyle }}>{qualities[1]}</span>
-        <span style={{ ...spanStyle, textAlign: 'center'}}>{qualities[3]}</span>
+        <span style={{ ...spanStyle, textAlign: 'center' }}>{ qualities[3] }</span>
         <span style={{ ...spanStyle }}>{qualities[5]}</span>
       </div>
     </div>
