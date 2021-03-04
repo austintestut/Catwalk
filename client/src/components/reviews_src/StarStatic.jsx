@@ -1,7 +1,7 @@
 // eslint-disable no-eval
 import React from 'react';
-import quarter_star from '../../../../images/quarter_star.jpg';
-import three_quarter_star from '../../../../images/three_quarter_star.jpg';
+import quarter_star from '../../../../images/quarter_star.png';
+import three_quarter_star from '../../../../images/three_quarter_star.png';
 
 const StarStatic = ({ number }) => {
   // const emptyStar = <i className="far fa-star"/>;
