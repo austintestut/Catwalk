@@ -32,10 +32,15 @@ class Reviews extends React.Component {
   }
 
   render() {
-    //console.log(this.state.reviewData.results);
     const { reviewsData, reviewsMeta, currentFilters } = this.state;
+    const flexContainerStyle = {
+      display: 'flex',
+      flexWrap: 'nowrap',
+      flex: 'row',
+      padding: '10px',
+    };
     return (
-      <div>
+      <div style={{ ...flexContainerStyle }}>
         <ReviewSummary
           reviewsMeta={reviewsMeta}
           currentFilters={currentFilters}

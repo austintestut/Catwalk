@@ -23,6 +23,10 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   const average = getAverage();
 
   // Styles ---->>>>>>>
+  const containerStyle= {
+    alignSelf: 'flex-start',
+    marginRight: '10px',
+  };
   const inlineStyle = {
     display: 'inline',
     fontSize: '500%',
@@ -36,10 +40,13 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
     fontWeight: 'bold',
     fontSize: '90%',
   };
+  const headerStyle = {
+    marginTop: '0px',
+  }
 
   return (
-    <div>
-      <h3>Ratings &amp; Reviews</h3>
+    <div style={{ ...containerStyle }}>
+      <h3 style={{ ...headerStyle }}>Ratings &amp; Reviews</h3>
       <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
       <Filters clearFilters={clearFilters} filters={currentFilters} />
       <div style={{ ...recommendStyle }}>{percentReq}% of reviews recommend this product</div>

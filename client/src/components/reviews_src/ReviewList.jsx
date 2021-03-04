@@ -20,12 +20,17 @@ class ReviewList extends React.Component {
 
   render() {
     const { reviews, show } = this.state;
+    const containerStyle = {
+      alignSelf: 'flex-end stretch',
+      margin: '10px',
+      marginTop: '0px',
+    };
     const reviewTileStyle = {
       overflow: 'auto',
       maxHeight: '80vh',
     };
     return (
-      <div>
+      <div style={{ ...containerStyle }}>
         <ReviewsSort total={reviews.length} />
         <div style={reviewTileStyle}>
           { reviews.slice(0, show).map((review) => (<ReviewTile review={review} />)) }
