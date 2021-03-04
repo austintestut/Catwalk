@@ -25,7 +25,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   // Styles ---->>>>>>>
   const inlineStyle = {
     display: 'inline',
-    fontSize: '400%',
+    fontSize: '500%',
     paddingRight: '15px',
   };
   const starStyle = {
@@ -48,6 +48,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
         <span onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
         <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />
       </div>)}
+      <br />
       {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
     </div>
     );
