@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import StarHover from '../new_review_components/StarHover';
 
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
-class ImgModal extends React.Component {
+class NewReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,16 +17,13 @@ class ImgModal extends React.Component {
   }
 
   render() {
-    let { url } = this.props;
     const modalStyle = {
-      // display: 'none', /* Hidden by default <<<<<<<<<<<<------------- */
       position: 'fixed',
       zIndex: 1,
       left: '50%',
       transform: 'translateX(-50%)',
       top: '5%',
       height: '100%',
-      overflow: 'auto',
       backgroundColor: 'transparent',
       maxHeight: 'calc(100vh - 100px)',
       maxWidth: '95%',
@@ -45,10 +43,6 @@ class ImgModal extends React.Component {
       textShadow: '0 0 1px #000',
     };
 
-    const imgStyle = {
-      borderRadius: '2%',
-    };
-
     const overlayStyle = {
       position: 'fixed',
       top: 0,
@@ -58,33 +52,29 @@ class ImgModal extends React.Component {
       backgroundColor: 'rgba(128,128,128,0.5)',
     };
 
-    const thumbStyle = {
+    const formStyle = {
+      width: '90vw',
+      height: '90vh',
+      backgroundColor: 'white',
       borderRadius: '5px',
-      padding: '5px',
-      paddingLeft: '0',
-      height: '80px',
-      maxWidth: '80px',
     };
     /* ---------------------------------------------------------------------------------*/
-    if (this.state.open && url) {
+    //if (this.state.open) {
       return (
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
             <div style={{ ...modalContentStyle }}>
               <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
-              <img src={url} alt="" style={{ ...imgStyle }} />
+              <div style={{ ...formStyle }}>
+                <StarHover />
+              </div>
             </div>
           </div>
         </div>
       );
-    }
-    if (url) {
-      return (
-        <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
-      );
-    }
-    return null;
+    //}
+     //return null;
   }
 }
 
-export default ImgModal;
+export default NewReviewModal;

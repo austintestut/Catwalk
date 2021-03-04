@@ -1,8 +1,8 @@
 import React from 'react';
-import ReviewTile from './ReviewTile';
 import MoreReviews from './MoreReviews';
 import ReviewsSort from './ReviewsSort';
 import ReviewTileContainer from './ReviewTileContainer';
+import NewReviewModal from './NewReviewModal';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -54,6 +54,7 @@ class ReviewList extends React.Component {
         {/* { showReviews.map((review) => (<ReviewTile review={review} />)) } */}
         <ReviewTileContainer reviews={reviews} show={show} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
+        <NewReviewModal />
       </div>
     );
   }

@@ -2,7 +2,6 @@ import React from 'react';
 import ReviewTile from './ReviewTile';
 
 const ReviewTileContainer = ({ reviews, show }) => {
-  debugger;
   const showReviews = reviews.slice(0, show);
   const reviewTileStyle = {
     overflow: 'auto',
