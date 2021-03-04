@@ -69,7 +69,7 @@ app.get(`/products/:id/related`, (req, res) => {
     }
   })
     .then((data) => {
-      res.status(200).send(data);
+      res.status(200).send(data.data);
     })
     .catch((err) => {
       console.log('ERR Axios request for related products');

@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div>
       <h1>Hell World I am rendering!</h1>
-      <RelatedProductsAndOutfits />
+      <RelatedProductsAndOutfits currentPageItemId={[17090]}/>
       {/* <Container /> */}
     </div>
   );

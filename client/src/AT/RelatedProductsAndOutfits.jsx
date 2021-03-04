@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
@@ -12,26 +13,28 @@ grid-template-columns: 1fr 12fr 1fr;
 overflow-y: hidden;
 `;
 const StyledLeftButton = styled.button`
-height: 270px;
+height: 370px;
 width: 100%;
 position: relative;
 top: 18px;
 background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 50% 0 0 50%;
+padding-right: 16%;
 ${StyledLeftButton}:hover {
   background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(175, 175, 175));
   cursor: pointer;
 }
 `;
 const StyledRightButton = styled.button`
-height: 270px;
+height: 370px;
 width: 100%;
 position: relative;
 top: 18px;
 background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 0 50% 50% 0;
+padding-left: 16%;
 ${StyledRightButton}:hover {
   background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(175, 175, 175));
   cursor: pointer;
@@ -46,24 +49,24 @@ class RelatedProductsAndOutfits extends React.Component {
       relatedCurrentlyShowingIndexes: [0, 1, 2, 3],
       outfitCurrentlyShowingIndexes: [0, 1, 2],
 
-      // track first products for hiding left arrows MAY JUST BE ABLE TO USE INDEXES
-      firstRelatedProductId: 17762, // for testing
-      firstOutfitProductId: 18076, // for testing
-
-      // tracks last products for hiding right arrows MAY JUST BE ABLE TO USE INDEXES
-      lastRelatedProductId: 17070, // for testing
-      lastOutfitProductId: 17858, // for testing
-
       // boolean for whether arrows are showing
       relatedLeftArrow: false,
       relatedRightArrow: true,
 
       outfitLeftArrow: false,
       outfitRightArrow: true,
+
+      productData: [],
+      rating: 0,
+      cardCharacteristics: [],
+      totalReviews: 0,
+      relatedProductIds: [],
+      outfitProductIds: []
+
     };
 
-    this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
-    this.outfitProductIds = [18076, 17858, 17763, 18076, 17068]; // for testing
+    // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
+    // this.outfitProductIds = [18076, 17858, 17763, 18076, 17068]; // for testing
 
     this.handleRelatedCarouselRight = this.handleRelatedCarouselRight.bind(this);
     this.handleRelatedCarouselLeft = this.handleRelatedCarouselLeft.bind(this);
@@ -74,15 +77,81 @@ class RelatedProductsAndOutfits extends React.Component {
     this.renderLeftButtonToggleForRelatedProducts = this.renderLeftButtonToggleForRelatedProducts.bind(this);
     this.renderLeftButtonToggleForOutfit = this.renderLeftButtonToggleForOutfit.bind(this);
     this.checkIfButtonsShouldRender = this.checkIfButtonsShouldRender.bind(this);
+    this.getProductInfo = this.getProductInfo.bind(this);
+    this.getRating = this.getRating.bind(this);
+    this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
   }
 
   componentDidMount() {
     this.renderRightButtonToggleForRelatedProducts();
     this.renderRightButtonToggleForOutfit();
+    this.getProductInfo(this.props.currentPageItemId);
+    this.getRating(this.props.currentPageItemId);
+    this.getRelatedItemIds(this.props.currentPageItemId);
+  }
+
+  // fetch data for current item on page
+  // fetch related items
+  getRelatedItemIds(id) {
+    axios.get(`/products/${id}/related`)
+      .then((data) => {
+        this.setState({
+          relatedProductIds: data.data
+        });
+      })
+      .catch((err) => {
+        console.log('ERR Axios get product from client', err);
+      });
+  }
+
+
+  // get the category, name, default price
+  getProductInfo(id) {
+    axios.get(`/products/${id}`)
+      .then((data) => {
+        this.setState({
+          productData: data.data
+        });
+      })
+      .catch((err) => {
+        console.log('ERR Axios get product from client', err);
+      });
+  }
+
+  //get rating
+  getRating(id) {
+    axios.get(`/reviews/meta/${id}`)
+      .then((data) => {
+        let ratings = data.data.ratings;
+        let oneStars = ratings['1'] || 0;
+        let twoStars = ratings['2'] || 0;
+        let threeStars = ratings['3'] || 0;
+        let fourStars = ratings['4'] || 0;
+        let fiveStars = ratings['5'] || 0;
+
+        let totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
+
+        let reviewStars = (oneStars * 1)
+          + (twoStars * 2) + (threeStars * 3)
+          + (fourStars * 4) + (fiveStars * 5);
+
+        let rating = reviewStars / totalReviews;
+        if (totalReviews === 0) {
+          rating = 0;
+        }
+        this.setState({
+          rating: rating,
+          cardCharacteristics: data.data.characteristics,
+          totalReviews: totalReviews
+        });
+      })
+      .catch((err) => {
+        console.log('ERR getting average star rating from client', err);
+      });
   }
 
   renderRightButtonToggleForRelatedProducts() {
-    if (this.state.relatedCurrentlyShowingIndexes[3] >= this.relatedProductIds.length - 1) {
+    if (this.state.relatedCurrentlyShowingIndexes[3] >= this.state.relatedProductIds.length - 1) {
       this.setState({
         relatedRightArrow: false
       });
@@ -94,7 +163,7 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   renderRightButtonToggleForOutfit() {
-    if (this.state.outfitCurrentlyShowingIndexes[2] >= this.outfitProductIds.length - 1) {
+    if (this.state.outfitCurrentlyShowingIndexes[2] >= this.state.outfitProductIds.length - 1) {
       this.setState({
         outfitRightArrow: false
       });
@@ -188,9 +257,7 @@ class RelatedProductsAndOutfits extends React.Component {
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
           </div>
           <RelatedProductsCarousel
-            relatedProductIds={this.relatedProductIds}
-            relatedProductData={this.state.relatedProductData}
-            productStyleData={this.state.productStyleData}
+            relatedProductIds={this.state.relatedProductIds}
             relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes}
             toggleModal={this.toggleModal}
           />
@@ -204,7 +271,7 @@ class RelatedProductsAndOutfits extends React.Component {
             {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
           </div>
           <OutfitCarousel
-            outfitProductIds={this.outfitProductIds}
+            outfitProductIds={this.state.outfitProductIds}
             outfitCurrentlyShowingIndexes={this.state.outfitCurrentlyShowingIndexes}
           />
           <div>

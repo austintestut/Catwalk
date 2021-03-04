@@ -48,8 +48,8 @@ display: grid;
 grid-template-columns: 5fr 4fr;
 `;
 const StyledImageContainer = styled.section`
-width: 200px;
-height: 150px;
+width: 100%;
+height: 200px;
 display: grid;
 grid-template-rows: 3fr 2fr;
 `;
@@ -65,12 +65,13 @@ animation: ${fadein} 0.4s;
 `;
 const StyledOtherImage = styled.img`
 position: relative;
-bottom: 61px;
+bottom: 65px;
 left: 5px;
 height: 57px;
 width: 57px;
 border: solid;
 border-color: white;
+border-width: 2px;
 ${StyledOtherImage}:hover {
   cursor: pointer;
 }
@@ -219,7 +220,7 @@ class RelatedProductCard extends React.Component {
           onMouseLeave={this.handleImageMouseLeave}
         >
           <div>
-            <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150" ></img>
+            <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="200px" />
           </div>
           <div>
             {this.state.otherImagesShowing && (

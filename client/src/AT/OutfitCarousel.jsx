@@ -3,18 +3,18 @@ import styled, { css } from 'styled-components';
 import OutfitCard from './OutfitCard';
 
 const StyledOutfitContainer = styled.div`
+position: relative;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
-height: 270px;
+grid-column-gap: 7%;
+height: 400px;
 `;
 const StyledProductCard = styled.div`
-padding-left: 20%;
-padding-right: 10%;
 margin-top: 5%;
 margin-bottom: 5%;
 `;
 const StyledAddButton = styled.button`
-width: 206px;
+width: 13.54%;
 height: 228px;
 margin-left: 20%;
 margin-right: 10%;
@@ -30,6 +30,7 @@ ${StyledAddButton}:hover {
   border-width: 1px;
 }
 `;
+
 const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => {
   let productsToShow = [
     (outfitProductIds[outfitCurrentlyShowingIndexes[0]] || null),

@@ -37,8 +37,8 @@ display: grid;
 grid-template-columns: 5fr 4fr;
 `;
 const StyledImageContainer = styled.section`
-width: 200px;
-height: 150px;
+width: 100%;
+height: 200px;
 display: grid;
 grid-template-rows: 3fr 2fr;
 `;
@@ -47,19 +47,20 @@ position: absolute;
 display: grid;
 grid-row: 2;
 grid-template-columns: 1fr 1fr 1fr;
-grid-column-gap: 11px;
+grid-column-gap: 2%;
 height: 57px;
 width: 173px;
 animation: ${fadein} 0.4s;
 `;
 const StyledOtherImage = styled.img`
 position: relative;
-bottom: 61px;
+bottom: 65px;
 left: 5px;
 height: 57px;
 width: 57px;
 border: solid;
 border-color: white;
+border-width: 2px;
 ${StyledOtherImage}:hover {
   cursor: pointer;
 }
@@ -187,7 +188,7 @@ class OutfitCard extends React.Component {
           onMouseLeave={this.handleImageMouseLeave}
         >
           <div>
-            <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150" ></img>
+            <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="200px" ></img>
           </div>
           <div>
             {this.state.otherImagesShowing && (
