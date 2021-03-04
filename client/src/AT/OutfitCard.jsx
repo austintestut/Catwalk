@@ -2,19 +2,29 @@ import React from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
 import StarStatic from '.././components/reviews_src/StarStatic.jsx'
+import xIcon from '../../../images/circle_x.png';
 
 const StyledCard = styled.div`
 border-style: solid;
 border-width: 3px;
+position: relative;
 `
-
+const StyledX = styled.div`
+height: 20px;
+width:20px;
+position: absolute;
+top:0;
+right: 0;
+filter: invert(1);
+`
 class OutfitCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       photoUrl: '',
       productData: [],
-      rating: 0
+      rating: 0,
+      otherUrls: []
     };
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getPhotoUrl = this.getPhotoUrl.bind(this);
@@ -76,8 +86,14 @@ class OutfitCard extends React.Component {
   getPhotoUrl(id) {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
+        console.log(styleData.data);
+        let otherUrls = [];
+        for (let i = 1; i < styleData.data.results.length; i++) {
+          otherUrls.push(styleData.data.results[i].photos[0].thumbnail_url);
+        }
         this.setState({
-          photoUrl: styleData.data.results[0].photos[0].thumbnail_url
+          photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
+          otherUrls: otherUrls
         });
       })
       .catch((err) => {
@@ -89,6 +105,9 @@ class OutfitCard extends React.Component {
   render() {
     return (
       <StyledCard>
+        <StyledX>
+          <img src={xIcon} width="100%" height="100%"/>
+        </StyledX>
         <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150"></img>
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>

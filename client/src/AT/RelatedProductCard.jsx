@@ -2,10 +2,19 @@ import React from 'react';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
 import StarStatic from '.././components/reviews_src/StarStatic.jsx';
+import starIcon from '../../../images/empty_star.png';
 
 const StyledCard = styled.div`
 border-style: solid;
 border-width: 3px;
+position: relative;
+`
+const StyledStar = styled.div`
+height: 20px;
+width:20px;
+position: absolute;
+top:0;
+right: 0;
 `
 
 class RelatedProductCard extends React.Component {
@@ -15,17 +24,13 @@ class RelatedProductCard extends React.Component {
       photoUrl: '',
       productData: [],
       rating: 0,
+      otherUrls: []
     };
-    this.getProductInfo = this.getProductInfo.bind(this);
-    this.getPhotoUrl = this.getPhotoUrl.bind(this);
   }
-  // make ajax request for each of those ID's, put data in state
-  // (probably going to have to make each card in carousel stateful)
-  // and make those ajax requests there
 
   componentDidMount() {
     this.getProductInfo(this.props.productId);
-    this.getPhotoUrl(this.props.productId);
+    this.getPhotoUrls(this.props.productId);
     this.getRating(this.props.productId);
   }
 
@@ -56,8 +61,8 @@ class RelatedProductCard extends React.Component {
         let totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
 
         let reviewStars = (oneStars * 1)
-        + (twoStars * 2) + (threeStars * 3)
-        + (fourStars * 4) + (fiveStars * 5);
+          + (twoStars * 2) + (threeStars * 3)
+          + (fourStars * 4) + (fiveStars * 5);
 
         let rating = reviewStars / totalReviews;
         if (totalReviews === 0) {
@@ -73,11 +78,13 @@ class RelatedProductCard extends React.Component {
   }
 
   //get the photo url
-  getPhotoUrl(id) {
+  getPhotoUrls(id) {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
+        let otherUrls = styleData.data.results.slice(1, this.length);
         this.setState({
-          photoUrl: styleData.data.results[0].photos[0].thumbnail_url
+          photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
+          otherUrls: otherUrls
         });
       })
       .catch((err) => {
@@ -85,11 +92,13 @@ class RelatedProductCard extends React.Component {
       });
   }
 
-
-
   render() {
     return (
       <StyledCard>
+        {this.state.modalShowing && <ComparisonModal />}
+        <StyledStar onClick={this.props.toggleModal}>
+          <img src={starIcon} width="100%" height="100%"/>
+        </StyledStar>
         <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150"></img>
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>

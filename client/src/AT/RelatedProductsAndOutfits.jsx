@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
+import ComparisonModal from './ComparisonModal';
 
 const StyledCarouselContainer = styled.div`
 padding-left: 15%;
@@ -25,7 +26,16 @@ top: 18px;
 background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(217, 217, 217, 1));
 border: none;
 `
-
+const StyledModalContainer = styled.div`
+position: fixed;
+left: 0;
+top: 0;
+z-index: 1;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.3);
+`
 class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {
     super(props);
@@ -47,8 +57,10 @@ class RelatedProductsAndOutfits extends React.Component {
       relatedRightArrow: true,
 
       outfitLeftArrow: false,
-      outfitRightArrow: true
+      outfitRightArrow: true,
 
+      // comparison modal showing or not
+      modalShowing: false
     };
 
     this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
@@ -63,7 +75,8 @@ class RelatedProductsAndOutfits extends React.Component {
     this.renderLeftButtonToggleForRelatedProducts = this.renderLeftButtonToggleForRelatedProducts.bind(this);
     this.renderLeftButtonToggleForOutfit = this.renderLeftButtonToggleForOutfit.bind(this);
     this.checkIfButtonsShouldRender = this.checkIfButtonsShouldRender.bind(this);
-
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleInnerModalClick = this.handleInnerModalClick.bind(this);
   }
 
   componentDidMount() {
@@ -168,20 +181,34 @@ class RelatedProductsAndOutfits extends React.Component {
     });
   }
 
+  toggleModal() {
+    this.setState({
+      modalShowing: !this.state.modalShowing
+    });
+  }
+
+  handleInnerModalClick(event) {
+    event.stopPropagation();
+  }
+
   render() {
     return (
       <div>
         <h3>Related Products and Outfit </h3>
         <StyledCarouselContainer>
+          {this.state.modalShowing && (
+            <StyledModalContainer onClick={this.toggleModal}>
+              <ComparisonModal handleInnerModalClick={this.handleInnerModalClick} />
+            </StyledModalContainer>)}
           <div>
-          {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
+            {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
           </div>
-        <RelatedProductsCarousel relatedProductIds={this.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes} />
-        <div>
-        {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
-      </div>
+          <RelatedProductsCarousel relatedProductIds={this.relatedProductIds} relatedProductData={this.state.relatedProductData} productStyleData={this.state.productStyleData} relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes} toggleModal={this.toggleModal} />
+          <div>
+            {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
+          </div>
         </StyledCarouselContainer >
-      <br></br> {/* remove this when incorporating everyone's components */ }
+        <br></br> {/* remove this when incorporating everyone's components */}
         <StyledCarouselContainer>
           <div>
             {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
@@ -191,7 +218,7 @@ class RelatedProductsAndOutfits extends React.Component {
             {this.state.outfitRightArrow && <StyledRightButton onClick={() => { this.handleOutfitCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
           </div>
         </StyledCarouselContainer>
-        <br></br> {/* remove this when incorporating everyone's components */ }
+        <br></br> {/* remove this when incorporating everyone's components */}
       </div >
     )
   }
