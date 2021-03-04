@@ -6,7 +6,14 @@ class NewReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      open: true,
+      stars: null,
+      recommend: null,
+      nickname: '',
+      email: '',
+      reviewSummary: '',
+      reviewBody: '',
+      images: '',
     };
     this.toggleModal = this.toggleModal.bind(this);
   }
@@ -36,7 +43,7 @@ class NewReviewModal extends React.Component {
 
     const modalButtonStyle = {
       right: 7,
-      top: 7,
+      top: 28,
       color: 'white',
       zIndex: 2,
       position: 'fixed',
@@ -59,21 +66,28 @@ class NewReviewModal extends React.Component {
       borderRadius: '5px',
     };
     /* ---------------------------------------------------------------------------------*/
-    //if (this.state.open) {
+    if (this.state.open) {
       return (
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
             <div style={{ ...modalContentStyle }}>
               <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
               <div style={{ ...formStyle }}>
+                { /* ------------------------------->>FORM HERE<<------------------------------*/ }
                 <StarHover />
+                <div>
+                  <p>Do you recommend this product (mandatory)</p>
+                  <input type="radio" name="recommend" value="true" />
+                  <input type="radio" name="recommend" value="false" />
+                </div>
+                { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>
           </div>
         </div>
       );
-    //}
-     //return null;
+    }
+    return null;
   }
 }
 

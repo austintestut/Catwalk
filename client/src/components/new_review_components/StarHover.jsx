@@ -11,6 +11,7 @@ class StarHover extends React.Component {
     this.hoverCount = this.hoverCount.bind(this);
     this.resetCount = this.resetCount.bind(this);
     this.clickToggle = this.clickToggle.bind(this);
+    this.makeText = this.makeText.bind(this);
   }
 
   clickToggle(e) {
@@ -43,20 +44,26 @@ class StarHover extends React.Component {
     for (let x = 0; x < 5; x++) {
       if (count > x) {
         stars.push(
-          <i
-            class="fas fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle}
-          />);
+          <i class="fas fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle} />);
         continue
       }
-      stars.push(<i class="far fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle}/>);
+      stars.push(
+      <i class="far fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle}/>);
     }
     return stars;
+  }
+
+  makeText() {
+    const { count, clicked } = this.state;
+    if (!count || !clicked) { return '   (please select a rating)'; }
+    return `   ${count} Stars`;
   }
 
   render() {
     return (
       <div>
-        {this.makeStars()}
+        <h4>Overall Rating (mandatory)</h4>
+       <span>{this.makeStars()}<span>{this.makeText()}</span></span>
       </div>
     );
   }
