@@ -5,6 +5,7 @@ import QuestionList from './QuestionList';
 import QuestionModal from './QuestionModal';
 import AddQuestionButton from './Buttons/AddQuestionButton';
 import ShowMoreQuestionsButton from './Buttons/ShowMoreQuestionsButton';
+import SearchBar from './SearchBar'
 
 class Container extends React.Component {
   constructor(props) {
@@ -16,16 +17,18 @@ class Container extends React.Component {
       questionsToShow: 4,
       isMaxQuestions: false,
       currentProductID: 17762,
+      searchText: '',
+      displayedQuestions: [],
+      searching: false
     };
     this.showQModal = this.showQModal.bind(this);
     this.hideQModal = this.hideQModal.bind(this);
-    // this.showAnsModal = this.showAnsModal.bind(this);
-    // this.hideAnsModal = this.hideAnsModal.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
     this.increaseHelpful = this.increaseHelpful.bind(this);
-    // this.reportAnswer = this.reportAnswer.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.displaySearchQuestions = this.displaySearchQuestions.bind(this)
   }
 
   componentDidMount() {
@@ -104,6 +107,22 @@ class Container extends React.Component {
       console.log(data)
     })
   }
+  handleSearch(e){
+    if(e.target.value.length > 2) {
+      console.log(this.displaySearchQuestions(e.target.value))
+      this.setState({searchText: e.target.value, searching: true, displayedQuestions: this.displaySearchQuestions(e.target.value)})
+
+  } else {
+    this.setState({searching: false})
+  }
+    }
+
+  displaySearchQuestions(text){
+    let filtered = this.state.questions.filter((question)=>question.question_body.includes(text));
+    return filtered
+
+  }
+
   // reportAnswer(event){
   //   console.log('calling Report Answer')
   // }
@@ -111,7 +130,8 @@ class Container extends React.Component {
   render() {
     return (
       <div>
-        <QuestionList questions={this.state.questions}showAns={this.showAnsModal} howMany={this.state.questionsToShow}increaseHelpful={this.increaseHelpful}/>
+        <SearchBar handleSearch={this.handleSearch}/>
+        <QuestionList questions={this.state.questions}showAns={this.showAnsModal} howMany={this.state.questionsToShow}increaseHelpful={this.increaseHelpful}searching={this.state.searching} displayedQuestions={this.state.displayedQuestions}/>
 
         <ShowMoreQuestionsButton showMoreQuestions={this.showMoreQuestions} isMaxQuestions={this.state.isMaxQuestions}/>
 
