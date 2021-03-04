@@ -32,13 +32,17 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
     verticalAlign: 'top',
     paddingLeft: '5px',
   };
+  const recommendStyle = {
+    fontWeight: 'bold',
+    fontSize: '90%',
+  };
 
   return (
     <div>
       <h3>Ratings &amp; Reviews</h3>
       <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
       <Filters clearFilters={clearFilters} filters={currentFilters} />
-      <div>{percentReq}% of reviews recommend this product</div>
+      <div style={{ ...recommendStyle }}>{percentReq}% of reviews recommend this product</div>
       {Object.entries(ratings).map((rating) =>
       <div>
         <span onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
