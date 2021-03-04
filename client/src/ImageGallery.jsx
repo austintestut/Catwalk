@@ -2,39 +2,60 @@ import React from 'react'
 import styled from 'styled-components';
 
 const MainImg = styled.img`
-  width: 45%;
+  width: 65%;
   height: auto%;
   border-radius: 10px;
+  display: inline-block;
+  cursor: -webkit-zoom-in;
 `
-// top: 0;
-// left: 0;
-// display: block;
-// position: relative;
 
 const Thumbnail = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 100%;
+  display: inline-block;
+  cursor: pointer;
 `
 
-// display: inline-block;
-// position: relative;
-// bottom: 100;
-// left: 100;
+const ImageGallery = ( {styles, selected} ) => {
+  if (selected) {
+    let main = '';
+    for (let i = 0; i < styles.length; i++) {
+      if (styles[i].style_id === Number(selected)) {
+        main = styles[i].photos[0].url;
+      }
+    };
 
-const ImageGallery = ( {styles} ) => {
-  //console.log(styles);
+    return (
+      <MainImg
+      key={selected}
+      src={main}
+      />
+    )
+  } else {
   return (
+    <>
     <div>
-      <h1>Image Gallery</h1>
-      <div>
-        <MainImg src="https://images.unsplash.com/photo-1547257965-087be799b084?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"></MainImg>
-      </div>
-      <div>
-        <Thumbnail src="https://images.unsplash.com/photo-1553830591-d8632a99e6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"></Thumbnail>
-      </div>
+      {styles.map((style) => {
+        if (style['default?']) {
+          return (
+            <MainImg key={style.style_id}src={style.photos[0].url} />
+          )
+        }
+      })}
     </div>
+
+    {/* <div>
+      {styles.map((style) => {
+        return (
+          <span key={style.style_id}>
+          <Thumbnail key={style.style_id} src={style.photos[0].thumbnail_url}></Thumbnail>
+          </span>
+        )
+      })}
+    </div> */}
+    </>
   )
 }
-
+}
 export default ImageGallery;

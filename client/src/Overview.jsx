@@ -9,17 +9,18 @@ import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import Cart from './Cart.jsx';
-
+import Thumbnails from './Thumbnails.jsx';
 
 const GridStyling = styled.div`
   display: grid;
   grid-template-areas:
-    "head head"
-    "main nav"
-    ". foot";
+    ". head ."
+    "small main nav"
+    ". . foot";
 `
 const Header = styled.div`
   grid-area: head;
+  text-align: center;
 `
 const Images = styled.div`
   grid-area: main;
@@ -30,54 +31,61 @@ const Info = styled.div`
 const StyledCart = styled.div`
   grid-area: foot;
 `
+const StyledThumbs = styled.div`
+  grid-area: small;
+`
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [],
-      styles: testStyles,
-      displayStyles: [],
+      products: {},
+      styles: [],
       reviews: testReview,
       ratings: [],
       totalReviews: undefined,
-      display: [],
+      selectedStlye: null,
+      selectedSize: '',
+      sizeId: '',
     };
     this.getProducts = this.getProducts.bind(this);
     this.getStyles = this.getStyles.bind(this);
     this.getRatingAndReviews = this.getRatingAndReviews.bind(this);
+    this.handleStyleSelect = this.handleStyleSelect.bind(this);
+    this.handleSizeSelect = this.handleSizeSelect.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
+
   componentDidMount() {
-    this.getProducts();
+    this.getProducts(18025);
 
     // Here to test functionality
-    //this.getStyles(18025);
+    this.getStyles(18025);
     //this.getRatingAndReviews(18025);
   }
 
 
-  getProducts() {
+  getProducts(id) {
     const options = {headers: {'Authorization': '51ed293eb79916493e9134ed9ca3d9940d0e4651'}}
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', options)
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, options)
       .then((res) => {
         this.setState({
           products: res.data
-        });
+        }, ()=>{console.log('Product:', this.state.products)});
       })
       .catch((err) => {
         console.error(err);
       })
   }
 
-// Errors out occasionaly due to async
   getStyles(id) {
     const options = {headers: {'Authorization': '51ed293eb79916493e9134ed9ca3d9940d0e4651'}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, options)
       .then((res) => {
         this.setState({
           styles: res.data.results
-        });
+        }, ()=>{console.log('Styles:', this.state.styles)});
       })
       .catch((err) => {
         console.error(err);
@@ -106,13 +114,59 @@ class Overview extends React.Component {
       })
   }
 
+  handleStyleSelect(event) {
+    this.setState({
+      selectedStyle: event.target.value
+    });
+  }
+
+  handleSizeSelect(event, id) {
+    //console.log('event:', event.target.value)
+    this.setState({
+      selectedSize: event.target.value,
+      sizeId: id
+    })
+  }
+
+  handleChange(event) {
+    let name = event.target.name;
+    this.setState({
+      [name]: event.target.value
+    })
+  }
+
   render() {
     return (
       <GridStyling>
         <Header>OVERVIEW</Header>
-        <Images><ImageGallery styles={this.state.styles} /></Images>
-        <Info><ProductInfo products={this.state.products} reviews={this.state.reviews} styles={this.state.styles}/></Info>
-        <StyledCart><Cart /></StyledCart>
+        <Images>
+          <ImageGallery
+          styles={this.state.styles}
+          selected={this.state.selectedStyle}
+          />
+          </Images>
+        <StyledThumbs>
+          <Thumbnails
+          handleSelect={this.handleStyleSelect}
+          styles={this.state.styles}
+          />
+        </StyledThumbs>
+        <Info>
+          <ProductInfo
+          products={this.state.products}
+          reviews={this.state.reviews}
+          styles={this.state.styles}
+          selected={this.state.selectedStyle}
+          />
+        </Info>
+        <StyledCart>
+          <Cart
+          styles={this.state.styles}
+          selected={this.state.selectedStyle}
+          selectedSize={this.state.selectedSize}
+          handleSize={this.handleSizeSelect}
+          />
+        </StyledCart>
       </GridStyling>
     )
   }
