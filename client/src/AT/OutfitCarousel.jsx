@@ -14,7 +14,7 @@ margin-top: 5%;
 margin-bottom: 5%;
 `;
 const StyledAddButton = styled.button`
-width: 200px;
+width: 206px;
 height: 228px;
 margin-left: 20%;
 margin-right: 10%;

@@ -36,27 +36,35 @@ const StyledStarLine = styled.div`
 display: grid;
 grid-template-columns: 5fr 4fr;
 `;
-const StyledImageContainer = styled.div`
+const StyledImageContainer = styled.section`
 width: 200px;
 height: 150px;
+display: grid;
+grid-template-rows: 3fr 2fr;
 `;
 const StyledOtherImageContainer = styled.div`
 position: absolute;
 display: grid;
+grid-row: 2;
 grid-template-columns: 1fr 1fr 1fr;
+grid-column-gap: 11px;
 height: 57px;
 width: 173px;
 animation: ${fadein} 0.4s;
 `;
 const StyledOtherImage = styled.img`
 position: relative;
-bottom: 60px;
-padding-left: 6.25%;
-padding-right: 6.25%;
-height: 78%;
-width: 78%;
-z-index: 1;
+bottom: 61px;
+left: 5px;
+height: 57px;
+width: 57px;
+border: solid;
+border-color: white;
+${StyledOtherImage}:hover {
+  cursor: pointer;
+}
 `;
+
 class OutfitCard extends React.Component {
   constructor(props) {
     super(props);
@@ -71,14 +79,10 @@ class OutfitCard extends React.Component {
       totalReviews: 0,
       otherImagesShowing: false
     };
-    this.getProductInfo = this.getProductInfo.bind(this);
-    this.getPhotoUrl = this.getPhotoUrl.bind(this);
-    this.handleImageHover = this.handleImageHover.bind(this);
+    this.handleImageMouseOver = this.handleImageMouseOver.bind(this);
+    this.handleImageMouseLeave = this.handleImageMouseLeave.bind(this);
     this.handleOtherImageClick = this.handleOtherImageClick.bind(this);
   }
-  // make ajax request for each of those ID's, put data in state
-  // (probably going to have to make each card in carousel stateful)
-  // and make those ajax requests there
 
   componentDidMount() {
     this.getProductInfo(this.props.productId);
@@ -122,6 +126,7 @@ class OutfitCard extends React.Component {
         }
         this.setState({
           rating: rating,
+          cardCharacteristics: data.data.characteristics,
           totalReviews: totalReviews
         });
       })
@@ -146,17 +151,25 @@ class OutfitCard extends React.Component {
       });
   }
 
-  handleImageHover() {
+  handleImageMouseOver() {
     this.setState({
-      otherImagesShowing: !this.state.otherImagesShowing
+      otherImagesShowing: true
     });
   }
 
-  handleOtherImageClick(event) {
-    let clickedPhotoIndex = event.target.index;
-    let clickedPhoto = this.state.otherUrls[clickedPhotoIndex];
+  handleImageMouseLeave() {
+    this.setState({
+      otherImagesShowing: false
+    });
+  }
+
+  handleOtherImageClick(index) {
+    let clickedPhoto = this.state.otherUrls[index];
     let showingPhoto = this.state.photoUrl;
-    let newOtherUrls = this.state.otherUrls.splice(clickedPhotoIndex, 1, showingPhoto);
+    let newOtherUrls = this.state.otherUrls;
+
+    newOtherUrls.splice(index, 1, showingPhoto);
+
     this.setState({
       photoUrl: clickedPhoto,
       otherUrls: newOtherUrls
@@ -166,22 +179,26 @@ class OutfitCard extends React.Component {
   render() {
     return (
       <StyledCard>
-        <StyledX>
+        <StyledX onClick={this.toggleModal}>
           <img src={xIcon} width="100%" height="100%" />
         </StyledX>
         <StyledImageContainer
-          onMouseOver={this.handleImageHover}
-          onMouseLeave={this.handleImageHover}
+          onMouseOver={this.handleImageMouseOver}
+          onMouseLeave={this.handleImageMouseLeave}
         >
-          <img src={this.state.photoUrl} alt={this.state.productData.name} width="200" height="150"></img>
+          <div>
+            <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150" ></img>
+          </div>
+          <div>
+            {this.state.otherImagesShowing && (
+              <StyledOtherImageContainer>
+                <StyledOtherImage src={this.state.otherUrls[0]} onClick={() => this.handleOtherImageClick(0)} />
+                <StyledOtherImage src={this.state.otherUrls[1]} onClick={() => this.handleOtherImageClick(1)} />
+                <StyledOtherImage src={this.state.otherUrls[2]} onClick={() => this.handleOtherImageClick(2)} />
+              </StyledOtherImageContainer>
+            )}
+          </div>
         </StyledImageContainer>
-        {this.state.otherImagesShowing && (
-        <StyledOtherImageContainer>
-          <StyledOtherImage index='0' src={this.state.otherUrls[0]} onClick={this.handleOtherImageClick}/>
-          <StyledOtherImage index='1' src={this.state.otherUrls[1]} onClick={this.handleOtherImageClick}/>
-          <StyledOtherImage index='2' src={this.state.otherUrls[2]} onClick={this.handleOtherImageClick}/>
-        </StyledOtherImageContainer>
-        )}
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>
         <div>{this.state.productData.default_price}</div>
@@ -192,6 +209,6 @@ class OutfitCard extends React.Component {
       </StyledCard>
     );
   }
-};
+}
 
 export default OutfitCard;
