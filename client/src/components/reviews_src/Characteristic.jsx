@@ -22,7 +22,7 @@ const Characteristic = ({ item }) => {
     borderRight: '6px solid transparent',
     borderTop: '12px solid black',
     position: 'absolute',
-    marginLeft: '237px', // 237 max slider left, 0 = max left
+    marginLeft: `${((item[1].value) / 5) * 237}px`, // 237 max slider left, 0 = max left
   };
   const textContainerStyle = {
     justifyContent: 'space-between',
@@ -30,10 +30,12 @@ const Characteristic = ({ item }) => {
     width: '249px',
   };
   const spanStyle = {
-    fontSize: '12px',
+    fontSize: '13px',
   };
+
   return (
-    <div>
+    <div style={{ width: '249px' }}>
+      <h4 style={{textAlign: 'center', margin: '10px' }}>{item[0]}</h4>
       <div style={{ ...containerStyle }}>
         <div style={{ ...triangleStyle }} />
         <div style={{ ...barStyle, float: 'left' }} />
