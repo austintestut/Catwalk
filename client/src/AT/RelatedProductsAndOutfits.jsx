@@ -18,6 +18,7 @@ position: relative;
 top: 18px;
 background-image: linear-gradient(to left, rgb(255, 255, 255), rgba(217, 217, 217, 1));
 border: none;
+border-radius: 50% 0 0 50%;
 `
 const StyledRightButton = styled.button`
 height: 270px;
@@ -26,6 +27,7 @@ position: relative;
 top: 18px;
 background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(217, 217, 217, 1));
 border: none;
+border-radius: 0 50% 50% 0;
 `
 
 class RelatedProductsAndOutfits extends React.Component {
