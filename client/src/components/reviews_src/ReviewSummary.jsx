@@ -47,11 +47,10 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
       <div>
         <span onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
         <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />
-      </div>)
-      }
+      </div>)}
       {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
     </div>
     );
-  }
+  };
 
 export default ReviewSummary;
