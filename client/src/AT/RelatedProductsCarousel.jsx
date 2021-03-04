@@ -7,13 +7,13 @@ const StyledProductCardContainer = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 height: 270px;
-`
+`;
 const StyledProductCard = styled.div`
 padding-left: 20%;
 padding-right: 10%;
 margin-top: 5%;
 margin-bottom: 5%;
-`
+`;
 
 
 const RelatedProductsCarousel = ({ relatedProductIds, relatedProductData, productStyleData, relatedCurrentlyShowingIndexes, toggleModal }) => {
@@ -36,22 +36,22 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedProductData, produc
           } else {
             card = (
               <RelatedProductCard
-              key={productId}
-              productId={productId}
-              relatedProductData={relatedProductData}
-              productStyleData={productStyleData}
-              toggleModal={toggleModal}
+                key={productId}
+                productId={productId}
+                relatedProductData={relatedProductData}
+                productStyleData={productStyleData}
+                toggleModal={toggleModal}
               />
-              );
-            }
-            return (
-              <StyledProductCard key={productId}>
+            );
+          }
+          return (
+            <StyledProductCard key={productId}>
               {card}
             </StyledProductCard>
           );
         })}
       </StyledProductCardContainer>
-        </div>
+    </div>
   );
 };
 

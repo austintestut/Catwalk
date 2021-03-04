@@ -5,8 +5,8 @@ import OutfitCarousel from './OutfitCarousel';
 import ComparisonModal from './ComparisonModal';
 
 const StyledCarouselContainer = styled.div`
-padding-left: 15%;
-padding-right: 15%;
+padding-left: 10%;
+padding-right: 10%;
 display: grid;
 grid-template-columns: 1fr 12fr 1fr;
 overflow-y: hidden;

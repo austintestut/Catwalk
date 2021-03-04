@@ -1,16 +1,23 @@
 import React from 'react';
 import axios from 'axios';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import StarStatic from '.././components/reviews_src/StarStatic.jsx'
 import xIcon from '../../../images/circle_x.png';
 
+const fadein = keyframes`
+from {
+  opacity: 0;
+}
+to {
+  opacity: 1;
+}
+`;
 const StyledCard = styled.div`
 border-style: solid;
 border-width: 3px;
-position: relative;
 border-radius: 5px;
+position: relative;
 ${StyledCard}:hover {
-  border-width:4px;
   box-shadow: 5px 5px 2px rgb(200, 200, 200);
 }
 `;
@@ -25,6 +32,31 @@ ${StyledX}:hover {
   cursor: pointer;
   filter: invert(0.5);
 `;
+const StyledStarLine = styled.div`
+display: grid;
+grid-template-columns: 5fr 4fr;
+`;
+const StyledImageContainer = styled.div`
+width: 200px;
+height: 150px;
+`;
+const StyledOtherImageContainer = styled.div`
+position: absolute;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+height: 57px;
+width: 173px;
+animation: ${fadein} 0.4s;
+`;
+const StyledOtherImage = styled.img`
+position: relative;
+bottom: 60px;
+padding-left: 6.25%;
+padding-right: 6.25%;
+height: 78%;
+width: 78%;
+z-index: 1;
+`;
 class OutfitCard extends React.Component {
   constructor(props) {
     super(props);
@@ -32,10 +64,17 @@ class OutfitCard extends React.Component {
       photoUrl: '',
       productData: [],
       rating: 0,
-      otherUrls: []
+      otherUrls: [],
+      cardCharacteristics: {},
+      // comparison modal showing or not
+      modalShowing: false,
+      totalReviews: 0,
+      otherImagesShowing: false
     };
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getPhotoUrl = this.getPhotoUrl.bind(this);
+    this.handleImageHover = this.handleImageHover.bind(this);
+    this.handleOtherImageClick = this.handleOtherImageClick.bind(this);
   }
   // make ajax request for each of those ID's, put data in state
   // (probably going to have to make each card in carousel stateful)
@@ -74,15 +113,16 @@ class OutfitCard extends React.Component {
         let totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
 
         let reviewStars = (oneStars * 1)
-        + (twoStars * 2) + (threeStars * 3)
-        + (fourStars * 4) + (fiveStars * 5);
+          + (twoStars * 2) + (threeStars * 3)
+          + (fourStars * 4) + (fiveStars * 5);
 
         let rating = reviewStars / totalReviews;
         if (totalReviews === 0) {
           rating = 0;
         }
         this.setState({
-          rating: rating
+          rating: rating,
+          totalReviews: totalReviews
         });
       })
       .catch((err) => {
@@ -94,10 +134,8 @@ class OutfitCard extends React.Component {
   getPhotoUrl(id) {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
-        let otherUrls = [];
-        for (let i = 1; i < styleData.data.results.length; i++) {
-          otherUrls.push(styleData.data.results[i].photos[0].thumbnail_url);
-        }
+        let otherStyles = styleData.data.results.slice(1, this.length);
+        let otherUrls = otherStyles.map((style) => style.photos[0].thumbnail_url);
         this.setState({
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
           otherUrls: otherUrls
@@ -108,18 +146,49 @@ class OutfitCard extends React.Component {
       });
   }
 
+  handleImageHover() {
+    this.setState({
+      otherImagesShowing: !this.state.otherImagesShowing
+    });
+  }
+
+  handleOtherImageClick(event) {
+    let clickedPhotoIndex = event.target.index;
+    let clickedPhoto = this.state.otherUrls[clickedPhotoIndex];
+    let showingPhoto = this.state.photoUrl;
+    let newOtherUrls = this.state.otherUrls.splice(clickedPhotoIndex, 1, showingPhoto);
+    this.setState({
+      photoUrl: clickedPhoto,
+      otherUrls: newOtherUrls
+    });
+  }
 
   render() {
     return (
       <StyledCard>
         <StyledX>
-          <img src={xIcon} width="100%" height="100%"/>
+          <img src={xIcon} width="100%" height="100%" />
         </StyledX>
-        <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150"></img>
+        <StyledImageContainer
+          onMouseOver={this.handleImageHover}
+          onMouseLeave={this.handleImageHover}
+        >
+          <img src={this.state.photoUrl} alt={this.state.productData.name} width="200" height="150"></img>
+        </StyledImageContainer>
+        {this.state.otherImagesShowing && (
+        <StyledOtherImageContainer>
+          <StyledOtherImage index='0' src={this.state.otherUrls[0]} onClick={this.handleOtherImageClick}/>
+          <StyledOtherImage index='1' src={this.state.otherUrls[1]} onClick={this.handleOtherImageClick}/>
+          <StyledOtherImage index='2' src={this.state.otherUrls[2]} onClick={this.handleOtherImageClick}/>
+        </StyledOtherImageContainer>
+        )}
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>
         <div>{this.state.productData.default_price}</div>
-        <StarStatic number={this.state.rating} />
+        <StyledStarLine>
+          <div><StarStatic number={this.state.rating} /></div>
+          ({this.state.totalReviews})
+        </StyledStarLine>
       </StyledCard>
     );
   }

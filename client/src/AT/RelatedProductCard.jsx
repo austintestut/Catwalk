@@ -19,7 +19,6 @@ border-width: 3px;
 border-radius: 5px;
 position: relative;
 ${StyledCard}:hover {
-  border-width: 4px;
   box-shadow: 5px 5px 2px rgb(200, 200, 200);
 }
 `;
@@ -48,10 +47,9 @@ const StyledStarLine = styled.div`
 display: grid;
 grid-template-columns: 5fr 4fr;
 `;
-const StyledImageContainer = styled.img`
-width: 100%;
+const StyledImageContainer = styled.div`
+width: 200px;
 height: 150px;
-overflow-y: auto;
 `;
 const StyledOtherImageContainer = styled.div`
 position: absolute;
@@ -78,7 +76,7 @@ class RelatedProductCard extends React.Component {
       photoUrl: '',
       productData: [],
       rating: 0,
-      otherUrls: [{}],
+      otherUrls: [],
       cardCharacteristics: {},
       // comparison modal showing or not
       modalShowing: false,
@@ -89,6 +87,7 @@ class RelatedProductCard extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInnerModalClick = this.handleInnerModalClick.bind(this);
     this.handleImageHover = this.handleImageHover.bind(this);
+    this.handleOtherImageClick = this.handleOtherImageClick.bind(this);
   }
 
   componentDidMount() {
@@ -174,6 +173,17 @@ class RelatedProductCard extends React.Component {
     });
   }
 
+  handleOtherImageClick(event) {
+    let clickedPhotoIndex = event.target.index;
+    let clickedPhoto = this.state.otherUrls[clickedPhotoIndex];
+    let showingPhoto = this.state.photoUrl;
+    let newOtherUrls = this.state.otherUrls.splice(clickedPhotoIndex, 1, showingPhoto);
+    this.setState({
+      photoUrl: clickedPhoto,
+      otherUrls: newOtherUrls
+    });
+  }
+
   render() {
     return (
       <StyledCard>
@@ -189,16 +199,17 @@ class RelatedProductCard extends React.Component {
         <StyledStarIcon onClick={this.toggleModal}>
           <img src={starIcon} width="100%" height="100%" />
         </StyledStarIcon>
-        <StyledImageContainer src={this.state.photoUrl}
-          alt={this.state.productData.name}
+        <StyledImageContainer
           onMouseOver={this.handleImageHover}
           onMouseLeave={this.handleImageHover}
-        />
+        >
+          <img src={this.state.photoUrl} alt={this.state.productData.name} width="200" height="150"></img>
+        </StyledImageContainer>
         {this.state.otherImagesShowing && (
         <StyledOtherImageContainer>
-          <StyledOtherImage src={this.state.otherUrls[0]}></StyledOtherImage>
-          <StyledOtherImage src={this.state.otherUrls[1]}></StyledOtherImage>
-          <StyledOtherImage src={this.state.otherUrls[2]}></StyledOtherImage>
+          <StyledOtherImage index='0' src={this.state.otherUrls[0]} onClick={this.handleOtherImageClick}/>
+          <StyledOtherImage index='1' src={this.state.otherUrls[1]} onClick={this.handleOtherImageClick}/>
+          <StyledOtherImage index='2' src={this.state.otherUrls[2]} onClick={this.handleOtherImageClick}/>
         </StyledOtherImageContainer>
         )}
         <div>{this.state.productData.category}</div>
@@ -211,6 +222,6 @@ class RelatedProductCard extends React.Component {
       </StyledCard>
     );
   }
-};
+}
 
 export default RelatedProductCard;
