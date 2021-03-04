@@ -9,6 +9,7 @@ padding-left: 15%;
 padding-right: 15%;
 display: grid;
 grid-template-columns: 1fr 12fr 1fr;
+overflow-y: hidden;
 `
 const StyledLeftButton = styled.button`
 height: 270px;
@@ -33,7 +34,7 @@ class RelatedProductsAndOutfits extends React.Component {
     this.state = {
       // currently showing products in carousel
       relatedCurrentlyShowingIndexes: [0, 1, 2, 3],
-      outfitCurrentlyShowingIndexes: [0, 1, 2, 3],
+      outfitCurrentlyShowingIndexes: [0, 1, 2],
 
       // track first products for hiding left arrows MAY JUST BE ABLE TO USE INDEXES
       firstRelatedProductId: 17762, // for testing
@@ -52,7 +53,7 @@ class RelatedProductsAndOutfits extends React.Component {
     };
 
     this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
-    this.outfitProductIds = [18076, 17858]; // for testing
+    this.outfitProductIds = [18076, 17858, 17763, 18076, 17068]; // for testing
 
     this.handleRelatedCarouselRight = this.handleRelatedCarouselRight.bind(this);
     this.handleRelatedCarouselLeft = this.handleRelatedCarouselLeft.bind(this);
@@ -83,7 +84,7 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   renderRightButtonToggleForOutfit() {
-    if (this.state.outfitCurrentlyShowingIndexes[3] >= this.outfitProductIds.length - 1) {
+    if (this.state.outfitCurrentlyShowingIndexes[2] >= this.outfitProductIds.length - 1) {
       this.setState({
         outfitRightArrow: false
       });

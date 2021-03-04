@@ -13,18 +13,28 @@ padding-right: 10%;
 margin-top: 5%;
 margin-bottom: 5%;
 `
-
+const StyledAddButton = styled.button`
+margin-left: 20%;
+margin-right: 10%;
+margin-top: 5%;
+margin-bottom: 5%;
+font-size: 50px;
+border: none;
+border-radius: 5px;
+background: radial-gradient(rgb(255, 255, 255), rgb(235, 235, 235))
+`
 const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => {
   let productsToShow = [
     (outfitProductIds[outfitCurrentlyShowingIndexes[0]] || null),
     (outfitProductIds[outfitCurrentlyShowingIndexes[1]] || null),
-    (outfitProductIds[outfitCurrentlyShowingIndexes[2]] || null),
-    (outfitProductIds[outfitCurrentlyShowingIndexes[3]] || null)
+    (outfitProductIds[outfitCurrentlyShowingIndexes[2]] || null)
   ];
+
   return (
     <div>
       <div>YOUR OUTFIT</div>
-      <StyledOutfitContainer key='StyledOutfitontainer'>
+      <StyledOutfitContainer key='StyledOutfitContainer'>
+      <StyledAddButton>+</StyledAddButton>
         {productsToShow.map((productId) => {
           let card;
           if (productId === null) {
