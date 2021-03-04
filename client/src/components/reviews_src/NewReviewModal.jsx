@@ -76,9 +76,9 @@ class NewReviewModal extends React.Component {
                 { /* ------------------------------->>FORM HERE<<------------------------------*/ }
                 <StarHover />
                 <div>
-                  <p>Do you recommend this product (mandatory)</p>
-                  <input type="radio" name="recommend" value="true" />
-                  <input type="radio" name="recommend" value="false" />
+                  <h4>Do you recommend this product (mandatory)</h4>
+                  <input type="radio" name="recommend" value="true" /><span>Yes</span>
+                  <input type="radio" name="recommend" value="false" /><span>No</span>
                 </div>
                 { /* ---------------------------------------------------------------------------*/ }
               </div>

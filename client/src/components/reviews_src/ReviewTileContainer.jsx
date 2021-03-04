@@ -5,8 +5,9 @@ const ReviewTileContainer = ({ reviews, show }) => {
   const showReviews = reviews.slice(0, show);
   const reviewTileStyle = {
     overflow: 'auto',
-    maxHeight: '80vh',
+    maxHeight: '90vh',
   };
+
   return (
     <div style={reviewTileStyle}>
       {showReviews.map((review) => <ReviewTile review={review} />)}

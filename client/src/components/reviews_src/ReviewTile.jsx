@@ -17,7 +17,7 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    const { review } = this.state;
+    const { review } = this.props;
     const tileStyle = {
       marginBottom: '8px',
       border: '2px solid grey',

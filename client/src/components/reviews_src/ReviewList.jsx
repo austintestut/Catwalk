@@ -9,10 +9,15 @@ class ReviewList extends React.Component {
     super(props);
     this.state = {
       show: 2,
-      reviews: this.props.reviews,
+      reviews: [],
     };
     this.addReviews = this.addReviews.bind(this);
     this.setFilters = this.setFilters.bind(this);
+  }
+
+  componentDidMount() {
+    const { reviews } = this.props;
+    this.setState({ reviews });
   }
 
   componentDidUpdate(prevProps) {
@@ -51,7 +56,6 @@ class ReviewList extends React.Component {
     return (
       <div style={{ ...containerStyle }}>
         <ReviewsSort total={reviews.length} />
-        {/* { showReviews.map((review) => (<ReviewTile review={review} />)) } */}
         <ReviewTileContainer reviews={reviews} show={show} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
         <NewReviewModal />
