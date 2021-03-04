@@ -16,7 +16,7 @@ const StarStatic = ({ number }) => {
 
   let decrementer = number;
   const makeStar = () => {
-    if (decrementer > 0 && decrementer < 1) {
+    if (decrementer >= 0 && decrementer < 1) {
       decrementer = Number((Math.round(decrementer * 4) / 4).toFixed(2));
     }
     if (decrementer >= 1) {decrementer--; return <i className="fas fa-star" style = {{ ...style }} />; }
@@ -38,9 +38,9 @@ const StarStatic = ({ number }) => {
   };
 
   return (
-    <div>
+    <React.Fragment>
       {makeStars()}
-    </div>
+    </React.Fragment>
   );
 };
 

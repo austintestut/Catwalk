@@ -4,37 +4,41 @@ import styled, { css } from 'styled-components';
 
 
 const StyledModalBox = styled.div`
+display: grid;
+grid-template-columns: 2fr 1fr 2fr;
 background-color: white;
 align: center;
 z-index: 2;
 margin: auto;
 margin-top: 10%;
-height: 60%;
+height: auto;
 width: 40%;
 text-align: center;
-display: grid;
-grid-template-columns: 2fr 1fr 2fr;
 border: solid;
 border-width: 2px;
 border-radius: 10px;
 `
+const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics }) => {
+  let categories = Object.keys(cardCharacteristics);
+  let currentItemValues;
+  let cardItemValues;
 
-const ComparisonModal = ( {handleInnerModalClick} ) => {
+
   return (
     <StyledModalBox onClick={handleInnerModalClick}>
       <div>
-        THIS PRODUCT
-        <div>check mark</div>
+      <h3><br></br></h3>
+        <h4>CURRENT ITEM ON PAGE</h4>
         <div> no check mark</div>
       </div>
       <div>
-        CATEGORIES
-        <div>category</div>
-        <div>category 2</div>
+        <h3>Comparing</h3>
+        <h4>Characteristic</h4>
+        {categories.map((category) => (<div>{category}</div>))}
       </div>
       <div>
-        CURRENT PAGE PRODUCT
-        <div> no check mark</div>
+      <h3><br></br></h3>
+        <h4>{name}</h4>
         <div>check mark</div>
       </div>
     </StyledModalBox>

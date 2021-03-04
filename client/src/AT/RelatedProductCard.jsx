@@ -8,6 +8,7 @@ import ComparisonModal from './ComparisonModal';
 const StyledCard = styled.div`
 border-style: solid;
 border-width: 3px;
+border-radius: 5px;
 position: relative;
 `
 const StyledStar = styled.div`
@@ -27,6 +28,10 @@ height: 100%;
 overflow: auto;
 background-color: rgba(0,0,0,0.3);
 `
+const StyledStarLine = styled.div`
+display: grid;
+grid-template-columns: 5fr 4fr;
+`
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
@@ -35,9 +40,12 @@ class RelatedProductCard extends React.Component {
       productData: [],
       rating: 0,
       otherUrls: [],
+      cardCharacteristics: {},
       // comparison modal showing or not
-      modalShowing: false
+      modalShowing: false,
+      totalReviews: 0
     };
+
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInnerModalClick = this.handleInnerModalClick.bind(this);
   }
@@ -83,7 +91,9 @@ class RelatedProductCard extends React.Component {
           rating = 0;
         }
         this.setState({
-          rating: rating.toFixed(1)
+          rating: rating,
+          cardCharacteristics: data.data.characteristics,
+          totalReviews: totalReviews
         });
       })
       .catch((err) => {
@@ -115,6 +125,7 @@ class RelatedProductCard extends React.Component {
   handleInnerModalClick(event) {
     event.stopPropagation();
   }
+
   render() {
     return (
       <StyledCard>
@@ -122,6 +133,8 @@ class RelatedProductCard extends React.Component {
           <StyledModalContainer onClick={this.toggleModal}>
             <ComparisonModal
               handleInnerModalClick={this.handleInnerModalClick}
+              name={this.state.productData.name}
+              cardCharacteristics={this.state.cardCharacteristics}
             />
           </StyledModalContainer>
         )}
@@ -132,7 +145,10 @@ class RelatedProductCard extends React.Component {
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>
         <div>{this.state.productData.default_price}</div>
-        <StarStatic number={this.state.rating} />
+        <StyledStarLine>
+          <div><StarStatic number={this.state.rating} /></div>
+          ({this.state.totalReviews})
+        </StyledStarLine>
       </StyledCard>
     );
   }

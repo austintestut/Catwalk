@@ -8,6 +8,8 @@ const StyledCard = styled.div`
 border-style: solid;
 border-width: 3px;
 position: relative;
+border-radius: 5px;
+
 `
 const StyledX = styled.div`
 height: 20px;
@@ -74,7 +76,7 @@ class OutfitCard extends React.Component {
           rating = 0;
         }
         this.setState({
-          rating: rating.toFixed(1)
+          rating: rating
         });
       })
       .catch((err) => {
@@ -86,7 +88,6 @@ class OutfitCard extends React.Component {
   getPhotoUrl(id) {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
-        console.log(styleData.data);
         let otherUrls = [];
         for (let i = 1; i < styleData.data.results.length; i++) {
           otherUrls.push(styleData.data.results[i].photos[0].thumbnail_url);

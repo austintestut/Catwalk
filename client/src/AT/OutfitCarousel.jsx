@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import OutfitCard from './OutfitCard';
 
-const StyledProductCardContainer = styled.div`
+const StyledOutfitContainer = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 height: 270px;
@@ -24,10 +24,11 @@ const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => 
   return (
     <div>
       <div>YOUR OUTFIT</div>
-      <StyledProductCardContainer>
+      <StyledOutfitContainer key='StyledOutfitontainer'>
         {productsToShow.map((productId) => {
           let card;
           if (productId === null) {
+            productId = Math.random();
             card = <div></div>;
           } else {
             card = <OutfitCard productId={productId} />;
@@ -38,7 +39,7 @@ const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => 
             </StyledProductCard>
           );
         })}
-      </StyledProductCardContainer>
+      </StyledOutfitContainer>
     </div>
   );
 };
