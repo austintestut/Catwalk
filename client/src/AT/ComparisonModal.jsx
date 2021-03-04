@@ -42,7 +42,7 @@ const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics }) =
       <div>
         <h3>Comparing</h3>
         <h4>Characteristic</h4>
-        {categories.map((category) => (<div>{category}</div>))}
+        {categories.map((category) => (<div key={category}>{category}</div>))}
       </div>
       <div>
       <h3><br></br></h3>

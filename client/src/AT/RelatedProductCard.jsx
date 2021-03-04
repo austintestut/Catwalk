@@ -5,6 +5,14 @@ import StarStatic from '.././components/reviews_src/StarStatic.jsx';
 import starIcon from '../../../images/empty_star.png';
 import ComparisonModal from './ComparisonModal';
 
+const fadein = keyframes`
+from {
+  opacity: 0;
+}
+to {
+  opacity: 1;
+}
+`;
 const StyledCard = styled.div`
 border-style: solid;
 border-width: 3px;
@@ -12,6 +20,7 @@ border-radius: 5px;
 position: relative;
 ${StyledCard}:hover {
   border-width: 4px;
+  box-shadow: 5px 5px 2px rgb(200, 200, 200);
 }
 `;
 const StyledStarIcon = styled.div`
@@ -39,6 +48,29 @@ const StyledStarLine = styled.div`
 display: grid;
 grid-template-columns: 5fr 4fr;
 `;
+const StyledImageContainer = styled.img`
+width: 100%;
+height: 150px;
+overflow-y: auto;
+`;
+const StyledOtherImageContainer = styled.div`
+position: absolute;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+height: 57px;
+width: 173px;
+animation: ${fadein} 0.4s;
+`;
+const StyledOtherImage = styled.img`
+position: relative;
+bottom: 60px;
+padding-left: 6.25%;
+padding-right: 6.25%;
+height: 78%;
+width: 78%;
+z-index: 1;
+`;
+
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
@@ -46,15 +78,17 @@ class RelatedProductCard extends React.Component {
       photoUrl: '',
       productData: [],
       rating: 0,
-      otherUrls: [],
+      otherUrls: [{}],
       cardCharacteristics: {},
       // comparison modal showing or not
       modalShowing: false,
-      totalReviews: 0
+      totalReviews: 0,
+      otherImagesShowing: false
     };
 
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInnerModalClick = this.handleInnerModalClick.bind(this);
+    this.handleImageHover = this.handleImageHover.bind(this);
   }
 
   componentDidMount() {
@@ -112,7 +146,8 @@ class RelatedProductCard extends React.Component {
   getPhotoUrls(id) {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
-        let otherUrls = styleData.data.results.slice(1, this.length);
+        let otherStyles = styleData.data.results.slice(1, this.length);
+        let otherUrls = otherStyles.map((style) => style.photos[0].thumbnail_url);
         this.setState({
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
           otherUrls: otherUrls
@@ -133,6 +168,12 @@ class RelatedProductCard extends React.Component {
     event.stopPropagation();
   }
 
+  handleImageHover() {
+    this.setState({
+      otherImagesShowing: !this.state.otherImagesShowing
+    });
+  }
+
   render() {
     return (
       <StyledCard>
@@ -148,7 +189,18 @@ class RelatedProductCard extends React.Component {
         <StyledStarIcon onClick={this.toggleModal}>
           <img src={starIcon} width="100%" height="100%" />
         </StyledStarIcon>
-        <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150"></img>
+        <StyledImageContainer src={this.state.photoUrl}
+          alt={this.state.productData.name}
+          onMouseOver={this.handleImageHover}
+          onMouseLeave={this.handleImageHover}
+        />
+        {this.state.otherImagesShowing && (
+        <StyledOtherImageContainer>
+          <StyledOtherImage src={this.state.otherUrls[0]}></StyledOtherImage>
+          <StyledOtherImage src={this.state.otherUrls[1]}></StyledOtherImage>
+          <StyledOtherImage src={this.state.otherUrls[2]}></StyledOtherImage>
+        </StyledOtherImageContainer>
+        )}
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>
         <div>{this.state.productData.default_price}</div>
