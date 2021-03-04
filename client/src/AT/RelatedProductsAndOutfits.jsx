@@ -10,25 +10,33 @@ padding-right: 15%;
 display: grid;
 grid-template-columns: 1fr 12fr 1fr;
 overflow-y: hidden;
-`
+`;
 const StyledLeftButton = styled.button`
 height: 270px;
 width: 100%;
 position: relative;
 top: 18px;
-background-image: linear-gradient(to left, rgb(255, 255, 255), rgba(217, 217, 217, 1));
+background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 50% 0 0 50%;
-`
+${StyledLeftButton}:hover {
+  background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(175, 175, 175));
+  cursor: pointer;
+}
+`;
 const StyledRightButton = styled.button`
 height: 270px;
 width: 100%;
 position: relative;
 top: 18px;
-background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(217, 217, 217, 1));
+background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 0 50% 50% 0;
-`
+${StyledRightButton}:hover {
+  background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(175, 175, 175));
+  cursor: pointer;
+}
+`;
 
 class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {

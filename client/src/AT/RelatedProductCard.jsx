@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import StarStatic from '.././components/reviews_src/StarStatic.jsx';
 import starIcon from '../../../images/empty_star.png';
 import ComparisonModal from './ComparisonModal';
@@ -10,14 +10,21 @@ border-style: solid;
 border-width: 3px;
 border-radius: 5px;
 position: relative;
-`
-const StyledStar = styled.div`
+${StyledCard}:hover {
+  border-width: 4px;
+}
+`;
+const StyledStarIcon = styled.div`
 height: 20px;
 width:20px;
 position: absolute;
 top:0;
 right: 0;
-`
+${StyledStarIcon}:hover {
+  cursor: pointer;
+  filter: invert(0.5);
+}
+`;
 const StyledModalContainer = styled.div`
 position: fixed;
 left: 0;
@@ -27,11 +34,11 @@ width: 100%;
 height: 100%;
 overflow: auto;
 background-color: rgba(0,0,0,0.3);
-`
+`;
 const StyledStarLine = styled.div`
 display: grid;
 grid-template-columns: 5fr 4fr;
-`
+`;
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
@@ -138,9 +145,9 @@ class RelatedProductCard extends React.Component {
             />
           </StyledModalContainer>
         )}
-        <StyledStar onClick={this.toggleModal}>
+        <StyledStarIcon onClick={this.toggleModal}>
           <img src={starIcon} width="100%" height="100%" />
-        </StyledStar>
+        </StyledStarIcon>
         <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="150"></img>
         <div>{this.state.productData.category}</div>
         <div>{this.state.productData.name}</div>

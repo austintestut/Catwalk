@@ -1,8 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
-
+const fadein = keyframes`
+from {
+  opacity: 0;
+}
+to {
+  opacity: 1;
+}
+`;
 const StyledModalBox = styled.div`
 display: grid;
 grid-template-columns: 2fr 1fr 2fr;
@@ -17,7 +24,8 @@ text-align: center;
 border: solid;
 border-width: 2px;
 border-radius: 10px;
-`
+animation: ${fadein} 0.35s;
+`;
 const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics }) => {
   let categories = Object.keys(cardCharacteristics);
   let currentItemValues;

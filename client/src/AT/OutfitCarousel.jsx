@@ -6,13 +6,13 @@ const StyledOutfitContainer = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 height: 270px;
-`
+`;
 const StyledProductCard = styled.div`
 padding-left: 20%;
 padding-right: 10%;
 margin-top: 5%;
 margin-bottom: 5%;
-`
+`;
 const StyledAddButton = styled.button`
 margin-left: 20%;
 margin-right: 10%;
@@ -21,8 +21,13 @@ margin-bottom: 5%;
 font-size: 50px;
 border: none;
 border-radius: 5px;
-background: radial-gradient(rgb(255, 255, 255), rgb(235, 235, 235))
-`
+background: radial-gradient(rgb(220, 220, 220), rgb(245, 245, 245));
+${StyledAddButton}:hover {
+  cursor: pointer;
+  border: solid;
+  border-width: 1px;
+}
+`;
 const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => {
   let productsToShow = [
     (outfitProductIds[outfitCurrentlyShowingIndexes[0]] || null),

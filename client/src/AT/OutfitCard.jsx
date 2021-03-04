@@ -9,8 +9,11 @@ border-style: solid;
 border-width: 3px;
 position: relative;
 border-radius: 5px;
-
-`
+${StyledCard}:hover {
+  border-width:4px;
+  box-shadow: 5px 5px 2px rgb(200, 200, 200);
+}
+`;
 const StyledX = styled.div`
 height: 20px;
 width:20px;
@@ -18,7 +21,10 @@ position: absolute;
 top:0;
 right: 0;
 filter: invert(1);
-`
+${StyledX}:hover {
+  cursor: pointer;
+  filter: invert(0.5);
+`;
 class OutfitCard extends React.Component {
   constructor(props) {
     super(props);
