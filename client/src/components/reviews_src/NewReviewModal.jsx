@@ -1,6 +1,7 @@
 import React from 'react';
 import StarHover from '../new_review_components/StarHover';
 import CharacteristicsSelector from '../new_review_components/CharacteristicsSelector';
+import formValidator from '../../global_functions/formValidator';
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
   constructor(props) {
@@ -20,7 +21,13 @@ class NewReviewModal extends React.Component {
     this.characterChecker = this.characterChecker.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.characterChecker = this.characterChecker.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     // this.characterChecker = this.characterChecker.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    formValidator(this.state);
   }
 
   handleChange(e, cb = null) {
@@ -132,7 +139,7 @@ class NewReviewModal extends React.Component {
                   <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none' }} />
                   <small>{this.state.count}</small>
                 </div>
-                <button>Add Images</button><button style={{ float: 'right' }}type="submit">Submit</button>
+                <button>Add Images</button><button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>
