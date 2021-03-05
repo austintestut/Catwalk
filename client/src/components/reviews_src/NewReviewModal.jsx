@@ -102,24 +102,19 @@ class NewReviewModal extends React.Component {
                 </div>
                 <h3>Characteristics:</h3>
                 <CharacteristicsSelector characteristics={characteristics} />
-                <div>
-                  <h4>Nickname:</h4>
-                  <input type="text" placeholder="Example: Jackson111" />
-                  <div>
-                    <div>
-                      <h4>Email:</h4>
-                      <input type="text" placeholder="Example: Jackson111@email.com" />
-                    </div>
-                    <div>
-                      <h4>Review Summary</h4>
-                      <input type="text" placeholder="Example: Best Purchase Ever!" />
-                    </div>
-                    <div>
-                      <h4>Review Body</h4>
-                      <input type="text" placeholder="Why did you like this product or not" />
-                    </div>
-                  </div>
-                </div>
+
+                <h4>Nickname:</h4>
+                <input type="text" placeholder="Example: Jackson111" />
+
+                <h4>Email:</h4>
+                <input type="text" placeholder="Example: Jackson111@email.com" />
+
+                <h4>Review Summary</h4>
+                <input type="text" placeholder="Example: Best Purchase Ever!" />
+
+                <h4>Review Body</h4>
+                <input type="text" placeholder="Why did you like this product or not" />
+
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>
