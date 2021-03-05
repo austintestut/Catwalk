@@ -33,6 +33,7 @@ class Reviews extends React.Component {
 
   render() {
     const { reviewsData, reviewsMeta, currentFilters } = this.state;
+    const characteristics = Object.keys(reviewsMeta.characteristics);
     const flexContainerStyle = {
       display: 'flex',
       flexWrap: 'nowrap',
@@ -47,7 +48,11 @@ class Reviews extends React.Component {
           clearFilters={this.clearFilters}
           addFilter={this.addFilter}
         />
-        <ReviewList reviews={reviewsData.results} filters={currentFilters} />
+        <ReviewList
+          reviews={reviewsData.results}
+          filters={currentFilters}
+          characteristics={characteristics}
+        />
       </div>
     );
   }
