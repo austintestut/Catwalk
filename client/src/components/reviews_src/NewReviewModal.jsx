@@ -11,12 +11,20 @@ class NewReviewModal extends React.Component {
       recommend: null,
       nickname: '',
       email: '',
-      reviewSummary: '',
-      reviewBody: '',
-      images: '',
+      summary: '',
+      body: '',
+      images: [],
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.characterChecker = this.characterChecker.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     // this.characterChecker = this.characterChecker.bind(this);
+  }
+
+  handleChange(e) {
+    let val = e.target.value;
+    let name = e.target.getAttribute('name');
+    this.setState({ [name]: val });
   }
 
   toggleModal(e) {
@@ -24,11 +32,11 @@ class NewReviewModal extends React.Component {
     this.setState({ open: !this.state.open });
   }
 
-  characterChecker(count, min) {
-    if (count < min) {
-      return <small>{min-count} characters remaining</small>
+  characterChecker(name) {
+    if (this.state[name].length < 250) {
+      return <small>{min-count} characters remaining</small>;
     }
-    return <small>'minimum reached'</small>
+    return <small>minimum reached</small>;
   }
 
   render() {
@@ -94,8 +102,8 @@ class NewReviewModal extends React.Component {
                   <StarHover />
                   <div style={{ justifyContent: 'flex-end' }}>
                     <h4>Do you recommend this product?</h4>
-                    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                      <span style={{marginRight: '50px' }}><input type="radio" name="recommend" value="true" /><span>Yes</span></span>
+                    <div onChange={this.handleChange} style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                      <span style={{ marginRight: '50px' }}><input type="radio" name="recommend" value="true" /><span>Yes</span></span>
                       <span style={{ float: 'right' }}> <input type="radio" name="recommend" value="false" /><span>No</span></span>
                     </div>
                   </div>
@@ -105,20 +113,22 @@ class NewReviewModal extends React.Component {
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
                   <div style={{ justifyContent: 'flex-start' }}>
                     <h4>Nickname:</h4>
-                    <input type="text" placeholder="Example: Jackson111" style={{ width: '350px'}} />
+                    <input type="text" name="nickname" placeholder="Example: Jackson111" value={this.state.nickname} onChange={this.handleChange} style={{ width: '350px' }}/><br />
+                    <small>for privacy reasons do not use your full name or email</small>
                   </div>
                   <div style={{ justifyContent: 'flex-end', float: 'right' }}>
                     <h4>Email:</h4>
-                    <input type="text" placeholder="Example: Jackson111@email.com" style={{ width: '350px' }} />
+                    <input type="text" name="email" placeholder="Example: Jackson111@email.com" style={{ width: '350px' }} value={this.state.email} onChange={this.handleChange} /><br />
+                    <small>for privacy reasons do not use your full name or email</small>
                   </div>
                 </div>
                 <div>
                   <h4>Review Summary</h4>
-                  <input type="text" placeholder="Example: Best Purchase Ever!" style={{ width: '99.5%' }} />
+                  <input type="text" name="summary" placeholder="Example: Best Purchase Ever!" style={{ width: '99.5%' }} value={this.state.summary} onChange={this.handleChange} />
                 </div>
                 <div>
                   <h4>Review Body</h4>
-                  <textarea rows="6" placeholder="Why did you like this product or not" style={{ width: '99.5%', resize: 'none' }} />
+                  <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={this.handleChange} style={{ width: '99.5%', resize: 'none' }} />
                 </div>
                 <button>Add Images</button><button type="submit">Submit</button>
                 { /* ---------------------------------------------------------------------------*/ }
