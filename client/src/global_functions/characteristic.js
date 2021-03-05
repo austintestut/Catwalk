@@ -1,9 +1,9 @@
 const characteristic = {
   Size: {
     1: 'A size too small',
-    2: '&frac12 a size too small ',
+    2: '½ a size too small ',
     3: 'Perfect',
-    4: '&frac12 a size too big',
+    4: '½ a size too big',
     5: 'A size too wide',
   },
   Width: {
