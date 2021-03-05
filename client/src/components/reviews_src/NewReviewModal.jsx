@@ -16,11 +16,19 @@ class NewReviewModal extends React.Component {
       images: '',
     };
     this.toggleModal = this.toggleModal.bind(this);
+    // this.characterChecker = this.characterChecker.bind(this);
   }
 
   toggleModal(e) {
     e.preventDefault();
     this.setState({ open: !this.state.open });
+  }
+
+  characterChecker(count, min) {
+    if (count < min) {
+      return `${min-count} characters remaining`
+    }
+    return 'minimum reached'
   }
 
   render() {
@@ -44,7 +52,7 @@ class NewReviewModal extends React.Component {
 
     const modalButtonStyle = {
       right: 7,
-      top: 28,
+      top: 12,
       color: 'white',
       zIndex: 2,
       position: 'fixed',
@@ -61,10 +69,13 @@ class NewReviewModal extends React.Component {
     };
 
     const formStyle = {
-      width: '90vw',
+      padding: '3%',
+      paddingTop: 0,
+      width: '60vw',
       height: '90vh',
       backgroundColor: 'white',
       borderRadius: '5px',
+      overflow: 'auto',
     };
     /* ---------------------------------------------------------------------------------*/
     if (this.state.open) {
@@ -75,13 +86,40 @@ class NewReviewModal extends React.Component {
               <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
               <div style={{ ...formStyle }}>
                 { /* ------------------------------->>FORM HERE<<------------------------------*/ }
-                <StarHover />
-                <div>
-                  <h4>Do you recommend this product (mandatory)</h4>
-                  <input type="radio" name="recommend" value="true" /><span>Yes</span>
-                  <input type="radio" name="recommend" value="false" /><span>No</span>
+                <div style={{ justifyContent: 'center', textAlign: 'center' }}>
+                  <h2>New Review</h2>
+                  <h3>Tell us what you think</h3>
                 </div>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                  <StarHover />
+                  <div style={{ justifyContent: 'flex-end' }}>
+                    <h4>Do you recommend this product?</h4>
+                    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                      <span style={{marginRight: '50px' }}><input type="radio" name="recommend" value="true" /><span>Yes</span></span>
+                      <span style={{ float: 'right' }}> <input type="radio" name="recommend" value="false" /><span>No</span></span>
+                    </div>
+                  </div>
+                </div>
+                <h3>Characteristics:</h3>
                 <CharacteristicsSelector characteristics={characteristics} />
+                <div>
+                  <h4>Nickname:</h4>
+                  <input type="text" placeholder="Example: Jackson111" />
+                  <div>
+                    <div>
+                      <h4>Email:</h4>
+                      <input type="text" placeholder="Example: Jackson111@email.com" />
+                    </div>
+                    <div>
+                      <h4>Review Summary</h4>
+                      <input type="text" placeholder="Example: Best Purchase Ever!" />
+                    </div>
+                    <div>
+                      <h4>Review Body</h4>
+                      <input type="text" placeholder="Why did you like this product or not" />
+                    </div>
+                  </div>
+                </div>
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>

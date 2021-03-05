@@ -26,25 +26,35 @@ class CharacteristicsSelector extends React.Component {
     let text;
     if (!this.state[item]) { text = 'None Selected'; }
     else { text = characteristic[item][this.state[item]]; }
-    console.log(text);
+    const radioStyle = {
+      //border: '1px solid black',
+      width: '18%',
+      display: 'inline-block',
+      textAlign: 'center',
+    };
     return (
-      <div onChange={this.handleChange}>
+      <div style={{ ...radioStyle }} onChange={this.handleChange}>
         <h4>{item}</h4>
         <p>{text}</p>
-        <input type="radio" name={item} value="1" />
-        <input type="radio" name={item} value="2" />
-        <input type="radio" name={item} value="3" />
-        <input type="radio" name={item} value="4" />
-        <input type="radio" name={item} value="5" />
+        <input type="radio" name={item} value="1" /><br />
+        <input type="radio" name={item} value="2" /><br />
+        <input type="radio" name={item} value="3" /><br />
+        <input type="radio" name={item} value="4" /><br />
+        <input type="radio" name={item} value="5" /><br />
       </div>
-    )
+    );
   }
 
   render() {
     const { characteristics } = this.props;
+    const containerStyle = {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    }
     if (characteristic) {
       return (
-        <div>
+        <div style={{ ...containerStyle }}>
           {characteristics.map((item) => this.makeRadioButton(item))}
         </div>
       );

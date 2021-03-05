@@ -61,8 +61,8 @@ class StarHover extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4>Overall Rating (mandatory)</h4>
+      <div style={{ justifyContent: 'flex-start' }}>
+        <h4>Overall Rating</h4>
        <span>{this.makeStars()}<span>{this.makeText()}</span></span>
       </div>
     );
