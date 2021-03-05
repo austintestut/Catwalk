@@ -14,17 +14,19 @@ class NewReviewModal extends React.Component {
       summary: '',
       body: '',
       images: [],
+      count: '250 characters remaining',
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.characterChecker = this.characterChecker.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.characterChecker = this.characterChecker.bind(this);
     // this.characterChecker = this.characterChecker.bind(this);
   }
 
-  handleChange(e) {
+  handleChange(e, cb = null) {
     let val = e.target.value;
     let name = e.target.getAttribute('name');
-    this.setState({ [name]: val });
+    this.setState({ [name]: val }, cb(e));
   }
 
   toggleModal(e) {
@@ -32,11 +34,10 @@ class NewReviewModal extends React.Component {
     this.setState({ open: !this.state.open });
   }
 
-  characterChecker(name) {
-    if (this.state[name].length < 250) {
-      return <small>{min-count} characters remaining</small>;
-    }
-    return <small>minimum reached</small>;
+  characterChecker(e) {
+    let remaining = 250 - e.target.value.length;
+    if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
+    this.setState({ count: 'minimum reached' });
   }
 
   render() {
@@ -128,9 +129,10 @@ class NewReviewModal extends React.Component {
                 </div>
                 <div>
                   <h4>Review Body</h4>
-                  <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={this.handleChange} style={{ width: '99.5%', resize: 'none' }} />
+                  <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none' }} />
+                  <small>{this.state.count}</small>
                 </div>
-                <button>Add Images</button><button type="submit">Submit</button>
+                <button>Add Images</button><button style={{ float: 'right' }}type="submit">Submit</button>
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>
