@@ -55,20 +55,27 @@ display: grid;
 grid-template-rows: 3fr 2fr;
 content-align: center;
 `;
+const StyledImg = styled.img`
+width: 100%;
+height: 200px;
+${StyledImg}:hover {
+  cursor: pointer;
+}
+`;
 const StyledOtherImageContainer = styled.div`
 display: grid;
+padding-left: 2%;
+padding-right: 2%;
 grid-row: 2;
 grid-template-columns: 1fr 1fr 1fr;
 grid-column-gap: 4%;
 height: 57px;
 width: auto;
-content-align: center;
 animation: ${fadein} 0.4s;
 `;
 const StyledOtherImage = styled.img`
 position: relative;
-bottom: 65px;
-left: 5px;
+bottom: 66px;
 height: 57px;
 width: 57px;
 border: solid;
@@ -211,6 +218,9 @@ class RelatedProductCard extends React.Component {
               handleInnerModalClick={this.handleInnerModalClick}
               name={this.state.productData.name}
               cardCharacteristics={this.state.cardCharacteristics}
+              currentProductData={this.props.productData}
+              currentRating={this.props.currentRating}
+              currentCharacteristics={this.props.currentCharacteristics}
             />
           </StyledModalContainer>
         )}
@@ -222,7 +232,7 @@ class RelatedProductCard extends React.Component {
           onMouseLeave={this.handleImageMouseLeave}
         >
           <div onClick={() => this.props.handleItemClick(this.props.productId)}>
-            <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="200px" />
+            <StyledImg src={this.state.photoUrl} alt={this.state.productData.name} />
           </div>
           <div>
             {this.state.otherImagesShowing && (

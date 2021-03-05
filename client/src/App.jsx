@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('hello from component');
+    console.log('hello from App');
     this.render();
   }
 
@@ -23,7 +23,6 @@ class App extends React.Component {
     this.setState({
       currentPageItemId: id
     });
-    this.render();
   }
 
   render() {

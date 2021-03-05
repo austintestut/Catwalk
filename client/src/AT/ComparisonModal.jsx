@@ -26,11 +26,15 @@ border-width: 2px;
 border-radius: 10px;
 animation: ${fadein} 0.35s;
 `;
-const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics }) => {
-  let categories = Object.keys(cardCharacteristics);
+const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics, currentProductData, currentRating, currentCharacteristics }) => {
+  let categories = [];
+  let categorySet = new Set(Object.keys(cardCharacteristics).concat(Object.keys(currentCharacteristics)));
+
+  categorySet.forEach((element) => categories.push(element));
+  console.log('set', categorySet);
+  console.log('categories', categories);
   let currentItemValues;
   let cardItemValues;
-
 
   return (
     <StyledModalBox onClick={handleInnerModalClick}>

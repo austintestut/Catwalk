@@ -15,7 +15,7 @@ margin-top: 5%;
 margin-bottom: 5%;
 `;
 
-const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal, handleItemClick }) => {
+const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal, handleItemClick, currentProductData, currentRating, currentCharacteristics }) => {
   let productsToShow = [
     (relatedProductIds[relatedCurrentlyShowingIndexes[0]] || null),
     (relatedProductIds[relatedCurrentlyShowingIndexes[1]] || null),
@@ -39,6 +39,9 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingInd
                 productId={productId}
                 toggleModal={toggleModal}
                 handleItemClick={handleItemClick}
+                currentProductData={currentProductData}
+                currentRating={currentRating}
+                currentCharacteristics={currentCharacteristics}
               />
             );
           }
