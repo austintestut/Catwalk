@@ -26,9 +26,9 @@ class NewReviewModal extends React.Component {
 
   characterChecker(count, min) {
     if (count < min) {
-      return `${min-count} characters remaining`
+      return <small>{min-count} characters remaining</small>
     }
-    return 'minimum reached'
+    return <small>'minimum reached'</small>
   }
 
   render() {
@@ -120,6 +120,7 @@ class NewReviewModal extends React.Component {
                   <h4>Review Body</h4>
                   <textarea rows="6" placeholder="Why did you like this product or not" style={{ width: '99.5%', resize: 'none' }} />
                 </div>
+                <button>Add Images</button><button type="submit">Submit</button>
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>

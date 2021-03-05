@@ -55,15 +55,15 @@ class StarHover extends React.Component {
 
   makeText() {
     const { count, clicked } = this.state;
-    if (!count || !clicked) { return '   (please select a rating)'; }
-    return `   ${count} Stars`;
+    if (!count || !clicked) { return '      (please select a rating)'; }
+    return // `     ${count} Stars`;
   }
 
   render() {
     return (
       <div style={{ justifyContent: 'flex-start' }}>
         <h4>Overall Rating</h4>
-       <span>{this.makeStars()}<span>{this.makeText()}</span></span>
+       <span>{this.makeStars()}<small>{this.makeText()}</small></span>
       </div>
     );
   }
