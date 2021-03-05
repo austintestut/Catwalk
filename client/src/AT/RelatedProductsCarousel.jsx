@@ -15,7 +15,7 @@ margin-top: 5%;
 margin-bottom: 5%;
 `;
 
-const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal }) => {
+const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal, handleItemClick }) => {
   let productsToShow = [
     (relatedProductIds[relatedCurrentlyShowingIndexes[0]] || null),
     (relatedProductIds[relatedCurrentlyShowingIndexes[1]] || null),
@@ -38,6 +38,7 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingInd
                 key={productId}
                 productId={productId}
                 toggleModal={toggleModal}
+                handleItemClick={handleItemClick}
               />
             );
           }

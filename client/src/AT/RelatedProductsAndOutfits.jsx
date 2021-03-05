@@ -62,7 +62,6 @@ class RelatedProductsAndOutfits extends React.Component {
       totalReviews: 0,
       relatedProductIds: [],
       outfitProductIds: []
-
     };
 
     // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
@@ -88,6 +87,7 @@ class RelatedProductsAndOutfits extends React.Component {
     this.getProductInfo(this.props.currentPageItemId);
     this.getRating(this.props.currentPageItemId);
     this.getRelatedItemIds(this.props.currentPageItemId);
+    // console.log(this.props.currentPageItemId);
   }
 
   // fetch data for current item on page
@@ -260,6 +260,7 @@ class RelatedProductsAndOutfits extends React.Component {
             relatedProductIds={this.state.relatedProductIds}
             relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes}
             toggleModal={this.toggleModal}
+            handleItemClick={this.props.handleItemClick}
           />
           <div>
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}

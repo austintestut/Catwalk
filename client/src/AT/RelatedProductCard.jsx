@@ -45,22 +45,24 @@ background-color: rgba(0,0,0,0.3);
 `;
 const StyledStarLine = styled.div`
 display: grid;
-grid-template-columns: 5fr 4fr;
+grid-template-columns: auto 1fr;
+
 `;
 const StyledImageContainer = styled.section`
 width: 100%;
 height: 200px;
 display: grid;
 grid-template-rows: 3fr 2fr;
+content-align: center;
 `;
 const StyledOtherImageContainer = styled.div`
-position: absolute;
 display: grid;
 grid-row: 2;
 grid-template-columns: 1fr 1fr 1fr;
-grid-column-gap: 2%;
+grid-column-gap: 4%;
 height: 57px;
-width: 173px;
+width: auto;
+content-align: center;
 animation: ${fadein} 0.4s;
 `;
 const StyledOtherImage = styled.img`
@@ -219,7 +221,7 @@ class RelatedProductCard extends React.Component {
           onMouseOver={this.handleImageMouseOver}
           onMouseLeave={this.handleImageMouseLeave}
         >
-          <div>
+          <div onClick={() => this.props.handleItemClick(this.props.productId)}>
             <img src={this.state.photoUrl} alt={this.state.productData.name} width="100%" height="200px" />
           </div>
           <div>
@@ -237,7 +239,7 @@ class RelatedProductCard extends React.Component {
         <div>{this.state.productData.default_price}</div>
         <StyledStarLine>
           <div><StarStatic number={this.state.rating} /></div>
-          ({this.state.totalReviews})
+          <span text-align="left">({this.state.totalReviews})</span>
         </StyledStarLine>
       </StyledCard>
     );
