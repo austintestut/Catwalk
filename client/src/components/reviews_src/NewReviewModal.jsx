@@ -1,6 +1,6 @@
 import React from 'react';
 import StarHover from '../new_review_components/StarHover';
-
+import CharacteristicsSelector from '../new_review_components/CharacteristicsSelector';
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class NewReviewModal extends React.Component {
   }
 
   render() {
+    const { characteristics } = this.props;
     const modalStyle = {
       position: 'fixed',
       zIndex: 1,
@@ -80,6 +81,7 @@ class NewReviewModal extends React.Component {
                   <input type="radio" name="recommend" value="true" /><span>Yes</span>
                   <input type="radio" name="recommend" value="false" /><span>No</span>
                 </div>
+                <CharacteristicsSelector characteristics={characteristics} />
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>

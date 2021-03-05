@@ -47,6 +47,7 @@ class ReviewList extends React.Component {
 
   render() {
     const { reviews, show } = this.state;
+    const { characteristics } = this.props;
     const containerStyle = {
       alignSelf: 'flex-end stretch',
       margin: '10px',
@@ -58,7 +59,7 @@ class ReviewList extends React.Component {
         <ReviewsSort total={reviews.length} />
         <ReviewTileContainer reviews={reviews} show={show} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
-        <NewReviewModal />
+        <NewReviewModal characteristics={characteristics} />
       </div>
     );
   }
