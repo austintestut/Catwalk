@@ -102,19 +102,24 @@ class NewReviewModal extends React.Component {
                 </div>
                 <h3>Characteristics:</h3>
                 <CharacteristicsSelector characteristics={characteristics} />
-
-                <h4>Nickname:</h4>
-                <input type="text" placeholder="Example: Jackson111" />
-
-                <h4>Email:</h4>
-                <input type="text" placeholder="Example: Jackson111@email.com" />
-
-                <h4>Review Summary</h4>
-                <input type="text" placeholder="Example: Best Purchase Ever!" />
-
-                <h4>Review Body</h4>
-                <input type="text" placeholder="Why did you like this product or not" />
-
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
+                  <div style={{ justifyContent: 'flex-start' }}>
+                    <h4>Nickname:</h4>
+                    <input type="text" placeholder="Example: Jackson111" style={{ width: '350px'}} />
+                  </div>
+                  <div style={{ justifyContent: 'flex-end', float: 'right' }}>
+                    <h4>Email:</h4>
+                    <input type="text" placeholder="Example: Jackson111@email.com" style={{ width: '350px' }} />
+                  </div>
+                </div>
+                <div>
+                  <h4>Review Summary</h4>
+                  <input type="text" placeholder="Example: Best Purchase Ever!" style={{ width: '99.5%' }} />
+                </div>
+                <div>
+                  <h4>Review Body</h4>
+                  <textarea rows="6" placeholder="Why did you like this product or not" style={{ width: '99.5%', resize: 'none' }} />
+                </div>
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>
