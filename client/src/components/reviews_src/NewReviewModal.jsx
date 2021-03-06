@@ -10,7 +10,7 @@ class NewReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      open: false,
       recommend: null,
       nickname: '',
       email: '',
@@ -37,7 +37,21 @@ class NewReviewModal extends React.Component {
     if (!errors) {
       reviews.post(
         reviewBodyConstructor(this.state, meta),
-        (response) => { console.log(response); },
+        (response) => {
+          console.log(response);
+          // modal closes only after server response --> possibly change this
+          this.setState({
+            open: false,
+            recommend: null,
+            nickname: '',
+            email: '',
+            characteristics: { current: null },
+            summary: '',
+            body: '',
+            images: [],
+            count: '250 characters remaining',
+          });
+        },
       );
     }
     console.log(errors);
@@ -57,7 +71,7 @@ class NewReviewModal extends React.Component {
   }
 
   toggleModal(e) {
-    e.preventDefault();
+    if (e) { e.preventDefault(); }
     this.setState({ open: !this.state.open });
   }
 
