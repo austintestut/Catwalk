@@ -3,6 +3,7 @@ import StarHover from '../new_review_components/StarHover';
 import CharacteristicsSelector from '../new_review_components/CharacteristicsSelector';
 import formValidator from '../../global_functions/formValidator';
 import reviewBodyConstructor from '../new_review_components/reviewBodyConstructor';
+import handler from '../../global_functions/handler';
 
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
@@ -31,11 +32,15 @@ class NewReviewModal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { meta } = this.props;
+    const { reviews } = handler;
     let errors = formValidator(this.state);
     if (!errors) {
-      reviewBodyConstructor(this.state, meta);
-      return;
+      reviews.post(
+        reviewBodyConstructor(this.state, meta),
+        (response) => { console.log(response); },
+      );
     }
+    console.log(errors);
     this.setState({ errors });
   }
 
