@@ -11,6 +11,7 @@ class NewReviewModal extends React.Component {
       recommend: null,
       nickname: '',
       email: '',
+      characteristics: { current: null },
       summary: '',
       body: '',
       images: [],
