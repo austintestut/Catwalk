@@ -167,7 +167,7 @@ class NewReviewModal extends React.Component {
         </div>
       );
     }
-    return null;
+    return <button style={{float: 'right'}} onClick={this.toggleModal}>ADD A REVIEW +</button>;
   }
 }
 
