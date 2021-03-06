@@ -17,9 +17,12 @@ class CharacteristicsSelector extends React.Component {
   }
 
   handleChange(e) {
+    const { hoist } = this.props;
     const val = e.target.getAttribute('value');
     const name = e.target.getAttribute('name');
-    this.setState({ [name]: val });
+    this.setState({ [name]: val }, () => {
+      hoist('characteristics', this.state);
+    });
   }
 
   makeRadioButton(item) {

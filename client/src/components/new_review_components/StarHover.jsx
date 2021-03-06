@@ -16,6 +16,7 @@ class StarHover extends React.Component {
 
   clickToggle(e) {
     const { clicked } = this.state;
+    const { hoist } = this.props;
     if (clicked) {
       const newCount = Number(e.target.getAttribute('value'));
       this.setState({ count: newCount });
@@ -55,7 +56,12 @@ class StarHover extends React.Component {
 
   makeText() {
     const { count, clicked } = this.state;
-    if (!count || !clicked) { return '      (please select a rating)'; }
+    const { hoist } = this.props;
+    if (!count || !clicked) {
+      hoist('stars', null);
+      return '      (please select a rating)';
+    }
+    hoist('stars', count);
     return // `     ${count} Stars`;
   }
 

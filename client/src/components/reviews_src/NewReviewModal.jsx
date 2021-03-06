@@ -8,7 +8,6 @@ class NewReviewModal extends React.Component {
     super(props);
     this.state = {
       open: true,
-      stars: null,
       recommend: null,
       nickname: '',
       email: '',
@@ -22,6 +21,7 @@ class NewReviewModal extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.characterChecker = this.characterChecker.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.hoist = this.hoist.bind(this);
     // this.characterChecker = this.characterChecker.bind(this);
   }
 
@@ -30,10 +30,16 @@ class NewReviewModal extends React.Component {
     formValidator(this.state);
   }
 
-  handleChange(e, cb = null) {
-    let val = e.target.value;
-    let name = e.target.getAttribute('name');
+  handleChange(e, cb = () => {}) {
+    const val = e.target.value;
+    const name = e.target.getAttribute('name');
     this.setState({ [name]: val }, cb(e));
+  }
+
+  hoist(name, value) {
+    if (this.state[name] !== value) {
+      this.setState({ [name]: value });
+    }
   }
 
   toggleModal(e) {
@@ -46,6 +52,8 @@ class NewReviewModal extends React.Component {
     if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
     this.setState({ count: 'minimum reached' });
   }
+
+
 
   render() {
     const { characteristics } = this.props;
@@ -107,7 +115,7 @@ class NewReviewModal extends React.Component {
                   <h3>Tell us what you think</h3>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-                  <StarHover />
+                  <StarHover hoist={this.hoist} />
                   <div style={{ justifyContent: 'flex-end' }}>
                     <h4>Do you recommend this product?</h4>
                     <div onChange={this.handleChange} style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -117,7 +125,7 @@ class NewReviewModal extends React.Component {
                   </div>
                 </div>
                 <h3>Characteristics:</h3>
-                <CharacteristicsSelector characteristics={characteristics} />
+                <CharacteristicsSelector characteristics={characteristics} hoist={this.hoist} />
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
                   <div style={{ justifyContent: 'flex-start' }}>
                     <h4>Nickname:</h4>
