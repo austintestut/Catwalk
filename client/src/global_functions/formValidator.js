@@ -1,11 +1,6 @@
-import React from 'react';
-import axios from 'axios';
-import imageValidator from './imageValidator';
-
-// assuming images are ok
 const formValidator = (stateObj) => {
   let {
-    recommend, nickname, email, summary, body, images, stars, characteristics,
+    recommend, nickname, email, summary, body, stars, characteristics,
   } = stateObj;
   const checkEmail = (string) => {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(string)) { return true; }
@@ -25,8 +20,9 @@ const formValidator = (stateObj) => {
   else if (body.length < 250 || body.length > 1000) { errors.push('invalid review body'); }
   if (stars === null) { errors.push('rating required'); }
 
-  if (errors.length) { console.log(JSON.stringify(errors)); return; }
-  console.log('success');
+  if (errors.length) { return errors; }
+  console.log('content acceptable');
+  return (false);
 };
 
 export default formValidator;

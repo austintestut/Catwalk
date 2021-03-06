@@ -52,6 +52,7 @@ class Reviews extends React.Component {
           reviews={reviewsData.results}
           filters={currentFilters}
           characteristics={characteristics}
+          meta={reviewsMeta}
         />
       </div>
     );

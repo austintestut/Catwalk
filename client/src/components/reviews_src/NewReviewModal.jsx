@@ -2,6 +2,8 @@ import React from 'react';
 import StarHover from '../new_review_components/StarHover';
 import CharacteristicsSelector from '../new_review_components/CharacteristicsSelector';
 import formValidator from '../../global_functions/formValidator';
+import reviewBodyConstructor from '../new_review_components/reviewBodyConstructor';
+
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
   constructor(props) {
@@ -28,7 +30,13 @@ class NewReviewModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    formValidator(this.state);
+    const { meta } = this.props;
+    let errors = formValidator(this.state);
+    if (!errors) {
+      reviewBodyConstructor(this.state, meta);
+      return;
+    }
+    this.setState({ errors });
   }
 
   handleChange(e, cb = () => {}) {
@@ -53,8 +61,6 @@ class NewReviewModal extends React.Component {
     if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
     this.setState({ count: 'minimum reached' });
   }
-
-
 
   render() {
     const { characteristics } = this.props;
