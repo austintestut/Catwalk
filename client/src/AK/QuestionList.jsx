@@ -1,15 +1,24 @@
 import React from 'react';
 import Questionn from './Questionn';
+import styled from 'styled-components';
+
+const QuestionListDiv = styled.div`
+border: 1px solid;
+margin-left: 5%;
+margin-right: 5%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+
+`
 
 const QuestionList = function ({ questions, howMany, increaseHelpful, searching, displayedQuestions}) {
-  console.log(displayedQuestions);
   let list = questions;
   if (searching) {
     list = displayedQuestions
   }
   return (
-    <div>
-      Question List:
+    <QuestionListDiv>
       {list.slice(0, howMany).map((question) => (
         <Questionn
           question={question}
@@ -18,7 +27,7 @@ const QuestionList = function ({ questions, howMany, increaseHelpful, searching,
           increaseHelpful={increaseHelpful}
         />
       ))}
-    </div>
+    </QuestionListDiv>
   );
 };
 

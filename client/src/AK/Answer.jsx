@@ -1,5 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const AnswerDiv = styled.div`
+
+`
 
 class Answer extends React.Component {
   constructor(props){
@@ -14,12 +19,10 @@ class Answer extends React.Component {
   }
   increaseHelpful(){
     let id = this.props.ans.id
-    console.log('calling Increase Helpful on: ', id);
     axios({
       url: `/answers/${id}`,
       method: 'put'
     }).then((data)=>{
-      console.log(data)
       this.setState({helped: true})
     })
   }
@@ -49,7 +52,7 @@ class Answer extends React.Component {
   }
   render(){
     return (
-    <div>
+    <AnswerDiv>
       <p>
         A: {this.props.ans.body}
       </p>
@@ -57,7 +60,7 @@ class Answer extends React.Component {
       {this.renderHelpfulButton()}
       {this.renderReportButton()}
       </p>
-    </div>
+    </AnswerDiv>
   )
   }
 

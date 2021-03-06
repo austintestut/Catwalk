@@ -29,7 +29,7 @@ app.get(`/products`, (req, res) => {
       res.status(404).send(err);
     });
 });
-
+// Gets all the questions
 app.get('/questions/:id', (req, res) => {
   axios({
     headers: {

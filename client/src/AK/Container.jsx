@@ -5,7 +5,18 @@ import QuestionList from './QuestionList';
 import QuestionModal from './QuestionModal';
 import AddQuestionButton from './Buttons/AddQuestionButton';
 import ShowMoreQuestionsButton from './Buttons/ShowMoreQuestionsButton';
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBar';
+import styled from 'styled-components';
+
+const ContainerDiv = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+flex-wrap: wrap;
+margin: auto;
+border: 1px solid;
+width: 50%;
+`
 
 class Container extends React.Component {
   constructor(props) {
@@ -108,7 +119,7 @@ class Container extends React.Component {
 
   render() {
     return (
-      <div>
+      <ContainerDiv>
         <SearchBar handleSearch={this.handleSearch}/>
         <QuestionList questions={this.state.questions}showAns={this.showAnsModal} howMany={this.state.questionsToShow}increaseHelpful={this.increaseHelpful}searching={this.state.searching} displayedQuestions={this.state.displayedQuestions}/>
 
@@ -117,7 +128,7 @@ class Container extends React.Component {
          <AddQuestionButton showQModal={this.showQModal} />
 
         <QuestionModal show={this.state.showQ} hideQModal={this.hideQModal} submitQuestion={this.submitQuestion} />
-      </div>
+      </ContainerDiv>
     );
   }
 }

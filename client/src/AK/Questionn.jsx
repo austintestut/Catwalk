@@ -3,7 +3,17 @@ import AddAnswerButton from './Buttons/AddAnswerButton';
 import AnswerModal from './AnswerModal';
 import AnswerList from './AnswerList';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const QuestionDiv = styled.div`
+display: flex;
+justify-content: space-between;
+border: 1px solid;
+
+`
+const QButtonsDiv = styled.div`
+font-size: 12px;
+`
 class Questionn extends React.Component {
   constructor(props){
     super(props)
@@ -82,12 +92,14 @@ class Questionn extends React.Component {
     myAnswers.push(value);
   }
     return (
-      <div>
-        Q: {this.props.question.question_body}
-        <p>Helpful?</p>
-        {/* <a onClick={this.markQuestionHelpful} > Yes {this.props.question.question_helpfulness + this.state.QhelpfulCounter}</a> */}
-        {this.renderHelpfulButton()}
-        <AddAnswerButton showAnsModal={this.showAnsModal.bind(this)} />
+      <div style={{'width': '100%'}}>
+        <QuestionDiv>
+        <div>Q: {this.props.question.question_body}</div>
+        <div style={{'font-size': '12px'}}>
+          Helpful?
+          {this.renderHelpfulButton()}
+        <AddAnswerButton showAnsModal={this.showAnsModal.bind(this)} /></div>
+        </QuestionDiv>
         <AnswerModal hide={this.hideAnsModal.bind(this)}showing={this.state.showingAnsModal}submitAnswer={this.submitAnswer.bind(this)}/>
         <AnswerList answers={myAnswers}increaseHelpful={this.props.increaseHelpful}reportAnswer={this.reportAnswer.bind(this)}maxed={this.state.maxedAnswers}/>
         {this.renderSeeMoreAnswersButton()}
