@@ -21,8 +21,8 @@ const reviewBodyConstructor = (obj, meta) => {
     }
 }
   */
-  const {product_id, characteristics} = meta;
-  const {recommend, nickname, email, summary, body, images, stars} = obj;
+  const { product_id, characteristics } = meta;
+  const { recommend, nickname, email, summary, body, images, stars } = obj;
   const charRatings = obj.characteristics;
 
   let charBody = {};
@@ -43,7 +43,7 @@ const reviewBodyConstructor = (obj, meta) => {
     "characteristics": charBody,
   };
   debugger;
-  console.log(resBody);
+  return (resBody);
 };
 
 export default reviewBodyConstructor;
