@@ -82,14 +82,18 @@ app.post(`/reviews`, (req, res) => {
     },
   })
     .then((data) => {
-      res.status(200).send(data.data);
+      res.status(201).send(data.data);
     })
     .catch((err) => {
       console.log('ERR posting review');
-      res.status(404).send(err);
+      res.status(500).send(err);
     });
 });
 
 app.listen(port, () => {
   console.log('Server listening at:', port);
 });
+
+module.exports = {
+  port,
+};
