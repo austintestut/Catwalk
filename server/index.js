@@ -3,7 +3,6 @@ const path = require('path');
 const axios = require('axios');
 const TOKEN = require('../config').TOKEN;
 
-
 const app = express();
 
 const port = 8080;
@@ -64,8 +63,8 @@ app.get(`/products/styles`, (req, res) => {
 app.get(`/products/related`, (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.body.id}/related`, {
     headers: {
-      Authorization: TOKEN
-    }
+      Authorization: TOKEN,
+    },
   })
     .then((data) => {
       res.status(200).send(data.data);
