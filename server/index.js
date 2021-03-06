@@ -76,6 +76,21 @@ app.get(`/products/related`, (req, res) => {
     });
 });
 
+app.post(`/reviews`, (req, res) => {
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews`, req.body, {
+    headers: {
+      Authorization: TOKEN,
+    },
+  })
+    .then((data) => {
+      res.status(200).send(data.data);
+    })
+    .catch((err) => {
+      console.log('ERR posting review');
+      res.status(404).send(err);
+    });
+});
+
 app.listen(port, () => {
   console.log('Server listening at:', port);
 });
