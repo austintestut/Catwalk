@@ -96,6 +96,18 @@ app.put('/questions/:id/helpful', (req, res)=>{
   })
   .catch((error)=>{res.send(error)})
 })
+app.put('/questions/:id/report', (req, res)=>{
+  axios({
+    headers: {
+      Authorization: config.TOKEN,
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${req.params.id}/report`,
+    method: 'put'
+  }).then((data)=>{
+    res.send(data)
+  })
+  .catch((error)=>{res.send(error)})
+})
 app.put('/answers/:id', (req, res)=>{
   axios({
     headers: {

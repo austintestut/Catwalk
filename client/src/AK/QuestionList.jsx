@@ -3,7 +3,6 @@ import Questionn from './Questionn';
 import styled from 'styled-components';
 
 const QuestionListDiv = styled.div`
-border: 1px solid;
 margin-left: 5%;
 margin-right: 5%;
 display: flex;

@@ -5,6 +5,8 @@ const SearchInput = styled.input`
 width: 90%;
 margin: auto;
 height: 50px;
+font-size: 20px;
+}
 `
 
 const SearchBar = ({handleSearch}) => {

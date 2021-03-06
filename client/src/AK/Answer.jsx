@@ -2,7 +2,25 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+const StyledButton = styled.button`
+margin-left: 10px;
+text-decoration: underline;
+background: none;
+border: none;
+&:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+`
 const AnswerDiv = styled.div`
+display: flex;
+justify-content: space-between;
+`
+const AnswerButtonsDiv = styled.div`
+display: flex;
+justify-content: flex-end;
+align-items: center;
+margin-bottom: 35px;
 
 `
 
@@ -30,7 +48,11 @@ class Answer extends React.Component {
     if (this.state.helped){
       return <a>Marked Helpful!</a>
     } else {
-      return <button onClick={this.increaseHelpful}>Helpful? {this.props.ans.helpfulness}</button>
+      return (
+        <>
+      <StyledButton onClick={this.increaseHelpful}>Yes ({this.props.ans.helpfulness})</StyledButton>
+      </>
+      )
     }
   }
   reportAnswer(){
@@ -47,19 +69,24 @@ class Answer extends React.Component {
     if (this.state.reported){
       return <a>Marked as Reported</a>
     } else {
-      return <button onClick={this.reportAnswer}> Report</button>
+      return <StyledButton onClick={this.reportAnswer}> Report</StyledButton>
     }
   }
   render(){
     return (
     <AnswerDiv>
-      <p>
+      <div>
+        <p>
         A: {this.props.ans.body}
       </p>
-      <p>by {this.props.ans.answerer_name}, {this.props.ans.date.substring(0, 10)}
-      {this.renderHelpfulButton()}
+      <p style={{'fontSize': '14px'}}>by {this.props.ans.answerer_name}, {this.props.ans.date.substring(0, 10)}
+         </p>
+      </div>
+      <AnswerButtonsDiv>
+        <div style={{'fontSize': '12px'}}>Helpful?</div>
+       {this.renderHelpfulButton()}
       {this.renderReportButton()}
-      </p>
+      </AnswerButtonsDiv>
     </AnswerDiv>
   )
   }

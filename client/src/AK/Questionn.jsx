@@ -8,11 +8,20 @@ import styled from 'styled-components';
 const QuestionDiv = styled.div`
 display: flex;
 justify-content: space-between;
-border: 1px solid;
 
 `
 const QButtonsDiv = styled.div`
-font-size: 12px;
+fontSize: 12px;
+`
+const StyledButton = styled.button`
+margin-left: 10px;
+text-decoration: underline;
+background: none;
+border: none;
+&:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
 `
 class Questionn extends React.Component {
   constructor(props){
@@ -22,11 +31,15 @@ class Questionn extends React.Component {
       QhelpfulCounter: 0,
       helped: false,
       maxedAnswers: false,
+      answers: Object.keys(this.props.answers),
+      question_id: this.props.question.question_id,
     }
     this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
     this.renderHelpfulButton = this.renderHelpfulButton.bind(this);
     this.renderSeeMoreAnswersButton = this.renderSeeMoreAnswersButton.bind(this);
     this.handleSeeAnswersClick = this.handleSeeAnswersClick.bind(this);
+    this.renderReportButton = this.renderReportButton.bind(this);
+    this.reportQuestion = this.reportQuestion.bind(this);
   }
   showAnsModal() {
     this.setState({
@@ -72,14 +85,30 @@ class Questionn extends React.Component {
     {if (this.state.helped) {
       return <a>Marked Helpful!</a>
     } else {
-      return  <button onClick={this.markQuestionHelpful} > Yes {this.props.question.question_helpfulness + this.state.QhelpfulCounter}</button>
+      return  <StyledButton onClick={this.markQuestionHelpful} > Yes ({this.props.question.question_helpfulness + this.state.QhelpfulCounter})</StyledButton>
     }}
+  }
+  renderReportButton(){
+    if (this.state.reported){
+      return <a>Marked as Reported</a>
+    } else {
+      return <StyledButton onClick={this.reportQuestion}> Report</StyledButton>
+    }
+  }
+  reportQuestion(){
+    let id = this.state.question_id
+    axios({
+      url: `/questions/${id}/report`,
+      method: 'put'
+    }).then((data)=>{
+      this.setState({reported: true})
+    })
   }
   renderSeeMoreAnswersButton(){
     if (this.state.maxedAnswers){
       return <button onClick={this.handleSeeAnswersClick}>Collapse Answers</button>
 
-    } else {
+    } else if (this.state.answers.length > 2) {
       return <button onClick={this.handleSeeAnswersClick}>See More Answers</button>
     }
   }
@@ -94,10 +123,11 @@ class Questionn extends React.Component {
     return (
       <div style={{'width': '100%'}}>
         <QuestionDiv>
-        <div>Q: {this.props.question.question_body}</div>
-        <div style={{'font-size': '12px'}}>
+        <div style={{'fontWeight': 'bold', 'fontSize': '18px', 'width': '50%'}}>Q: {this.props.question.question_body}</div>
+        <div style={{'fontSize': '12px'}}>
           Helpful?
           {this.renderHelpfulButton()}
+          {this.renderReportButton()}
         <AddAnswerButton showAnsModal={this.showAnsModal.bind(this)} /></div>
         </QuestionDiv>
         <AnswerModal hide={this.hideAnsModal.bind(this)}showing={this.state.showingAnsModal}submitAnswer={this.submitAnswer.bind(this)}/>

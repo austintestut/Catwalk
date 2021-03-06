@@ -1,8 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+margin-left: 10px;
+text-decoration: underline;
+background: none;
+border: none;
+&:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+`
 
 const AddAnswerButton = function ({ showAnsModal }) {
   return (
-    <button onClick={showAnsModal} type="button">Add Answer</button>
+    <StyledButton onClick={showAnsModal} type="button">Add Answer</StyledButton>
   );
 };
 

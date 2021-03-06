@@ -1,16 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Form = styled.form`
+const ModalDiv = styled.div`
+position: fixed;
 z-index: 1;
-font-family: sans-serif;
-font-size: 1.3rem;
-border: solid;
-display: grid;
-`;
-
-
-const P = styled.p`
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgb(0,0,0);
+background-color: rgba(0,0,0,0.4);
+`
+const ModalForm = styled.form`
+background-color: #fefefe;
+margin: 15% auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
 `
 
 const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
@@ -18,11 +25,11 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
     return null;
   }
     return (
-      <div>
+      <ModalDiv>
       <h2>Ask Your Question</h2>
       <h4>About (the product name here)</h4>
-      <Form onSubmit={submitQuestion}>
-        <P>What is your question?</P>
+      <ModalForm onSubmit={submitQuestion}>
+        <p>What is your question?</p>
         <input maxLength="1000" />
         <p>What is your nickname?</p>
         <input placeholder="Example: jackson11!" maxLength="60" />
@@ -33,8 +40,8 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
         <button type="submit">Submit Your Question</button>
 
         <button onClick={hideQModal}>Hide</button>
-      </Form>
-      </div>
+      </ModalForm>
+      </ModalDiv>
     );
   };
 

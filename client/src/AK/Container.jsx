@@ -14,8 +14,7 @@ flex-direction: row;
 justify-content: flex-start;
 flex-wrap: wrap;
 margin: auto;
-border: 1px solid;
-width: 50%;
+width: 65%;
 `
 
 class Container extends React.Component {
