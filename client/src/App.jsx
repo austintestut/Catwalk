@@ -10,7 +10,7 @@ const App = () => {
     <div>
       <h1>Hell World I am rendering!</h1>
       {/* <Container /> */}
-      {/* <Reviews data={example_review_data} meta={example_review_meta} /> */ }
+      <Reviews data={example_review_data} meta={example_review_meta} />
     </div>
   );
 };
