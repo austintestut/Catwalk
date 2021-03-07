@@ -64,7 +64,7 @@ class ImgModal extends React.Component {
       padding: '5px',
       paddingLeft: '0',
       height: '80px',
-      maxWidth: '80px',
+      maxWidth: '160px',
     };
     /* ---------------------------------------------------------------------------------*/
     if (this.state.open && url) {

@@ -25,8 +25,9 @@ class CharacteristicsSelector extends React.Component {
     });
   }
 
-  makeRadioButton(item) {
+  makeRadioButton(item, index) {
     let text;
+    const { characteristics } = this.props
     if (!this.state[item]) { text = 'None Selected'; }
     else { text = characteristic[item][this.state[item]]; }
     const radioStyle = {
@@ -35,15 +36,40 @@ class CharacteristicsSelector extends React.Component {
       display: 'inline-block',
       textAlign: 'center',
     };
+    const radioStyleInline1 = {
+      //border: '1px solid black',
+      width: '18%',
+    };
+    const radioStyleInline2 = {
+      //border: '1px solid black',
+      width: '18%',
+      float: 'right',
+    };
+    if (characteristics.length > 2) {
+      return (
+        <div style={{ ...radioStyle }} onChange={this.handleChange}>
+          <h4 style={{marginBottom: '5px'}}>{item}</h4>
+          <p style={{ fontSize: '80%', margin: '5px' }}>{text}</p>
+          <input type="radio" name={item} value="1" /><br />
+          <input type="radio" name={item} value="2" /><br />
+          <input type="radio" name={item} value="3" /><br />
+          <input type="radio" name={item} value="4" /><br />
+          <input type="radio" name={item} value="5" /><br />
+        </div>
+      );
+    }
+    let thisStyle;
+    if (index === 0) { thisStyle = radioStyleInline1; }
+    else { thisStyle = radioStyleInline2; }
     return (
-      <div style={{ ...radioStyle }} onChange={this.handleChange}>
+      <div style={{ ...thisStyle }} onChange={this.handleChange}>
         <h4 style={{marginBottom: '5px'}}>{item}</h4>
-        <p style={{ fontSize: '80%', margin: '5px' }}>{text}</p>
-        <input type="radio" name={item} value="1" /><br />
-        <input type="radio" name={item} value="2" /><br />
-        <input type="radio" name={item} value="3" /><br />
-        <input type="radio" name={item} value="4" /><br />
-        <input type="radio" name={item} value="5" /><br />
+        <p style={{ fontSize: '80%', margin: '5px', marginLeft: '0px' }}>{text}</p>
+        <input type="radio" name={item} value="1" />
+        <input type="radio" name={item} value="2" />
+        <input type="radio" name={item} value="3" />
+        <input type="radio" name={item} value="4" />
+        <input type="radio" name={item} value="5" />
       </div>
     );
   }
@@ -58,7 +84,7 @@ class CharacteristicsSelector extends React.Component {
     if (characteristic) {
       return (
         <div style={{ ...containerStyle }}>
-          {characteristics.map((item) => this.makeRadioButton(item))}
+          {characteristics.map((item, index) => this.makeRadioButton(item, index))}
         </div>
       );
     }
