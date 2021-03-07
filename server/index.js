@@ -30,20 +30,20 @@ app.get(`/products`, (req, res) => {
     });
 });
 
-// app.get('/reviews/meta', (req, res) => {
-//   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${req.body.id}`, {
-//     headers: {
-//       Authorization: TOKEN
-//     }
-//   })
-//     .then((data) => {
-//       res.status(200).send(data.data);
-//     })
-//     .catch((err) => {
-//       console.log('ERR getting average star rating');
-//       res.status(404).send(err);
-//     });
-// });
+app.get('/reviews/meta', (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${req.body.id}`, {
+    headers: {
+      Authorization: TOKEN
+    }
+  })
+    .then((data) => {
+      res.status(200).send(data.data);
+    })
+    .catch((err) => {
+      console.log('ERR getting average star rating');
+      res.status(404).send(err);
+    });
+});
 
 app.get('/reviews/:product_id/:sort/:count', (req, res) => {
   const { product_id, sort, count} = req.params;

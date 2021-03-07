@@ -16,6 +16,17 @@ class Reviews extends React.Component {
     this.updateReviews = this.updateReviews.bind(this);
   }
 
+  componentDidMount() {
+    const { productId } = this.props;
+    if (productId) {
+      const { reviews } = handler;
+      reviews.getMeta(productId,
+        (response) => this.setState({
+          reviewsMeta: response },
+        this.updateReviews()));
+    }
+  }
+
   updateReviews(sort = 'relevant') {
     const { reviewsMeta } = this.state;
     const { recommended, product_id } = reviewsMeta;

@@ -16,7 +16,12 @@ const handler = {
         .then((response) => cb(response))
         .catch((err) => console.log(err));
     },
-    // getMeta
+    getMeta(id, cb = () => {}) {
+      const body = { id };
+      axios.get(`http://${ip}:${port}/reviews/meta`, body)
+        .then((response) => cb(response))
+        .catch((err) => console.log(err));
+    },
   },
 };
 
