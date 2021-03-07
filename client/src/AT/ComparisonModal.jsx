@@ -52,7 +52,6 @@ const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics, cur
         <h3><br></br></h3>
         <h4>{currentProductData.name}</h4>
         {currentItemValues.map((value) => {
-          console.log(typeof(value));
           if (typeof(value) !== 'string') {
             return (<div>{value}</div>);
           }

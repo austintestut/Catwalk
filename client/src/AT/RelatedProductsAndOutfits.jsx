@@ -163,7 +163,7 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   renderRightButtonToggleForOutfit() {
-    if (this.state.outfitCurrentlyShowingIndexes[2] >= this.state.outfitProductIds.length - 1) {
+    if (this.state.outfitCurrentlyShowingIndexes[2] >= window.localStorage.length - 1) {
       this.setState({
         outfitRightArrow: false
       });
@@ -251,7 +251,6 @@ class RelatedProductsAndOutfits extends React.Component {
     let outfitProductIds = [];
     for (let i = 0; i < window.localStorage.length; i++) {
       outfitProductIds.push(window.localStorage[window.localStorage.key(i)]);
-      console.log(window.localStorage[i]);
     }
     this.setState({
       outfitProductIds: outfitProductIds
@@ -289,6 +288,8 @@ class RelatedProductsAndOutfits extends React.Component {
             outfitCurrentlyShowingIndexes={this.state.outfitCurrentlyShowingIndexes}
             getOutfitIds={this.getOutfitIds}
             currentPageItemId={this.props.currentPageItemId}
+            handleItemClick={this.props.handleItemClick}
+            checkIfButtonsShouldRender={this.checkIfButtonsShouldRender}
           />
           <div>
             {this.state.outfitRightArrow && (

@@ -29,7 +29,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>Hell World I am rendering!</h1>
-        <RelatedProductsAndOutfits currentPageItemId={this.state.currentPageItemId} handleItemClick={this.handleItemClick} />
+        <RelatedProductsAndOutfits
+        currentPageItemId={this.state.currentPageItemId}
+        handleItemClick={this.handleItemClick}
+        />
         {/* <Container /> */}
       </div>
     );

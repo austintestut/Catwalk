@@ -6,7 +6,7 @@ const StyledOutfitContainer = styled.div`
 position: relative;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
-grid-column-gap: 7%;
+grid-column-gap: 3%;
 height: 400px;
 `;
 const StyledProductCard = styled.div`
@@ -29,7 +29,14 @@ ${StyledAddButton}:hover {
 }
 `;
 
-const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes, getOutfitIds, currentPageItemId }) => {
+const OutfitCarousel = ({
+  outfitProductIds,
+  outfitCurrentlyShowingIndexes,
+  getOutfitIds,
+  currentPageItemId,
+  handleItemClick,
+  checkIfButtonsShouldRender
+}) => {
   let productsToShow = [
     (outfitProductIds[outfitCurrentlyShowingIndexes[0]] || null),
     (outfitProductIds[outfitCurrentlyShowingIndexes[1]] || null),
@@ -39,6 +46,7 @@ const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes, getOu
   const storeOutfitItem = (id) => {
     window.localStorage.setItem(`id: ${id}`, id);
     getOutfitIds();
+    checkIfButtonsShouldRender();
   };
 
   return (
@@ -52,7 +60,12 @@ const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes, getOu
             productId = Math.random();
             card = <div></div>;
           } else {
-            card = <OutfitCard productId={productId} getOutfitIds={getOutfitIds}/>;
+            card = <OutfitCard
+              productId={productId}
+              getOutfitIds={getOutfitIds}
+              handleItemClick={handleItemClick}
+              checkIfButtonsShouldRender={checkIfButtonsShouldRender}
+            />;
           }
           return (
             <StyledProductCard key={productId}>
