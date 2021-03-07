@@ -30,7 +30,8 @@ const Characteristic = ({ item }) => {
     width: '249px',
   };
   const spanStyle = {
-    fontSize: '13px',
+    width: '83px',
+    fontSize: '11px',
   };
 
   return (
@@ -43,9 +44,9 @@ const Characteristic = ({ item }) => {
         <div style={{ ...barStyle, margin: '0 auto' }} />
       </div>
       <div style={{ ...textContainerStyle }}>
-        <span style={{ ...spanStyle }}>{qualities[1]}</span>
-        <span style={{ ...spanStyle, textAlign: 'center' }}>{ qualities[3] }</span>
-        <span style={{ ...spanStyle }}>{qualities[5]}</span>
+        <div style={{ ...spanStyle }}>{qualities[1]}</div>
+        <div style={{ ...spanStyle, textAlign: 'center' }}>{ qualities[3] }</div>
+        <div style={{ ...spanStyle, textAlign: 'right' }}>{qualities[5]}</div>
       </div>
     </div>
   );
