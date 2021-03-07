@@ -19,19 +19,32 @@ const ReviewTile = ({ review, length, index }) => {
     padding: '10px',
     paddingRight: '5px',
     paddingLeft: 0,
+    paddingBottom: '3px',
     width: '75vw',
+  };
+  const imageMap = () => {
+    if (review.photos.length) {
+      return (
+        <fragment>
+          <br />
+          <span>
+            {review.photos.map((img) => <ImgModal url={img.url} />)}
+          </span>
+          <br />< br />
+        </fragment>
+      );
+    }
+    return <br />;
   };
   if (index === length - 1) { tileStyle.borderBottom = 'none'; }
   return (
     <div style={{ ...tileStyle }}>
       <StarStatic number={review.rating} />
-      <div style={{ float: 'right' }}>{review.reviewer_name}, {dateFormatter(review.date)}</div><br/><br/>
+      <div style={{ float: 'right', paddingRight: '10px' }}>{review.reviewer_name}, {dateFormatter(review.date)}</div><br/><br/>
       <Summary summary={review.summary} />
       <Recommend bool={review.recommend} />
-      <Body body={review.body} /><br />
-      <span>
-        { review.photos.map((img) => <ImgModal url={img.url} />) }
-      </span>
+      <Body body={review.body} />
+      {imageMap()}
       { /* <ImgModal /> */ }
       <Response response={review.response} />
       <Helpfulness helpfulness={review.helpfulness} />
