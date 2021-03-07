@@ -14,7 +14,6 @@ const imageValidator = (imagesArr, cb) => {
     if (resultsArr.length === imagesArr.length) {
       for (let x = 0; x < resultsArr.length; x++) {
         const current = resultsArr[x];
-        debugger;
         if (current !== 'image/jpeg' && current !== 'image/png') {
           bool = false;
         }

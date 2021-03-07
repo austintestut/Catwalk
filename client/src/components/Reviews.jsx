@@ -19,7 +19,6 @@ class Reviews extends React.Component {
   updateReviews(sort = 'relevant') {
     const { reviewsMeta } = this.state;
     const { recommended, product_id } = reviewsMeta;
-    debugger;
     const count = (+recommended.false) + (+recommended.true);
     const methods = {
       productId: product_id,
@@ -52,6 +51,8 @@ class Reviews extends React.Component {
     const { reviewsData, reviewsMeta, currentFilters } = this.state;
     const characteristics = Object.keys(reviewsMeta.characteristics);
     const flexContainerStyle = {
+      paddingTop: '0px',
+      paddingBottom: '0px',
       display: 'flex',
       flexWrap: 'nowrap',
       flex: 'row',

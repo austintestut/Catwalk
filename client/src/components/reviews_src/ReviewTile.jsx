@@ -26,14 +26,14 @@ const ReviewTile = ({ review, length, index }) => {
     <div style={{ ...tileStyle }}>
       <StarStatic number={review.rating} />
       <div style={{ float: 'right' }}>{review.reviewer_name}, {dateFormatter(review.date)}</div><br/><br/>
-      <Summary summary={review.summary} /><br/>
-      <Recommend bool={review.recommend} /><br/>
-      <Body body={review.body} />
+      <Summary summary={review.summary} />
+      <Recommend bool={review.recommend} />
+      <Body body={review.body} /><br />
       <span>
         { review.photos.map((img) => <ImgModal url={img.url} />) }
       </span>
-      <ImgModal />
-      <Response response={review.response} /><br />
+      { /* <ImgModal /> */ }
+      <Response response={review.response} />
       <Helpfulness helpfulness={review.helpfulness} />
     </div>
   );

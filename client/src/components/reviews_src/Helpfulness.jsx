@@ -24,11 +24,11 @@ class Helpfulness extends React.Component {
   render() {
     let { count } = this.state;
     return (
-      <div>
+      <div style={{fontSize: '90%', color: 'grey' }}>
         <span>Helpful? </span>
-        <span name="yes" onClick={this.click} style={{ textDecoration: 'underline' }}>Yes</span>
+        <span name="yes" className="helpful" onClick={this.click} style={{ textDecoration: 'underline' }}>Yes</span>
         <span> ({ count })    |    </span>
-        <span name="no" onClick = {this.click} style={{ textDecoration: 'underline' }}>No</span>
+        <span name="no" className="helpful" onClick = {this.click} style={{ textDecoration: 'underline' }}>No</span>
       </div>
     );
   }

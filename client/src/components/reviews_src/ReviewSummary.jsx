@@ -52,7 +52,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
       <div style={{ ...recommendStyle }}>{percentReq}% of reviews recommend this product</div>
       {Object.entries(ratings).map((rating) =>
       <div>
-        <span onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
+        <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
         <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />
       </div>)}
       <br />
