@@ -15,6 +15,11 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
       (Number(recommended.true) / (Number(recommended.false) + Number(recommended.true))) * 100,
     ));
   };
+  const getTotal = () => {
+    let truth = recommended.true || 0;
+    let falsey = recommended.false || 0;
+    return (+truth + +falsey);
+  };
   const getAverage = () => {
     let total = 0;
     let average = 0;
@@ -57,7 +62,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
       {Object.entries(ratings).map((rating) =>
       <div>
         <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
-        <ColoredBar total={Number(recommended.true) + Number(recommended.false)} count={rating[1]} />
+        <ColoredBar total={getTotal()} count={rating[1]} />
       </div>)}
       <br />
       {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
