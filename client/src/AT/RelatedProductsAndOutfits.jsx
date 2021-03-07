@@ -13,7 +13,7 @@ grid-template-columns: 1fr 12fr 1fr;
 overflow-y: hidden;
 `;
 const StyledLeftButton = styled.button`
-height: 370px;
+height: 300px;
 width: 100%;
 position: relative;
 top: 18px;
@@ -27,7 +27,7 @@ ${StyledLeftButton}:hover {
 }
 `;
 const StyledRightButton = styled.button`
-height: 370px;
+height: 300px;
 width: 100%;
 position: relative;
 top: 18px;
@@ -82,8 +82,6 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   componentDidMount() {
-    this.renderRightButtonToggleForRelatedProducts();
-    this.renderRightButtonToggleForOutfit();
     this.getProductInfo(this.props.currentPageItemId);
     this.getRating(this.props.currentPageItemId);
     this.getRelatedItemIds(this.props.currentPageItemId);
@@ -97,6 +95,7 @@ class RelatedProductsAndOutfits extends React.Component {
         this.setState({
           relatedProductIds: data.data
         });
+        this.checkIfButtonsShouldRender();
       })
       .catch((err) => {
         console.log('ERR Axios get product from client', err);

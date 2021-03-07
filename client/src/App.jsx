@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentPageItemId: 17072
+      currentPageItemId: 17450
     };
     this.handleItemClick = this.handleItemClick.bind(this);
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styled, { css, keyframes } from 'styled-components';
+import StarStatic from '.././components/reviews_src/StarStatic.jsx';
 
 const fadein = keyframes`
 from {
@@ -29,19 +30,34 @@ animation: ${fadein} 0.35s;
 const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics, currentProductData, currentRating, currentCharacteristics }) => {
   let categories = [];
   let categorySet = new Set(Object.keys(cardCharacteristics).concat(Object.keys(currentCharacteristics)));
-
   categorySet.forEach((element) => categories.push(element));
-  console.log('set', categorySet);
-  console.log('categories', categories);
-  let currentItemValues;
-  let cardItemValues;
-
+  categories.sort();
+  let currentItemValues = [];
+  let cardItemValues = [];
+  for (let i = 0; i < categories.length; i++) {
+    if (currentCharacteristics[categories[i]]) {
+      currentItemValues.push(currentCharacteristics[categories[i]].value);
+    } else {
+      currentItemValues.push(<br />);
+    }
+    if (cardCharacteristics[categories[i]]) {
+      cardItemValues.push(cardCharacteristics[categories[i]].value);
+    } else {
+      cardItemValues.push(<br />);
+    }
+  }
   return (
     <StyledModalBox onClick={handleInnerModalClick}>
       <div>
-      <h3><br></br></h3>
-        <h4>CURRENT ITEM ON PAGE</h4>
-        <div> no check mark</div>
+        <h3><br></br></h3>
+        <h4>{currentProductData.name}</h4>
+        {currentItemValues.map((value) => {
+          console.log(typeof(value));
+          if (typeof(value) !== 'string') {
+            return (<div>{value}</div>);
+          }
+          return (<div key={value}><StarStatic number={value} /></div>);
+        })}
       </div>
       <div>
         <h3>Comparing</h3>
@@ -49,9 +65,14 @@ const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics, cur
         {categories.map((category) => (<div key={category}>{category}</div>))}
       </div>
       <div>
-      <h3><br></br></h3>
+        <h3><br></br></h3>
         <h4>{name}</h4>
-        <div>check mark</div>
+        {cardItemValues.map((value) => {
+          if (typeof(value) !== 'string') {
+            return (<div>{value}</div>);
+          }
+          return (<div key={value}><StarStatic number={value} /></div>);
+        })}
       </div>
     </StyledModalBox>
   );

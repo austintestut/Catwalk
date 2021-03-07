@@ -218,7 +218,7 @@ class RelatedProductCard extends React.Component {
               handleInnerModalClick={this.handleInnerModalClick}
               name={this.state.productData.name}
               cardCharacteristics={this.state.cardCharacteristics}
-              currentProductData={this.props.productData}
+              currentProductData={this.props.currentProductData}
               currentRating={this.props.currentRating}
               currentCharacteristics={this.props.currentCharacteristics}
             />
