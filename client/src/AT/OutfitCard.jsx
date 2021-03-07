@@ -25,7 +25,7 @@ const StyledX = styled.div`
 height: 20px;
 width:20px;
 position: absolute;
-top:0;
+top: 0;
 right: 0;
 filter: invert(1);
 ${StyledX}:hover {
@@ -34,28 +34,36 @@ ${StyledX}:hover {
 `;
 const StyledStarLine = styled.div`
 display: grid;
-grid-template-columns: 5fr 4fr;
+grid-template-columns: auto 1fr;
 `;
 const StyledImageContainer = styled.section`
 width: 100%;
 height: 200px;
 display: grid;
 grid-template-rows: 3fr 2fr;
+content-align: center;
+`;
+const StyledImg = styled.img`
+width: 100%;
+height: 200px;
+${StyledImg}:hover {
+  cursor: pointer;
+}
 `;
 const StyledOtherImageContainer = styled.div`
-position: absolute;
 display: grid;
+padding-left: 2%;
+padding-right: 2%;
 grid-row: 2;
 grid-template-columns: 1fr 1fr 1fr;
-grid-column-gap: 2%;
+grid-column-gap: 4%;
 height: 57px;
-width: 173px;
+width: auto;
 animation: ${fadein} 0.4s;
 `;
 const StyledOtherImage = styled.img`
 position: relative;
-bottom: 65px;
-left: 5px;
+bottom: 66px;
 height: 57px;
 width: 57px;
 border: solid;
@@ -177,10 +185,15 @@ class OutfitCard extends React.Component {
     });
   }
 
+  removeOutfitItem(id) {
+    window.localStorage.removeItem(`id: ${id}`);
+    this.props.getOutfitIds();
+  };
+
   render() {
     return (
       <StyledCard>
-        <StyledX onClick={this.toggleModal}>
+        <StyledX onClick={() => { this.removeOutfitItem(this.props.productId); this.toggleModal();}}>
           <img src={xIcon} width="100%" height="100%" />
         </StyledX>
         <StyledImageContainer

@@ -26,7 +26,7 @@ const StyledStarIcon = styled.div`
 height: 20px;
 width:20px;
 position: absolute;
-top:0;
+top: 0;
 right: 0;
 ${StyledStarIcon}:hover {
   cursor: pointer;

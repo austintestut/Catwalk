@@ -79,12 +79,14 @@ class RelatedProductsAndOutfits extends React.Component {
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getRating = this.getRating.bind(this);
     this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
+    this.getOutfitIds = this.getOutfitIds.bind(this);
   }
 
   componentDidMount() {
     this.getProductInfo(this.props.currentPageItemId);
     this.getRating(this.props.currentPageItemId);
     this.getRelatedItemIds(this.props.currentPageItemId);
+    this.getOutfitIds();
   }
 
   // fetch data for current item on page
@@ -245,12 +247,22 @@ class RelatedProductsAndOutfits extends React.Component {
     });
   }
 
+  getOutfitIds() {
+    let outfitProductIds = [];
+    for (let i = 0; i < window.localStorage.length; i++) {
+      outfitProductIds.push(window.localStorage[window.localStorage.key(i)]);
+      console.log(window.localStorage[i]);
+    }
+    this.setState({
+      outfitProductIds: outfitProductIds
+    });
+  }
+
   render() {
     return (
       <div>
         <h3>Related Products and Outfit </h3>
         <StyledCarouselContainer>
-
           <div>
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
           </div>
@@ -275,6 +287,8 @@ class RelatedProductsAndOutfits extends React.Component {
           <OutfitCarousel
             outfitProductIds={this.state.outfitProductIds}
             outfitCurrentlyShowingIndexes={this.state.outfitCurrentlyShowingIndexes}
+            getOutfitIds={this.getOutfitIds}
+            currentPageItemId={this.props.currentPageItemId}
           />
           <div>
             {this.state.outfitRightArrow && (
@@ -290,8 +304,8 @@ class RelatedProductsAndOutfits extends React.Component {
           </div>
         </StyledCarouselContainer>
         <br></br> {/* remove this when incorporating everyone's components */}
-      </div >
-    )
+      </div>
+    );
   }
 }
 

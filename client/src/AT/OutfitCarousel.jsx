@@ -15,9 +15,7 @@ margin-bottom: 5%;
 `;
 const StyledAddButton = styled.button`
 width: auto;
-height: 228px;
-margin-left: 20%;
-margin-right: 10%;
+height: 278px;
 margin-top: 5%;
 margin-bottom: 5%;
 font-size: 50px;
@@ -31,25 +29,30 @@ ${StyledAddButton}:hover {
 }
 `;
 
-const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes }) => {
+const OutfitCarousel = ({ outfitProductIds, outfitCurrentlyShowingIndexes, getOutfitIds, currentPageItemId }) => {
   let productsToShow = [
     (outfitProductIds[outfitCurrentlyShowingIndexes[0]] || null),
     (outfitProductIds[outfitCurrentlyShowingIndexes[1]] || null),
     (outfitProductIds[outfitCurrentlyShowingIndexes[2]] || null)
   ];
 
+  const storeOutfitItem = (id) => {
+    window.localStorage.setItem(`id: ${id}`, id);
+    getOutfitIds();
+  };
+
   return (
     <div>
       <div>YOUR OUTFIT</div>
       <StyledOutfitContainer key='StyledOutfitContainer'>
-      <StyledAddButton>+</StyledAddButton>
+        <StyledAddButton onClick={() => storeOutfitItem(currentPageItemId)}>+</StyledAddButton>
         {productsToShow.map((productId) => {
           let card;
           if (productId === null) {
             productId = Math.random();
             card = <div></div>;
           } else {
-            card = <OutfitCard productId={productId} />;
+            card = <OutfitCard productId={productId} getOutfitIds={getOutfitIds}/>;
           }
           return (
             <StyledProductCard key={productId}>
