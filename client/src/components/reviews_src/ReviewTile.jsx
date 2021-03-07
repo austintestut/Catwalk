@@ -8,26 +8,26 @@ import Helpfulness from './Helpfulness';
 import Response from './Response';
 import ImgModal from './ImgModal';
 
-const ReviewTile = ({ review }) => {
+const ReviewTile = ({ review, length, index }) => {
   const tileStyle = {
-    marginBottom: '12px',
-    marginTop: '8px',
+    marginBottom: '4px',
+    marginTop: '4px',
     // border: '2px solid grey',
-    borderBottom: '4px solid grey',
-    borderRadius: '3px',
+    borderBottom: '3px solid grey',
+    borderRadius: '1px',
     // boxShadow: '3px 3px Grey',
     padding: '10px',
     paddingRight: '5px',
     paddingLeft: 0,
     width: '75vw',
   };
+  if (index === length - 1) { tileStyle.borderBottom = 'none'; }
   return (
     <div style={{ ...tileStyle }}>
       <StarStatic number={review.rating} />
-      <div>{review.reviewer_name}</div>
-      <div>{dateFormatter(review.date)}</div>
-      <Summary summary={review.summary} />
-      <Recommend bool={review.recommend} />
+      <div style={{ float: 'right' }}>{review.reviewer_name}, {dateFormatter(review.date)}</div><br/><br/>
+      <Summary summary={review.summary} /><br/>
+      <Recommend bool={review.recommend} /><br/>
       <Body body={review.body} />
       <span>
         { review.photos.map((img) => <ImgModal url={img.url} />) }
