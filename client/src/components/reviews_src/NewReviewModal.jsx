@@ -134,7 +134,7 @@ class NewReviewModal extends React.Component {
           <div style={{ ...modalStyle }}>
             <div style={{ ...modalContentStyle }}>
               <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
-              <div style={{ ...formStyle }}>
+              <div style={{ ...formStyle }} className="new-review">
                 { /* ------------------------------->>FORM HERE<<------------------------------*/ }
                 <div style={{ justifyContent: 'center', textAlign: 'center' }}>
                   <h2>New Review</h2>
@@ -150,7 +150,7 @@ class NewReviewModal extends React.Component {
                     </div>
                   </div>
                 </div>
-                <h3>Characteristics:</h3>
+                <h4 style={{marginBottom: '0px '}}>Characteristics:</h4>
                 <CharacteristicsSelector characteristics={characteristics} hoist={this.hoist} />
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
                   <div style={{ justifyContent: 'flex-start' }}>

@@ -4,14 +4,17 @@ class ReviewsSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sort: 'relevance',
+      sort: 'relevant',
     };
     this.handleSort = this.handleSort.bind(this);
   }
 
   handleSort(e) {
+    debugger;
+    const { updateReviews } = this.props;
+    const { sort } = this.state;
     e.preventDefault();
-    this.setState({ sort: e.target.value });
+    this.setState({ sort: e.target.value }, updateReviews(sort));
   }
 
   render() {
@@ -30,9 +33,9 @@ class ReviewsSort extends React.Component {
         <form>
           <label style={{ ...labelStyle }}>{total} reviews sorted by:
             <select value={sort} style={{ ...selectorStyle }} onChange={this.handleSort}>
-              <option value="relevance">Relevance</option>
-              <option value="newewst">Newest</option>
-              <option value="helpfulness">Helpfulness</option>
+              <option value="relevant">Relevance</option>
+              <option value="newest">Newest</option>
+              <option value="helpful">Helpfulness</option>
             </select>
           </label>
         </form>

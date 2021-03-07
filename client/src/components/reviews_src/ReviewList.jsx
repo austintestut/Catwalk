@@ -9,20 +9,20 @@ class ReviewList extends React.Component {
     super(props);
     this.state = {
       show: 2,
-      reviews: [],
+      reviews: this.props.reviews,
     };
     this.addReviews = this.addReviews.bind(this);
     this.setFilters = this.setFilters.bind(this);
   }
 
-  componentDidMount() {
-    const { reviews } = this.props;
-    this.setState({ reviews });
-  }
-
   componentDidUpdate(prevProps) {
-    if (prevProps.filters !== this.props.filters) {
+    const { filters, reviews } = this.props;
+    debugger;
+    if (prevProps.filters !== filters) {
       this.setFilters();
+    }
+    if (prevProps.reviews !== reviews) {
+      this.setState({ reviews });
     }
   }
 
@@ -47,7 +47,7 @@ class ReviewList extends React.Component {
 
   render() {
     const { reviews, show } = this.state;
-    const { characteristics } = this.props;
+    const { characteristics, updateReviews } = this.props;
     const containerStyle = {
       alignSelf: 'flex-end stretch',
       margin: '10px',
@@ -56,7 +56,7 @@ class ReviewList extends React.Component {
 
     return (
       <div style={{ ...containerStyle }}>
-        <ReviewsSort total={reviews.length} />
+        <ReviewsSort total={reviews.length} updateReviews={updateReviews} />
         <ReviewTileContainer reviews={reviews} show={show} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
         <NewReviewModal characteristics={characteristics} meta={this.props.meta}/>

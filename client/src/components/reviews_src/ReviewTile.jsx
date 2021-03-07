@@ -10,12 +10,15 @@ import ImgModal from './ImgModal';
 
 const ReviewTile = ({ review }) => {
   const tileStyle = {
-    marginBottom: '8px',
-    border: '2px solid grey',
+    marginBottom: '12px',
+    marginTop: '8px',
+    // border: '2px solid grey',
+    borderBottom: '4px solid grey',
     borderRadius: '3px',
-    boxShadow: '3px 3px Grey',
+    // boxShadow: '3px 3px Grey',
     padding: '10px',
     paddingLeft: 0,
+    width: '75vw',
   };
   return (
     <div style={{ ...tileStyle }}>
@@ -29,7 +32,7 @@ const ReviewTile = ({ review }) => {
         { review.photos.map((img) => <ImgModal url={img.url} />) }
       </span>
       <ImgModal />
-      <Response response={review.response} />
+      <Response response={review.response} /><br />
       <Helpfulness helpfulness={review.helpfulness} />
     </div>
   );

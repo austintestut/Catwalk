@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewList from './reviews_src/ReviewList';
 import ReviewSummary from './reviews_src/ReviewSummary';
+import handler from '../global_functions/handler';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -12,6 +13,22 @@ class Reviews extends React.Component {
     };
     this.addFilter = this.addFilter.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
+    this.updateReviews = this.updateReviews.bind(this);
+  }
+
+  updateReviews(sort = 'relevant') {
+    const { reviewsMeta } = this.state;
+    const { recommended, product_id } = reviewsMeta;
+    debugger;
+    const count = (+recommended.false) + (+recommended.true);
+    const methods = {
+      productId: product_id,
+      sort,
+      count,
+    };
+    handler.reviews.get(methods, (response) => {
+      this.setState({ reviewsData: response.data });
+    });
   }
 
   addFilter(e) {
@@ -41,7 +58,7 @@ class Reviews extends React.Component {
       padding: '10px',
     };
     return (
-      <div style={{ ...flexContainerStyle }}>
+      <div style={{ ...flexContainerStyle }} className="reviews">
         <ReviewSummary
           reviewsMeta={reviewsMeta}
           currentFilters={currentFilters}
@@ -53,6 +70,7 @@ class Reviews extends React.Component {
           filters={currentFilters}
           characteristics={characteristics}
           meta={reviewsMeta}
+          updateReviews={this.updateReviews}
         />
       </div>
     );
