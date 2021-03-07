@@ -31,19 +31,22 @@ class Reviews extends React.Component {
     }
   }
 
-  updateReviews(sort = 'relevant', recommended = null, product_id = null) {
+  updateReviews(sort = 'relevant', recCounts = null, id = null) {
     const { reviewsMeta } = this.state;
-    if (!recommended || !product_id) {
-      let { recommended, product_id } = reviewsMeta;
+    let recommend = recCounts;
+    let productId = id;
+    if (!recCounts || !id) {
+      const { recommended, product_id } = reviewsMeta;
+      recommend = recommended;
+      productId = product_id;
     }
     let count = 0;
-    Object.values(recommended).forEach((value) => count += +value);
+    Object.values(recommend).forEach((value) => count += +value);
     const methods = {
-      productId: product_id,
+      productId,
       sort,
       count,
     };
-    debugger;
     handler.reviews.get(methods, (response) => {
       this.setState({ reviewsData: response.data });
     });
