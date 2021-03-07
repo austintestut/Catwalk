@@ -30,8 +30,10 @@ app.get(`/products`, (req, res) => {
     });
 });
 
-app.get('/reviews/meta', (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${req.body.id}`, {
+app.get('/reviews/meta/:id?', (req, res) => {
+  console.log('meta');
+  console.log(req.params);
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${req.params.id}`, {
     headers: {
       Authorization: TOKEN
     }
@@ -40,13 +42,15 @@ app.get('/reviews/meta', (req, res) => {
       res.status(200).send(data.data);
     })
     .catch((err) => {
-      console.log('ERR getting average star rating');
+      console.log('ERR getting reviews metadata');
       res.status(404).send(err);
     });
 });
 
 app.get('/reviews/:product_id/:sort/:count', (req, res) => {
-  const { product_id, sort, count} = req.params;
+  console.log('not meta');
+  let { product_id, sort, count} = req.params;
+  if (product_id = 'meta') { return; }
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${product_id}&count=${count}&sort=${sort}`, {
     headers: {
       Authorization: TOKEN,

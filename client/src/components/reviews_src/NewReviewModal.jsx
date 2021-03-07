@@ -37,10 +37,10 @@ class NewReviewModal extends React.Component {
     const { reviews } = handler;
     let errors = formValidator(this.state);
     if (!errors) {
+      debugger;
       reviews.post(
         reviewBodyConstructor(this.state, meta),
-        (response) => {
-          console.log(response);
+        () => {
           // modal closes only after server response --> possibly change this
           this.setState({
             open: false,

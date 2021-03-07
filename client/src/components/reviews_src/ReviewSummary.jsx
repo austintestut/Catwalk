@@ -8,9 +8,13 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   // const { reviewsMeta, currentFilters, addFilter } = this.props;
   let { recommended, ratings, characteristics } = reviewsMeta;
 
-  const percentReq = Math.round(
-    (Number(recommended.true) / (Number(recommended.false) + Number(recommended.true))) * 100,
-  );
+  const percentReq = () => {
+    if (!recommended.true) return (0);
+    if (!recommended.false) return (100);
+    return (Math.round(
+      (Number(recommended.true) / (Number(recommended.false) + Number(recommended.true))) * 100,
+    ));
+  };
   const getAverage = () => {
     let total = 0;
     let average = 0;
@@ -38,7 +42,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   };
   const recommendStyle = {
     fontWeight: 'bold',
-    fontSize: '84%',
+    fontSize: '82%',
   };
   const headerStyle = {
     marginTop: '0px',
@@ -49,7 +53,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
       <h3 style={{ ...headerStyle }}>Ratings &amp; Reviews</h3>
       <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
       <Filters clearFilters={clearFilters} filters={currentFilters} />
-      <div style={{ ...recommendStyle }}>{percentReq}% of reviews recommend this product</div>
+      <div style={{ ...recommendStyle }}>{percentReq()}% of reviews recommend this product</div>
       {Object.entries(ratings).map((rating) =>
       <div>
         <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
