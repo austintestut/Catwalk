@@ -18,18 +18,24 @@ class Reviews extends React.Component {
     this.updateReviews = this.updateReviews.bind(this);
   }
 
-  // componentDidMount() {
-  //   const { productId } = this.props;
-  //   if (productId) {
-  //     const { reviews } = handler;
-  //     reviews.getMeta(productId,
-  //       (response) => this.setState({ reviewsMeta: response.data }))
+  componentDidMount() {
+    const { productId } = this.props;
+    if (productId) {
+      const { reviews } = handler;
+      reviews.getMeta(productId,
+        (response) => {
+          this.setState({ reviewsMeta: response.data });
+          let { recommended, product_id } = response.data;
+          this.updateReviews('relevant', recommended, product_id);
+        });
+    }
+  }
 
-  // }
-
-  updateReviews(sort = 'relevant') {
+  updateReviews(sort = 'relevant', recommended = null, product_id = null) {
     const { reviewsMeta } = this.state;
-    const { recommended, product_id } = reviewsMeta;
+    if (!recommended || !product_id) {
+      let { recommended, product_id } = reviewsMeta;
+    }
     let count = 0;
     Object.values(recommended).forEach((value) => count += +value);
     const methods = {

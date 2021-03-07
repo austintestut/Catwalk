@@ -6,7 +6,7 @@ const App = () => (
   <div>
     { /* <h1>Hell World I am rendering!</h1> */}
     {/* <Container /> */}
-    <Reviews /* productId="17763" */ />
+    <Reviews productId="17763" />
   </div>
 );
 
