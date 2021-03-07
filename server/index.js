@@ -49,8 +49,8 @@ app.get('/reviews/meta/:id?', (req, res) => {
 
 app.get('/reviews/:product_id/:sort/:count', (req, res) => {
   console.log('not meta');
+  console.log(req.params);
   let { product_id, sort, count} = req.params;
-  if (product_id = 'meta') { return; }
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${product_id}&count=${count}&sort=${sort}`, {
     headers: {
       Authorization: TOKEN,
@@ -60,7 +60,7 @@ app.get('/reviews/:product_id/:sort/:count', (req, res) => {
       res.status(200).send(data.data);
     })
     .catch((err) => {
-      console.log('ERR getting average star rating');
+      console.log('ERR getting reviews meta data');
       res.status(404).send(err);
     });
 });

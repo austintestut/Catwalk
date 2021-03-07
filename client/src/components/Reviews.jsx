@@ -30,7 +30,7 @@ class Reviews extends React.Component {
   updateReviews(sort = 'relevant') {
     const { reviewsMeta } = this.state;
     const { recommended, product_id } = reviewsMeta;
-    let count = 0
+    let count = 0;
     Object.values(recommended).forEach((value) => count += +value);
     const methods = {
       productId: product_id,
