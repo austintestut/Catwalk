@@ -17,6 +17,7 @@ const ReviewTile = ({ review }) => {
     borderRadius: '3px',
     // boxShadow: '3px 3px Grey',
     padding: '10px',
+    paddingRight: '5px',
     paddingLeft: 0,
     width: '75vw',
   };

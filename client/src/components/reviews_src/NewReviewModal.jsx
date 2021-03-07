@@ -102,11 +102,12 @@ class NewReviewModal extends React.Component {
 
     const modalButtonStyle = {
       right: 7,
-      top: 12,
+      top: 7,
       color: 'white',
       zIndex: 2,
       position: 'fixed',
       textShadow: '0 0 1px #000',
+      float: 'right',
     };
 
     const overlayStyle = {
@@ -150,7 +151,7 @@ class NewReviewModal extends React.Component {
                     </div>
                   </div>
                 </div>
-                <h4 style={{marginBottom: '0px '}}>Characteristics:</h4>
+                { /* <h4 style={{marginBottom: '0px '}}>Characteristics:</h4> */ }
                 <CharacteristicsSelector characteristics={characteristics} hoist={this.hoist} />
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
                   <div style={{ justifyContent: 'flex-start' }}>

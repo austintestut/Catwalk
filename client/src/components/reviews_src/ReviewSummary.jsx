@@ -38,7 +38,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   };
   const recommendStyle = {
     fontWeight: 'bold',
-    fontSize: '90%',
+    fontSize: '84%',
   };
   const headerStyle = {
     marginTop: '0px',
