@@ -23,12 +23,13 @@ class ImgModal extends React.Component {
       zIndex: 1,
       left: '50%',
       transform: 'translateX(-50%)',
-      top: '5%',
+      top: '3%',
       height: '100%',
       overflow: 'auto',
       backgroundColor: 'transparent',
-      maxHeight: 'calc(100vh - 100px)',
+      maxHeight: 'calc(100vh - 50px)',
       maxWidth: '95%',
+      borderRadius: '10px',
     };
     const modalContentStyle = {
       backgroundColor: 'transparent',
@@ -46,7 +47,7 @@ class ImgModal extends React.Component {
     };
 
     const imgStyle = {
-      borderRadius: '2%',
+      // borderRadius: '2%',
     };
 
     const overlayStyle = {

@@ -10,7 +10,6 @@ class ReviewsSort extends React.Component {
   }
 
   handleSort(e) {
-    debugger;
     const { updateReviews } = this.props;
     const { sort } = this.state;
     e.preventDefault();

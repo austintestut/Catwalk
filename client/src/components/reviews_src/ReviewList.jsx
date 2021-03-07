@@ -17,7 +17,6 @@ class ReviewList extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { filters, reviews } = this.props;
-    debugger;
     if (prevProps.filters !== filters) {
       this.setFilters();
     }

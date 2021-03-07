@@ -90,10 +90,10 @@ class NewReviewModal extends React.Component {
       zIndex: 1,
       left: '50%',
       transform: 'translateX(-50%)',
-      top: '5%',
+      top: '3%',
       height: '100%',
       backgroundColor: 'transparent',
-      maxHeight: 'calc(100vh - 100px)',
+      maxHeight: 'calc(100vh - 50px)',
       maxWidth: '95%',
     };
     const modalContentStyle = {
@@ -173,7 +173,7 @@ class NewReviewModal extends React.Component {
                 </div>
                 <div>
                   <h4>Review Body</h4>
-                  <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none' }} />
+                  <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block' }} />
                   <small>{this.state.count}</small>
                 </div>
                 <button>Add Images</button>
