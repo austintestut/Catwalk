@@ -1,6 +1,6 @@
 import React from 'react';
-import Questionn from './Questionn';
 import styled from 'styled-components';
+import Questionn from './Questionn';
 
 const QuestionListDiv = styled.div`
 margin-left: 5%;
@@ -9,12 +9,12 @@ display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 
-`
+`;
 
-const QuestionList = function ({ questions, howMany, increaseHelpful, searching, displayedQuestions}) {
+const QuestionList = function ({ questions, howMany, increaseHelpful, searching, displayedQuestions }) {
   let list = questions;
   if (searching) {
-    list = displayedQuestions
+    list = displayedQuestions;
   }
   return (
     <QuestionListDiv>

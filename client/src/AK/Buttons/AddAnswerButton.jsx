@@ -10,7 +10,7 @@ border: none;
   font-weight: bold;
   cursor: pointer;
 }
-`
+`;
 
 const AddAnswerButton = function ({ showAnsModal }) {
   return (

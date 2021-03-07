@@ -1,12 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import TOKEN from '../../../config';
+import styled from 'styled-components';
 import QuestionList from './QuestionList';
 import QuestionModal from './QuestionModal';
 import AddQuestionButton from './Buttons/AddQuestionButton';
 import ShowMoreQuestionsButton from './Buttons/ShowMoreQuestionsButton';
 import SearchBar from './SearchBar';
-import styled from 'styled-components';
 
 const ContainerDiv = styled.div`
 display: flex;
@@ -15,7 +14,7 @@ justify-content: flex-start;
 flex-wrap: wrap;
 margin: auto;
 width: 65%;
-`
+`;
 
 class Container extends React.Component {
   constructor(props) {
@@ -26,9 +25,8 @@ class Container extends React.Component {
       questionsToShow: 4,
       isMaxQuestions: false,
       currentProductID: 17762,
-      searchText: '',
       displayedQuestions: [],
-      searching: false
+      searching: false,
     };
     this.showQModal = this.showQModal.bind(this);
     this.hideQModal = this.hideQModal.bind(this);
@@ -37,16 +35,46 @@ class Container extends React.Component {
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
     this.increaseHelpful = this.increaseHelpful.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.displaySearchQuestions = this.displaySearchQuestions.bind(this)
+    this.displaySearchQuestions = this.displaySearchQuestions.bind(this);
   }
 
   componentDidMount() {
     this.getProductQuestions();
   }
 
-  showMoreQuestions(){
+  handleSearch(e) {
+    if (e.target.value.length > 2) {
+      this.setState({ searchText: e.target.value,
+        searching: true,
+        displayedQuestions: this.displaySearchQuestions(e.target.value) });
+    } else {
+      this.setState({ searching: false });
+    }
+  }
+
+  getProductQuestions() {
+    // will need to change the ID parameter below to be dynamic, maybe use params obj
+    const ID = 17762;
+    axios({
+      url: `/questions/${ID}`,
+      method: 'get',
+    })
+      .then((data) => {
+        this.setState({ questions: data.data.results });
+        console.log(data.data.results);
+      });
+  }
+
+  increaseHelpful(id) {
+    axios({
+      url: `/answers/${id}`,
+      method: 'put',
+    });
+  }
+
+  showMoreQuestions() {
     this.setState({ questionsToShow: this.state.questionsToShow += 2 });
-    if ( this.state.questionsToShow > this.state.questions.length) {
+    if (this.state.questionsToShow > this.state.questions.length) {
       this.setState({ isMaxQuestions: true });
     }
   }
@@ -57,7 +85,6 @@ class Container extends React.Component {
     });
   }
 
-
   hideQModal() {
     this.setState({
       showQ: false,
@@ -65,7 +92,7 @@ class Container extends React.Component {
   }
 
   submitQuestion(event) {
-    let ID = 17762;
+    const ID = 17762;
     axios({
       url: `/questions/${ID}`,
       method: 'post',
@@ -74,59 +101,42 @@ class Container extends React.Component {
         name: event.target[1].value,
         email: event.target[2].value,
         product_id: ID,
-      }
-    }).then((response)=>{
-    })
-
+      },
+    });
   }
 
-  getProductQuestions() {
-    // will need to change the ID parameter below to be dynamic, maybe use params obj
-    let ID = 17762;
-    axios({
-      url: `/questions/${ID}`,
-      method: 'get',
-    })
-      .then((data) => {
-        this.setState({ questions: data.data.results });
-        console.log(data.data.results);
-      });
+  displaySearchQuestions(text) {
+    const filtered = this.state.questions.filter(
+      (question) => question.question_body.includes(text),
+    );
+    return filtered;
   }
-  increaseHelpful(id){
-    axios({
-      url: `/answers/${id}`,
-      method: 'put'
-    }).then((data)=>{
-
-    })
-  }
-  handleSearch(e){
-    if(e.target.value.length > 2) {
-      this.setState({searchText: e.target.value, searching: true, displayedQuestions: this.displaySearchQuestions(e.target.value)})
-
-  } else {
-    this.setState({searching: false})
-  }
-    }
-
-  displaySearchQuestions(text){
-    let filtered = this.state.questions.filter((question)=>question.question_body.includes(text));
-    return filtered
-
-  }
-
 
   render() {
     return (
       <ContainerDiv>
-        <SearchBar handleSearch={this.handleSearch}/>
-        <QuestionList questions={this.state.questions}showAns={this.showAnsModal} howMany={this.state.questionsToShow}increaseHelpful={this.increaseHelpful}searching={this.state.searching} displayedQuestions={this.state.displayedQuestions}/>
+        <SearchBar handleSearch={this.handleSearch} />
+        <QuestionList
+          questions={this.state.questions}
+          showAns={this.showAnsModal}
+          howMany={this.state.questionsToShow}
+          increaseHelpful={this.increaseHelpful}
+          searching={this.state.searching}
+          displayedQuestions={this.state.displayedQuestions}
+        />
 
-        <ShowMoreQuestionsButton showMoreQuestions={this.showMoreQuestions} isMaxQuestions={this.state.isMaxQuestions}/>
+        <ShowMoreQuestionsButton
+          showMoreQuestions={this.showMoreQuestions}
+          isMaxQuestions={this.state.isMaxQuestions}
+        />
 
-         <AddQuestionButton showQModal={this.showQModal} />
+        <AddQuestionButton showQModal={this.showQModal} />
 
-        <QuestionModal show={this.state.showQ} hideQModal={this.hideQModal} submitQuestion={this.submitQuestion} />
+        <QuestionModal
+          show={this.state.showQ}
+          hideQModal={this.hideQModal}
+          submitQuestion={this.submitQuestion}
+        />
       </ContainerDiv>
     );
   }

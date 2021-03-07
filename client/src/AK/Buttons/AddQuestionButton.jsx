@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledAddQuestionButton = styled.button`
 width: 15%;
 margin-left: 5%;
-`
+`;
 
 const AddQuestionButton = function ({ showQModal }) {
   return (

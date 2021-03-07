@@ -11,21 +11,21 @@ height: 100%;
 overflow: auto;
 background-color: rgb(0,0,0);
 background-color: rgba(0,0,0,0.4);
-`
+`;
 const ModalForm = styled.form`
 background-color: #fefefe;
 margin: 15% auto;
 padding: 20px;
 border: 1px solid #888;
 width: 80%;
-`
+`;
 
 const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
   if (!show) {
     return null;
   }
-    return (
-      <ModalDiv>
+  return (
+    <ModalDiv>
       <h2>Ask Your Question</h2>
       <h4>About (the product name here)</h4>
       <ModalForm onSubmit={submitQuestion}>
@@ -41,9 +41,8 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
 
         <button onClick={hideQModal}>Hide</button>
       </ModalForm>
-      </ModalDiv>
-    );
-  };
+    </ModalDiv>
+  );
+};
 
-  export default QuestionModal;
-
+export default QuestionModal;
