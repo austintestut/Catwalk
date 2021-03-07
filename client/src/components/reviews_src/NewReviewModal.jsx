@@ -4,6 +4,7 @@ import CharacteristicsSelector from '../new_review_components/CharacteristicsSel
 import formValidator from '../../global_functions/formValidator';
 import reviewBodyConstructor from '../new_review_components/reviewBodyConstructor';
 import handler from '../../global_functions/handler';
+import Errors from '../new_review_components/Errors';
 
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
@@ -19,6 +20,7 @@ class NewReviewModal extends React.Component {
       body: '',
       images: [],
       count: '250 characters remaining',
+      errors: [],
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.characterChecker = this.characterChecker.bind(this);
@@ -72,7 +74,7 @@ class NewReviewModal extends React.Component {
 
   toggleModal(e) {
     if (e) { e.preventDefault(); }
-    this.setState({ open: !this.state.open });
+    this.setState({ open: !this.state.open, errors: [] });
   }
 
   characterChecker(e) {
@@ -126,7 +128,7 @@ class NewReviewModal extends React.Component {
       height: '90vh',
       backgroundColor: 'white',
       borderRadius: '5px',
-      // overflow: 'auto',
+      overflow: 'auto',
     };
     /* ---------------------------------------------------------------------------------*/
     if (this.state.open) {
@@ -174,7 +176,11 @@ class NewReviewModal extends React.Component {
                   <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none' }} />
                   <small>{this.state.count}</small>
                 </div>
-                <button>Add Images</button><button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
+                <button>Add Images</button>
+                <span>
+                  <button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
+                  <Errors errors={this.state.errors}/>
+                </span>
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>
