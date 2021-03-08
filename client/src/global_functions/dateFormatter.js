@@ -1,4 +1,5 @@
 const dateFormatter = (string) => {
+  // 2021-03-06T00:00:00.000Z <<--- expected format
   const months = {
     '01': 'January',
     '02': 'February',
