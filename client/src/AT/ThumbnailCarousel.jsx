@@ -27,11 +27,11 @@ width: 100%;
 border: none;
 position: relative;
 top: 4px;
-background-image: linear-gradient(to left, rgb(230, 230, 230), rgb(217, 217, 217));
+background-image: linear-gradient(to left, rgb(230, 230, 230), rgb(200, 200, 200));
 border-radius: 50% 0 0 50%;
 ${StyledOtherImgCarouselLeftButton}: hover {
   cursor: pointer;
-  background-image: linear-gradient(to left, rgb(230, 230, 230), rgb(175, 175, 175));
+  background-image: linear-gradient(to left, rgb(230, 230, 230), rgb(160, 160, 160));
 }
 `;
 const StyledOtherImgCarouselRightButton = styled.button`
@@ -40,11 +40,11 @@ width: 100%;
 border: none;
 position: relative;
 top: 4px;
-background-image: linear-gradient(to right, rgb(230, 230, 230), rgb(217, 217, 217));
+background-image: linear-gradient(to right, rgb(230, 230, 230), rgb(200, 200, 200));
 border-radius: 0 50% 50% 0;
 ${StyledOtherImgCarouselRightButton}: hover {
   cursor: pointer;
-  background-image: linear-gradient(to right, rgb(230, 230, 230), rgb(175, 175, 175));
+  background-image: linear-gradient(to right, rgb(230, 230, 230), rgb(160, 160, 160));
 `;
 const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumbnailCarouselRightButtonClick, thumbnailLeftArrow, thumbnailRightArrow, handleOtherImageClick, otherUrls, thumbnailCarouselShowingIndexes }) => {
   let imagesToShow = [
@@ -65,7 +65,7 @@ const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumb
           thumbnail = (
             <StyledOtherImage
               src={image}
-              onClick={() => handleOtherImageClick(imagesToShow.indexOf(image))}
+              onClick={() => handleOtherImageClick(otherUrls.indexOf(image))}
             />
           );
         }

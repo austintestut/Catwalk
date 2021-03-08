@@ -160,7 +160,7 @@ class OutfitCard extends React.Component {
   getPhotoUrls(id) {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
-        let otherStyles = styleData.data.results.slice(1, this.length);
+        let otherStyles = styleData.data.results.slice();
         let otherUrls = otherStyles.map((style) => (style.photos[0].thumbnail_url));
         let styleSalePrices = {};
         otherStyles.map((style) => {
@@ -194,15 +194,10 @@ class OutfitCard extends React.Component {
 
   handleOtherImageClick(index) {
     let clickedPhoto = this.state.otherUrls[index];
-    let showingPhoto = this.state.photoUrl;
-    let newOtherUrls = this.state.otherUrls;
-
-    newOtherUrls.splice(index, 1, showingPhoto);
 
     if (this.state.styleSalePrices[clickedPhoto].salePrice !== null) {
       this.setState({
         photoUrl: clickedPhoto,
-        otherUrls: newOtherUrls,
         strikethroughPrice: this.state.styleSalePrices[clickedPhoto].originalPrice,
         showingStylePrice: this.state.styleSalePrices[clickedPhoto].salePrice,
         salePriceExists: true
@@ -210,7 +205,6 @@ class OutfitCard extends React.Component {
     } else {
       this.setState({
         photoUrl: clickedPhoto,
-        otherUrls: newOtherUrls,
         showingStylePrice: this.state.styleSalePrices[clickedPhoto].originalPrice,
         salePriceExists: false
       });

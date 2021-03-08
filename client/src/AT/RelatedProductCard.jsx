@@ -68,8 +68,10 @@ display: grid;
 padding-left: 2%;
 padding-right: 2%;
 position: relative;
-background-color: white;
-bottom: 66px;
+background-color: rgb(230, 230, 230);
+border-style: solid none solid none;
+border-width: 2px;
+bottom: 65px;
 grid-row: 2;
 grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;
 grid-column-gap: 2%;
@@ -178,7 +180,7 @@ class RelatedProductCard extends React.Component {
   getPhotoUrls(id) {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
-        let otherStyles = styleData.data.results.slice(1, this.length);
+        let otherStyles = styleData.data.results.slice();
         let otherUrls = otherStyles.map((style) => (style.photos[0].thumbnail_url));
         let styleSalePrices = {};
         otherStyles.map((style) => {
@@ -222,15 +224,10 @@ class RelatedProductCard extends React.Component {
 
   handleOtherImageClick(index) {
     let clickedPhoto = this.state.otherUrls[index];
-    let showingPhoto = this.state.photoUrl;
-    let newOtherUrls = this.state.otherUrls;
-
-    newOtherUrls.splice(index, 1, showingPhoto);
 
     if (this.state.styleSalePrices[clickedPhoto].salePrice !== null) {
       this.setState({
         photoUrl: clickedPhoto,
-        otherUrls: newOtherUrls,
         strikethroughPrice: this.state.styleSalePrices[clickedPhoto].originalPrice,
         showingStylePrice: this.state.styleSalePrices[clickedPhoto].salePrice,
         salePriceExists: true
@@ -238,7 +235,6 @@ class RelatedProductCard extends React.Component {
     } else {
       this.setState({
         photoUrl: clickedPhoto,
-        otherUrls: newOtherUrls,
         showingStylePrice: this.state.styleSalePrices[clickedPhoto].originalPrice,
         salePriceExists: false
       });

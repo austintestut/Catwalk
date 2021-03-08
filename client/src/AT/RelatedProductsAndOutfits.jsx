@@ -6,6 +6,7 @@ import OutfitCarousel from './OutfitCarousel';
 import ComparisonModal from './ComparisonModal';
 
 const StyledCarouselContainer = styled.div`
+font-family: Lucida Sans, Helvetica, Arial, sans-serif;
 padding-left: 10%;
 padding-right: 10%;
 display: grid;
