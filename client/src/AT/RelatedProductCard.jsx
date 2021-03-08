@@ -67,7 +67,7 @@ display: grid;
 padding-left: 2%;
 padding-right: 2%;
 grid-row: 2;
-grid-template-columns: 1fr 1fr 1fr 1fr;
+grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;
 grid-column-gap: 2%;
 height: 57px;
 width: auto;
@@ -76,14 +76,31 @@ animation: ${fadein} 0.4s;
 const StyledOtherImage = styled.img`
 position: relative;
 bottom: 66px;
-height: 50px;
-width: 50px;
+height: 45px;
+width: 40px;
 border: solid;
 border-color: white;
 border-width: 2px;
 ${StyledOtherImage}:hover {
   cursor: pointer;
 }
+`;
+const StyledOtherImgCarouselLeftButton = styled.button`
+height: 49px;
+width: 100%;
+position: relative;
+bottom: 66px;
+${StyledOtherImgCarouselLeftButton}: hover {
+  cursor: pointer;
+}
+`;
+const StyledOtherImgCarouselRightButton = styled.button`
+height: 49px;
+width: 100%;
+position: relative;
+bottom: 66px;
+${StyledOtherImgCarouselRightButton}: hover {
+  cursor: pointer;
 `;
 const StyledPriceLine = styled.div`
 display: grid;
@@ -110,7 +127,10 @@ class RelatedProductCard extends React.Component {
       styleSalePrices: {},
       showingStylePrice: 0,
       salePriceExists: false,
-      strikethroughPrice: 0
+      strikethroughPrice: 0,
+      thumbnailCarouselShowingIndexes: [0, 1, 2, 3],
+      thumbnailRightArrow: true,
+      thumbnailLeftArrow: false
     };
     ;
 
@@ -119,6 +139,11 @@ class RelatedProductCard extends React.Component {
     this.handleImageMouseOver = this.handleImageMouseOver.bind(this);
     this.handleImageMouseLeave = this.handleImageMouseLeave.bind(this);
     this.handleOtherImageClick = this.handleOtherImageClick.bind(this);
+    this.checkIfThumbnailButtonsShouldRender = this.checkIfThumbnailButtonsShouldRender.bind(this);
+    this.renderRightButtonForThumbnails = this.renderRightButtonForThumbnails.bind(this);
+    this.renderLeftButtonForThumbnails = this.renderLeftButtonForThumbnails.bind(this);
+    this.handleThumbnailCarouselRightButtonClick = this.handleThumbnailCarouselRightButtonClick.bind(this);
+    this.handleThumbnailCarouselLeftButtonClick = this.handleThumbnailCarouselLeftButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -191,6 +216,7 @@ class RelatedProductCard extends React.Component {
           otherUrls: otherUrls,
           styleSalePrices: styleSalePrices
         });
+        this.checkIfThumbnailButtonsShouldRender();
       })
       .catch((err) => {
         console.log('ERR Axios get styles from client', err);
@@ -244,6 +270,59 @@ class RelatedProductCard extends React.Component {
     }
   }
 
+  checkIfThumbnailButtonsShouldRender() {
+    this.renderRightButtonForThumbnails();
+    this.renderLeftButtonForThumbnails();
+  }
+
+  renderRightButtonForThumbnails() {
+    debugger;
+    if (this.state.thumbnailCarouselShowingIndexes[3] >= this.state.otherUrls.length - 1) {
+      this.setState({
+        thumbnailRightArrow: false
+      });
+    } else {
+      this.setState({
+        thumbnailRightArrow: true
+      });
+    }
+  }
+
+  renderLeftButtonForThumbnails() {
+    debugger;
+    if (this.state.thumbnailCarouselShowingIndexes[0] === 0) {
+      this.setState({
+        thumbnailLeftArrow: false
+      });
+    } else {
+      this.setState({
+        thumbnailLeftArrow: true
+      });
+    }
+  }
+
+  handleThumbnailCarouselRightButtonClick() {
+    let newIndexes = [];
+    for (let i = 0; i < this.state.thumbnailCarouselShowingIndexes.length; i++) {
+      newIndexes.push(this.state.thumbnailCarouselShowingIndexes[i] + 4);
+    }
+    this.setState({
+      thumbnailCarouselShowingIndexes: newIndexes
+    });
+    this.checkIfThumbnailButtonsShouldRender();
+  }
+
+  handleThumbnailCarouselLeftButtonClick() {
+    let newIndexes = [];
+    for (let i = 0; i < this.state.thumbnailCarouselShowingIndexes.length; i++) {
+      newIndexes.push(this.state.thumbnailCarouselShowingIndexes[i] - 4);
+    }
+    this.setState({
+      thumbnailCarouselShowingIndexes: newIndexes
+    });
+    this.checkIfThumbnailButtonsShouldRender();
+  }
+
   render() {
     return (
       <StyledCard>
@@ -272,10 +351,24 @@ class RelatedProductCard extends React.Component {
           <div>
             {this.state.otherImagesShowing && (
               <StyledOtherImageContainer>
-                <StyledOtherImage src={this.state.otherUrls[0]} onClick={() => this.handleOtherImageClick(0)} />
-                <StyledOtherImage src={this.state.otherUrls[1]} onClick={() => this.handleOtherImageClick(1)} />
-                <StyledOtherImage src={this.state.otherUrls[2]} onClick={() => this.handleOtherImageClick(2)} />
-                <StyledOtherImage src={this.state.otherUrls[3]} onClick={() => this.handleOtherImageClick(3)} />
+                <div>{this.state.thumbnailLeftArrow && <StyledOtherImgCarouselLeftButton onClick={this.handleThumbnailCarouselLeftButtonClick} />}</div>
+                <StyledOtherImage
+                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[0]]}
+                  onClick={() => this.handleOtherImageClick(0)}
+                />
+                <StyledOtherImage
+                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[1]]}
+                  onClick={() => this.handleOtherImageClick(1)}
+                />
+                <StyledOtherImage
+                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[2]]}
+                  onClick={() => this.handleOtherImageClick(2)}
+                />
+                <StyledOtherImage
+                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[3]]}
+                  onClick={() => this.handleOtherImageClick(3)}
+                />
+                <div>{this.state.thumbnailRightArrow && <StyledOtherImgCarouselRightButton onClick={this.handleThumbnailCarouselRightButtonClick} />}</div>
               </StyledOtherImageContainer>
             )}
           </div>

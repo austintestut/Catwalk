@@ -116,7 +116,8 @@ class OutfitCard extends React.Component {
     axios.get(`/products/${id}`)
       .then((data) => {
         this.setState({
-          productData: data.data
+          productData: data.data,
+          showingStylePrice: data.data.default_price
         });
       })
       .catch((err) => {
