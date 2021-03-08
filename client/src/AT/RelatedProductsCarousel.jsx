@@ -25,7 +25,7 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingInd
 
   return (
     <div>
-      <div>RELATED PRODUCTS</div>
+      <h3>RELATED PRODUCTS</h3>
       <StyledProductCardContainer key='StyledProductContainer'>
         {productsToShow.map((productId) => {
           let card;

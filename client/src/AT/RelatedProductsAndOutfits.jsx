@@ -17,7 +17,7 @@ const StyledLeftButton = styled.button`
 height: 350px;
 width: 100%;
 position: relative;
-top: 18px;
+top: 61px;
 background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 50% 0 0 50%;
@@ -31,7 +31,7 @@ const StyledRightButton = styled.button`
 height: 350px;
 width: 100%;
 position: relative;
-top: 18px;
+top: 61px;
 background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 0 50% 50% 0;
@@ -262,7 +262,6 @@ class RelatedProductsAndOutfits extends React.Component {
   render() {
     return (
       <div>
-        <h3>Related Products and Outfit </h3>
         <StyledCarouselContainer>
           <div>
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
@@ -280,7 +279,6 @@ class RelatedProductsAndOutfits extends React.Component {
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
           </div>
         </StyledCarouselContainer >
-        <br></br> {/* remove this when incorporating everyone's components */}
         <StyledCarouselContainer>
           <div>
             {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}

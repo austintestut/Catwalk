@@ -51,7 +51,7 @@ const OutfitCarousel = ({
 
   return (
     <div>
-      <div>YOUR OUTFIT</div>
+      <h3>YOUR OUTFIT</h3>
       <StyledOutfitContainer key='StyledOutfitContainer'>
         <StyledAddButton onClick={() => storeOutfitItem(currentPageItemId)}>+</StyledAddButton>
         {productsToShow.map((productId) => {

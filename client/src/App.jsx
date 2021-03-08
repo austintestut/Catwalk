@@ -30,7 +30,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hell World I am rendering!</h1>
+        <br />
+        <br />
+        {/* <h1>Hell World I am rendering!</h1> */}
         <RelatedProductsAndOutfits
         currentPageItemId={this.state.currentPageItemId}
         handleItemClick={this.handleItemClick}
