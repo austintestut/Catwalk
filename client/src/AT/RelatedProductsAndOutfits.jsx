@@ -96,8 +96,9 @@ class RelatedProductsAndOutfits extends React.Component {
       .then((data) => {
         this.setState({
           relatedProductIds: data.data
+        }, () => {
+          this.checkIfButtonsShouldRender();
         });
-        this.checkIfButtonsShouldRender();
       })
       .catch((err) => {
         console.log('ERR Axios get product from client', err);
