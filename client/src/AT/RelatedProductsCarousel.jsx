@@ -31,7 +31,7 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingInd
           let card;
           if (productId === null) {
             productId = Math.random();
-            card = <div></div>;
+            card = <div />;
           } else {
             card = (
               <RelatedProductCard

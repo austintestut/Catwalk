@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import styled, { css, keyframes } from 'styled-components';
-import StarStatic from '.././components/reviews_src/StarStatic.jsx';
+import StarStatic from '../components/reviews_src/StarStatic';
 import starIcon from '../../../images/empty_star.png';
 import ComparisonModal from './ComparisonModal';
+import ThumbnailCarousel from './ThumbnailCarousel';
 
 const fadein = keyframes`
 from {
@@ -66,41 +67,15 @@ const StyledOtherImageContainer = styled.div`
 display: grid;
 padding-left: 2%;
 padding-right: 2%;
+position: relative;
+background-color: rgb(230, 230, 230);
+bottom: 66px;
 grid-row: 2;
 grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;
 grid-column-gap: 2%;
 height: 57px;
 width: auto;
 animation: ${fadein} 0.4s;
-`;
-const StyledOtherImage = styled.img`
-position: relative;
-bottom: 66px;
-height: 45px;
-width: 40px;
-border: solid;
-border-color: white;
-border-width: 2px;
-${StyledOtherImage}:hover {
-  cursor: pointer;
-}
-`;
-const StyledOtherImgCarouselLeftButton = styled.button`
-height: 49px;
-width: 100%;
-position: relative;
-bottom: 66px;
-${StyledOtherImgCarouselLeftButton}: hover {
-  cursor: pointer;
-}
-`;
-const StyledOtherImgCarouselRightButton = styled.button`
-height: 49px;
-width: 100%;
-position: relative;
-bottom: 66px;
-${StyledOtherImgCarouselRightButton}: hover {
-  cursor: pointer;
 `;
 const StyledPriceLine = styled.div`
 display: grid;
@@ -109,6 +84,7 @@ grid-template-columns: auto 1fr;
 const StyledOldPrice = styled.div`
   color: red;
   text-decoration: line-through;
+  margin-right: 2px;
 `;
 
 class RelatedProductCard extends React.Component {
@@ -215,8 +191,7 @@ class RelatedProductCard extends React.Component {
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
           otherUrls: otherUrls,
           styleSalePrices: styleSalePrices
-        });
-        this.checkIfThumbnailButtonsShouldRender();
+        }, () => this.checkIfThumbnailButtonsShouldRender());
       })
       .catch((err) => {
         console.log('ERR Axios get styles from client', err);
@@ -341,30 +316,23 @@ class RelatedProductCard extends React.Component {
           onMouseOver={this.handleImageMouseOver}
           onMouseLeave={this.handleImageMouseLeave}
         >
+
+
           <div onClick={() => this.props.handleItemClick(this.props.productId)}>
             <StyledImg src={this.state.photoUrl} alt={this.state.productData.name} />
           </div>
           <div>
             {this.state.otherImagesShowing && (
               <StyledOtherImageContainer>
-                <div>{this.state.thumbnailLeftArrow && <StyledOtherImgCarouselLeftButton onClick={this.handleThumbnailCarouselLeftButtonClick} />}</div>
-                <StyledOtherImage
-                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[0]]}
-                  onClick={() => this.handleOtherImageClick(0)}
+                <ThumbnailCarousel
+                  handleThumbnailCarouselRightButtonClick={this.handleThumbnailCarouselRightButtonClick}
+                  handleThumbnailCarouselLeftButtonClick={this.handleThumbnailCarouselLeftButtonClick}
+                  thumbnailRightArrow={this.state.thumbnailRightArrow}
+                  thumbnailLeftArrow={this.state.thumbnailLeftArrow}
+                  handleOtherImageClick={this.handleOtherImageClick}
+                  otherUrls={this.state.otherUrls}
+                  thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
                 />
-                <StyledOtherImage
-                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[1]]}
-                  onClick={() => this.handleOtherImageClick(1)}
-                />
-                <StyledOtherImage
-                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[2]]}
-                  onClick={() => this.handleOtherImageClick(2)}
-                />
-                <StyledOtherImage
-                  src={this.state.otherUrls[this.state.thumbnailCarouselShowingIndexes[3]]}
-                  onClick={() => this.handleOtherImageClick(3)}
-                />
-                <div>{this.state.thumbnailRightArrow && <StyledOtherImgCarouselRightButton onClick={this.handleThumbnailCarouselRightButtonClick} />}</div>
               </StyledOtherImageContainer>
             )}
           </div>
