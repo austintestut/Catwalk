@@ -276,7 +276,6 @@ class RelatedProductCard extends React.Component {
   }
 
   renderRightButtonForThumbnails() {
-    debugger;
     if (this.state.thumbnailCarouselShowingIndexes[3] >= this.state.otherUrls.length - 1) {
       this.setState({
         thumbnailRightArrow: false
@@ -289,7 +288,6 @@ class RelatedProductCard extends React.Component {
   }
 
   renderLeftButtonForThumbnails() {
-    debugger;
     if (this.state.thumbnailCarouselShowingIndexes[0] === 0) {
       this.setState({
         thumbnailLeftArrow: false
@@ -308,8 +306,7 @@ class RelatedProductCard extends React.Component {
     }
     this.setState({
       thumbnailCarouselShowingIndexes: newIndexes
-    });
-    this.checkIfThumbnailButtonsShouldRender();
+    }, () => this.checkIfThumbnailButtonsShouldRender());
   }
 
   handleThumbnailCarouselLeftButtonClick() {
@@ -319,8 +316,7 @@ class RelatedProductCard extends React.Component {
     }
     this.setState({
       thumbnailCarouselShowingIndexes: newIndexes
-    });
-    this.checkIfThumbnailButtonsShouldRender();
+    }, () => this.checkIfThumbnailButtonsShouldRender());
   }
 
   render() {
