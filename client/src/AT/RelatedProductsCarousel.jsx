@@ -8,7 +8,7 @@ position: relative;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 grid-column-gap: 3%;
-height: 400px;
+height: 450px;
 `;
 const StyledProductCard = styled.div`
 margin-top: 5%;

@@ -39,14 +39,14 @@ grid-template-columns: auto 1fr;
 `;
 const StyledImageContainer = styled.section`
 width: 100%;
-height: 200px;
+height: 250px;
 display: grid;
 grid-template-rows: 3fr 2fr;
 content-align: center;
 `;
 const StyledImg = styled.img`
 width: 100%;
-height: 200px;
+height: 250px;
 ${StyledImg}:hover {
   cursor: pointer;
 }

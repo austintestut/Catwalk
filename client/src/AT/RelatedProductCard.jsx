@@ -51,14 +51,14 @@ grid-template-columns: auto 1fr;
 `;
 const StyledImageContainer = styled.section`
 width: 100%;
-height: 200px;
+height: 250px;
 display: grid;
 grid-template-rows: 3fr 2fr;
 content-align: center;
 `;
 const StyledImg = styled.img`
 width: 100%;
-height: 200px;
+height: 250px;
 ${StyledImg}:hover {
   cursor: pointer;
 }
@@ -68,7 +68,7 @@ display: grid;
 padding-left: 2%;
 padding-right: 2%;
 position: relative;
-background-color: rgb(230, 230, 230);
+background-color: white;
 bottom: 66px;
 grid-row: 2;
 grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;

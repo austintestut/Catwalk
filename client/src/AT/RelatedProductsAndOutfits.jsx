@@ -13,7 +13,7 @@ grid-template-columns: 1fr 12fr 1fr;
 overflow-y: hidden;
 `;
 const StyledLeftButton = styled.button`
-height: 300px;
+height: 350px;
 width: 100%;
 position: relative;
 top: 18px;
@@ -27,7 +27,7 @@ ${StyledLeftButton}:hover {
 }
 `;
 const StyledRightButton = styled.button`
-height: 300px;
+height: 350px;
 width: 100%;
 position: relative;
 top: 18px;

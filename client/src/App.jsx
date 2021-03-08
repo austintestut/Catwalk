@@ -22,6 +22,8 @@ class App extends React.Component {
   handleItemClick(id) {
     this.setState({
       currentPageItemId: id
+    }, () => {
+      this.forceUpdate();
     });
   }
 
