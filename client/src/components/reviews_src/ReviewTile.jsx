@@ -47,7 +47,7 @@ const ReviewTile = ({ review, length, index }) => {
       {imageMap()}
       { /* <ImgModal /> */ }
       <Response response={review.response} />
-      <Helpfulness helpfulness={review.helpfulness} />
+      <Helpfulness helpfulness={review.helpfulness} id={review.review_id} />
     </div>
   );
 };

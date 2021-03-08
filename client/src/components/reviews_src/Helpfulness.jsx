@@ -1,4 +1,5 @@
 import React from 'react';
+import handler from '../../global_functions/handler';
 
 class Helpfulness extends React.Component {
   constructor(props) {
@@ -12,12 +13,19 @@ class Helpfulness extends React.Component {
   }
 
   click(e) {
-    if (!this.state.clicked) {
-      let newCount;
+    const { reviews } = handler;
+    const { id } = this.props;
+    const { clicked, count } = this.state;
+    if (!clicked) {
       let name = e.target.getAttribute('name');
-      if (name === 'yes') { newCount = this.state.count + 1; }
-      if (name === 'no') { newCount = this.state.count - 1; }
-      this.setState({ clicked: true, count: newCount });
+      if (name === 'helpful') {
+        this.setState({ clicked: true, count: count + 1 });
+        reviews.update(id, 'helpful');
+      }
+      if (name === 'report') {
+        reviews.update(id, 'report');
+        this.setState({ clicked: true });
+      }
     }
   }
 
@@ -26,9 +34,9 @@ class Helpfulness extends React.Component {
     return (
       <div style={{fontSize: '90%', color: 'grey' }}>
         <span>Helpful? </span>
-        <span name="yes" className="helpful" onClick={this.click} style={{ textDecoration: 'underline' }}>Yes</span>
+        <span name="helpful" className="helpful" onClick={this.click} style={{ textDecoration: 'underline' }}>Yes</span>
         <span> ({ count })    |    </span>
-        <span name="no" className="helpful" onClick = {this.click} style={{ textDecoration: 'underline' }}>No</span>
+        <span name="report" className="helpful" onClick = {this.click} style={{ textDecoration: 'underline' }}>Report</span>
       </div>
     );
   }
