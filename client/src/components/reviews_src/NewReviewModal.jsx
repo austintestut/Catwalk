@@ -103,11 +103,11 @@ class NewReviewModal extends React.Component {
     };
 
     const modalButtonStyle = {
-      right: 7,
+      right: -15,
       top: 7,
       color: 'white',
       zIndex: 2,
-      position: 'fixed',
+      position: 'absolute',
       textShadow: '0 0 1px #000',
       float: 'right',
     };
