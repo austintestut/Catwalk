@@ -1,0 +1,30 @@
+.reviews {
+  font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+}
+
+.reviews .new-review h4{
+  margin-bottom: 5px;
+}
+.reviews .new-review h3{
+  margin-top: 5px;
+}
+.reviews .new-review h2{
+  margin-bottom: 5px;
+  margin-top: 3px;
+}
+
+.reviews button, input[type="button"], input[type="submit"] {
+  margin-top: 10px;
+  background-color:white;
+  border: 2px solid grey;
+  color: grey;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.reviews, input[type="radio"] {
+  margin: '10px';
+}

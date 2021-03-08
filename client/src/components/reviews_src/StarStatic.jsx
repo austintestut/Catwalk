@@ -9,7 +9,7 @@ const StarStatic = ({ number }) => {
   // const halfStar = <i class="fas fa-star-half-alt"></i>
   let style = {
     width: '18px',
-    verticalAlign: 'bottom',
+    verticalAlign: 'top',
   };
   const quarterStar = <img src={quarter_star} style = {{...style}}/>;
   const threeQuarterStar = <img src={three_quarter_star} style = {{...style}}/>
@@ -38,9 +38,9 @@ const StarStatic = ({ number }) => {
   };
 
   return (
-    <div>
+    <fragment>
       {makeStars()}
-    </div>
+    </fragment>
   );
 };
 
