@@ -17,19 +17,19 @@ class ImgModal extends React.Component {
 
   render() {
     let { url } = this.props;
-    //let url = 'https://images.unsplash.com/photo-1511499008188-de491bbbae98?ixlib=rb-1.2.1&auto=format&fit=crop&w=988&q=80';
     const modalStyle = {
       // display: 'none', /* Hidden by default <<<<<<<<<<<<------------- */
       position: 'fixed',
       zIndex: 1,
       left: '50%',
       transform: 'translateX(-50%)',
-      top: '5%',
+      top: '3%',
       height: '100%',
       overflow: 'auto',
       backgroundColor: 'transparent',
-      maxHeight: 'calc(100vh - 100px)',
+      maxHeight: 'calc(100vh - 50px)',
       maxWidth: '95%',
+      borderRadius: '10px',
     };
     const modalContentStyle = {
       backgroundColor: 'transparent',
@@ -47,7 +47,7 @@ class ImgModal extends React.Component {
     };
 
     const imgStyle = {
-      borderRadius: '2%',
+      // borderRadius: '2%',
     };
 
     const overlayStyle = {
@@ -64,10 +64,10 @@ class ImgModal extends React.Component {
       padding: '5px',
       paddingLeft: '0',
       height: '80px',
-      maxWidth: '80px',
+      maxWidth: '160px',
     };
     /* ---------------------------------------------------------------------------------*/
-    if (this.state.open) {
+    if (this.state.open && url) {
       return (
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
@@ -79,9 +79,12 @@ class ImgModal extends React.Component {
         </div>
       );
     }
-    return (
-      <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
-    );
+    if (url) {
+      return (
+        <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
+      );
+    }
+    return null;
   }
 }
 
