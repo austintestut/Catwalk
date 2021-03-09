@@ -11,7 +11,7 @@ padding-left: 10%;
 padding-right: 10%;
 display: grid;
 grid-template-columns: 1fr 12fr 1fr;
-overflow-y: hidden;
+overflow: hidden;
 `;
 const StyledLeftButton = styled.button`
 height: 350px;
@@ -62,7 +62,9 @@ class RelatedProductsAndOutfits extends React.Component {
       characteristics: [],
       totalReviews: 0,
       relatedProductIds: [],
-      outfitProductIds: []
+      outfitProductIds: [],
+
+      translatedX: 0
     };
 
     // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
@@ -226,13 +228,15 @@ class RelatedProductsAndOutfits extends React.Component {
   // Related Products Carousel button clicks
   handleRelatedCarouselRight() {
     this.setState({
-      relatedCurrentlyShowingIndexes: this.renderNextProduct(this.state.relatedCurrentlyShowingIndexes)
+      relatedCurrentlyShowingIndexes: this.renderNextProduct(this.state.relatedCurrentlyShowingIndexes),
+      translatedX: this.state.translatedX - 282.25
     });
   }
 
   handleRelatedCarouselLeft() {
     this.setState({
-      relatedCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.relatedCurrentlyShowingIndexes)
+      relatedCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.relatedCurrentlyShowingIndexes),
+      translatedX: this.state.translatedX + 282.25
     });
   }
 
@@ -259,6 +263,18 @@ class RelatedProductsAndOutfits extends React.Component {
     });
   }
 
+  // testHandleClickRight() {
+  //   this.setState({
+  //     translatedX: this.state.translatedX - 260
+  //   });
+  // }
+
+  // testHandleClickLeft() {
+  //   this.setState({
+  //     translatedX: this.state.translatedX + 260
+  //   });
+  // }
+
   render() {
     return (
       <div>
@@ -274,6 +290,7 @@ class RelatedProductsAndOutfits extends React.Component {
             currentProductData={this.state.productData}
             currentRating={this.state.rating}
             currentCharacteristics={this.state.characteristics}
+            translatedX={this.state.translatedX}
           />
           <div>
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}

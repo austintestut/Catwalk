@@ -19,8 +19,9 @@ border-style: solid;
 border-width: 3px;
 border-radius: 5px;
 position: relative;
+transform: translate(${props => props.translatedX}px);
 ${StyledCard}:hover {
-  box-shadow: 5px 5px 2px rgb(200, 200, 200);
+  box-shadow: 5px 5px 5px rgb(200, 200, 200);
 }
 `;
 const StyledStarIcon = styled.div`
@@ -81,7 +82,7 @@ animation: ${fadein} 0.4s;
 `;
 const StyledPriceLine = styled.div`
 display: grid;
-grid-template-columns: auto 1fr;
+grid-template-columns: 1fr 1fr;
 `;
 const StyledOldPrice = styled.div`
   color: red;
@@ -292,7 +293,7 @@ class RelatedProductCard extends React.Component {
 
   render() {
     return (
-      <StyledCard>
+      <StyledCard translatedX={this.props.translatedX}>
         {this.state.modalShowing && (
           <StyledModalContainer onClick={this.toggleModal}>
             <ComparisonModal
