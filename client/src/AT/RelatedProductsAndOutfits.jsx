@@ -13,28 +13,31 @@ grid-template-columns: 1fr 12fr 1fr;
 overflow: hidden;
 `;
 const StyledLeftButton = styled.button`
-height: 372px;
-width: 100%;
+height: 50px;
+width: 50px;
 position: relative;
-background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(217, 217, 217));
+top: 32%;
+left: 40px;
+background-image: linear-gradient(to left, white, rgb(230, 230, 230));
 border: none;
-border-radius: 50% 0 0 50%;
+border-radius: 50%;
 padding-right: 16%;
 ${StyledLeftButton}:hover {
-  background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(175, 175, 175));
+  background-image: linear-gradient(to left, white, rgb(200, 200, 200));
   cursor: pointer;
 }
 `;
 const StyledRightButton = styled.button`
-height: 372px;
-width: 100%;
+height: 50px;
+width: 50px;
 position: relative;
-background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 217, 217));
+top: 32%;
+background-image: linear-gradient(to right, white, rgb(230, 230, 230));
 border: none;
-border-radius: 0 50% 50% 0;
+border-radius: 50%;
 padding-left: 16%;
 ${StyledRightButton}:hover {
-  background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(175, 175, 175));
+  background-image: linear-gradient(to right, white, rgb(200, 200, 200));
   cursor: pointer;
 }
 `;
