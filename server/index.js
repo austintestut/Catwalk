@@ -173,11 +173,7 @@ app.get(`/products/:id/styles`, (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
     headers: {
       Authorization: config.TOKEN,
-    },
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${req.params.id}/report`,
-    method: 'put',
-  }).then((data) => {
-    res.send(data);
+    }
   })
     .then((data) => {
       // console.log(data.data.results);

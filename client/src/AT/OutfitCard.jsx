@@ -18,8 +18,10 @@ border-style: solid;
 border-width: 3px;
 border-radius: 5px;
 position: relative;
+transition: transform 0.35s;
+transform: translate(${props => props.translatedXoutfit}px);
 ${StyledCard}:hover {
-  box-shadow: 5px 5px 2px rgb(200, 200, 200);
+  box-shadow: 0 0 6px rgb(100, 100, 100);
 }
 `;
 const StyledX = styled.div`
@@ -268,7 +270,7 @@ class OutfitCard extends React.Component {
 
   render() {
     return (
-      <StyledCard>
+      <StyledCard translatedXoutfit={this.props.translatedXoutfit}>
         <StyledX onClick={() => this.removeOutfitItem(this.props.productId)}>
           <img src={xIcon} width="100%" height="100%" />
         </StyledX>

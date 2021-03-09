@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
-import ComparisonModal from './ComparisonModal';
 
 const StyledCarouselContainer = styled.div`
 font-family: Lucida Sans, Helvetica, Arial, sans-serif;
@@ -11,13 +10,12 @@ padding-left: 10%;
 padding-right: 10%;
 display: grid;
 grid-template-columns: 1fr 12fr 1fr;
-overflow-y: hidden;
+overflow: hidden;
 `;
 const StyledLeftButton = styled.button`
-height: 350px;
+height: 372px;
 width: 100%;
 position: relative;
-top: 61px;
 background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 50% 0 0 50%;
@@ -28,10 +26,9 @@ ${StyledLeftButton}:hover {
 }
 `;
 const StyledRightButton = styled.button`
-height: 350px;
+height: 372px;
 width: 100%;
 position: relative;
-top: 61px;
 background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 0 50% 50% 0;
@@ -41,11 +38,17 @@ ${StyledRightButton}:hover {
   cursor: pointer;
 }
 `;
+const StyledHeader = styled.h3`
+  padding-left: 16%;
+  width: auto;
+`;
 
 class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentPageItemId: 0, // updated upon mount
+
       // currently showing products in carousel
       relatedCurrentlyShowingIndexes: [0, 1, 2, 3],
       outfitCurrentlyShowingIndexes: [0, 1, 2],
@@ -62,7 +65,10 @@ class RelatedProductsAndOutfits extends React.Component {
       characteristics: [],
       totalReviews: 0,
       relatedProductIds: [],
-      outfitProductIds: []
+      outfitProductIds: [],
+
+      translatedXrp: 0,
+      translatedXoutfit: 0
     };
 
     // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
@@ -84,10 +90,14 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   componentDidMount() {
-    this.getProductInfo(this.props.currentPageItemId);
-    this.getRating(this.props.currentPageItemId);
-    this.getRelatedItemIds(this.props.currentPageItemId);
-    this.getOutfitIds();
+    this.setState({
+      currentPageItemId: this.props.currentPageItemId
+    }, () => {
+      this.getProductInfo(this.props.currentPageItemId);
+      this.getRating(this.props.currentPageItemId);
+      this.getRelatedItemIds(this.props.currentPageItemId);
+      this.getOutfitIds();
+    });
   }
 
   // fetch data for current item on page
@@ -226,26 +236,30 @@ class RelatedProductsAndOutfits extends React.Component {
   // Related Products Carousel button clicks
   handleRelatedCarouselRight() {
     this.setState({
-      relatedCurrentlyShowingIndexes: this.renderNextProduct(this.state.relatedCurrentlyShowingIndexes)
+      relatedCurrentlyShowingIndexes: this.renderNextProduct(this.state.relatedCurrentlyShowingIndexes),
+      translatedXrp: this.state.translatedXrp - 288.25
     });
   }
 
   handleRelatedCarouselLeft() {
     this.setState({
-      relatedCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.relatedCurrentlyShowingIndexes)
+      relatedCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.relatedCurrentlyShowingIndexes),
+      translatedXrp: this.state.translatedXrp + 288.25
     });
   }
 
   // Outfit Carousel button clicks
   handleOutfitCarouselRight() {
     this.setState({
-      outfitCurrentlyShowingIndexes: this.renderNextProduct(this.state.outfitCurrentlyShowingIndexes)
+      outfitCurrentlyShowingIndexes: this.renderNextProduct(this.state.outfitCurrentlyShowingIndexes),
+      translatedXoutfit: this.state.translatedXoutfit - 288.25
     });
   }
 
   handleOutfitCarouselLeft() {
     this.setState({
-      outfitCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.outfitCurrentlyShowingIndexes)
+      outfitCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.outfitCurrentlyShowingIndexes),
+      translatedXoutfit: this.state.translatedXoutfit + 288.25
     });
   }
 
@@ -262,6 +276,7 @@ class RelatedProductsAndOutfits extends React.Component {
   render() {
     return (
       <div>
+        <StyledHeader>RELATED PRODUCTS</StyledHeader>
         <StyledCarouselContainer>
           <div>
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
@@ -274,11 +289,13 @@ class RelatedProductsAndOutfits extends React.Component {
             currentProductData={this.state.productData}
             currentRating={this.state.rating}
             currentCharacteristics={this.state.characteristics}
+            translatedXrp={this.state.translatedXrp}
           />
           <div>
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
           </div>
-        </StyledCarouselContainer >
+        </StyledCarouselContainer>
+        <StyledHeader>YOUR OUTFIT</StyledHeader>
         <StyledCarouselContainer>
           <div>
             {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
@@ -290,6 +307,7 @@ class RelatedProductsAndOutfits extends React.Component {
             currentPageItemId={this.props.currentPageItemId}
             handleItemClick={this.props.handleItemClick}
             checkIfButtonsShouldRender={this.checkIfButtonsShouldRender}
+            translatedXoutfit={this.state.translatedXoutfit}
           />
           <div>
             {this.state.outfitRightArrow && (
