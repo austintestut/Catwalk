@@ -4,9 +4,11 @@ import ReviewTile from './ReviewTile';
 const ReviewTileContainer = ({ reviews, show }) => {
   const showReviews = reviews.slice(0, show);
   const reviewTileStyle = {
-    overflow: 'auto',
-    maxHeight: '85vh',
-    borderBottom: '3px solid grey',
+    overflow: '-moz-scrollbars-vertical',
+    overflowY: 'scroll',
+    height: '85vh',
+
+    // borderBottom: '3px solid silver',
     borderRadius: '1px',
     //borderTop: '1px solid grey',
   };

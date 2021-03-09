@@ -1,7 +1,20 @@
 import React from 'react';
 
 const Recommend = ({ bool }) => {
-  if (bool !== false) { return <fragment><div>✓ I recommend this product </div><br /></fragment>; }
+  const style = {
+    // fontWeight: 'bold',
+  }
+  const checkStyle= {
+    color: '#e11a2b',
+  }
+  if (bool !== false) {
+    return (
+      <fragment>
+      <div style={{ ...style}}>
+        <span style={{ ...checkStyle }}>✓</span> I recommend this product
+      </div><br />
+      </fragment>
+    )}
   return null;
 };
 

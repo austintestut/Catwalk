@@ -138,7 +138,7 @@ class NewReviewModal extends React.Component {
       padding: '3%',
       paddingTop: 0,
       width: '60vw',
-      height: '90vh',
+      height: 'auto',
       backgroundColor: 'white',
       borderRadius: '5px',
       overflow: 'auto',
@@ -208,7 +208,7 @@ class NewReviewModal extends React.Component {
         </div>
       );
     }
-    return <button style={{float: 'right'}} onClick={this.toggleModal}>ADD A REVIEW +</button>;
+    return <button style={{float: 'right'}} onClick={this.toggleModal}>Add A Review +</button>;
   }
 }
 

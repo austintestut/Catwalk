@@ -6,13 +6,20 @@ const Filters = ({ filters, clearFilters }) => {
     position: 'relative',
   };
   const clearFiltersStyle = {
-    textDecoration: 'underline',
-    fontWeight: 'bold',
-    color: 'red',
+    backgroundColor: '#e11a2b',
+    border: 'none',
+    outline: 0,
+    color: 'white',
+    /* padding: 15px 32px; */
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
     position: 'absolute',
     bottom: '5px',
+    backgroundImage: 'linear-gradient(#ff0019, #790a04)',
   };
   const ulStyle = {
+    color: 'silver',
     margin: '0px',
     paddingLeft: '18px',
   };
@@ -25,9 +32,9 @@ const Filters = ({ filters, clearFilters }) => {
       <div style={{ ...containerStyle }}>
         <span>Filters Applied:</span>
         <ul style={{ ...ulStyle }}>
-          {filters.map((filter) => <li Style={{ ...liStyle }}>{filter} Star</li>)}
+          {filters.map((filter) => <li style={{ ...liStyle }}>{filter} Star</li>)}
         </ul>
-        <span onClick={clearFilters} style={{ ...clearFiltersStyle }}>Remove Current Filters</span>
+        <button className="remove-filters" onClick={clearFilters} style={{ ...clearFiltersStyle }}>Remove Current Filters</button>
       </div>
     );
   }

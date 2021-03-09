@@ -66,8 +66,11 @@ class StarHover extends React.Component {
   }
 
   render() {
+    const filterStyle = {
+      justifyContent: 'flex-start',
+    }
     return (
-      <div style={{ justifyContent: 'flex-start' }}>
+      <div style={{ ...filterStyle }}>
         <h4>Overall Rating</h4>
        <span>{this.makeStars()}<small>{this.makeText()}</small></span>
       </div>
