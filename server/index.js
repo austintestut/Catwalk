@@ -10,13 +10,13 @@ const port = 8080;
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
-/* request body is JSON:
-  {
-    "id": "#####""
-  }
+/*
+ example: axios.get(`/products/${id}`)
+ don't forget to access data.data on your client side as well (see .then)
 */
-app.get(`/products`, (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.body.id}`, {
+app.get(`/products/:id`, (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}`, {
+
     headers: {
       Authorization: TOKEN
     }
@@ -26,13 +26,12 @@ app.get(`/products`, (req, res) => {
     })
     .catch((err) => {
       console.log('ERR Axios request for product');
-      res.status(404).send(err);
+      res.status(402).send(err);
     });
 });
 
-app.get('/reviews/meta/:id?', (req, res) => {
-  console.log('meta');
-  console.log(req.params);
+app.get('/reviews/meta/:id', (req, res) => {
+
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${req.params.id}`, {
     headers: {
       Authorization: TOKEN
@@ -42,6 +41,7 @@ app.get('/reviews/meta/:id?', (req, res) => {
       res.status(200).send(data.data);
     })
     .catch((err) => {
+
       console.log('ERR getting reviews metadata');
       res.status(404).send(err);
     });
@@ -65,23 +65,24 @@ app.get('/reviews/:product_id/:sort/:count', (req, res) => {
     });
 });
 
-app.get(`/products/styles`, (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.body.id}/styles`, {
+app.get(`/products/:id/styles`, (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
     headers: {
       Authorization: TOKEN
     }
   })
     .then((data) => {
+      // console.log(data.data.results);
       res.status(200).send(data.data);
     })
     .catch((err) => {
-      console.log('ERR getting average styles');
-      res.status(404).send(err);
+      console.log('ERR getting styles');
+      res.status(402).send(err);
     });
 });
 
-app.get(`/products/related`, (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.body.id}/related`, {
+app.get(`/products/:id/related`, (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/related`, {
     headers: {
       Authorization: TOKEN,
     },
@@ -91,7 +92,7 @@ app.get(`/products/related`, (req, res) => {
     })
     .catch((err) => {
       console.log('ERR Axios request for related products');
-      res.status(404).send(err);
+      res.status(402).send(err);
     });
 });
 
