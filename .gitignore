@@ -1,10 +1,7 @@
 node_modules
-
-# API KEY
 config.js
-
-GalleryTest.jsx
-
-testReview.js
-
-app.js
+coverage
+public/app.js
+.DS_Store
+client/.DS_Store
+client/src/.DS_Store
