@@ -36,7 +36,7 @@ class App extends React.Component {
         currentPageItemId={this.state.currentPageItemId}
         handleItemClick={this.handleItemClick}
         />
-        {/* <Container /> */}
+        <Container />
       </div>
     );
   }
