@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
-import ComparisonModal from './ComparisonModal';
 
 const StyledCarouselContainer = styled.div`
 font-family: Lucida Sans, Helvetica, Arial, sans-serif;
@@ -64,7 +63,8 @@ class RelatedProductsAndOutfits extends React.Component {
       relatedProductIds: [],
       outfitProductIds: [],
 
-      translatedX: 0
+      translatedXrp: 0,
+      translatedXoutfit: 0
     };
 
     // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
@@ -229,27 +229,29 @@ class RelatedProductsAndOutfits extends React.Component {
   handleRelatedCarouselRight() {
     this.setState({
       relatedCurrentlyShowingIndexes: this.renderNextProduct(this.state.relatedCurrentlyShowingIndexes),
-      translatedX: this.state.translatedX - 282.25
+      translatedXrp: this.state.translatedXrp - 282.25
     });
   }
 
   handleRelatedCarouselLeft() {
     this.setState({
       relatedCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.relatedCurrentlyShowingIndexes),
-      translatedX: this.state.translatedX + 282.25
+      translatedXrp: this.state.translatedXrp + 282.25
     });
   }
 
   // Outfit Carousel button clicks
   handleOutfitCarouselRight() {
     this.setState({
-      outfitCurrentlyShowingIndexes: this.renderNextProduct(this.state.outfitCurrentlyShowingIndexes)
+      outfitCurrentlyShowingIndexes: this.renderNextProduct(this.state.outfitCurrentlyShowingIndexes),
+      translatedXoutfit: this.state.translatedXoutfit - 282.25
     });
   }
 
   handleOutfitCarouselLeft() {
     this.setState({
-      outfitCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.outfitCurrentlyShowingIndexes)
+      outfitCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.outfitCurrentlyShowingIndexes),
+      translatedXoutfit: this.state.translatedXoutfit + 282.25
     });
   }
 
@@ -262,18 +264,6 @@ class RelatedProductsAndOutfits extends React.Component {
       outfitProductIds: outfitProductIds
     });
   }
-
-  // testHandleClickRight() {
-  //   this.setState({
-  //     translatedX: this.state.translatedX - 260
-  //   });
-  // }
-
-  // testHandleClickLeft() {
-  //   this.setState({
-  //     translatedX: this.state.translatedX + 260
-  //   });
-  // }
 
   render() {
     return (
@@ -290,7 +280,7 @@ class RelatedProductsAndOutfits extends React.Component {
             currentProductData={this.state.productData}
             currentRating={this.state.rating}
             currentCharacteristics={this.state.characteristics}
-            translatedX={this.state.translatedX}
+            translatedXrp={this.state.translatedXrp}
           />
           <div>
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
@@ -307,6 +297,7 @@ class RelatedProductsAndOutfits extends React.Component {
             currentPageItemId={this.props.currentPageItemId}
             handleItemClick={this.props.handleItemClick}
             checkIfButtonsShouldRender={this.checkIfButtonsShouldRender}
+            translatedXoutfit={this.state.translatedXoutfit}
           />
           <div>
             {this.state.outfitRightArrow && (

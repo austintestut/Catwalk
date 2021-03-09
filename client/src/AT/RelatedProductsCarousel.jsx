@@ -7,28 +7,20 @@ const StyledProductCardContainer = styled.div`
 position: relative;
 display: flex;
 flex-direction: row;
+flex-wrap: nowrap;
 gap: 32.25px;
-justify-content: space-between;
+align-items: flex-start;
+justify-content: left;
 height: 450px;
 overflow: hidden;
 `;
-
-/*
-const StyledProductCardContainer = styled.div`
-position: relative;
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-grid-column-gap: 3%;
-height: 450px;
-`;
-*/
 const StyledProductCard = styled.div`
 margin-top: 5%;
 margin-bottom: 5%;
 flex: 0 0 250px;
 `;
 
-const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal, handleItemClick, currentProductData, currentRating, currentCharacteristics, translatedX }) => {
+const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal, handleItemClick, currentProductData, currentRating, currentCharacteristics, translatedXrp }) => {
   let productsToShow = relatedProductIds;
 
   return (
@@ -50,7 +42,7 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingInd
                 currentProductData={currentProductData}
                 currentRating={currentRating}
                 currentCharacteristics={currentCharacteristics}
-                translatedX={translatedX}
+                translatedXrp={translatedXrp}
               />
             );
           }
