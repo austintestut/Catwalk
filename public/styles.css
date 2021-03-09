@@ -40,3 +40,7 @@
 .reviews, input[type="radio"] {
   margin: '10px';
 }
+
+.filter:hover {
+  font-weight: bold;
+}

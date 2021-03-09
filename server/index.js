@@ -102,6 +102,7 @@ app.post(`/reviews`, (req, res) => {
     },
   })
     .then((data) => {
+      console.log('success')
       res.status(201).send(data.data);
     })
     .catch((err) => {
@@ -118,14 +119,14 @@ app.put(`/reviews/:review_id/:method`, (req, res) => {
   if (!method) { method = 'helpful'; }
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${review_id}/${method}`;
   console.log(url);
-  axios.put(url, {
+  axios.put(url, req.body, {
     headers: {
       Authorization: TOKEN,
     },
   })
     .then((data) => {
       console.log('good');
-      console.log(data);
+      //console.log(data);
       res.status(201).send(data.data);
     })
     .catch((err) => {

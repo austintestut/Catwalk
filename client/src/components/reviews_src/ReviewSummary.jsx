@@ -34,7 +34,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   // Styles ---->>>>>>>
   const containerStyle= {
     alignSelf: 'flex-start',
-    marginRight: '10px',
+    marginRight: 'auto',
   };
   const inlineStyle = {
     display: 'inline',
@@ -51,7 +51,10 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   };
   const headerStyle = {
     marginTop: '0px',
-  }
+  };
+  const coloredBarStyle = {
+    whiteSpace: 'nowrap',
+  };
 
   return (
     <div style={{ ...containerStyle }}>
@@ -60,10 +63,10 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
       <Filters clearFilters={clearFilters} filters={currentFilters} />
       <div style={{ ...recommendStyle }}>{percentReq()}% of reviews recommend this product</div>
       {Object.entries(ratings).map((rating) =>
-      <div>
-        <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
-        <ColoredBar total={getTotal()} count={rating[1]} />
-      </div>)}
+        <div style={{ ...coloredBarStyle }}>
+          <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
+          <ColoredBar total={getTotal()} count={rating[1]} />
+        </div>)}
       <br />
       {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
     </div>
