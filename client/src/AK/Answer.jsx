@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import dateFormatter from '../global_functions/dateFormatter';
 
 const StyledButton = styled.button`
+font-family: Lucida Sans, Helvetica, Arial, sans-serif;
 margin-left: 10px;
 text-decoration: underline;
 background: none;
@@ -15,6 +17,7 @@ border: none;
 const AnswerDiv = styled.div`
 display: flex;
 justify-content: space-between;
+font-family: Lucida Sans, Helvetica, Arial, sans-serif;
 `;
 const AnswerButtonsDiv = styled.div`
 display: flex;
@@ -48,7 +51,14 @@ class Answer extends React.Component {
 
   renderHelpfulButton() {
     if (this.state.helped) {
-      return <div>Marked Helpful!</div>;
+     return (
+        <>
+          <StyledButton
+          disabled
+          >Thank you for your feedback! ({this.props.ans.helpfulness + 1})
+          </StyledButton>
+        </>
+      );
     }
     return (
       <>
@@ -73,7 +83,7 @@ class Answer extends React.Component {
 
   renderReportButton() {
     if (this.state.reported) {
-      return <div>Marked as Reported</div>;
+      return (<StyledButton disabled style={{color: 'red'}}> Reported</StyledButton>)
     }
     return <StyledButton onClick={this.reportAnswer}> Report</StyledButton>;
   }
@@ -85,7 +95,7 @@ class Answer extends React.Component {
           <p>
             A: {this.props.ans.body}
           </p>
-          <p style={{ fontSize: '14px' }}>by {this.props.ans.answerer_name}, {this.props.ans.date.substring(0, 10)}
+          <p style={{ fontSize: '14px' }}>by {this.props.ans.answerer_name}, {dateFormatter(this.props.ans.date)}
           </p>
         </div>
         <AnswerButtonsDiv>

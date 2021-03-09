@@ -7,12 +7,10 @@ margin: auto;
 height: 50px;
 font-size: 20px;
 }
-`
+`;
 
-const SearchBar = ({handleSearch}) => {
-  return (
-    <SearchInput placeholder="Have a question? Search for answers" onChange={handleSearch}></SearchInput>
-  )
-}
+const SearchBar = ({ handleSearch }) => (
+  <SearchInput placeholder="Have a question? Search for answers" onChange={handleSearch} />
+);
 
-export default SearchBar
+export default SearchBar;

@@ -8,11 +8,13 @@ import AnswerList from './AnswerList';
 const QuestionDiv = styled.div`
 display: flex;
 justify-content: space-between;
+font-family: Lucida Sans, Helvetica, Arial, sans-serif;
 
 `;
 
+
 const StyledButton = styled.button`
-margin-left: 10px;
+margin-left: 8px;
 text-decoration: underline;
 background: none;
 border: none;
@@ -85,16 +87,15 @@ class Questionn extends React.Component {
   }
 
   renderHelpfulButton() {
-    { if (this.state.helped) {
-      return <div>Marked Helpful!</div>;
+    if (this.state.helped) {
+      return (<StyledButton disabled> Thank you for your feedback! ({this.props.question.question_helpfulness + 1})</StyledButton>)
     }
-    return <StyledButton onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness + this.state.QhelpfulCounter})</StyledButton>;
-    }
+    return (<StyledButton onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness + this.state.QhelpfulCounter})</StyledButton>)
   }
 
   renderReportButton() {
     if (this.state.reported) {
-      return <div>Marked as Reported</div>;
+      return (<StyledButton style={{color: 'red'}}> Reported</StyledButton>)
     }
     return <StyledButton onClick={this.reportQuestion}> Report</StyledButton>;
   }
@@ -129,16 +130,26 @@ class Questionn extends React.Component {
     return (
       <div style={{ width: '100%' }}>
         <QuestionDiv>
-          <div style={{ fontWeight: 'bold', fontSize: '18px', width: '50%' }}>Q: {this.props.question.question_body}</div>
-          <div style={{ fontSize: '12px' }}>
+          <div style={{fontWeight: 'bold', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
+          </div>
+          <div style={{ fontSize: '14px' }}>
             Helpful?
             {this.renderHelpfulButton()}
             {this.renderReportButton()}
             <AddAnswerButton showAnsModal={this.showAnsModal} />
           </div>
         </QuestionDiv>
-        <AnswerModal hide={this.hideAnsModal} showing={this.state.showingAnsModal} submitAnswer={this.submitAnswer} />
-        <AnswerList answers={myAnswers} increaseHelpful={this.props.increaseHelpful} reportAnswer={this.reportAnswer} maxed={this.state.maxedAnswers} />
+        <AnswerModal
+          hide={this.hideAnsModal}
+          showing={this.state.showingAnsModal}
+          submitAnswer={this.submitAnswer}
+        />
+        <AnswerList
+          answers={myAnswers}
+          increaseHelpful={this.props.increaseHelpful}
+          reportAnswer={this.reportAnswer}
+          maxed={this.state.maxedAnswers}
+        />
         {this.renderSeeMoreAnswersButton()}
       </div>
     );

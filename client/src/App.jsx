@@ -7,7 +7,7 @@ const App = () => {
   console.log(example_review_data);
   return (
     <div>
-      <h1>Hell World I am rendering!</h1>
+      <h1>I love Hack Reactor!</h1>
       <Container />
       {/* <Reviews data={example_review_data} /> */}
     </div>

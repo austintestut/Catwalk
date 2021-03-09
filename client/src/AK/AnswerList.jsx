@@ -1,5 +1,11 @@
 import React from 'react';
 import Answer from './Answer';
+import styled from 'styled-components';
+
+const AnswerDiv = styled.div`
+max-height: 100vh;
+overflow: scroll;
+`
 
 const AnswerList = ({ answers, increaseHelpful, reportAnswer, maxed }) => {
   answers.sort((a, b) => b.helpfulness - a.helpfulness);
@@ -7,9 +13,8 @@ const AnswerList = ({ answers, increaseHelpful, reportAnswer, maxed }) => {
   if (maxed) {
     shown = answers;
   }
-
   return (
-    <div>
+    <AnswerDiv>
       {shown.map((ans) => (
         <Answer
           ans={ans}
@@ -18,7 +23,7 @@ const AnswerList = ({ answers, increaseHelpful, reportAnswer, maxed }) => {
           key={ans.id}
         />
       ))}
-    </div>
+    </AnswerDiv>
 
   );
 };

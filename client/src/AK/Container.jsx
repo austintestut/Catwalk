@@ -13,7 +13,9 @@ flex-direction: row;
 justify-content: flex-start;
 flex-wrap: wrap;
 margin: auto;
-width: 65%;
+width: 75%;
+max-height: 100vh;
+overflow: scroll;
 `;
 
 class Container extends React.Component {
@@ -44,7 +46,7 @@ class Container extends React.Component {
 
   handleSearch(e) {
     if (e.target.value.length > 2) {
-      this.setState({ searchText: e.target.value,
+      this.setState({
         searching: true,
         displayedQuestions: this.displaySearchQuestions(e.target.value) });
     } else {
@@ -92,6 +94,8 @@ class Container extends React.Component {
   }
 
   submitQuestion(event) {
+    event.preventDefault();
+    console.log('submitting question')
     const ID = 17762;
     axios({
       url: `/questions/${ID}`,
