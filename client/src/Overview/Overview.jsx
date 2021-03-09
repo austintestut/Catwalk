@@ -3,8 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import TOKEN from './config.js';
 
-import testReview from './testReview.js';
-
 import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import ImageGallery from './ImageGallery.jsx';
@@ -18,7 +16,7 @@ class Overview extends React.Component {
     this.state = {
       products: {},
       styles: [],
-      reviews: testReview,
+      reviews: null,
       ratings: [],
       totalReviews: undefined,
       selectedStyle: '',
@@ -42,7 +40,7 @@ class Overview extends React.Component {
 
 
   getProducts(id) {
-    const options = {headers: {'Authorization': '51ed293eb79916493e9134ed9ca3d9940d0e4651'}}
+    const options = {headers: {'Authorization': 'TOKEN'}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, options)
       .then((res) => {
         this.setState({
@@ -55,7 +53,7 @@ class Overview extends React.Component {
   }
 
   getStyles(id) {
-    const options = {headers: {'Authorization': '51ed293eb79916493e9134ed9ca3d9940d0e4651'}}
+    const options = {headers: {'Authorization': 'TOKEN'}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, options)
       .then((res) => {
         this.setState({
@@ -76,7 +74,7 @@ class Overview extends React.Component {
       let whole = sum/arr.length;
       return (Math.round(whole * 4) / 4).toFixed(2)
     }
-    const options = {headers: {'Authorization': '51ed293eb79916493e9134ed9ca3d9940d0e4651'}}
+    const options = {headers: {'Authorization': 'TOKEN'}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${id}`, options)
       .then((res) => {
         this.setState({
