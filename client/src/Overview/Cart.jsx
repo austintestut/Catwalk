@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledCart = styled.div`
-  background-color: green;
+
 `
 
 const checkStock = (totalStock) => {
@@ -91,34 +91,76 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
         </form>
       </StyledCart>
     )
+  } else {
+  let allSkus;
+  let allSizes = {};
+  let totalStock;
+  let quantity;
+  for (let i = 0; i < styles.length; i++) {
+    allSkus = styles[0].skus;
+  }
+    for (let key in allSkus) {
+      allSizes[key] = allSkus[key].size
+    }
+    //console.log(allSizes);
+    //console.log(allSkus);
+
+
+  if (selectedSize) {
+  totalStock = allSkus[Number(selectedSize)]['quantity'];
   }
   return (
     <StyledCart>
     <form>
       <h2>Cart</h2>
       <label>
-        Size Selector
-        <select>
-          <option defaultValue='-'>-</option>
-          <option value='1'>1</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-        </select>
-      </label>
+            Size Selector
+            <select onChange={handleSize}>
+              <option
+              defaultValue='Select Size'
+              >
+                Select Size
+              </option>
+              {Object.keys(allSizes).map((sizeId) => {
+                return (
+                  <option
+                  name={allSizes[sizeId]}
+                  key={sizeId}
+                  value={sizeId}
+                  >
+                    {allSizes[sizeId]}
+                  </option>
+                )
+              })}
+            </select>
+          </label>
       <br/>
       <label>
-        Quantity Selector
-        <select>
-          <option defaultValue='1'>1</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-        </select>
-      </label>
+            Quantity Selector
+            <select>
+              <option
+              defaultValue='-'
+              >
+                -
+              </option>
+              {checkStock(totalStock).map((qt) => {
+                return (
+                  <option
+                  key={qt}
+                  value={qt}
+                  >
+                    {qt}
+                  </option>
+                )
+              })}
+            </select>
+          </label>
       <br/>
       <button>Add to Cart</button>
     </form>
     </StyledCart>
   )
+  }
 };
 
 export default Cart;

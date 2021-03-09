@@ -1,39 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import TOKEN from './config.js';
 
-import testStyles from './testStyles.js';
 import testReview from './testReview.js';
 
 import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import Cart from './Cart.jsx';
-import Thumbnails from './Thumbnails.jsx';
+import Description from './Description.jsx';
 
-const GridStyling = styled.div`
-  display: grid;
-  grid-template-areas:
-    ". head ."
-    "small main nav"
-    ". . foot";
-`
-const Header = styled.div`
-  grid-area: head;
-  text-align: center;
-`
-const Images = styled.div`
-  grid-area: main;
-`
-const Info = styled.div`
-  grid-area: nav;
-`
-const StyledCart = styled.div`
-  grid-area: foot;
-`
-const StyledThumbs = styled.div`
-  grid-area: small;
-`
 
 class Overview extends React.Component {
   constructor(props) {
@@ -44,7 +21,7 @@ class Overview extends React.Component {
       reviews: testReview,
       ratings: [],
       totalReviews: undefined,
-      selectedStlye: null,
+      selectedStyle: '',
       selectedSize: '',
       sizeId: '',
     };
@@ -53,14 +30,12 @@ class Overview extends React.Component {
     this.getRatingAndReviews = this.getRatingAndReviews.bind(this);
     this.handleStyleSelect = this.handleStyleSelect.bind(this);
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+
   }
 
 
   componentDidMount() {
     this.getProducts(18025);
-
-    // Here to test functionality
     this.getStyles(18025);
     //this.getRatingAndReviews(18025);
   }
@@ -72,7 +47,7 @@ class Overview extends React.Component {
       .then((res) => {
         this.setState({
           products: res.data
-        }, ()=>{console.log('Product:', this.state.products)});
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -85,7 +60,7 @@ class Overview extends React.Component {
       .then((res) => {
         this.setState({
           styles: res.data.results
-        }, ()=>{console.log('Styles:', this.state.styles)});
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -117,46 +92,33 @@ class Overview extends React.Component {
   handleStyleSelect(event) {
     this.setState({
       selectedStyle: event.target.value
-    });
+    }, ()=>{console.log(this.state.selectedStyle)});
   }
 
   handleSizeSelect(event, id) {
-    //console.log('event:', event.target.value)
     this.setState({
       selectedSize: event.target.value,
       sizeId: id
     })
   }
 
-  handleChange(event) {
-    let name = event.target.name;
-    this.setState({
-      [name]: event.target.value
-    })
-  }
-
   render() {
     return (
-      <GridStyling>
-        <Header>OVERVIEW</Header>
+      <>
+      <OverviewMain>
         <Images>
           <ImageGallery
-          styles={this.state.styles}
           selected={this.state.selectedStyle}
           />
-          </Images>
-        <StyledThumbs>
-          <Thumbnails
-          handleSelect={this.handleStyleSelect}
-          styles={this.state.styles}
-          />
-        </StyledThumbs>
+        </Images>
+        <SelectionContainer>
         <Info>
           <ProductInfo
           products={this.state.products}
           reviews={this.state.reviews}
           styles={this.state.styles}
           selected={this.state.selectedStyle}
+          handleSelect={this.handleStyleSelect}
           />
         </Info>
         <StyledCart>
@@ -167,9 +129,44 @@ class Overview extends React.Component {
           handleSize={this.handleSizeSelect}
           />
         </StyledCart>
-      </GridStyling>
+        </SelectionContainer>
+        <StyledDesc>
+          <Description
+          products={this.state.products}
+          />
+        </StyledDesc>
+
+      </OverviewMain>
+      </>
     )
   }
 }
 
+const OverviewMain = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+const SelectionContainer = styled.div`
+ display: flex;
+ flex-direction: column;
+ flex-grow: 3;
+ order: 2;
+`
+const Images = styled.div`
+  display: flex;
+  order: 1;
+  flex-grow: 1;
+`
+const Info = styled.div`
+  display: flex;
+  flex-grow: 3;
+`
+const StyledCart = styled.div`
+  display: flex;
+`
+const StyledDesc = styled.div`
+  display: flex;
+  order: 3;
+  flex-grow: 2;
+`
 export default Overview;
