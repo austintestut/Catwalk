@@ -31,7 +31,6 @@ class App extends React.Component {
       <div>
         <br />
         <br />
-        {/* <h1>Hell World I am rendering!</h1> */}
         <RelatedProductsAndOutfits
         currentPageItemId={this.state.currentPageItemId}
         handleItemClick={this.handleItemClick}
