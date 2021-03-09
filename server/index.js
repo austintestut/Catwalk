@@ -123,6 +123,17 @@ app.put('/answers/:id', (req, res) => {
 
 app.put('/answers/:id/report', (req, res) => {
   axios({
+    headers: {
+      Authorization: config.TOKEN,
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${req.params.id}/report`,
+    method: 'put',
+  }).then((data) => {
+    res.send(data);
+  })
+    .catch((error) => { res.send(error); });
+});
+
 app.get('/reviews/meta/:id', (req, res) => {
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${req.params.id}`, {
