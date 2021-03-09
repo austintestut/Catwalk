@@ -106,14 +106,24 @@ class Container extends React.Component {
         email: event.target[2].value,
         product_id: ID,
       },
-    });
-  }
-
-  displaySearchQuestions(text) {
-    const filtered = this.state.questions.filter(
-      (question) => question.question_body.includes(text),
-    );
-    return filtered;
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=17761',
+      method: 'get',
+    })
+      .then((data) => {
+        this.setState({ questions: data.data.results });
+        // console.log(data.data.results);
+      })
+      .then(() => {
+        axios({
+          headers: {
+            Authorization: TOKEN,
+          },
+          url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/111326/answers',
+          method: 'get',
+        }).then((data) => {
+          // console.log(data.data);
+        });
+      });
   }
 
   render() {

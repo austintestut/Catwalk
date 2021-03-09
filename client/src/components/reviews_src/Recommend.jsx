@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Recommend = ({ bool }) => {
-  if (bool !== false) { return (<div>✓ I recommend this product </div>); }
+  if (bool !== false) { return <fragment><div>✓ I recommend this product </div><br /></fragment>; }
   return null;
 };
 

@@ -1,17 +1,45 @@
 import React from 'react';
+import QuestionList from './AK/QuestionList.jsx';
+import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
 import Reviews from './components/Reviews.jsx';
-import example_review_data from '../../example_review_data.js';
 import Container from './AK/Container';
 
-const App = () => {
-  console.log(example_review_data);
-  return (
-    <div>
-      <h1>I love Hack Reactor!</h1>
-      <Container />
-      {/* <Reviews data={example_review_data} /> */}
-    </div>
-  );
-};
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      currentPageItemId: 17450
+    };
+    this.handleItemClick = this.handleItemClick.bind(this);
+  }
+
+  componentDidUpdate() {
+    console.log('hello from App');
+    this.render();
+  }
+
+  handleItemClick(id) {
+    this.setState({
+      currentPageItemId: id
+    }, () => {
+      this.forceUpdate();
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <br />
+        <br />
+        {/* <h1>Hell World I am rendering!</h1> */}
+        <RelatedProductsAndOutfits
+        currentPageItemId={this.state.currentPageItemId}
+        handleItemClick={this.handleItemClick}
+        />
+        {/* <Container /> */}
+      </div>
+    );
+  }
+}
 
 export default App;
