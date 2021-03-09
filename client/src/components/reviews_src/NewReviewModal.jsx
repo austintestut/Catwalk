@@ -5,12 +5,14 @@ import formValidator from '../../global_functions/formValidator';
 import reviewBodyConstructor from '../new_review_components/reviewBodyConstructor';
 import handler from '../../global_functions/handler';
 import Errors from '../new_review_components/Errors';
+import UrlWindow from '../new_review_components/UrlWindow';
 
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      urlWindow: false,
       open: false,
       recommend: null,
       nickname: '',
@@ -28,6 +30,7 @@ class NewReviewModal extends React.Component {
     this.characterChecker = this.characterChecker.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.hoist = this.hoist.bind(this);
+    this.toggleUrlWindow = this.toggleUrlWindow.bind(this);
     // this.characterChecker = this.characterChecker.bind(this);
   }
 
@@ -66,6 +69,12 @@ class NewReviewModal extends React.Component {
     this.setState({ [name]: val }, cb(e));
   }
 
+  toggleUrlWindow(bool) {
+    this.setState({
+      urlWindow: bool,
+    });
+  }
+
   hoist(name, value) {
     if (this.state[name] !== value) {
       this.setState({ [name]: value });
@@ -74,7 +83,11 @@ class NewReviewModal extends React.Component {
 
   toggleModal(e) {
     if (e) { e.preventDefault(); }
-    this.setState({ open: !this.state.open, errors: [] });
+    this.setState({
+      open: !this.state.open,
+      errors: [],
+      urlWindow: false,
+    });
   }
 
   characterChecker(e) {
@@ -176,11 +189,18 @@ class NewReviewModal extends React.Component {
                   <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block' }} />
                   <small>{this.state.count}</small>
                 </div>
-                <button>Add Images</button>
+                <button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
                 <span>
                   <button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
                   <Errors errors={this.state.errors}/>
                 </span>
+                {this.state.urlWindow && (
+                  <UrlWindow>
+                    <h1>Little Window :)</h1>
+                    <p>Look at how small I am</p>
+                    <button onClick={() => {this.toggleUrlWindow(false)}} >Close me!</button>
+                  </UrlWindow>
+                )}
                 { /* ---------------------------------------------------------------------------*/ }
               </div>
             </div>

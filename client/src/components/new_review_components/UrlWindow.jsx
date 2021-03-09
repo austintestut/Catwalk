@@ -6,12 +6,11 @@ class UrlWindow extends React.PureComponent {
     super(props);
     // STEP 1: create a container <div>
     this.containerEl = document.createElement('div');
+    this.containerEl.setAttribute('id', 'urlWindow');
     this.externalWindow = null;
   }
 
-
   componentDidMount() {
-    debugger;
     // STEP 3: open a new browser window and store a reference to it
     this.externalWindow = window.open('', '', 'width=600,height=400,left=200,top=200');
 
@@ -27,11 +26,7 @@ class UrlWindow extends React.PureComponent {
 
   render() {
     // STEP 2: append props.children to the container <div> that isn't mounted anywhere yet
-    if (this.props.show) {
-      return ReactDOM.createPortal(this.props.children, this.containerEl);
-    }
-    return null;
+    return ReactDOM.createPortal(this.props.children, this.containerEl);
   }
 }
-
 export default UrlWindow;
