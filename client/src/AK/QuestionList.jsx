@@ -1,12 +1,32 @@
 import React from 'react';
-import Question from './Question';
+import styled from 'styled-components';
+import Questionn from './Questionn';
 
-const QuestionList = function ({questions, showAns, hide, show}) {
+const QuestionListDiv = styled.div`
+margin-left: 5%;
+margin-right: 5%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+
+`;
+
+const QuestionList = function ({ questions, howMany, increaseHelpful, searching, displayedQuestions }) {
+  let list = questions;
+  if (searching) {
+    list = displayedQuestions;
+  }
   return (
-    <div>
-      Question List:
-      {questions.map(question => <Question question={question}key={question.question_id}showAns={showAns} hide={hide}show={show} />)}
-    </div>
+    <QuestionListDiv>
+      {list.slice(0, howMany).map((question) => (
+        <Questionn
+          question={question}
+          key={question.question_id}
+          answers={question.answers}
+          increaseHelpful={increaseHelpful}
+        />
+      ))}
+    </QuestionListDiv>
   );
 };
 

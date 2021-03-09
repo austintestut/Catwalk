@@ -1,13 +1,41 @@
 import React from 'react';
+import QuestionList from './AK/QuestionList.jsx';
+import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
 import Reviews from './components/Reviews.jsx';
 import Container from './AK/Container';
 
-const App = () => (
-  <div>
-    { /* <h1>Hell World I am rendering!</h1> */}
-    {/* <Container /> */}
-    <Reviews /* productId="17764" */ />
-  </div>
-);
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      currentPageItemId: 17450
+    };
+    this.handleItemClick = this.handleItemClick.bind(this);
+  }
+
+  componentDidUpdate() {
+    console.log('hello from App');
+  }
+
+  handleItemClick(id) {
+    this.setState({
+      currentPageItemId: id
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <br />
+        <br />
+        <RelatedProductsAndOutfits
+        currentPageItemId={this.state.currentPageItemId}
+        handleItemClick={this.handleItemClick}
+        />
+        <Container />
+      </div>
+    );
+  }
+}
 
 export default App;
