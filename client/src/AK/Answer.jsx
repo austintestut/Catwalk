@@ -18,6 +18,7 @@ const AnswerDiv = styled.div`
 display: flex;
 justify-content: space-between;
 font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+font-weight: lighter;
 `;
 const AnswerButtonsDiv = styled.div`
 display: flex;
@@ -91,7 +92,7 @@ class Answer extends React.Component {
   render() {
     return (
       <AnswerDiv>
-        <div>
+        <div style={{width: '65%'}}>
           <p>
             A: {this.props.ans.body}
           </p>
