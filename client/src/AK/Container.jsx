@@ -67,6 +67,13 @@ class Container extends React.Component {
       });
   }
 
+  displaySearchQuestions(text) {
+    const filtered = this.state.questions.filter(
+      (question) => question.question_body.includes(text),
+    );
+    return filtered;
+  }
+
   increaseHelpful(id) {
     axios({
       url: `/answers/${id}`,
