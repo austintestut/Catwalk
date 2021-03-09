@@ -13,10 +13,9 @@ grid-template-columns: 1fr 12fr 1fr;
 overflow: hidden;
 `;
 const StyledLeftButton = styled.button`
-height: 350px;
+height: 372px;
 width: 100%;
 position: relative;
-top: 61px;
 background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 50% 0 0 50%;
@@ -27,10 +26,9 @@ ${StyledLeftButton}:hover {
 }
 `;
 const StyledRightButton = styled.button`
-height: 350px;
+height: 372px;
 width: 100%;
 position: relative;
-top: 61px;
 background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 217, 217));
 border: none;
 border-radius: 0 50% 50% 0;
@@ -39,6 +37,10 @@ ${StyledRightButton}:hover {
   background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(175, 175, 175));
   cursor: pointer;
 }
+`;
+const StyledHeader = styled.h3`
+  padding-left: 16%;
+  width: auto;
 `;
 
 class RelatedProductsAndOutfits extends React.Component {
@@ -268,6 +270,7 @@ class RelatedProductsAndOutfits extends React.Component {
   render() {
     return (
       <div>
+        <StyledHeader>RELATED PRODUCTS</StyledHeader>
         <StyledCarouselContainer>
           <div>
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
@@ -285,7 +288,8 @@ class RelatedProductsAndOutfits extends React.Component {
           <div>
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
           </div>
-        </StyledCarouselContainer >
+        </StyledCarouselContainer>
+        <StyledHeader>YOUR OUTFIT</StyledHeader>
         <StyledCarouselContainer>
           <div>
             {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}

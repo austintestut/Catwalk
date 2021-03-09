@@ -15,17 +15,22 @@ height: 450px;
 overflow: hidden;
 `;
 const StyledProductCard = styled.div`
-margin-top: 5%;
-margin-bottom: 5%;
 flex: 0 0 250px;
+margin-top: 20px;
 `;
 
-const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal, handleItemClick, currentProductData, currentRating, currentCharacteristics, translatedXrp }) => {
+const RelatedProductsCarousel = ({ relatedProductIds,
+  toggleModal,
+  handleItemClick,
+  currentProductData,
+  currentRating,
+  currentCharacteristics,
+  translatedXrp
+}) => {
   let productsToShow = relatedProductIds;
 
   return (
     <div>
-      <h3>RELATED PRODUCTS</h3>
       <StyledProductCardContainer key='StyledProductContainer'>
         {productsToShow.map((productId) => {
           let card;
