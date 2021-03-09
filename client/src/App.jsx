@@ -15,14 +15,11 @@ class App extends React.Component {
 
   componentDidUpdate() {
     console.log('hello from App');
-    this.render();
   }
 
   handleItemClick(id) {
     this.setState({
       currentPageItemId: id
-    }, () => {
-      this.forceUpdate();
     });
   }
 

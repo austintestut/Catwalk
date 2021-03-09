@@ -19,8 +19,10 @@ border-style: solid;
 border-width: 3px;
 border-radius: 5px;
 position: relative;
+transition: transform 0.35s;
+transform: translate(${props => props.translatedXrp}px);
 ${StyledCard}:hover {
-  box-shadow: 5px 5px 2px rgb(200, 200, 200);
+  box-shadow: 0 0 6px rgb(100, 100, 100);
 }
 `;
 const StyledStarIcon = styled.div`
@@ -81,7 +83,7 @@ animation: ${fadein} 0.4s;
 `;
 const StyledPriceLine = styled.div`
 display: grid;
-grid-template-columns: auto 1fr;
+grid-template-columns: 1fr 1fr;
 `;
 const StyledOldPrice = styled.div`
   color: red;
@@ -292,7 +294,7 @@ class RelatedProductCard extends React.Component {
 
   render() {
     return (
-      <StyledCard>
+      <>
         {this.state.modalShowing && (
           <StyledModalContainer onClick={this.toggleModal}>
             <ComparisonModal
@@ -305,45 +307,47 @@ class RelatedProductCard extends React.Component {
             />
           </StyledModalContainer>
         )}
-        <StyledStarIcon onClick={this.toggleModal}>
-          <img src={starIcon} width="100%" height="100%" />
-        </StyledStarIcon>
-        <StyledImageContainer
-          onMouseOver={this.handleImageMouseOver}
-          onMouseLeave={this.handleImageMouseLeave}
-        >
+        <StyledCard translatedXrp={this.props.translatedXrp}>
+          <StyledStarIcon onClick={this.toggleModal}>
+            <img src={starIcon} width="100%" height="100%" />
+          </StyledStarIcon>
+          <StyledImageContainer
+            onMouseOver={this.handleImageMouseOver}
+            onMouseLeave={this.handleImageMouseLeave}
+          >
 
 
-          <div onClick={() => this.props.handleItemClick(this.props.productId)}>
-            <StyledImg src={this.state.photoUrl} alt={this.state.productData.name} />
-          </div>
-          <div>
-            {this.state.otherImagesShowing && (
-              <StyledOtherImageContainer>
-                <ThumbnailCarousel
-                  handleThumbnailCarouselRightButtonClick={this.handleThumbnailCarouselRightButtonClick}
-                  handleThumbnailCarouselLeftButtonClick={this.handleThumbnailCarouselLeftButtonClick}
-                  thumbnailRightArrow={this.state.thumbnailRightArrow}
-                  thumbnailLeftArrow={this.state.thumbnailLeftArrow}
-                  handleOtherImageClick={this.handleOtherImageClick}
-                  otherUrls={this.state.otherUrls}
-                  thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
-                />
-              </StyledOtherImageContainer>
-            )}
-          </div>
-        </StyledImageContainer>
-        <div>{this.state.productData.category}</div>
-        <div>{this.state.productData.name}</div>
-        <StyledPriceLine>
-          {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
-          <div>${this.state.showingStylePrice}</div>
-        </StyledPriceLine>
-        <StyledStarLine>
-          <div><StarStatic number={this.state.rating} /></div>
-          <span text-align="left">({this.state.totalReviews})</span>
-        </StyledStarLine>
-      </StyledCard>
+            <div onClick={() => this.props.handleItemClick(this.props.productId)}>
+              <StyledImg src={this.state.photoUrl} alt={this.state.productData.name} />
+            </div>
+            <div>
+              {this.state.otherImagesShowing && (
+                <StyledOtherImageContainer>
+                  <ThumbnailCarousel
+                    handleThumbnailCarouselRightButtonClick={this.handleThumbnailCarouselRightButtonClick}
+                    handleThumbnailCarouselLeftButtonClick={this.handleThumbnailCarouselLeftButtonClick}
+                    thumbnailRightArrow={this.state.thumbnailRightArrow}
+                    thumbnailLeftArrow={this.state.thumbnailLeftArrow}
+                    handleOtherImageClick={this.handleOtherImageClick}
+                    otherUrls={this.state.otherUrls}
+                    thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
+                  />
+                </StyledOtherImageContainer>
+              )}
+            </div>
+          </StyledImageContainer>
+          <div>{this.state.productData.category}</div>
+          <div>{this.state.productData.name}</div>
+          <StyledPriceLine>
+            {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
+            <div>${this.state.showingStylePrice}</div>
+          </StyledPriceLine>
+          <StyledStarLine>
+            <div><StarStatic number={this.state.rating} /></div>
+            <span text-align="left">({this.state.totalReviews})</span>
+          </StyledStarLine>
+        </StyledCard>
+      </>
     );
   }
 }
