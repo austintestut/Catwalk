@@ -47,6 +47,8 @@ class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentPageItemId: 0, // updated upon mount
+
       // currently showing products in carousel
       relatedCurrentlyShowingIndexes: [0, 1, 2, 3],
       outfitCurrentlyShowingIndexes: [0, 1, 2],
@@ -88,10 +90,14 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   componentDidMount() {
-    this.getProductInfo(this.props.currentPageItemId);
-    this.getRating(this.props.currentPageItemId);
-    this.getRelatedItemIds(this.props.currentPageItemId);
-    this.getOutfitIds();
+    this.setState({
+      currentPageItemId: this.props.currentPageItemId
+    }, () => {
+      this.getProductInfo(this.props.currentPageItemId);
+      this.getRating(this.props.currentPageItemId);
+      this.getRelatedItemIds(this.props.currentPageItemId);
+      this.getOutfitIds();
+    });
   }
 
   // fetch data for current item on page
@@ -231,14 +237,14 @@ class RelatedProductsAndOutfits extends React.Component {
   handleRelatedCarouselRight() {
     this.setState({
       relatedCurrentlyShowingIndexes: this.renderNextProduct(this.state.relatedCurrentlyShowingIndexes),
-      translatedXrp: this.state.translatedXrp - 282.25
+      translatedXrp: this.state.translatedXrp - 288.25
     });
   }
 
   handleRelatedCarouselLeft() {
     this.setState({
       relatedCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.relatedCurrentlyShowingIndexes),
-      translatedXrp: this.state.translatedXrp + 282.25
+      translatedXrp: this.state.translatedXrp + 288.25
     });
   }
 
@@ -246,14 +252,14 @@ class RelatedProductsAndOutfits extends React.Component {
   handleOutfitCarouselRight() {
     this.setState({
       outfitCurrentlyShowingIndexes: this.renderNextProduct(this.state.outfitCurrentlyShowingIndexes),
-      translatedXoutfit: this.state.translatedXoutfit - 282.25
+      translatedXoutfit: this.state.translatedXoutfit - 288.25
     });
   }
 
   handleOutfitCarouselLeft() {
     this.setState({
       outfitCurrentlyShowingIndexes: this.renderPreviousProduct(this.state.outfitCurrentlyShowingIndexes),
-      translatedXoutfit: this.state.translatedXoutfit + 282.25
+      translatedXoutfit: this.state.translatedXoutfit + 288.25
     });
   }
 

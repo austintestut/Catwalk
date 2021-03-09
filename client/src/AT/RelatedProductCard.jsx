@@ -19,9 +19,10 @@ border-style: solid;
 border-width: 3px;
 border-radius: 5px;
 position: relative;
+transition: transform 0.35s;
 transform: translate(${props => props.translatedXrp}px);
 ${StyledCard}:hover {
-  box-shadow: 7px 7px 7px rgb(200, 200, 200);
+  box-shadow: 0 0 6px rgb(100, 100, 100);
 }
 `;
 const StyledStarIcon = styled.div`

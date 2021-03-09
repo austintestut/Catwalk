@@ -19,6 +19,7 @@ overflow: hidden;
 `;
 const StyledProductCard = styled.div`
 flex: 0 0 250px;
+margin-left: 6px;
 margin-top: 20px;
 `;
 const StyledAddButton = styled.button`
