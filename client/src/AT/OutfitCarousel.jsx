@@ -2,6 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import OutfitCard from './OutfitCard';
 
+const StyledContainer = styled.div`
+display: grid;
+grid-template-columns 1fr 4fr;
+`;
 const StyledOutfitContainer = styled.div`
 position: relative;
 display: flex;
@@ -9,6 +13,7 @@ flex-direction: row;
 flex-wrap: nowrap;
 gap: 32.25px;
 justify-content: left;
+align-content: flex-start;
 height: 450px;
 overflow: hidden;
 `;
@@ -18,10 +23,11 @@ margin-bottom: 5%;
 flex: 0 0 250px;
 `;
 const StyledAddButton = styled.button`
-width: 256px;
+width: 250px;
 height: 328px;
 margin-top: 5%;
 margin-bottom: 5%;
+margin-right: 32.25px;
 font-size: 50px;
 border: none;
 border-radius: 5px;
@@ -51,8 +57,7 @@ const OutfitCarousel = ({
   };
 
   return (
-    <div>
-      <h3>YOUR OUTFIT</h3>
+    <StyledContainer>
       <StyledAddButton onClick={() => storeOutfitItem(currentPageItemId)}>+</StyledAddButton>
       <StyledOutfitContainer key='StyledOutfitContainer'>
         {productsToShow.map((productId) => {
@@ -76,7 +81,7 @@ const OutfitCarousel = ({
           );
         })}
       </StyledOutfitContainer>
-    </div>
+    </StyledContainer>
   );
 };
 
