@@ -35,7 +35,7 @@ class Container extends React.Component {
     this.setState({
       showAns: true,
     });
-    console.log('state set: shown ans modal');
+    // console.log('state set: shown ans modal');
   }
 
   hideQModal() {
@@ -67,7 +67,7 @@ class Container extends React.Component {
     })
       .then((data) => {
         this.setState({ questions: data.data.results });
-        console.log(data.data.results);
+        // console.log(data.data.results);
       })
       .then(() => {
         axios({
@@ -77,7 +77,7 @@ class Container extends React.Component {
           url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/111326/answers',
           method: 'get',
         }).then((data) => {
-          console.log(data.data);
+          // console.log(data.data);
         });
       });
   }
