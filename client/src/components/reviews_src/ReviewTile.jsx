@@ -13,7 +13,7 @@ const ReviewTile = ({ review, length, index }) => {
     marginBottom: '4px',
     marginTop: '4px',
     // border: '2px solid grey',
-    borderBottom: '3px solid grey',
+    borderBottom: '3px solid silver',
     borderRadius: '1px',
     // boxShadow: '3px 3px Grey',
     padding: '10px',
@@ -36,7 +36,7 @@ const ReviewTile = ({ review, length, index }) => {
     }
     return <br />;
   };
-  if (index === length - 1) { tileStyle.borderBottom = 'none'; }
+  // if (index === length - 1) { tileStyle.borderBottom = 'none'; }
   return (
     <div style={{ ...tileStyle }}>
       <StarStatic number={review.rating} />
@@ -47,7 +47,7 @@ const ReviewTile = ({ review, length, index }) => {
       {imageMap()}
       { /* <ImgModal /> */ }
       <Response response={review.response} />
-      <Helpfulness helpfulness={review.helpfulness} />
+      <Helpfulness helpfulness={review.helpfulness} id={review.review_id} />
     </div>
   );
 };
