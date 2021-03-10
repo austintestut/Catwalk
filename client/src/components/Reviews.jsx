@@ -79,6 +79,8 @@ class Reviews extends React.Component {
       flexWrap: 'nowrap',
       flex: 'row',
       padding: '10px',
+      width: '90%',
+      marginLeft: '5%',
     };
     return (
       <div style={{ ...flexContainerStyle }} className="reviews">

@@ -34,7 +34,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   // Styles ---->>>>>>>
   const containerStyle= {
     alignSelf: 'flex-start',
-    marginRight: 'auto',
+    marginRight: '30px',
   };
   const inlineStyle = {
     display: 'inline',
@@ -54,6 +54,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
     fontWeight: 'bold',
     fontSize: '82%',
     textShadow: '0 0 0.5px #000',
+    whiteSpace: 'nowrap',
   };
   const headerStyle = {
     marginTop: '0px',
