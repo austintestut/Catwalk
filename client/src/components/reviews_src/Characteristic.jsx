@@ -18,9 +18,9 @@ const Characteristic = ({ item }) => {
   const triangleStyle = {
     width: 0,
     height: 0,
-    borderLeft: '8px solid transparent',
-    borderRight: '8px solid transparent',
-    borderTop: '16px solid #e11a2b',
+    borderLeft: '6px solid transparent',
+    borderRight: '6px solid transparent',
+    borderTop: '12px solid #e11a2b',
     position: 'absolute',
     marginLeft: `${((item[1].value) / 5) * 237}px`, // 237 = max slider right, 0 = max left
   };
