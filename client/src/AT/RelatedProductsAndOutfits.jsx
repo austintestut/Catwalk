@@ -291,6 +291,8 @@ class RelatedProductsAndOutfits extends React.Component {
     }
     this.setState({
       outfitProductIds: outfitProductIds
+    }, () => {
+      this.renderRightButtonToggleForOutfit();
     });
   }
 
