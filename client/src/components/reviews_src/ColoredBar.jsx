@@ -4,13 +4,14 @@ const ColoredBar = ({ total, count }) => {
   const containerStyle = {
     width: '200px',
     height: '12px',
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'white',
     // margin: '5px',
+    border: '1px solid silver',
     marginLeft: '5px',
     display: 'inline-block',
   };
   const innerStyle = {
-    backgroundColor: 'black',
+    backgroundColor: '#e11a2b',
     height: '12px',
     width: `${(count / total) * 200}px`,
     maxWidth: '200px',

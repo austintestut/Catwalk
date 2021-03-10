@@ -6,6 +6,14 @@ import starIcon from '../../../images/empty_star.png';
 import ComparisonModal from './ComparisonModal';
 import ThumbnailCarousel from './ThumbnailCarousel';
 
+const modalFade = keyframes`
+from {
+  background-color: rgba(128,128,128,0);
+}
+to {
+  background-color: rgba(128,128,128,0.5);
+}
+`;
 const fadein = keyframes`
 from {
   opacity: 0;
@@ -19,8 +27,10 @@ border-style: solid;
 border-width: 3px;
 border-radius: 5px;
 position: relative;
+transition: transform 0.35s;
+transform: translate(${props => props.translatedXrp}px);
 ${StyledCard}:hover {
-  box-shadow: 5px 5px 2px rgb(200, 200, 200);
+  box-shadow: 0 0 6px rgb(100, 100, 100);
 }
 `;
 const StyledStarIcon = styled.div`
@@ -42,7 +52,8 @@ z-index: 1;
 width: 100%;
 height: 100%;
 overflow: auto;
-background-color: rgba(0,0,0,0.3);
+animation: ${modalFade} .35s;
+animation-fill-mode: forwards;
 `;
 const StyledStarLine = styled.div`
 display: grid;
@@ -68,7 +79,7 @@ display: grid;
 padding-left: 2%;
 padding-right: 2%;
 position: relative;
-background-color: rgb(230, 230, 230);
+background-color: white;
 border-style: solid none solid none;
 border-width: 2px;
 bottom: 65px;
@@ -88,6 +99,14 @@ const StyledOldPrice = styled.div`
   text-decoration: line-through;
   margin-right: 2px;
 `;
+const StyledCategoryText = styled.div`
+font-family: Arial, Avenir;
+font-style: italic;
+`;
+const StyledProductNameText = styled.div`
+font-family: Arial, Avenir;
+font-weight: bold;
+`;
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
@@ -97,6 +116,7 @@ class RelatedProductCard extends React.Component {
       productData: [],
       rating: 0,
       otherUrls: [],
+      styleNames: [],
       cardCharacteristics: {},
       // comparison modal showing or not
       modalShowing: false,
@@ -181,18 +201,30 @@ class RelatedProductCard extends React.Component {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
         let otherStyles = styleData.data.results.slice();
-        let otherUrls = otherStyles.map((style) => (style.photos[0].thumbnail_url));
+        let otherUrls = otherStyles.map((style) => {
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+          return image
+        });
+        let styleNames = otherStyles.map((style) => style.name);
         let styleSalePrices = {};
         otherStyles.map((style) => {
-          styleSalePrices[style.photos[0].thumbnail_url] = {
-            originalPrice: style.original_price,
-            salePrice: style.sale_price
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+            styleSalePrices[image] = {
+              originalPrice: style.original_price,
+              salePrice: style.sale_price
           };
         });
         this.setState({
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
           otherUrls: otherUrls,
-          styleSalePrices: styleSalePrices
+          styleSalePrices: styleSalePrices,
+          styleNames: styleNames
         }, () => this.checkIfThumbnailButtonsShouldRender());
       })
       .catch((err) => {
@@ -292,7 +324,7 @@ class RelatedProductCard extends React.Component {
 
   render() {
     return (
-      <StyledCard>
+      <>
         {this.state.modalShowing && (
           <StyledModalContainer onClick={this.toggleModal}>
             <ComparisonModal
@@ -305,45 +337,48 @@ class RelatedProductCard extends React.Component {
             />
           </StyledModalContainer>
         )}
-        <StyledStarIcon onClick={this.toggleModal}>
-          <img src={starIcon} width="100%" height="100%" />
-        </StyledStarIcon>
-        <StyledImageContainer
-          onMouseOver={this.handleImageMouseOver}
-          onMouseLeave={this.handleImageMouseLeave}
-        >
+        <StyledCard translatedXrp={this.props.translatedXrp}>
+          <StyledStarIcon onClick={this.toggleModal}>
+            <img src={starIcon} width="100%" height="100%" />
+          </StyledStarIcon>
+          <StyledImageContainer
+            onMouseOver={this.handleImageMouseOver}
+            onMouseLeave={this.handleImageMouseLeave}
+          >
 
 
-          <div onClick={() => this.props.handleItemClick(this.props.productId)}>
-            <StyledImg src={this.state.photoUrl} alt={this.state.productData.name} />
-          </div>
-          <div>
-            {this.state.otherImagesShowing && (
-              <StyledOtherImageContainer>
-                <ThumbnailCarousel
-                  handleThumbnailCarouselRightButtonClick={this.handleThumbnailCarouselRightButtonClick}
-                  handleThumbnailCarouselLeftButtonClick={this.handleThumbnailCarouselLeftButtonClick}
-                  thumbnailRightArrow={this.state.thumbnailRightArrow}
-                  thumbnailLeftArrow={this.state.thumbnailLeftArrow}
-                  handleOtherImageClick={this.handleOtherImageClick}
-                  otherUrls={this.state.otherUrls}
-                  thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
-                />
-              </StyledOtherImageContainer>
-            )}
-          </div>
-        </StyledImageContainer>
-        <div>{this.state.productData.category}</div>
-        <div>{this.state.productData.name}</div>
+            <div onClick={() => this.props.handleItemClick(this.props.productId)}>
+              <StyledImg src={this.state.photoUrl} alt={this.state.productData.name} />
+            </div>
+            <div>
+              {this.state.otherImagesShowing && (
+                <StyledOtherImageContainer>
+                  <ThumbnailCarousel
+                    handleThumbnailCarouselRightButtonClick={this.handleThumbnailCarouselRightButtonClick}
+                    handleThumbnailCarouselLeftButtonClick={this.handleThumbnailCarouselLeftButtonClick}
+                    thumbnailRightArrow={this.state.thumbnailRightArrow}
+                    thumbnailLeftArrow={this.state.thumbnailLeftArrow}
+                    handleOtherImageClick={this.handleOtherImageClick}
+                    otherUrls={this.state.otherUrls}
+                    thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
+                    styleNames={this.state.styleNames}
+                  />
+                </StyledOtherImageContainer>
+              )}
+            </div>
+          </StyledImageContainer>
+          <StyledCategoryText>{this.state.productData.category}</StyledCategoryText>
+        <StyledProductNameText>{this.state.productData.name}</StyledProductNameText>
         <StyledPriceLine>
           {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
           <div>${this.state.showingStylePrice}</div>
         </StyledPriceLine>
         <StyledStarLine>
-          <div><StarStatic number={this.state.rating} /></div>
-          <span text-align="left">({this.state.totalReviews})</span>
-        </StyledStarLine>
-      </StyledCard>
+            <div><StarStatic number={this.state.rating} /></div>
+            ({this.state.totalReviews})
+          </StyledStarLine>
+        </StyledCard>
+      </>
     );
   }
 }

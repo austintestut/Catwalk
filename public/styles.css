@@ -1,23 +1,8 @@
-.reviews {
-  font-family: Lucida Sans, Helvetica, Arial, sans-serif;
-}
-
-.reviews .new-review h4{
-  margin-bottom: 5px;
-}
-.reviews .new-review h3{
-  margin-top: 5px;
-}
-.reviews .new-review h2{
-  margin-bottom: 5px;
-  margin-top: 3px;
-}
-
-.reviews button, input[type="button"], input[type="submit"] {
+#urlWindow button, input[type="button"] {
   margin-top: 10px;
-  background-color:white;
-  border: 2px solid grey;
-  color: grey;
+  background-color:#e11a2b;
+  /*border: 2px solid grey;*/
+  color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -25,6 +10,74 @@
   font-size: 16px;
 }
 
+.reviews {
+  font-family: 'Arial', 'Avenir Black';
+}
+
+.reviews h1 {
+  font-family: 'Avenir Black';
+  font-weight: bold;
+}
+
+.reviews .new-review h4{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: 'Avenir Black';
+}
+.reviews .new-review h3{
+  margin-top: 5px;
+  font-family: 'Avenir Black';
+}
+.reviews .new-review h2{
+  margin-bottom: 5px;
+  margin-top: 2px;
+  font-family: 'Avenir Black';
+}
+
+
+.reviews button:not(.remove-filters) {
+  margin-top: 10px;
+  background-color:#e11a2b;
+  border: none;
+  outline: 0;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
 .reviews, input[type="radio"] {
   margin: '10px';
 }
+
+.filter{
+  font-size: 12px;
+}
+
+.filter:hover {
+  font-weight: bold;
+}
+
+.remove-filters {
+  all: none
+}
+.austinButtons:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/*
+color: #e11a2b
+color: white
+color: silver
+color: black
+
+font: areil
+second: Avenir
+
+
+
+*/

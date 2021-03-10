@@ -5,7 +5,7 @@ const example_review_data = {
   "results": [
       {
           "review_id": 202288,
-          "rating": 3,
+          "rating": 5,
           "summary": "Beatae cumque similique qui libero placeat incidunt quis.",
           "recommend": true,
           "response": null,
@@ -22,7 +22,7 @@ const example_review_data = {
       },
       {
           "review_id": 202286,
-          "rating": 3,
+          "rating": 5,
           "summary": "Omnis quis voluptatum repellendus.",
           "recommend": true,
           "response": null,
@@ -39,7 +39,7 @@ const example_review_data = {
       },
       {
           "review_id": 202306,
-          "rating": 4,
+          "rating": 5,
           "summary": "Quas repellat id repudiandae id.",
           "recommend": true,
           "response": null,
@@ -169,7 +169,7 @@ const example_review_data = {
       },
       {
           "review_id": 202301,
-          "rating": 1,
+          "rating": 5,
           "summary": "Laborum eveniet rerum et veritatis laudantium ab quos.",
           "recommend": false,
           "response": null,
@@ -207,7 +207,7 @@ const example_review_data = {
       },
       {
           "review_id": 202302,
-          "rating": 1,
+          "rating": 5,
           "summary": "Dolorem dolorem quidem quod quo nesciunt officia qui voluptatibus.",
           "recommend": false,
           "response": null,
@@ -224,7 +224,7 @@ const example_review_data = {
       },
       {
           "review_id": 202305,
-          "rating": 2,
+          "rating": 5,
           "summary": "Qui error rerum veritatis facilis qui.",
           "recommend": true,
           "response": null,
@@ -241,7 +241,7 @@ const example_review_data = {
       },
       {
           "review_id": 202292,
-          "rating": 1,
+          "rating": 5,
           "summary": "Tempora iusto et enim corporis labore magnam eum.",
           "recommend": false,
           "response": null,

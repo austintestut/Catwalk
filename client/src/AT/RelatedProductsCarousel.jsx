@@ -5,27 +5,33 @@ import RelatedProductCard from './RelatedProductCard';
 // change height to auto to account for long text, but strict px makes it seem smoother
 const StyledProductCardContainer = styled.div`
 position: relative;
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-grid-column-gap: 3%;
-height: 450px;
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+gap: 32.25px;
+align-items: flex-start;
+justify-content: left;
+height: 370px;
+overflow: hidden;
 `;
 const StyledProductCard = styled.div`
-margin-top: 5%;
-margin-bottom: 5%;
+flex: 0 0 250px;
+margin-left: 6px;
+margin-top: 20px;
 `;
 
-const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingIndexes, toggleModal, handleItemClick, currentProductData, currentRating, currentCharacteristics }) => {
-  let productsToShow = [
-    (relatedProductIds[relatedCurrentlyShowingIndexes[0]] || null),
-    (relatedProductIds[relatedCurrentlyShowingIndexes[1]] || null),
-    (relatedProductIds[relatedCurrentlyShowingIndexes[2]] || null),
-    (relatedProductIds[relatedCurrentlyShowingIndexes[3]] || null)
-  ];
+const RelatedProductsCarousel = ({ relatedProductIds,
+  toggleModal,
+  handleItemClick,
+  currentProductData,
+  currentRating,
+  currentCharacteristics,
+  translatedXrp
+}) => {
+  let productsToShow = relatedProductIds;
 
   return (
     <div>
-      <h3>RELATED PRODUCTS</h3>
       <StyledProductCardContainer key='StyledProductContainer'>
         {productsToShow.map((productId) => {
           let card;
@@ -42,6 +48,7 @@ const RelatedProductsCarousel = ({ relatedProductIds, relatedCurrentlyShowingInd
                 currentProductData={currentProductData}
                 currentRating={currentRating}
                 currentCharacteristics={currentCharacteristics}
+                translatedXrp={translatedXrp}
               />
             );
           }

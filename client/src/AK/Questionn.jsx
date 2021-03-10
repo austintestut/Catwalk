@@ -9,15 +9,23 @@ const QuestionDiv = styled.div`
 display: flex;
 justify-content: space-between;
 font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+padding-top: 15px;
 
 `;
-
+const RedButton = styled.button`
+color: white;
+background-image: linear-gradient(#ff0019, #790a04);
+&:hover {
+  cursor: pointer;
+}
+`
 
 const StyledButton = styled.button`
 margin-left: 8px;
 text-decoration: underline;
 background: none;
 border: none;
+color: grey;
 &:hover {
   font-weight: bold;
   cursor: pointer;
@@ -112,9 +120,9 @@ class Questionn extends React.Component {
 
   renderSeeMoreAnswersButton() {
     if (this.state.maxedAnswers) {
-      return <button onClick={this.handleSeeAnswersClick}>Collapse Answers</button>;
+      return <RedButton onClick={this.handleSeeAnswersClick}>collapse answers</RedButton>;
     } if (this.state.answers.length > 2) {
-      return <button onClick={this.handleSeeAnswersClick}>See More Answers</button>;
+      return <RedButton onClick={this.handleSeeAnswersClick}>see more answers</RedButton>;
     }
   }
 
@@ -130,9 +138,9 @@ class Questionn extends React.Component {
     return (
       <div style={{ width: '100%' }}>
         <QuestionDiv>
-          <div style={{fontWeight: 'bold', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
+          <div style={{fontWeight: '600', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
           </div>
-          <div style={{ fontSize: '14px' }}>
+          <div style={{ fontSize: '14px', color: 'grey'}}>
             Helpful?
             {this.renderHelpfulButton()}
             {this.renderReportButton()}

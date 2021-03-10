@@ -18,8 +18,10 @@ border-style: solid;
 border-width: 3px;
 border-radius: 5px;
 position: relative;
+transition: transform 0.35s;
+transform: translate(${props => props.translatedXoutfit}px);
 ${StyledCard}:hover {
-  box-shadow: 5px 5px 2px rgb(200, 200, 200);
+  box-shadow: 0 0 6px rgb(100, 100, 100);
 }
 `;
 const StyledX = styled.div`
@@ -57,7 +59,9 @@ padding-left: 2%;
 padding-right: 2%;
 position: relative;
 background-color: white;
-bottom: 66px;
+border-style: solid none solid none;
+border-width: 2px;
+bottom: 65px;
 grid-row: 2;
 grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;
 grid-column-gap: 2%;
@@ -72,7 +76,17 @@ grid-template-columns: auto 1fr;
 const StyledOldPrice = styled.div`
   color: red;
   text-decoration: line-through;
+  margin-right: 2px;
 `;
+const StyledCategoryText = styled.div`
+font-family: Arial, Avenir;
+font-style: italic;
+`;
+const StyledProductNameText = styled.div`
+font-family: Arial, Avenir;
+font-weight: bold;
+`;
+
 class OutfitCard extends React.Component {
   constructor(props) {
     super(props);
@@ -81,6 +95,7 @@ class OutfitCard extends React.Component {
       productData: [],
       rating: 0,
       otherUrls: [],
+      styleNames: [],
       cardCharacteristics: {},
       // comparison modal showing or not
       modalShowing: false,
@@ -161,18 +176,30 @@ class OutfitCard extends React.Component {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
         let otherStyles = styleData.data.results.slice();
-        let otherUrls = otherStyles.map((style) => (style.photos[0].thumbnail_url));
+        let otherUrls = otherStyles.map((style) => {
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+          return image
+        });
+        let styleNames = otherStyles.map((style) => style.name);
         let styleSalePrices = {};
         otherStyles.map((style) => {
-          styleSalePrices[style.photos[0].thumbnail_url] = {
-            originalPrice: style.original_price,
-            salePrice: style.sale_price
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+            styleSalePrices[image] = {
+              originalPrice: style.original_price,
+              salePrice: style.sale_price
           };
         });
         this.setState({
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
           otherUrls: otherUrls,
-          styleSalePrices: styleSalePrices
+          styleSalePrices: styleSalePrices,
+          styleNames: styleNames
         }, () => this.checkIfThumbnailButtonsShouldRender());
       })
       .catch((err) => {
@@ -268,7 +295,7 @@ class OutfitCard extends React.Component {
 
   render() {
     return (
-      <StyledCard>
+      <StyledCard translatedXoutfit={this.props.translatedXoutfit}>
         <StyledX onClick={() => this.removeOutfitItem(this.props.productId)}>
           <img src={xIcon} width="100%" height="100%" />
         </StyledX>
@@ -290,13 +317,14 @@ class OutfitCard extends React.Component {
                 handleOtherImageClick={this.handleOtherImageClick}
                 otherUrls={this.state.otherUrls}
                 thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
+                styleNames={this.state.styleNames}
               />
             </StyledOtherImageContainer>
             )}
           </div>
         </StyledImageContainer>
-        <div>{this.state.productData.category}</div>
-        <div>{this.state.productData.name}</div>
+        <StyledCategoryText>{this.state.productData.category}</StyledCategoryText>
+        <StyledProductNameText>{this.state.productData.name}</StyledProductNameText>
         <StyledPriceLine>
           {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
           <div>${this.state.showingStylePrice}</div>

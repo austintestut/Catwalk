@@ -34,36 +34,46 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   // Styles ---->>>>>>>
   const containerStyle= {
     alignSelf: 'flex-start',
-    marginRight: '10px',
+    marginRight: '30px',
   };
   const inlineStyle = {
     display: 'inline',
-    fontSize: '500%',
+    fontStyle: 'Impact',
+    fontSize: '550%',
     paddingRight: '15px',
+    fontWeight: 'bolder',
+    marginBottom: '0px',
+    paddingBottom: '0px',
   };
   const starStyle = {
     verticalAlign: 'top',
     paddingLeft: '5px',
   };
   const recommendStyle = {
+    color: '#e11a2b',
     fontWeight: 'bold',
     fontSize: '82%',
+    textShadow: '0 0 0.5px #000',
+    whiteSpace: 'nowrap',
   };
   const headerStyle = {
     marginTop: '0px',
-  }
+  };
+  const coloredBarStyle = {
+    whiteSpace: 'nowrap',
+  };
 
   return (
     <div style={{ ...containerStyle }}>
-      <h3 style={{ ...headerStyle }}>Ratings &amp; Reviews</h3>
+      <h3 style={{ ...headerStyle }}>Overall Rating:</h3>
       <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
       <Filters clearFilters={clearFilters} filters={currentFilters} />
       <div style={{ ...recommendStyle }}>{percentReq()}% of reviews recommend this product</div>
       {Object.entries(ratings).map((rating) =>
-      <div>
-        <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
-        <ColoredBar total={getTotal()} count={rating[1]} />
-      </div>)}
+        <div style={{ ...coloredBarStyle }}>
+          <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
+          <ColoredBar total={getTotal()} count={rating[1]} />
+        </div>)}
       <br />
       {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
     </div>

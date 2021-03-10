@@ -172,25 +172,21 @@ app.get('/reviews/:product_id/:sort/:count', (req, res) => {
     });
 });
 
-// app.get(`/products/:id/styles`, (req, res) => {
-//   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
-//     headers: {
-//       Authorization: config.TOKEN,
-//     },
-//     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${req.params.id}/report`,
-//     method: 'put',
-//   }).then((data) => {
-//     res.send(data);
-//   })
-//     .then((data) => {
-//        //console.log(data.data.results);
-//       res.status(200).send(data.data);
-//     })
-//     .catch((err) => {
-//       console.log('ERR getting styles');
-//       res.status(402).send(err);
-//     });
-// });
+app.get(`/products/:id/styles`, (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
+    headers: {
+      Authorization: config.TOKEN,
+    }
+  })
+    .then((data) => {
+      // console.log(data.data.results);
+      res.status(200).send(data.data);
+    })
+    .catch((err) => {
+      console.log('ERR getting styles');
+      res.status(402).send(err);
+    });
+});
 
 app.get(`/products/:id/related`, (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/related`, {
@@ -214,6 +210,7 @@ app.post(`/reviews`, (req, res) => {
     },
   })
     .then((data) => {
+      console.log('success')
       res.status(201).send(data.data);
     })
     .catch((err) => {
@@ -222,20 +219,28 @@ app.post(`/reviews`, (req, res) => {
     });
 });
 
-app.get('/products/:id/styles', (req, res) => {
-  //console.log(res)
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
+app.put(`/reviews/:review_id/:method`, (req, res) => {
+  // not working????
+  console.log(req.params);
+  const { review_id, method } = req.params;
+  // method === 'helpful' || 'report'
+  if (!method) { method = 'helpful'; }
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${review_id}/${method}`;
+  console.log(url);
+  axios.put(url, req.body, {
     headers: {
-      Authorization: config.TOKEN,
-    }})
-    .then((res) => {
-      res.status(200).send(res.data);
+      Authorization: TOKEN,
+    },
+  })
+    .then((data) => {
+      console.log('good');
+      //console.log(data);
+      res.status(201).send(data.data);
     })
     .catch((err) => {
-      res.status(400).send(err);
-    })
+      console.log(err.response.status);
+    });
 });
-
 app.listen(port, () => {
   console.log('Server listening at:', port);
 });

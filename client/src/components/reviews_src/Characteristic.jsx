@@ -13,14 +13,14 @@ const Characteristic = ({ item }) => {
   const barStyle = {
     width: '80px',
     height: '12px',
-    backgroundColor: 'lightGrey',
+    backgroundColor: 'silver',
   };
   const triangleStyle = {
     width: 0,
     height: 0,
     borderLeft: '6px solid transparent',
     borderRight: '6px solid transparent',
-    borderTop: '12px solid black',
+    borderTop: '12px solid #e11a2b',
     position: 'absolute',
     marginLeft: `${((item[1].value) / 5) * 237}px`, // 237 = max slider right, 0 = max left
   };
@@ -34,9 +34,17 @@ const Characteristic = ({ item }) => {
     fontSize: '11px',
   };
 
+  const textStyle = {
+    textAlign: 'left',
+    // margin: '8px',
+    fontSize: '14px',
+    marginBottom: '2px',
+    // color: 'silver',
+  }
+
   return (
     <div style={{ width: '249px' }}>
-      <h4 style={{ textAlign: 'center', margin: '8px' }}>{item[0]}</h4>
+      <h4 style={{ ...textStyle }}>{item[0]}:</h4>
       <div style={{ ...containerStyle }}>
         <div style={{ ...triangleStyle }} />
         <div style={{ ...barStyle, float: 'left' }} />
