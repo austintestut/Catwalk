@@ -20,7 +20,7 @@ const ReviewTile = ({ review, length, index }) => {
     paddingRight: '5px',
     paddingLeft: 0,
     paddingBottom: '3px',
-    width: '75vw',
+    //width: '75vw',
   };
   const imageMap = () => {
     if (review.photos.length) {

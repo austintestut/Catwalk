@@ -27,6 +27,7 @@ const AnswerModal = function ({ showing, hide, submitAnswer }) {
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitAnswer}>
+        <button style={{float: 'right'}} onClick={hide}>X</button>
         <p>Your Answer</p>
         <input maxLength="1000" />
         <p>What is your nickname?</p>
@@ -39,7 +40,7 @@ const AnswerModal = function ({ showing, hide, submitAnswer }) {
         <input type="file" accept="image/*" multiple />
         <button type="submit">Submit Your Answer</button>
 
-        <button onClick={hide}>Hide</button>
+
       </ModalForm>
     </ModalDiv>
 

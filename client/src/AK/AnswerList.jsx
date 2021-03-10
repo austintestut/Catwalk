@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const AnswerDiv = styled.div`
 max-height: 100vh;
-overflow: scroll;
+overflow-y: auto;
 `
 
 const AnswerList = ({ answers, increaseHelpful, reportAnswer, maxed }) => {
