@@ -9,6 +9,7 @@ const QuestionDiv = styled.div`
 display: flex;
 justify-content: space-between;
 font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+padding-top: 15px;
 
 `;
 const RedButton = styled.button`
@@ -118,9 +119,9 @@ class Questionn extends React.Component {
 
   renderSeeMoreAnswersButton() {
     if (this.state.maxedAnswers) {
-      return <RedButton onClick={this.handleSeeAnswersClick}>Collapse Answers</RedButton>;
+      return <RedButton onClick={this.handleSeeAnswersClick}>collapse answers</RedButton>;
     } if (this.state.answers.length > 2) {
-      return <RedButton onClick={this.handleSeeAnswersClick}>See More Answers</RedButton>;
+      return <RedButton onClick={this.handleSeeAnswersClick}>see more answers</RedButton>;
     }
   }
 

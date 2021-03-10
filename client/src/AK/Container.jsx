@@ -14,8 +14,8 @@ justify-content: flex-start;
 flex-wrap: wrap;
 margin: auto;
 width: 75%;
-max-height: 100vh;
-overflow: scroll;
+max-height: 90vh;
+overflow-y: auto;
 `;
 
 class Container extends React.Component {
