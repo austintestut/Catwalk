@@ -17,11 +17,10 @@ height: 50px;
 width: 50px;
 position: relative;
 top: 32%;
-left: 40px;
+left: 45%;
 background-image: linear-gradient(to left, white, rgb(230, 230, 230));
 border: none;
 border-radius: 50%;
-padding-right: 16%;
 ${StyledLeftButton}:hover {
   background-image: linear-gradient(to left, white, rgb(200, 200, 200));
   cursor: pointer;
@@ -35,7 +34,6 @@ top: 32%;
 background-image: linear-gradient(to right, white, rgb(230, 230, 230));
 border: none;
 border-radius: 50%;
-padding-left: 16%;
 ${StyledRightButton}:hover {
   background-image: linear-gradient(to right, white, rgb(200, 200, 200));
   cursor: pointer;
