@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
 
@@ -50,7 +50,24 @@ const StyledHeader = styled.h3`
   padding-left: 12%;
   width: auto;
 `;
-
+const StyledLeftRelatedButtonContainer = styled.div`
+${props => props.relatedLeftArrow && css`
+z-index: 2;
+box-shadow: 20px 0 15px 0 rgba(100, 100, 100, 0.4);
+`};
+`;
+const StyledRightRelatedButtonContainer = styled.div`
+${props => props.relatedRightArrow && css`
+z-index: 2;
+box-shadow: -20px 0 15px 0 rgba(100, 100, 100, 0.4);
+`};
+`;
+const StyledRightOutfitButtonContainer = styled.div`
+${props => props.outfitRightArrow && css`
+z-index: 2;
+box-shadow: -20px 0 15px 0 rgba(100, 100, 100, 0.4);
+`};
+`;
 class RelatedProductsAndOutfits extends React.Component {
   constructor(props) {
     super(props);
@@ -286,9 +303,9 @@ class RelatedProductsAndOutfits extends React.Component {
       <div>
         <StyledHeader>RELATED PRODUCTS</StyledHeader>
         <StyledCarouselContainer>
-          <div>
+          <StyledLeftRelatedButtonContainer relatedLeftArrow={this.state.relatedLeftArrow}>
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
-          </div>
+          </StyledLeftRelatedButtonContainer>
           <RelatedProductsCarousel
             relatedProductIds={this.state.relatedProductIds}
             relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes}
@@ -299,9 +316,9 @@ class RelatedProductsAndOutfits extends React.Component {
             currentCharacteristics={this.state.characteristics}
             translatedXrp={this.state.translatedXrp}
           />
-          <div>
+          <StyledRightRelatedButtonContainer relatedRightArrow={this.state.relatedRightArrow}>
             {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
-          </div>
+          </StyledRightRelatedButtonContainer>
         </StyledCarouselContainer>
         <StyledHeader>YOUR OUTFIT</StyledHeader>
         <StyledCarouselContainer>
@@ -316,8 +333,9 @@ class RelatedProductsAndOutfits extends React.Component {
             handleItemClick={this.props.handleItemClick}
             checkIfButtonsShouldRender={this.checkIfButtonsShouldRender}
             translatedXoutfit={this.state.translatedXoutfit}
+            outfitLeftArrow={this.state.outfitLeftArrow}
           />
-          <div>
+          <StyledRightOutfitButtonContainer outfitRightArrow={this.state.outfitRightArrow}>
             {this.state.outfitRightArrow && (
               <StyledRightButton
                 onClick={() => {
@@ -328,9 +346,12 @@ class RelatedProductsAndOutfits extends React.Component {
                 {'>'}
               </StyledRightButton>
             )}
-          </div>
+          </StyledRightOutfitButtonContainer>
         </StyledCarouselContainer>
-        <br></br> {/* remove this when incorporating everyone's components */}
+        <br /> {/* remove this when incorporating everyone's components */}
+        <br /> {/* remove this when incorporating everyone's components */}
+        <br /> {/* remove this when incorporating everyone's components */}
+        <br /> {/* remove this when incorporating everyone's components */}
       </div>
     );
   }

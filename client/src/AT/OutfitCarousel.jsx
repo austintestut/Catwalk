@@ -14,7 +14,7 @@ flex-wrap: nowrap;
 gap: 32.25px;
 justify-content: left;
 align-items: flex-start;
-height: 450px;
+height: 370px;
 overflow: hidden;
 `;
 const StyledProductCard = styled.div`
@@ -38,14 +38,20 @@ ${StyledAddButton}:hover {
   border-width: 1px;
 }
 `;
-
+const StyledLeftOutfitButtonContainer = styled.div`
+${props => props.outfitLeftArrow && css`
+z-index: 2;
+box-shadow: 20px 0 15px 0 rgba(100, 100, 100, 0.4);
+`};
+`;
 const OutfitCarousel = ({
   outfitProductIds,
   getOutfitIds,
   currentPageItemId,
   handleItemClick,
   checkIfButtonsShouldRender,
-  translatedXoutfit
+  translatedXoutfit,
+  outfitLeftArrow
 }) => {
   let productsToShow = outfitProductIds;
 
@@ -57,7 +63,9 @@ const OutfitCarousel = ({
 
   return (
     <StyledContainer>
+      <StyledLeftOutfitButtonContainer outfitLeftArrow={outfitLeftArrow}>
       <StyledAddButton onClick={() => storeOutfitItem(currentPageItemId)}>+</StyledAddButton>
+      </StyledLeftOutfitButtonContainer>
       <StyledOutfitContainer key='StyledOutfitContainer'>
         {productsToShow.map((productId) => {
           let card;
