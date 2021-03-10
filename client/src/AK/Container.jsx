@@ -121,22 +121,17 @@ class Container extends React.Component {
         email: event.target[2].value,
         product_id: ID,
       },
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=17761',
-      method: 'get',
-    })
-      .then((data) => {
-        this.setState({ questions: data.data.results });
+    }).then(() => {
+      let ID = 17762;
+      axios({
+        url: `/questions/${ID}`,
+        method: 'get',
       })
-      .then(() => {
-        axios({
-          headers: {
-            Authorization: TOKEN,
-          },
-          url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/111326/answers',
-          method: 'get',
-        }).then((data) => {
+        .then((data) => {
+          this.setState({ questions: data.data.results });
         });
-      });
+    }
+      );
   }
 
   render() {
