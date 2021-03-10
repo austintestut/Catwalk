@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import left from '../../../images/chevron-left.png';
+import right from '../../../images/chevron-right.png';
 
 import Carousel from './Carousel.jsx';
 
@@ -24,17 +26,18 @@ class ImageGallery extends React.Component {
     this.getPhotos = this.getPhotos.bind(this);
 
     this.zoomClick = this.zoomClick.bind(this);
+    this.selector = this.selector.bind(this);
 
     this.mainPicRef = React.createRef();
   }
 
 
   componentDidMount() {
-    this.getStyles(18025);
+   this.getStyles(18025);
   }
 
   getStyles(id) {
-    const options = {headers: {'Authorization': '51ed293eb79916493e9134ed9ca3d9940d0e4651'}}
+    const options = {headers: {'Authorization': ''}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, options)
       .then((res) => {
         this.setState({
@@ -101,11 +104,24 @@ class ImageGallery extends React.Component {
     })
   }
 
+  selector(selected) {
+    let styles = this.state.styles;
+    let index = 0;
+    for (let i = 0; i < styles.length; i++) {
+      if (styles[i].style_id === Number(selected)) {
+        index = i;
+      }
+    }
+    return index;
+  }
+
   render() {
 
     return (
       <GalleryContainer>
+
             <MainContainer>
+
         {this.state.mainPics.map((pic, index) => {
          let styles={
            backgroundImage: `url(${pic})`,
@@ -114,7 +130,7 @@ class ImageGallery extends React.Component {
          }
           return (
             <div key={index}>
-              {index === this.state.curMain && (
+              {index === (this.props.selected ? this.selector(this.props.selected) : this.state.curMain) && (
 
                 <MainImage ref={this.mainPicRef} key={index} style={styles}/>
 
@@ -122,26 +138,32 @@ class ImageGallery extends React.Component {
             </div>
           )
         })}
-      <button
+
+      <StyledPrevBtn
       name='curMain'
-      onClick={this.nextSlide}>
-      NEXT
-      </button>
-      <button
+      onClick={this.nextSlide}
+      />
+      <StyledNextBtn
       name='curMain'
-      onClick={this.prevSlide} >
-      PREV
-      </button>
+      onClick={this.prevSlide}
+      />
+
       </MainContainer>
+
       <ThumbsContainer>
+
           <Carousel
           curMain={this.state.curMain}
           thumbsMain={this.state.thumbsMain}
           thumbs={this.state.thumbs}
           next={this.nextThumb}
           prev={this.prevThumb}
+          selected={this.props.selected}
+          selector={this.selector}
           />
+
       </ThumbsContainer>
+
       </GalleryContainer>
     )
   }
@@ -164,7 +186,35 @@ const MainContainer = styled.div`
 `
 const ThumbsContainer = styled.div`
   position: relative;
-  bottom: 90%;
+  bottom: 95%;
+  width: 10%;
+  padding: 5px;
+`
+const StyledPrevBtn = styled.button`
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  left: 10%;
+  bottom: 50%;
+  background-image: url(${left});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 50%;
+`
+const StyledNextBtn = styled.button`
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  left: 85%;
+  bottom: 50%;
+  background-image: url(${right});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 50%;
 `
 
 export default ImageGallery;

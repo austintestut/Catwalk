@@ -1,12 +1,15 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components';
 
 const Description = ( {products} ) => {
   return (
     <div>
-      <h3>{products.slogan}</h3>
-      <p>{products.description}</p>
+      <h3><em>{products.slogan}</em></h3>
+      <StyledText>{products.description}</StyledText>
     </div>
   )
 }
-
+const StyledText = styled.p`
+  font-family: Arial, avenier;
+`
 export default Description;
