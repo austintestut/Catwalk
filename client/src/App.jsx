@@ -5,6 +5,7 @@ import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
 import Reviews from './components/Reviews.jsx';
 import Container from './AK/Container';
 import Overview from './Overview/Overview';
+import styled from 'styled-components';
 
 class App extends React.Component {
   constructor() {
