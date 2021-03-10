@@ -18,10 +18,11 @@ app.use(express.json());
  don't forget to access data.data on your client side as well (see .then)
 */
 app.get(`/products/:id`, (req, res) => {
+
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}`, {
 
     headers: {
-      Authorization: TOKEN,
+      Authorization: config.TOKEN,
     },
   })
     .then((data) => {
@@ -171,25 +172,25 @@ app.get('/reviews/:product_id/:sort/:count', (req, res) => {
     });
 });
 
-app.get(`/products/:id/styles`, (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
-    headers: {
-      Authorization: config.TOKEN,
-    },
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${req.params.id}/report`,
-    method: 'put',
-  }).then((data) => {
-    res.send(data);
-  })
-    .then((data) => {
-      // console.log(data.data.results);
-      res.status(200).send(data.data);
-    })
-    .catch((err) => {
-      console.log('ERR getting styles');
-      res.status(402).send(err);
-    });
-});
+// app.get(`/products/:id/styles`, (req, res) => {
+//   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
+//     headers: {
+//       Authorization: config.TOKEN,
+//     },
+//     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${req.params.id}/report`,
+//     method: 'put',
+//   }).then((data) => {
+//     res.send(data);
+//   })
+//     .then((data) => {
+//        //console.log(data.data.results);
+//       res.status(200).send(data.data);
+//     })
+//     .catch((err) => {
+//       console.log('ERR getting styles');
+//       res.status(402).send(err);
+//     });
+// });
 
 app.get(`/products/:id/related`, (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/related`, {
@@ -219,6 +220,20 @@ app.post(`/reviews`, (req, res) => {
       console.log('ERR posting review');
       res.status(500).send(err);
     });
+});
+
+app.get('/products/:id/styles', (req, res) => {
+  //console.log(res)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}/styles`, {
+    headers: {
+      Authorization: config.TOKEN,
+    }})
+    .then((res) => {
+      res.status(200).send(res.data);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
 });
 
 app.listen(port, () => {
