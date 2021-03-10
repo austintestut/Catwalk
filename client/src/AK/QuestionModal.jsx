@@ -26,9 +26,10 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
   }
   return (
     <ModalDiv>
-      <h2>Ask Your Question</h2>
-      <h4>About (the product name here)</h4>
       <ModalForm onSubmit={submitQuestion}>
+        <button style={{float: 'right'}}onClick={hideQModal}>X</button>
+        <h2>Ask Your Question</h2>
+        <h4>About (the product name here)</h4>
         <p>What is your question?</p>
         <input maxLength="1000" />
         <p>What is your nickname?</p>
@@ -39,7 +40,7 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
         <p>For authentication reasons only -  you will not be emailed</p>
         <button type="submit">Submit Your Question</button>
 
-        <button onClick={hideQModal}>Hide</button>
+
       </ModalForm>
     </ModalDiv>
   );

@@ -4,12 +4,17 @@ import styled from 'styled-components';
 const ShowQuestionsButton = styled.button`
 width: 15%;
 margin-left: 5%;
+color: white;
+background-image: linear-gradient(#ff0019, #790a04);
+&:hover {
+  cursor: pointer;
+}
 `;
 
 const ShowMoreQuestionsButton = function ({ showMoreQuestions, isMaxQuestions }) {
   if (!isMaxQuestions) {
     return (
-      <ShowQuestionsButton onClick={showMoreQuestions}>Show More Questions</ShowQuestionsButton>
+      <ShowQuestionsButton onClick={showMoreQuestions}>show more questions</ShowQuestionsButton>
     );
   }
   return (
