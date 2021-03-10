@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledAddQuestionButton = styled.button`
-width: 15%;
+height: 50px;
+width: 150px;
 margin-left: 5%;
 color: white;
 background-image: linear-gradient(#ff0019, #790a04);
 &:hover {
   cursor: pointer;
+  text-decoration: underline;
 };
 `;
 

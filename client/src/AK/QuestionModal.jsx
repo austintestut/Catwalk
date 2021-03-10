@@ -9,8 +9,7 @@ top: 0;
 width: 100%;
 height: 100%;
 overflow: auto;
-background-color: rgb(0,0,0);
-background-color: rgba(0,0,0,0.4);
+background-color: rgba(128,128,128,0.5);
 `;
 const ModalForm = styled.form`
 background-color: #fefefe;
