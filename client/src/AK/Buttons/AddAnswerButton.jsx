@@ -6,6 +6,7 @@ margin-left: 10px;
 text-decoration: underline;
 background: none;
 border: none;
+color: grey;
 &:hover {
   font-weight: bold;
   cursor: pointer;
