@@ -4,7 +4,8 @@ import QuestionList from './AK/QuestionList.jsx';
 import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
 import Reviews from './components/Reviews.jsx';
 import Container from './AK/Container';
-// import Overview from './Overview/Overview';
+import Overview from './Overview/Overview';
+import styled from 'styled-components'
 
 class App extends React.Component {
   constructor() {
@@ -98,9 +99,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <TopBar>Wozniak</TopBar>
         <br />
         <br />
-        {/* <Overview/> */}
+        <Overview/>
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
           handleItemClick={this.handleItemClick}
@@ -116,4 +118,9 @@ class App extends React.Component {
   }
 }
 
+const TopBar = styled.div`
+width: 100%;
+background-image: linear-gradient(#ff0019, #790a04);
+height: 50px;
+`
 export default App;
