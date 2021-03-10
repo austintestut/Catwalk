@@ -18,14 +18,15 @@ width: 50px;
 position: relative;
 top: 32%;
 left: 45%;
-background-image: linear-gradient(to left, white, silver);
-border: none;
+background-image: radial-gradient(white, silver);
+border-width: 1px;
 border-radius: 50%;
-color: black;
+font-size: 20px;
+text-align: center;
 ${StyledLeftButton}:hover {
-  background-image: linear-gradient(to left, white, #e11a2b);
+  background-image: radial-gradient(white, rgb(150, 150, 150));
   cursor: pointer;
-  color: white;
+  color: black;
 }
 `;
 const StyledRightButton = styled.button`
@@ -33,14 +34,16 @@ height: 50px;
 width: 50px;
 position: relative;
 top: 32%;
-background-image: linear-gradient(to right, white, silver);
-border: none;
+left: 15%;
+background-image: radial-gradient(white, silver);
+border-width: 1px;
+font-size: 20px;
 border-radius: 50%;
-color: black;
+text-align: center;
 ${StyledRightButton}:hover {
-  background-image: linear-gradient(to right, white, #e11a2b);
+  background-image: radial-gradient(white, rgb(150, 150, 150));
   cursor: pointer;
-  color: white;
+  color: black;
 }
 `;
 const StyledHeader = styled.h3`

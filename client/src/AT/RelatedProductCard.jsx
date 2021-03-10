@@ -6,6 +6,14 @@ import starIcon from '../../../images/empty_star.png';
 import ComparisonModal from './ComparisonModal';
 import ThumbnailCarousel from './ThumbnailCarousel';
 
+const modalFade = keyframes`
+from {
+  background-color: rgba(128,128,128,0);
+}
+to {
+  background-color: rgba(128,128,128,0.5);
+}
+`;
 const fadein = keyframes`
 from {
   opacity: 0;
@@ -44,7 +52,8 @@ z-index: 1;
 width: 100%;
 height: 100%;
 overflow: auto;
-background-color: rgba(0,0,0,0.3);
+animation: ${modalFade} .35s;
+animation-fill-mode: forwards;
 `;
 const StyledStarLine = styled.div`
 display: grid;
@@ -70,7 +79,7 @@ display: grid;
 padding-left: 2%;
 padding-right: 2%;
 position: relative;
-background-color: rgb(230, 230, 230);
+background-color: silver;
 border-style: solid none solid none;
 border-width: 2px;
 bottom: 65px;
@@ -336,8 +345,8 @@ class RelatedProductCard extends React.Component {
               )}
             </div>
           </StyledImageContainer>
-          <div>{this.state.productData.category}</div>
-          <div>{this.state.productData.name}</div>
+          <div font-style="italic">{this.state.productData.category}</div>
+          <div font-weight="bold">{this.state.productData.name}</div>
           <StyledPriceLine>
             {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
             <div>${this.state.showingStylePrice}</div>
