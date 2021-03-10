@@ -69,6 +69,10 @@
   font-weight: bold;
 }
 
+.bigButton {
+  color: white;
+  background-image: linear-gradient(#ff0019, #790a04);
+}
 .bigButton:hover {
   cursor: pointer;
   text-decoration: underline !important;

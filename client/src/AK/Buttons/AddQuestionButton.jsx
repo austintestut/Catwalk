@@ -8,6 +8,7 @@ color: white;
 background-image: linear-gradient(#ff0019, #790a04);
 &:hover {
   cursor: pointer;
+  text-decoration: underline;
 };
 `;
 
