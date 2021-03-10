@@ -74,6 +74,7 @@ grid-template-columns: auto 1fr;
 const StyledOldPrice = styled.div`
   color: red;
   text-decoration: line-through;
+  margin-right: 2px;
 `;
 class OutfitCard extends React.Component {
   constructor(props) {

@@ -92,7 +92,7 @@ animation: ${fadein} 0.4s;
 `;
 const StyledPriceLine = styled.div`
 display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: auto 1fr;
 `;
 const StyledOldPrice = styled.div`
   color: red;
@@ -359,15 +359,15 @@ class RelatedProductCard extends React.Component {
               )}
             </div>
           </StyledImageContainer>
-          <div font-style="italic">{this.state.productData.category}</div>
-          <div font-weight="bold">{this.state.productData.name}</div>
-          <StyledPriceLine>
-            {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
-            <div>${this.state.showingStylePrice}</div>
-          </StyledPriceLine>
-          <StyledStarLine>
+          <div>{this.state.productData.category}</div>
+        <div>{this.state.productData.name}</div>
+        <StyledPriceLine>
+          {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
+          <div>${this.state.showingStylePrice}</div>
+        </StyledPriceLine>
+        <StyledStarLine>
             <div><StarStatic number={this.state.rating} /></div>
-            <span text-align="left">({this.state.totalReviews})</span>
+            ({this.state.totalReviews})
           </StyledStarLine>
         </StyledCard>
       </>
