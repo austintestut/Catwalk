@@ -17,7 +17,16 @@ margin-bottom: 50px;
 width: 90%;
 max-height: 90vh;
 overflow-y: auto;
+border: 1px gray solid;
+border-radius: 4px;
+padding: 10px;
 `;
+
+const ButtonsDiv = styled.div`
+margin-top: 30px;
+width: 100%;
+height: 50px;
+`
 
 class Container extends React.Component {
   constructor(props) {
@@ -64,7 +73,6 @@ class Container extends React.Component {
     })
       .then((data) => {
         this.setState({ questions: data.data.results });
-        console.log(data.data.results);
       });
   }
 
@@ -103,7 +111,6 @@ class Container extends React.Component {
 
   submitQuestion(event) {
     event.preventDefault();
-    console.log('submitting question')
     const ID = 17762;
     axios({
       url: `/questions/${ID}`,
@@ -119,7 +126,6 @@ class Container extends React.Component {
     })
       .then((data) => {
         this.setState({ questions: data.data.results });
-        // console.log(data.data.results);
       })
       .then(() => {
         axios({
@@ -129,7 +135,6 @@ class Container extends React.Component {
           url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/111326/answers',
           method: 'get',
         }).then((data) => {
-          // console.log(data.data);
         });
       });
   }
@@ -146,13 +151,15 @@ class Container extends React.Component {
           searching={this.state.searching}
           displayedQuestions={this.state.displayedQuestions}
         />
-
-        <ShowMoreQuestionsButton
+        <ButtonsDiv >
+          <ShowMoreQuestionsButton
           showMoreQuestions={this.showMoreQuestions}
           isMaxQuestions={this.state.isMaxQuestions}
         />
 
         <AddQuestionButton showQModal={this.showQModal} />
+        </ButtonsDiv>
+
 
         <QuestionModal
           show={this.state.showQ}
