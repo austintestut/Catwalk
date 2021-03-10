@@ -37,8 +37,7 @@ class ImageGallery extends React.Component {
   }
 
   getStyles(id) {
-    const options = {headers: {'Authorization': ''}}
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, options)
+    axios.get(`/products/${id}/styles`)
       .then((res) => {
         this.setState({
           styles: res.data.results
