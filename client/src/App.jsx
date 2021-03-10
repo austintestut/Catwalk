@@ -35,6 +35,7 @@ class App extends React.Component {
         handleItemClick={this.handleItemClick}
         />
         <Container />
+        <Reviews/>
       </div>
     );
   }

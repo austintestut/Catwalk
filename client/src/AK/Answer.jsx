@@ -9,6 +9,7 @@ margin-left: 10px;
 text-decoration: underline;
 background: none;
 border: none;
+color: grey;
 &:hover {
   font-weight: bold;
   cursor: pointer;
@@ -18,13 +19,14 @@ const AnswerDiv = styled.div`
 display: flex;
 justify-content: space-between;
 font-family: Lucida Sans, Helvetica, Arial, sans-serif;
-font-weight: lighter;
+font-weight: normal;
 `;
 const AnswerButtonsDiv = styled.div`
 display: flex;
 justify-content: flex-end;
 align-items: center;
 margin-bottom: 35px;
+color: gray;
 
 `;
 

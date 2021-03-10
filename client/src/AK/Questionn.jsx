@@ -25,6 +25,7 @@ margin-left: 8px;
 text-decoration: underline;
 background: none;
 border: none;
+color: grey;
 &:hover {
   font-weight: bold;
   cursor: pointer;
@@ -139,7 +140,7 @@ class Questionn extends React.Component {
         <QuestionDiv>
           <div style={{fontWeight: '600', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
           </div>
-          <div style={{ fontSize: '14px' }}>
+          <div style={{ fontSize: '14px', color: 'grey'}}>
             Helpful?
             {this.renderHelpfulButton()}
             {this.renderReportButton()}

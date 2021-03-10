@@ -64,6 +64,10 @@
 .remove-filters {
   all: none
 }
+.austinButtons:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
 
 /*
 color: #e11a2b
