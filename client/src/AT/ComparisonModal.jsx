@@ -73,6 +73,7 @@ const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics, cur
           return (<div key={value}><StarStatic number={value} /></div>);
         })}
       </div>
+      <h3></h3>
     </StyledModalBox>
   );
 };

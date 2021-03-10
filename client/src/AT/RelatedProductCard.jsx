@@ -6,6 +6,14 @@ import starIcon from '../../../images/empty_star.png';
 import ComparisonModal from './ComparisonModal';
 import ThumbnailCarousel from './ThumbnailCarousel';
 
+const modalFade = keyframes`
+from {
+  background-color: rgba(128,128,128,0);
+}
+to {
+  background-color: rgba(128,128,128,0.5);
+}
+`;
 const fadein = keyframes`
 from {
   opacity: 0;
@@ -44,7 +52,8 @@ z-index: 1;
 width: 100%;
 height: 100%;
 overflow: auto;
-background-color: rgba(0,0,0,0.3);
+animation: ${modalFade} .35s;
+animation-fill-mode: forwards;
 `;
 const StyledStarLine = styled.div`
 display: grid;
@@ -70,7 +79,7 @@ display: grid;
 padding-left: 2%;
 padding-right: 2%;
 position: relative;
-background-color: rgb(230, 230, 230);
+background-color: white;
 border-style: solid none solid none;
 border-width: 2px;
 bottom: 65px;
@@ -83,12 +92,20 @@ animation: ${fadein} 0.4s;
 `;
 const StyledPriceLine = styled.div`
 display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: auto 1fr;
 `;
 const StyledOldPrice = styled.div`
   color: red;
   text-decoration: line-through;
   margin-right: 2px;
+`;
+const StyledCategoryText = styled.div`
+font-family: Arial, Avenir;
+font-style: italic;
+`;
+const StyledProductNameText = styled.div`
+font-family: Arial, Avenir;
+font-weight: bold;
 `;
 
 class RelatedProductCard extends React.Component {
@@ -99,6 +116,7 @@ class RelatedProductCard extends React.Component {
       productData: [],
       rating: 0,
       otherUrls: [],
+      styleNames: [],
       cardCharacteristics: {},
       // comparison modal showing or not
       modalShowing: false,
@@ -183,18 +201,30 @@ class RelatedProductCard extends React.Component {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
         let otherStyles = styleData.data.results.slice();
-        let otherUrls = otherStyles.map((style) => (style.photos[0].thumbnail_url));
+        let otherUrls = otherStyles.map((style) => {
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+          return image
+        });
+        let styleNames = otherStyles.map((style) => style.name);
         let styleSalePrices = {};
         otherStyles.map((style) => {
-          styleSalePrices[style.photos[0].thumbnail_url] = {
-            originalPrice: style.original_price,
-            salePrice: style.sale_price
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+            styleSalePrices[image] = {
+              originalPrice: style.original_price,
+              salePrice: style.sale_price
           };
         });
         this.setState({
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
           otherUrls: otherUrls,
-          styleSalePrices: styleSalePrices
+          styleSalePrices: styleSalePrices,
+          styleNames: styleNames
         }, () => this.checkIfThumbnailButtonsShouldRender());
       })
       .catch((err) => {
@@ -331,20 +361,21 @@ class RelatedProductCard extends React.Component {
                     handleOtherImageClick={this.handleOtherImageClick}
                     otherUrls={this.state.otherUrls}
                     thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
+                    styleNames={this.state.styleNames}
                   />
                 </StyledOtherImageContainer>
               )}
             </div>
           </StyledImageContainer>
-          <div>{this.state.productData.category}</div>
-          <div>{this.state.productData.name}</div>
-          <StyledPriceLine>
-            {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
-            <div>${this.state.showingStylePrice}</div>
-          </StyledPriceLine>
-          <StyledStarLine>
+          <StyledCategoryText>{this.state.productData.category}</StyledCategoryText>
+        <StyledProductNameText>{this.state.productData.name}</StyledProductNameText>
+        <StyledPriceLine>
+          {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
+          <div>${this.state.showingStylePrice}</div>
+        </StyledPriceLine>
+        <StyledStarLine>
             <div><StarStatic number={this.state.rating} /></div>
-            <span text-align="left">({this.state.totalReviews})</span>
+            ({this.state.totalReviews})
           </StyledStarLine>
         </StyledCard>
       </>
