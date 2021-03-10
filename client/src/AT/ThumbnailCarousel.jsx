@@ -46,7 +46,7 @@ ${StyledOtherImgCarouselRightButton}: hover {
   cursor: pointer;
   background-image: linear-gradient(to right, rgb(230, 230, 230), rgb(160, 160, 160));
 `;
-const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumbnailCarouselRightButtonClick, thumbnailLeftArrow, thumbnailRightArrow, handleOtherImageClick, otherUrls, thumbnailCarouselShowingIndexes }) => {
+const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumbnailCarouselRightButtonClick, thumbnailLeftArrow, thumbnailRightArrow, handleOtherImageClick, otherUrls, thumbnailCarouselShowingIndexes, styleNames }) => {
   let imagesToShow = [
     (otherUrls[thumbnailCarouselShowingIndexes[0]] || null),
     (otherUrls[thumbnailCarouselShowingIndexes[1]] || null),
@@ -65,6 +65,7 @@ const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumb
           thumbnail = (
             <StyledOtherImage
               src={image}
+              alt={styleNames[otherUrls.indexOf(image)]}
               onClick={() => handleOtherImageClick(otherUrls.indexOf(image))}
             />
           );

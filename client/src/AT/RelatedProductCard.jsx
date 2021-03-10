@@ -108,6 +108,7 @@ class RelatedProductCard extends React.Component {
       productData: [],
       rating: 0,
       otherUrls: [],
+      styleNames: [],
       cardCharacteristics: {},
       // comparison modal showing or not
       modalShowing: false,
@@ -192,18 +193,30 @@ class RelatedProductCard extends React.Component {
     axios.get(`/products/${id}/styles`)
       .then((styleData) => {
         let otherStyles = styleData.data.results.slice();
-        let otherUrls = otherStyles.map((style) => (style.photos[0].thumbnail_url));
+        let otherUrls = otherStyles.map((style) => {
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+          return image
+        });
+        let styleNames = otherStyles.map((style) => style.name);
         let styleSalePrices = {};
         otherStyles.map((style) => {
-          styleSalePrices[style.photos[0].thumbnail_url] = {
-            originalPrice: style.original_price,
-            salePrice: style.sale_price
+          let image = style.photos[0].thumbnail_url;
+          if (image[0] !== 'h') {
+            image = image.substring(1, image.length - 1);
+          }
+            styleSalePrices[image] = {
+              originalPrice: style.original_price,
+              salePrice: style.sale_price
           };
         });
         this.setState({
           photoUrl: styleData.data.results[0].photos[0].thumbnail_url,
           otherUrls: otherUrls,
-          styleSalePrices: styleSalePrices
+          styleSalePrices: styleSalePrices,
+          styleNames: styleNames
         }, () => this.checkIfThumbnailButtonsShouldRender());
       })
       .catch((err) => {
@@ -340,6 +353,7 @@ class RelatedProductCard extends React.Component {
                     handleOtherImageClick={this.handleOtherImageClick}
                     otherUrls={this.state.otherUrls}
                     thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
+                    styleNames={this.state.styleNames}
                   />
                 </StyledOtherImageContainer>
               )}
