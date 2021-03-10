@@ -17,6 +17,9 @@ margin-bottom: 50px;
 width: 90%;
 max-height: 90vh;
 overflow-y: auto;
+border: 1px gray solid;
+border-radius: 4px;
+padding: 10px;
 `;
 
 class Container extends React.Component {

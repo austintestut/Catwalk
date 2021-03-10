@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import dateFormatter from '../global_functions/dateFormatter';
 
 const StyledButton = styled.button`
-font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+font-family: Arial;
 margin-left: 10px;
 text-decoration: underline;
 background: none;

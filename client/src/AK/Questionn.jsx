@@ -8,7 +8,7 @@ import AnswerList from './AnswerList';
 const QuestionDiv = styled.div`
 display: flex;
 justify-content: space-between;
-font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+font-family: Arial;
 padding-top: 15px;
 
 `;

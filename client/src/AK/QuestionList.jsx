@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import Questionn from './Questionn';
 
 const QuestionListDiv = styled.div`
-margin-left: 5%;
-margin-right: 5%;
+
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
