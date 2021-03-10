@@ -37,8 +37,8 @@ class Overview extends React.Component {
   componentDidMount() {
     this.getProduct(18025);
     //this.getProducts(18025);
-    this.getStyles(18025);
-    //this.getStylish(18025);
+    // this.getStyles(18025);
+    this.getStylish(18025);
     //this.getRatingAndReviews(18025);
   }
 
