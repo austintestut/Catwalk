@@ -23,6 +23,7 @@ margin-left: 6px;
 margin-top: 20px;
 `;
 const StyledAddButton = styled.button`
+margin-left: 6px;
 width: 250px;
 height: 328px;
 margin-right: 32.25px;

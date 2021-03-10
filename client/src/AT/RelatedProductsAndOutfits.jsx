@@ -5,9 +5,9 @@ import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
 
 const StyledCarouselContainer = styled.div`
-font-family: Lucida Sans, Helvetica, Arial, sans-serif;
-padding-left: 10%;
-padding-right: 10%;
+font-family: Arial, Avenir;
+padding-left: 5%;
+padding-right: 5%;
 display: grid;
 grid-template-columns: 1fr 12fr 1fr;
 overflow: hidden;
@@ -18,12 +18,14 @@ width: 50px;
 position: relative;
 top: 32%;
 left: 45%;
-background-image: linear-gradient(to left, white, rgb(230, 230, 230));
+background-image: linear-gradient(to left, white, silver);
 border: none;
 border-radius: 50%;
+color: black;
 ${StyledLeftButton}:hover {
-  background-image: linear-gradient(to left, white, rgb(200, 200, 200));
+  background-image: linear-gradient(to left, white, #e11a2b);
   cursor: pointer;
+  color: white;
 }
 `;
 const StyledRightButton = styled.button`
@@ -31,16 +33,18 @@ height: 50px;
 width: 50px;
 position: relative;
 top: 32%;
-background-image: linear-gradient(to right, white, rgb(230, 230, 230));
+background-image: linear-gradient(to right, white, silver);
 border: none;
 border-radius: 50%;
+color: black;
 ${StyledRightButton}:hover {
-  background-image: linear-gradient(to right, white, rgb(200, 200, 200));
+  background-image: linear-gradient(to right, white, #e11a2b);
   cursor: pointer;
+  color: white;
 }
 `;
 const StyledHeader = styled.h3`
-  padding-left: 16%;
+  padding-left: 12%;
   width: auto;
 `;
 
