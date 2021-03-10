@@ -79,7 +79,7 @@ display: grid;
 padding-left: 2%;
 padding-right: 2%;
 position: relative;
-background-color: silver;
+background-color: white;
 border-style: solid none solid none;
 border-width: 2px;
 bottom: 65px;
@@ -98,6 +98,14 @@ const StyledOldPrice = styled.div`
   color: red;
   text-decoration: line-through;
   margin-right: 2px;
+`;
+const StyledCategoryText = styled.div`
+font-family: Arial, Avenir;
+font-style: italic;
+`;
+const StyledProductNameText = styled.div`
+font-family: Arial, Avenir;
+font-weight: bold;
 `;
 
 class RelatedProductCard extends React.Component {
@@ -359,8 +367,8 @@ class RelatedProductCard extends React.Component {
               )}
             </div>
           </StyledImageContainer>
-          <div>{this.state.productData.category}</div>
-        <div>{this.state.productData.name}</div>
+          <StyledCategoryText>{this.state.productData.category}</StyledCategoryText>
+        <StyledProductNameText>{this.state.productData.name}</StyledProductNameText>
         <StyledPriceLine>
           {this.state.salePriceExists && <StyledOldPrice>${this.state.strikethroughPrice}</StyledOldPrice>}
           <div>${this.state.showingStylePrice}</div>

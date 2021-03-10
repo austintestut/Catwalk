@@ -16,7 +16,7 @@ const StyledLeftButton = styled.button`
 height: 50px;
 width: 50px;
 position: relative;
-top: 32%;
+top: 160px;
 left: 45%;
 background-image: radial-gradient(white, silver);
 border-width: 1px;
@@ -33,7 +33,7 @@ const StyledRightButton = styled.button`
 height: 50px;
 width: 50px;
 position: relative;
-top: 32%;
+top: 160px;
 left: 15%;
 background-image: radial-gradient(white, silver);
 border-width: 1px;
@@ -85,16 +85,19 @@ class RelatedProductsAndOutfits extends React.Component {
       outfitLeftArrow: false,
       outfitRightArrow: true,
 
-      productData: [],
-      rating: 0,
-      characteristics: [],
-      totalReviews: 0,
-      relatedProductIds: [],
       outfitProductIds: [],
 
       translatedXrp: 0,
       translatedXoutfit: 0
     };
+
+    /*
+      relatedProductIds: [],
+      productData: [],
+      rating: 0,
+      characteristics: [],
+      totalReviews: 0
+    */
 
     // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
     // this.outfitProductIds = [18076, 17858, 17763, 18076, 17068]; // for testing
@@ -108,21 +111,14 @@ class RelatedProductsAndOutfits extends React.Component {
     this.renderLeftButtonToggleForRelatedProducts = this.renderLeftButtonToggleForRelatedProducts.bind(this);
     this.renderLeftButtonToggleForOutfit = this.renderLeftButtonToggleForOutfit.bind(this);
     this.checkIfButtonsShouldRender = this.checkIfButtonsShouldRender.bind(this);
-    this.getProductInfo = this.getProductInfo.bind(this);
-    this.getRating = this.getRating.bind(this);
-    this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
     this.getOutfitIds = this.getOutfitIds.bind(this);
   }
 
   componentDidMount() {
-    this.setState({
-      currentPageItemId: this.props.currentPageItemId
-    }, () => {
-      this.getProductInfo(this.props.currentPageItemId);
-      this.getRating(this.props.currentPageItemId);
-      this.getRelatedItemIds(this.props.currentPageItemId);
+      // this.getProductInfo(this.props.currentPageItemId);
+      // this.getRating(this.props.currentPageItemId);
+      // this.getRelatedItemIds(this.props.currentPageItemId);
       this.getOutfitIds();
-    });
   }
 
   // fetch data for current item on page
@@ -188,7 +184,7 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   renderRightButtonToggleForRelatedProducts() {
-    if (this.state.relatedCurrentlyShowingIndexes[3] >= this.state.relatedProductIds.length - 1) {
+    if (this.state.relatedCurrentlyShowingIndexes[3] >= this.props.relatedProductIds.length - 1) {
       this.setState({
         relatedRightArrow: false
       });
@@ -307,13 +303,13 @@ class RelatedProductsAndOutfits extends React.Component {
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
           </StyledLeftRelatedButtonContainer>
           <RelatedProductsCarousel
-            relatedProductIds={this.state.relatedProductIds}
+            relatedProductIds={this.props.relatedProductIds}
             relatedCurrentlyShowingIndexes={this.state.relatedCurrentlyShowingIndexes}
             toggleModal={this.toggleModal}
             handleItemClick={this.props.handleItemClick}
-            currentProductData={this.state.productData}
-            currentRating={this.state.rating}
-            currentCharacteristics={this.state.characteristics}
+            currentProductData={this.props.productData}
+            currentRating={this.props.rating}
+            currentCharacteristics={this.props.characteristics}
             translatedXrp={this.state.translatedXrp}
           />
           <StyledRightRelatedButtonContainer relatedRightArrow={this.state.relatedRightArrow}>
