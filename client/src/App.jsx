@@ -22,9 +22,15 @@ class App extends React.Component {
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getRating = this.getRating.bind(this);
     this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
+    this.fetcher = this.fetcher.bind(this);
   }
 
   componentDidMount() {
+    this.fetcher();
+  }
+
+  // add any axios requests here
+  fetcher() {
     this.getProductInfo(this.state.currentPageItemId);
     this.getRating(this.state.currentPageItemId);
     this.getRelatedItemIds(this.state.currentPageItemId);
@@ -92,6 +98,8 @@ class App extends React.Component {
   handleItemClick(id) {
     this.setState({
       currentPageItemId: id
+    }, () => {
+      this.fetcher();
     });
   }
 
@@ -100,7 +108,7 @@ class App extends React.Component {
       <div>
         <br />
         <br />
-        <Overview/>
+        <Overview />
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
           handleItemClick={this.handleItemClick}
