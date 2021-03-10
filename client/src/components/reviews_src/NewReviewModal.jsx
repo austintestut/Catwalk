@@ -189,9 +189,9 @@ class NewReviewModal extends React.Component {
                   <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block' }} />
                   <small>{this.state.count}</small>
                 </div>
-                <button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
+                <button className="bigButton"onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
                 <span>
-                  <button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
+                  <button className="bigButton"onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
                   <Errors errors={this.state.errors}/>
                 </span>
                 {this.state.urlWindow && (
@@ -208,7 +208,7 @@ class NewReviewModal extends React.Component {
         </div>
       );
     }
-    return <button style={{float: 'right'}} onClick={this.toggleModal}>Add A Review +</button>;
+    return <button className="bigButton"style={{float: 'right'}} onClick={this.toggleModal}>Add A Review +</button>;
   }
 }
 

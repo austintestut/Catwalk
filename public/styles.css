@@ -69,6 +69,11 @@
   font-weight: bold;
 }
 
+.bigButton:hover {
+  cursor: pointer;
+  text-decoration: underline !important;
+}
+
 /*
 color: #e11a2b
 color: white

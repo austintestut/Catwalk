@@ -140,7 +140,7 @@ class Questionn extends React.Component {
         <QuestionDiv>
           <div style={{fontWeight: '600', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
           </div>
-          <div style={{ fontSize: '14px', color: 'grey'}}>
+          <div style={{ fontSize: '14px', color: 'grey', width: '300px'}}>
             Helpful?
             {this.renderHelpfulButton()}
             {this.renderReportButton()}
