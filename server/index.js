@@ -8,7 +8,9 @@ const app = express();
 
 const port = 8080;
 
+
 app.use(express.static(path.join(__dirname, '../public')));
+
 app.use(express.json());
 
 /*
@@ -207,6 +209,7 @@ app.post(`/reviews`, (req, res) => {
     },
   })
     .then((data) => {
+      console.log('success')
       res.status(201).send(data.data);
     })
     .catch((err) => {
@@ -215,6 +218,28 @@ app.post(`/reviews`, (req, res) => {
     });
 });
 
+app.put(`/reviews/:review_id/:method`, (req, res) => {
+  // not working????
+  console.log(req.params);
+  const { review_id, method } = req.params;
+  // method === 'helpful' || 'report'
+  if (!method) { method = 'helpful'; }
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${review_id}/${method}`;
+  console.log(url);
+  axios.put(url, req.body, {
+    headers: {
+      Authorization: TOKEN,
+    },
+  })
+    .then((data) => {
+      console.log('good');
+      //console.log(data);
+      res.status(201).send(data.data);
+    })
+    .catch((err) => {
+      console.log(err.response.status);
+    });
+});
 app.listen(port, () => {
   console.log('Server listening at:', port);
 });

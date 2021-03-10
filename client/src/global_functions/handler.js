@@ -21,6 +21,12 @@ const handler = {
         .then((response) => cb(response))
         .catch((err) => console.log(err));
     },
+    update(id, method, cb = () => {}) {
+      //method === helpful || report
+      axios.put(`http://${ip}:${port}/reviews/${id}/${method}`)
+        .then((response) => cb(response))
+        .catch((err) => console.log(err));
+    },
   },
 };
 

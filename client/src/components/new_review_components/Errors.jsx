@@ -8,6 +8,7 @@ const Errors = ({ errors }) => {
         fontSize: '60%',
         color: 'red',
         marginRight: '10px',
+        width: '150px',
       }}>
         <ul>
           {errors.map((error) => <li>{error}</li>)}
