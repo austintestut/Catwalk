@@ -141,7 +141,6 @@ class NewReviewModal extends React.Component {
       height: 'auto',
       backgroundColor: 'white',
       borderRadius: '5px',
-      overflow: 'auto',
     };
     /* ---------------------------------------------------------------------------------*/
     if (this.state.open) {
