@@ -51,9 +51,9 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   };
   const recommendStyle = {
     color: '#e11a2b',
-    fontWeight: 'bold',
-    fontSize: '82%',
-    textShadow: '0 0 0.5px #000',
+    // fontWeight: 'bold',
+    fontSize: '85%',
+    // textShadow: '0 0 0.5px #000',
     whiteSpace: 'nowrap',
   };
   const headerStyle = {
@@ -63,12 +63,20 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
     whiteSpace: 'nowrap',
   };
 
+  const percentStyle = {
+    color: '#e11a2b',
+    fontWeight: 'bold',
+    fontSize: '85%',
+    whiteSpace: 'nowrap',
+    // textShadow: '0 0 0.5px #000',
+  };
+
   return (
     <div style={{ ...containerStyle }}>
       <h3 style={{ ...headerStyle }}>Overall Rating:</h3>
       <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
       <Filters clearFilters={clearFilters} filters={currentFilters} />
-      <div style={{ ...recommendStyle }}>{percentReq()}% of reviews recommend this product</div>
+      <div style={{ ...recommendStyle }}><span style={{ ...percentStyle }}>{percentReq()}%</span> of reviews recommend this product</div>
       {Object.entries(ratings).map((rating) =>
         <div style={{ ...coloredBarStyle }}>
           <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>

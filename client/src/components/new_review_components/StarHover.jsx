@@ -42,14 +42,18 @@ class StarHover extends React.Component {
     // const solidStar = <i class="fas fa-star"/>;
     let { count } = this.state;
     let stars = [];
+    const style = {
+      color: '#e11a2b',
+      // textShadow: '0 0 3px black',
+    }
     for (let x = 0; x < 5; x++) {
       if (count > x) {
         stars.push(
-          <i class="fas fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle} />);
+          <i class="fas fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle} style={{ ...style }}/>);
         continue
       }
       stars.push(
-      <i class="far fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle}/>);
+      <i class="far fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle} style={{ ...style }}/>);
     }
     return stars;
   }

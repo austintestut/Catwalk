@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import $ from 'jquery';
 
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class ImgModal extends React.Component {
@@ -12,6 +13,16 @@ class ImgModal extends React.Component {
 
   toggleModal(e) {
     e.preventDefault();
+    if (!this.state.open) {
+      $('html, body').css({
+        overflow: 'hidden',
+      });
+    }
+    else {
+      $('html, body').css({
+        overflow: 'auto',
+      });
+    }
     this.setState({ open: !this.state.open });
   }
 

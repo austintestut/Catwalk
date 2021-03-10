@@ -6,7 +6,7 @@ const Errors = ({ errors }) => {
       <div style={{
         float: 'right',
         fontSize: '60%',
-        color: 'red',
+        color: '#e11a2b',
         marginRight: '10px',
         width: '150px',
       }}>

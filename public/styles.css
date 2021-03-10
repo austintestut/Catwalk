@@ -69,6 +69,10 @@
   font-weight: bold;
 }
 
+body.no-scroll{
+  overflow: hidden;
+}
+
 /*
 color: #e11a2b
 color: white
