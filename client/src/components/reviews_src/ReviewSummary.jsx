@@ -42,8 +42,6 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
     fontSize: '550%',
     paddingRight: '15px',
     fontWeight: 'bolder',
-    marginBottom: '0px',
-    paddingBottom: '0px',
   };
   const starStyle = {
     verticalAlign: 'top',
@@ -52,7 +50,8 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   const recommendStyle = {
     color: '#e11a2b',
     // fontWeight: 'bold',
-    fontSize: '85%',
+    marginTop: '25px',
+    fontSize: '90%',
     // textShadow: '0 0 0.5px #000',
     whiteSpace: 'nowrap',
   };
@@ -81,7 +80,6 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
     <div style={{ ...containerStyle }}>
       <h3 style={{ ...headerStyle }}>Overall Rating:</h3>
       <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
-      <Filters clearFilters={clearFilters} filters={currentFilters} />
       <div style={{ ...recommendStyle }}><span style={{ ...percentStyle }}>{percentReq()}%</span> of reviews recommend this product</div>
       {Object.entries(ratings).map((rating) => {
         if (currentFilters.indexOf(rating[0]) === -1) {
@@ -99,6 +97,7 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
           </div>
         );
       })}
+      <Filters clearFilters={clearFilters} filters={currentFilters} />
       <br />
       {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
     </div>

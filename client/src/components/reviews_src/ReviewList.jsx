@@ -46,8 +46,8 @@ class ReviewList extends React.Component {
       { show: this.state.show + 2 },
       () => {
         const container = document.getElementById('review-tile-container');
-        window.scrollTo(0, document.body.scrollHeight);
-        container.scrollTo(0, container.scrollHeight);
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
       },
     );
   }

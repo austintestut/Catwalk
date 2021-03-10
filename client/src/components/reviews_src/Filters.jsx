@@ -5,6 +5,7 @@ const Filters = ({ filters, clearFilters }) => {
     height: '20px',
     position: 'relative',
     marginBottom: '5px',
+    marginTop: '5px',
   };
   const clearFiltersStyle = {
     backgroundColor: '#e11a2b',
