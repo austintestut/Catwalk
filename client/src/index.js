@@ -4,4 +4,4 @@ import App from './App.jsx';
 // add overview
 import Overview from './Overview/Overview.jsx';
 
-ReactDOM.render(<Overview />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
