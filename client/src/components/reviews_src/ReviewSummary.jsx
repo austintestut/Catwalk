@@ -65,10 +65,16 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
 
   const percentStyle = {
     color: '#e11a2b',
-    fontWeight: 'bold',
+    fontWeight: 'bolder',
     fontSize: '85%',
     whiteSpace: 'nowrap',
     // textShadow: '0 0 0.5px #000',
+  };
+
+  const selectedStyle = {
+    textDecoration: 'underline',
+    fontWeight: 'bold',
+    whiteSpace: 'nowrap',
   };
 
   return (
@@ -77,11 +83,22 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
       <span><h1 style={{ ...inlineStyle }}>{average}</h1><span style={{ ...starStyle }}><StarStatic number={average}/></span></span>
       <Filters clearFilters={clearFilters} filters={currentFilters} />
       <div style={{ ...recommendStyle }}><span style={{ ...percentStyle }}>{percentReq()}%</span> of reviews recommend this product</div>
-      {Object.entries(ratings).map((rating) =>
-        <div style={{ ...coloredBarStyle }}>
-          <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
-          <ColoredBar total={getTotal()} count={rating[1]} />
-        </div>)}
+      {Object.entries(ratings).map((rating) => {
+        if (currentFilters.indexOf(rating[0]) === -1) {
+          return (
+            <div style={{ ...coloredBarStyle }}>
+              <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
+              <ColoredBar total={getTotal()} count={rating[1]} />
+            </div>
+          );
+        }
+        return (
+          <div style={{ ...selectedStyle }}>
+            <span className="filter" onClick={addFilter} value={rating[0]}>{rating[0]} Stars</span>
+            <ColoredBar total={getTotal()} count={rating[1]} />
+          </div>
+        );
+      })}
       <br />
       {Object.entries(characteristics).map((entry) => <Characteristic item={entry} />)}
     </div>

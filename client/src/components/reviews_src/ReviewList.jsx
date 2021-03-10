@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import MoreReviews from './MoreReviews';
 import ReviewsSort from './ReviewsSort';
 import ReviewTileContainer from './ReviewTileContainer';
@@ -41,7 +42,14 @@ class ReviewList extends React.Component {
 
   addReviews(e) {
     e.preventDefault();
-    this.setState({ show: this.state.show + 2 });
+    this.setState(
+      { show: this.state.show + 2 },
+      () => {
+        const container = document.getElementById('review-tile-container');
+        window.scrollTo(0, document.body.scrollHeight);
+        container.scrollTo(0, container.scrollHeight);
+      },
+    );
   }
 
   render() {

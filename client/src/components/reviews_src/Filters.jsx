@@ -2,8 +2,9 @@ import React from 'react';
 
 const Filters = ({ filters, clearFilters }) => {
   const containerStyle = {
-    height: '130px',
+    height: '20px',
     position: 'relative',
+    marginBottom: '5px',
   };
   const clearFiltersStyle = {
     backgroundColor: '#e11a2b',
@@ -30,10 +31,6 @@ const Filters = ({ filters, clearFilters }) => {
   if (filters.length) {
     return (
       <div style={{ ...containerStyle }}>
-        <span>Filters Applied:</span>
-        <ul style={{ ...ulStyle }}>
-          {filters.map((filter) => <li style={{ ...liStyle }}>{filter} Star</li>)}
-        </ul>
         <button className="remove-filters" onClick={clearFilters} style={{ ...clearFiltersStyle }}>Remove Current Filters</button>
       </div>
     );

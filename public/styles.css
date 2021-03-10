@@ -21,12 +21,14 @@
 
 .reviews .new-review h4{
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   font-family: 'Avenir Black';
 }
 .reviews .new-review h3{
   margin-top: 5px;
+  margin-bottom: 0px;
   font-family: 'Avenir Black';
+  padding: 0px;
 }
 .reviews .new-review h2{
   margin-bottom: 5px;
@@ -48,6 +50,18 @@
   font-size: 16px;
 }
 
+.reviews small {
+  color: darkgrey;
+}
+
+.reviews button:hover{
+  cursor: pointer;
+}
+
+.modal-close:hover{
+  cursor: pointer;
+}
+
 
 .reviews, input[type="radio"] {
   margin: '10px';
@@ -59,10 +73,14 @@
 
 .filter:hover {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .remove-filters {
   all: none
+}
+.remove-filters:hover{
+  cursor: pointer;
 }
 .austinButtons:hover {
   cursor: pointer;

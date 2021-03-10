@@ -103,7 +103,7 @@ class NewReviewModal extends React.Component {
       zIndex: 1,
       left: '50%',
       transform: 'translateX(-50%)',
-      top: '3%',
+      top: '10%',
       height: '100%',
       backgroundColor: 'transparent',
       maxHeight: 'calc(100vh - 50px)',
@@ -135,9 +135,9 @@ class NewReviewModal extends React.Component {
     };
 
     const formStyle = {
-      padding: '3%',
+      padding: '5%',
       paddingTop: 0,
-      width: '50vw',
+      width: '800px',
       height: 'auto',
       backgroundColor: 'white',
       borderRadius: '5px',
@@ -148,7 +148,7 @@ class NewReviewModal extends React.Component {
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
             <div style={{ ...modalContentStyle }}>
-              <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
+              <i className="fas fa-times fa-lg modal-close" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
               <div style={{ ...formStyle }} className="new-review">
                 { /* ------------------------------->>FORM HERE<<------------------------------*/ }
                 <div style={{ justifyContent: 'center', textAlign: 'center' }}>

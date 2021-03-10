@@ -87,7 +87,7 @@ class ImgModal extends React.Component {
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
             <div style={{ ...modalContentStyle }}>
-              <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
+              <i className="fas fa-times fa-lg modal-close" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
               <img src={url} alt="" style={{ ...imgStyle }} />
             </div>
           </div>
