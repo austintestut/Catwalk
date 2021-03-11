@@ -19,7 +19,7 @@
 }
 
 .reviews .new-review h4{
-  margin-top: 5px;
+  margin-top: 14px;
   margin-bottom: 0px;
   font-family: 'Avenir Black';
 }
@@ -88,6 +88,16 @@
 
 body.no-scroll{
   overflow: hidden;
+}
+
+.reviews textarea, input[type=text]{
+  padding: 10px 5px;
+  margin: 0px 0;
+  border: 1px solid silver;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size:14px;
+  font-family: Arial;
 }
 
 /*

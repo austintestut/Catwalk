@@ -9,6 +9,7 @@ const ReviewTileContainer = ({ reviews, show }) => {
     maxHeight: '85vh',
     // borderBottom: '3px solid silver',
     borderRadius: '1px',
+    width: '100%',
     //borderTop: '1px solid grey',
   };
 

@@ -59,6 +59,7 @@ class ReviewList extends React.Component {
       alignSelf: 'flex-end stretch',
       margin: '10px',
       marginTop: '0px',
+      width: '100%',
     };
 
     return (

@@ -48,8 +48,8 @@ class CharacteristicsSelector extends React.Component {
     if (characteristics.length > 2) {
       return (
         <div style={{ ...radioStyle }} onChange={this.handleChange}>
-          <h4 style={{marginBottom: '5px'}}>{item}</h4>
-          <p style={{ fontSize: '80%', margin: '5px' }}>{text}</p>
+          <h4 style={{marginBottom: 0 }}>{item}</h4>
+          <p style={{ fontSize: '80%', margin: '5px', marginTop: 0 }}>{text}</p>
           <input type="radio" name={item} value="1" /><br />
           <input type="radio" name={item} value="2" /><br />
           <input type="radio" name={item} value="3" /><br />
