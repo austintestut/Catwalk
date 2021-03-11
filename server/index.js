@@ -49,7 +49,7 @@ app.get('/questions/:id', (req, res) => {
   }).then((data) => {
     res.send(data.data);
   }).catch((error) => {
-    console.log('error case');
+    console.log('error case:');
     res.send(error);
   });
 });

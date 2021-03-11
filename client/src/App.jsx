@@ -12,7 +12,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPageItemId: 17450, // hard coded landing page
-
+      questions: [],
       relatedProductIds: [],
       productData: {},
       rating: 0,
@@ -23,7 +23,9 @@ class App extends React.Component {
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getRating = this.getRating.bind(this);
     this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
+    this.getProductQuestions = this.getProductQuestions.bind(this);
     this.fetcher = this.fetcher.bind(this);
+
   }
 
   componentDidMount() {
@@ -35,6 +37,18 @@ class App extends React.Component {
     this.getProductInfo(this.state.currentPageItemId);
     this.getRating(this.state.currentPageItemId);
     this.getRelatedItemIds(this.state.currentPageItemId);
+    this.getProductQuestions();
+  }
+
+  getProductQuestions() {
+    // will need to change the ID parameter below to be dynamic, maybe use params obj
+    axios({
+      url: `/questions/${this.state.currentPageItemId}`,
+      method: 'get',
+    })
+      .then((data) => {
+        this.setState({ questions: data.data.results });
+      });
   }
 
   // fetch related items
@@ -107,22 +121,20 @@ class App extends React.Component {
     return (
       <>
         <TopBar>Wozniak</TopBar>
-        <div>
-          <br />
-          <br />
-          <Overview />
-          <RelatedProductsAndOutfits
-            currentPageItemId={this.state.currentPageItemId}
-            handleItemClick={this.handleItemClick}
-            relatedProductIds={this.state.relatedProductIds}
-            productData={this.state.productData}
-            rating={this.state.rating}
-            characteristics={this.state.characteristics}
-          />
-          <Container />
-          <Reviews />
-        </div>
-      </>
+        <br />
+        <br />
+        <Overview />
+        <RelatedProductsAndOutfits
+          currentPageItemId={this.state.currentPageItemId}
+          handleItemClick={this.handleItemClick}
+          relatedProductIds={this.state.relatedProductIds}
+          productData={this.state.productData}
+          rating={this.state.rating}
+          characteristics={this.state.characteristics}
+        />
+        <Container currentPageItemID={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
+        <Reviews />
+      </div>
     );
   }
 }
