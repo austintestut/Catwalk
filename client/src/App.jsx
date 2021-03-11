@@ -119,7 +119,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
+      <div>
         <TopBar>Wozniak</TopBar>
         <br />
         <br />
