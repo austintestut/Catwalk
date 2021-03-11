@@ -25,7 +25,7 @@ ${StyledOtherImage}:hover {
 `;
 const StyledOtherImgCarouselLeftButton = styled.button`
 height: 49px;
-width: 90%;
+width: 17px;
 border: none;
 position: relative;
 top: 4px;
@@ -42,7 +42,7 @@ ${StyledOtherImgCarouselLeftButton}: hover {
 `;
 const StyledOtherImgCarouselRightButton = styled.button`
 height: 49px;
-width: 90%;
+width: 17px;
 border: none;
 position: relative;
 top: 4px;
@@ -67,7 +67,7 @@ const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumb
 
   return (
     <>
-      <div>{thumbnailLeftArrow && <StyledOtherImgCarouselLeftButton onClick={handleThumbnailCarouselLeftButtonClick}>{'<'}</StyledOtherImgCarouselLeftButton>}</div>
+      <div>{thumbnailLeftArrow && <StyledOtherImgCarouselLeftButton onClick={handleThumbnailCarouselLeftButtonClick}></StyledOtherImgCarouselLeftButton>}</div>
       {imagesToShow.map((image) => {
         let thumbnail;
         if (image === null) {
@@ -76,6 +76,7 @@ const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumb
           thumbnail = (
             <StyledOtherImage
               src={image}
+              // for some reason, adding a key messes up the spacing in the carousel...
               alt={styleNames[otherUrls.indexOf(image)]}
               onClick={() => handleOtherImageClick(otherUrls.indexOf(image))}
             />
@@ -87,7 +88,7 @@ const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumb
         {thumbnailRightArrow &&
           (<StyledOtherImgCarouselRightButton
             onClick={handleThumbnailCarouselRightButtonClick}
-          >{'>'}</StyledOtherImgCarouselRightButton>)}
+          ></StyledOtherImgCarouselRightButton>)}
       </div>
     </>
   );

@@ -30,15 +30,15 @@ position: relative;
 transition: transform 0.35s;
 transform: translate(${props => props.translatedXrp}px);
 ${StyledCard}:hover {
-  box-shadow: 0 0 6px rgb(100, 100, 100);
+  box-shadow: 0 0 10px rgb(100, 100, 100);
 }
 `;
 const StyledStarIcon = styled.div`
 height: 30px;
 width:30px;
 position: absolute;
-top: 0;
-right: 0;
+top: 2px;
+right: 2px;
 ${StyledStarIcon}:hover {
   cursor: pointer;
   filter: invert(0.5);

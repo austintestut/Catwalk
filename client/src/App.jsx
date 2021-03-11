@@ -141,7 +141,6 @@ class App extends React.Component {
 
 const TopBar = styled.div`
 width: 100%;
-height: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
 `
