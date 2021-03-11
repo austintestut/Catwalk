@@ -35,7 +35,7 @@ class ImgModal extends React.Component {
       left: '50%',
       transform: 'translateX(-50%)',
       top: '3%',
-      height: '100%',
+      // height: '100%',
       // overflow: 'auto',
       backgroundColor: 'transparent',
       maxHeight: 'calc(100vh - 50px)',
