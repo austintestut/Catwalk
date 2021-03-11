@@ -33,13 +33,12 @@ class ImgModal extends React.Component {
       position: 'fixed',
       zIndex: 1,
       left: '50%',
-      transform: 'translateX(-50%)',
-      top: '3%',
+      transform: 'translate(-50%, -50%)',
+      top: '50%',
       // height: '100%',
       // overflow: 'auto',
       backgroundColor: 'transparent',
       maxHeight: 'calc(100vh - 50px)',
-      maxWidth: '95%',
       // borderRadius: '10px',
     };
     const modalContentStyle = {
@@ -47,6 +46,8 @@ class ImgModal extends React.Component {
       backgroundColor: 'white',
       width: '100%',
       height: '100%',
+      maxHeight: 'calc(100vh - 50px)',
+      maxWidth: 'calc(100vw - 50px)',
       overflow: '-moz-scrollbars-vertical',
       overflowY: 'scroll',
     };
