@@ -132,9 +132,5 @@ width: 100%;
 height: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
-position: fixed;
-z-index: 999;
-margin:-top 0;
-padding-top:0;
 `
 export default App;
