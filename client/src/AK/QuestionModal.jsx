@@ -12,25 +12,31 @@ overflow: auto;
 background-color: rgba(128,128,128,0.5);
 `;
 const ModalForm = styled.form`
+display: flex;
+flex-direction: column;
 background-color: #fefefe;
 margin: 15% auto;
 padding: 20px;
 border: 1px solid #888;
 width: 80%;
 `;
+const XButton = styled.button`
+width: 50px;
+align-self: flex-end;
+`
 
-const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
+const QuestionModal = function ({ show, hideQModal, submitQuestion, productName }) {
   if (!show) {
     return null;
   }
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitQuestion}>
-        <button style={{float: 'right'}}onClick={hideQModal}>X</button>
-        <h2>Ask Your Question</h2>
-        <h4>About (the product name here)</h4>
+        <XButton style={{float: 'right', justifyContent: 'flex-end'}}onClick={hideQModal}>X</XButton>
+        <h2 style={{alignSelf: 'center' }}>Ask Your Question</h2>
+        <h4 style={{alignSelf: 'center' }}>About {productName}</h4>
         <p>What is your question?</p>
-        <input maxLength="1000" />
+        <input style={{height: '200px'}}maxLength="1000" />
         <p>What is your nickname?</p>
         <input placeholder="Example: jackson11!" maxLength="60" />
         <p>(For privacy reasons, do not use your full name or email address)</p>

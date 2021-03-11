@@ -71,9 +71,9 @@ class Questionn extends React.Component {
       url: `/questions/${this.props.question.question_id}/answers`,
       method: 'post',
       data: {
-        body: event.target[0].value,
-        name: event.target[1].value,
-        email: event.target[2].value,
+        body: event.target[1].value,
+        name: event.target[2].value,
+        email: event.target[3].value,
       },
     });
   }
