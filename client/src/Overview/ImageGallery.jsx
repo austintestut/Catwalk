@@ -23,11 +23,9 @@ class ImageGallery extends React.Component {
     this.prevThumb = this.prevThumb.bind(this);
     this.getStyles = this.getStyles.bind(this);
     this.getPhotos = this.getPhotos.bind(this);
-
     this.zoomClick = this.zoomClick.bind(this);
     this.selector = this.selector.bind(this);
 
-    this.mainPicRef = React.createRef();
   }
 
 
@@ -40,7 +38,7 @@ class ImageGallery extends React.Component {
       .then((res) => {
         this.setState({
           styles: res.data.results
-        })
+        }, ()=>{this.getPhotos(this.state.styles)})
       })
       .catch((err) => {
         console.error(err);
@@ -69,7 +67,7 @@ class ImageGallery extends React.Component {
     let current = this.state.thumbsMain;
     this.setState({
       thumbsMain: (current === length - 1 ? 0 : current + 1)
-    }, ()=>{console.log(this.state.thumbsMain)})
+    })
   }
 
   prevThumb() {
@@ -93,7 +91,7 @@ class ImageGallery extends React.Component {
     let current = this.state.curMain;
     this.setState({
       curMain: (current === 0 ? length - 1 : current - 1)
-    }, ()=>{console.log(this.state.curMain)})
+    })
   }
 
   zoomClick() {
@@ -126,6 +124,7 @@ class ImageGallery extends React.Component {
            backgroundSize: 'cover',
            backgroundRepeat: 'no-repeat',
          }
+
           return (
             <div key={index}>
               {index === (this.props.selected ? this.selector(this.props.selected) : this.state.curMain) && (

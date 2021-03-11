@@ -15,38 +15,19 @@ class Overview extends React.Component {
     this.state = {
       products: {},
       styles: [],
-      ratings: [],
-      totalReviews: undefined,
       selectedStyle: '',
       selectedSize: '',
       sizeId: '',
     };
 
-    this.getProduct = this.getProduct.bind(this);
-    this.getReviewData = this.getReviewData.bind(this);
     this.getStyles = this.getStyles.bind(this);
     this.handleStyleSelect = this.handleStyleSelect.bind(this);
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
 
   }
 
-
   componentDidMount() {
-    this.getProduct(17450);
     this.getStyles(17450);
-    this.getReviewData(17450)
-  }
-
-  getProduct(id) {
-    axios.get(`/products/${id}`)
-      .then((res) => {
-        this.setState({
-          products: res.data
-        })
-      })
-      .catch((err) => {
-        console.error(err);
-      })
   }
 
   getStyles(id) {
@@ -54,28 +35,6 @@ class Overview extends React.Component {
       .then((res) => {
         this.setState({
           styles: res.data.results
-        })
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
-
-  getReviewData(id) {
-    const getAvg = (arr) => {
-      let sum = 0;
-      for (let i = 0; i < arr.length; i++) {
-        sum += Number(arr[i]);
-      }
-      let whole = sum/arr.length;
-      return (Math.round(whole * 4) / 4).toFixed(2)
-    }
-
-    axios.get(`/reviews/meta/${id}`)
-      .then((res) => {
-        this.setState({
-          ratings: getAvg(Object.values(res.data.ratings)),
-          totalReviews: Object.keys(res.data.ratings).length
         })
       })
       .catch((err) => {
@@ -110,9 +69,9 @@ class Overview extends React.Component {
         <SelectionContainer>
         <Info>
           <ProductInfo
-          products={this.state.products}
-          rating={this.state.ratings}
-          reviews={this.state.totalReviews}
+          product={this.props.product}
+          rating={this.props.rating}
+          reviews={this.props.reviews}
           styles={this.state.styles}
           selected={this.state.selectedStyle}
           handleSelect={this.handleStyleSelect}
@@ -129,7 +88,7 @@ class Overview extends React.Component {
         </SelectionContainer>
         <StyledDesc>
           <Description
-          products={this.state.products}
+          product={this.props.product}
           />
         </StyledDesc>
 
@@ -147,7 +106,7 @@ const OverviewMain = styled.div`
 const SelectionContainer = styled.div`
  display: flex;
  flex-direction: column;
- flex-grow: 3;
+ flex-grow: 1;
  order: 2;
 `
 const Images = styled.div`

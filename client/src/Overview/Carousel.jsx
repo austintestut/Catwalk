@@ -18,7 +18,7 @@ const Carousel = ({thumbs, thumbsMain, curMain, selected, next, prev, selector, 
       <StyledUpBtn onClick={next}/>
 
       {thumbs.map((pic, index) => {
-        console.log(index + 1)
+
         return (
           <div key={index}>
             {index === (selected ? selector(selected) : thumbsMain) && (
