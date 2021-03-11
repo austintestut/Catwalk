@@ -70,15 +70,20 @@ class Reviews extends React.Component {
     const { currentFilters } = this.state;
     const filterVal = e.target.getAttribute('value');
     if (currentFilters.indexOf(filterVal) === -1) {
-      this.setState({ currentFilters: [...currentFilters, filterVal] });
+      this.setState(
+        { currentFilters: [...currentFilters, filterVal] },
+      );
     }
   }
 
   clearFilters(e) {
-    e.preventDefault();
+    if (e) { e.preventDefault(); }
     const { currentFilters } = this.state;
     if (currentFilters) {
-      this.setState({ currentFilters: [] });
+      this.setState(
+        { currentFilters: [] },
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }),
+      );
     }
   }
 

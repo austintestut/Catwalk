@@ -22,12 +22,14 @@ const ReviewSummary = ({ addFilter, clearFilters, currentFilters, reviewsMeta })
   };
   const getAverage = () => {
     let total = 0;
-    let average = 0;
+    let avg = 0;
     Object.entries(reviewsMeta.ratings).forEach((review) => {
-      average += Number(review[0]) * Number(review[1]);
+      avg += Number(review[0]) * Number(review[1]);
       total += Number(review[1]);
     });
-    return (average / total).toFixed(1);
+    let val = (avg / total).toFixed(1);
+    if (val === 'NaN') return null;
+    return val;
   };
   const average = getAverage();
 

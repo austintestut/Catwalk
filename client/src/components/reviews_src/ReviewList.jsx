@@ -22,7 +22,10 @@ class ReviewList extends React.Component {
       this.setFilters();
     }
     if (prevProps.reviews !== reviews) {
-      this.setState({ reviews });
+      this.setState({
+        reviews,
+        show: 2,
+      });
     }
   }
 
@@ -34,10 +37,14 @@ class ReviewList extends React.Component {
           newList.push(review);
         }
       });
-      this.setState({ reviews: [...newList] });
+      this.setState(
+        { reviews: [...newList] },
+      );
       return;
     }
-    this.setState({ reviews: this.props.reviews });
+    this.setState(
+      { reviews: this.props.reviews },
+    );
   }
 
   addReviews(e) {
