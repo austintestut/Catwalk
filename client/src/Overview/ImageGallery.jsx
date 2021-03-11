@@ -201,6 +201,9 @@ const StyledPrevBtn = styled.button`
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 `
 const StyledNextBtn = styled.button`
   position: absolute;
@@ -214,6 +217,9 @@ const StyledNextBtn = styled.button`
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export default ImageGallery;

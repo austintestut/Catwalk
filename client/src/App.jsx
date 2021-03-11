@@ -14,7 +14,7 @@ class App extends React.Component {
       currentPageItemId: 17450, // hard coded landing page
       questions: [],
       relatedProductIds: [],
-      productData: [],
+      productData: {},
       rating: 0,
       characteristics: [],
       totalReviews: 0
@@ -63,7 +63,6 @@ class App extends React.Component {
         console.log('ERR Axios get product from client', err);
       });
   }
-
 
   // get the category, name, default price
   getProductInfo(id) {
@@ -120,7 +119,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <TopBar>Wozniak</TopBar>
         <br />
         <br />
@@ -142,7 +141,12 @@ class App extends React.Component {
 
 const TopBar = styled.div`
 width: 100%;
+height: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
+position: fixed;
+z-index: 999;
+margin:-top 0;
+padding-top:0;
 `
 export default App;
