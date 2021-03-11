@@ -22,7 +22,7 @@ class NewReviewModal extends React.Component {
       body: '',
       images: [],
       count: '250 characters remaining',
-      errors: [],
+      errors: {},
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.characterChecker = this.characterChecker.bind(this);
@@ -39,8 +39,9 @@ class NewReviewModal extends React.Component {
     const { meta } = this.props;
     const { reviews } = handler;
     let errors = formValidator(this.state);
-    if (!errors) {
-      debugger;
+    debugger;
+    console.log(!(Object.values(errors).length));
+    if (!Object.values(errors).length) {
       reviews.post(
         reviewBodyConstructor(this.state, meta),
         () => {
@@ -94,6 +95,13 @@ class NewReviewModal extends React.Component {
     let remaining = 250 - e.target.value.length;
     if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
     this.setState({ count: 'minimum reached' });
+  }
+
+  getColor(name) {
+    debugger;
+    if (this.state.errors[name]) {
+      return 'red';
+    }
   }
 
   render() {
@@ -170,28 +178,28 @@ class NewReviewModal extends React.Component {
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
                   <div style={{ justifyContent: 'flex-start' }}>
                     <h4>Nickname:</h4>
-                    <input type="text" name="nickname" placeholder="Example: Jackson111" value={this.state.nickname} onChange={this.handleChange} style={{ width: '350px' }}/><br />
+                    <input type="text" name="nickname" placeholder="Example: Jackson111" value={this.state.nickname} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('nickname') }}/><br />
                     <small>for privacy reasons do not use your full name or email</small>
                   </div>
                   <div style={{ justifyContent: 'flex-end', float: 'right' }}>
                     <h4>Email:</h4>
-                    <input type="text" name="email" placeholder="Example: Jackson111@email.com" style={{ width: '350px' }} value={this.state.email} onChange={this.handleChange} /><br />
+                    <input type="text" name="email" placeholder="Example: Jackson111@email.com" style={{ width: '350px', borderColor: this.getColor('email') }} value={this.state.email} onChange={this.handleChange} /><br />
                     <small>for privacy reasons do not use your full name or email</small>
                   </div>
                 </div>
                 <div>
                   <h4>Review Summary</h4>
-                  <input type="text" name="summary" placeholder="Example: Best Purchase Ever!" style={{ width: '99.5%' }} value={this.state.summary} onChange={this.handleChange} />
+                  <input type="text" name="summary" placeholder="Example: Best Purchase Ever!" style={{ width: '99.5%', borderColor: this.getColor('summary') }} value={this.state.summary} onChange={this.handleChange} />
                 </div>
                 <div>
                   <h4>Review Body</h4>
-                  <textarea rows="6" name="body"  placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block' }} />
+                  <textarea rows="6" name="body"  placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block', borderColor: this.getColor('body') }} />
                   <small>{this.state.count}</small>
                 </div>
                 <button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
                 <span>
                   <button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
-                  <Errors errors={this.state.errors} />
+                  <Errors errors={Object.values(this.state.errors)} />
                 </span>
                 {this.state.urlWindow && (
                   <UrlWindow>
