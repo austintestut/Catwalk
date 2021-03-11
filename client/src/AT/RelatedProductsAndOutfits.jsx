@@ -130,7 +130,7 @@ class RelatedProductsAndOutfits extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.relatedProductIds !== this.props.relatedProductIds) {
-      this.renderRightButtonToggleForRelatedProducts();
+        this.renderRightButtonToggleForRelatedProducts();
     }
   }
 
