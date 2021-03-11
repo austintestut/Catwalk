@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import LeftArrow from '../../../images/chevron-left.png';
+import RightArrow from '../../../images/chevron-right.png';
 
 const fadein = keyframes`
 from {
@@ -23,28 +25,37 @@ ${StyledOtherImage}:hover {
 `;
 const StyledOtherImgCarouselLeftButton = styled.button`
 height: 49px;
-width: 100%;
+width: 90%;
 border: none;
 position: relative;
 top: 4px;
-background-image: linear-gradient(to left, rgb(230, 230, 230), rgb(200, 200, 200));
+background-image: url(${LeftArrow});
+background-position: center;
+background-size: 100%;
+background-repeat: no-repeat;
+background-color: rgb(245, 245, 245);
 border-radius: 50% 0 0 50%;
 ${StyledOtherImgCarouselLeftButton}: hover {
   cursor: pointer;
-  background-image: linear-gradient(to left, rgb(230, 230, 230), rgb(160, 160, 160));
+  box-shadow: 0 0 15px rgba(115, 13, 21, .5);
 }
 `;
 const StyledOtherImgCarouselRightButton = styled.button`
 height: 49px;
-width: 100%;
+width: 90%;
 border: none;
 position: relative;
 top: 4px;
-background-image: linear-gradient(to right, rgb(230, 230, 230), rgb(200, 200, 200));
+background-image: url(${RightArrow});
+background-position: center;
+background-size: 100%;
+background-repeat: no-repeat;
+background-color: rgb(245, 245, 245);
 border-radius: 0 50% 50% 0;
 ${StyledOtherImgCarouselRightButton}: hover {
   cursor: pointer;
-  background-image: linear-gradient(to right, rgb(230, 230, 230), rgb(160, 160, 160));
+  box-shadow: 0 0 15px rgba(115, 13, 21, .5);
+}
 `;
 const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumbnailCarouselRightButtonClick, thumbnailLeftArrow, thumbnailRightArrow, handleOtherImageClick, otherUrls, thumbnailCarouselShowingIndexes, styleNames }) => {
   let imagesToShow = [

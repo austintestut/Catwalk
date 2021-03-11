@@ -121,7 +121,8 @@ class App extends React.Component {
     return (
       <div>
         <TopBar>
-          <p style={{fontSize: '24px'}}>Wozniak</p>
+          <TitleP>Wozniak</TitleP>
+          <p style={{fontFamily: 'Courier New '}}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
         </TopBar>
         <br />
         <br />
@@ -141,14 +142,18 @@ class App extends React.Component {
   }
 }
 
+const TitleP = styled.p`
+font-family: Courier New;
+font-size: 24px;
+`
+
 const TopBar = styled.div`
+display: flex;
+justify-content: space-around;
+align-items: center;
 width: 100%;
-height: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
-position: fixed;
-z-index: 999;
-margin-top: 0;
-padding-top:0;
+
 `
 export default App;
