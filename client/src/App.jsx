@@ -123,7 +123,11 @@ class App extends React.Component {
         <TopBar>Wozniak</TopBar>
         <br />
         <br />
-        <Overview />
+        <Overview
+        product={this.state.productData}
+        rating={this.state.rating}
+        reviews={this.state.totalReviews}
+        />
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
           handleItemClick={this.handleItemClick}
