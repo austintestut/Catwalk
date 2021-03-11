@@ -204,6 +204,8 @@ const StyledPrevBtn = styled.button`
   border-radius: 50%;
   ${StyledPrevBtn}:hover {
     opacity: 1;
+  &:hover {
+    cursor: pointer;
   }
 `
 const StyledNextBtn = styled.button`
@@ -221,6 +223,8 @@ const StyledNextBtn = styled.button`
   border-radius: 50%;
   ${StyledNextBtn}:hover {
     opacity: 1;
+  &:hover {
+    cursor: pointer;
   }
 `
 

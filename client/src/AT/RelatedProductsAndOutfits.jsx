@@ -3,6 +3,8 @@ import axios from 'axios';
 import styled, { css } from 'styled-components';
 import RelatedProductsCarousel from './RelatedProductsCarousel';
 import OutfitCarousel from './OutfitCarousel';
+import LeftArrow from '../../../images/chevron-left.png';
+import RightArrow from '../../../images/chevron-right.png';
 
 const StyledCarouselContainer = styled.div`
 font-family: Arial, Avenir;
@@ -18,15 +20,19 @@ width: 50px;
 position: relative;
 top: 160px;
 left: 45%;
-background-image: radial-gradient(white, silver);
-border-width: 1px;
+background-image: url(${LeftArrow});
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+background-color: transparent;
 border-radius: 50%;
+border-width: 2px;
 font-size: 20px;
 text-align: center;
 ${StyledLeftButton}:hover {
-  background-image: radial-gradient(white, rgb(150, 150, 150));
+  filter: contrast(70%);
   cursor: pointer;
-  color: black;
+  box-shadow: 0 0 15px rgba(115, 13, 21, .5);
 }
 `;
 const StyledRightButton = styled.button`
@@ -35,15 +41,19 @@ width: 50px;
 position: relative;
 top: 160px;
 left: 15%;
-background-image: radial-gradient(white, silver);
+background-image: url(${RightArrow});
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+background-color: transparent;
 border-width: 1px;
 font-size: 20px;
 border-radius: 50%;
 text-align: center;
 ${StyledRightButton}:hover {
-  background-image: radial-gradient(white, rgb(150, 150, 150));
+  filter: contrast(70%);
   cursor: pointer;
-  color: black;
+  box-shadow: 0 0 15px rgba(115, 13, 21, .5);
 }
 `;
 const StyledHeader = styled.h3`
@@ -115,72 +125,13 @@ class RelatedProductsAndOutfits extends React.Component {
   }
 
   componentDidMount() {
-      // this.getProductInfo(this.props.currentPageItemId);
-      // this.getRating(this.props.currentPageItemId);
-      // this.getRelatedItemIds(this.props.currentPageItemId);
-      this.getOutfitIds();
+    this.getOutfitIds();
   }
 
-  // fetch data for current item on page
-  // fetch related items
-  getRelatedItemIds(id) {
-    axios.get(`/products/${id}/related`)
-      .then((data) => {
-        this.setState({
-          relatedProductIds: data.data
-        }, () => {
-          this.checkIfButtonsShouldRender();
-        });
-      })
-      .catch((err) => {
-        console.log('ERR Axios get product from client', err);
-      });
-  }
-
-
-  // get the category, name, default price
-  getProductInfo(id) {
-    axios.get(`/products/${id}`)
-      .then((data) => {
-        this.setState({
-          productData: data.data
-        });
-      })
-      .catch((err) => {
-        console.log('ERR Axios get product from client', err);
-      });
-  }
-
-  //get rating
-  getRating(id) {
-    axios.get(`/reviews/meta/${id}`)
-      .then((data) => {
-        let ratings = data.data.ratings;
-        let oneStars = ratings['1'] || 0;
-        let twoStars = ratings['2'] || 0;
-        let threeStars = ratings['3'] || 0;
-        let fourStars = ratings['4'] || 0;
-        let fiveStars = ratings['5'] || 0;
-
-        let totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
-
-        let reviewStars = (oneStars * 1)
-          + (twoStars * 2) + (threeStars * 3)
-          + (fourStars * 4) + (fiveStars * 5);
-
-        let rating = reviewStars / totalReviews;
-        if (totalReviews === 0) {
-          rating = 0;
-        }
-        this.setState({
-          rating: rating,
-          characteristics: data.data.characteristics,
-          totalReviews: totalReviews
-        });
-      })
-      .catch((err) => {
-        console.log('ERR getting average star rating from client', err);
-      });
+  componentDidUpdate(prevProps) {
+    if (prevProps.relatedProductIds !== this.props.relatedProductIds) {
+        this.renderRightButtonToggleForRelatedProducts();
+    }
   }
 
   renderRightButtonToggleForRelatedProducts() {
@@ -291,6 +242,8 @@ class RelatedProductsAndOutfits extends React.Component {
     }
     this.setState({
       outfitProductIds: outfitProductIds
+    }, () => {
+      this.renderRightButtonToggleForOutfit();
     });
   }
 
@@ -300,7 +253,7 @@ class RelatedProductsAndOutfits extends React.Component {
         <StyledHeader>RELATED PRODUCTS</StyledHeader>
         <StyledCarouselContainer>
           <StyledLeftRelatedButtonContainer relatedLeftArrow={this.state.relatedLeftArrow}>
-            {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
+            {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}></StyledLeftButton>}
           </StyledLeftRelatedButtonContainer>
           <RelatedProductsCarousel
             relatedProductIds={this.props.relatedProductIds}
@@ -313,13 +266,19 @@ class RelatedProductsAndOutfits extends React.Component {
             translatedXrp={this.state.translatedXrp}
           />
           <StyledRightRelatedButtonContainer relatedRightArrow={this.state.relatedRightArrow}>
-            {this.state.relatedRightArrow && <StyledRightButton onClick={() => { this.handleRelatedCarouselRight(); this.checkIfButtonsShouldRender(); }}>{'>'}</StyledRightButton>}
+            {this.state.relatedRightArrow && (
+              <StyledRightButton
+                onClick={() => {
+                  this.handleRelatedCarouselRight();
+                  this.checkIfButtonsShouldRender();
+                }} />
+            )}
           </StyledRightRelatedButtonContainer>
         </StyledCarouselContainer>
         <StyledHeader>YOUR OUTFIT</StyledHeader>
         <StyledCarouselContainer>
           <div>
-            {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}>{'<'}</StyledLeftButton>}
+            {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}></StyledLeftButton>}
           </div>
           <OutfitCarousel
             outfitProductIds={this.state.outfitProductIds}
@@ -337,10 +296,7 @@ class RelatedProductsAndOutfits extends React.Component {
                 onClick={() => {
                   this.handleOutfitCarouselRight();
                   this.checkIfButtonsShouldRender();
-                }}
-              >
-                {'>'}
-              </StyledRightButton>
+                }} />
             )}
           </StyledRightOutfitButtonContainer>
         </StyledCarouselContainer>

@@ -8,9 +8,8 @@ import AnswerList from './AnswerList';
 const QuestionDiv = styled.div`
 display: flex;
 justify-content: space-between;
-font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+font-family: Arial;
 padding-top: 15px;
-
 `;
 const RedButton = styled.button`
 color: white;
@@ -71,9 +70,9 @@ class Questionn extends React.Component {
       url: `/questions/${this.props.question.question_id}/answers`,
       method: 'post',
       data: {
-        body: event.target[0].value,
-        name: event.target[1].value,
-        email: event.target[2].value,
+        body: event.target[1].value,
+        name: event.target[2].value,
+        email: event.target[3].value,
       },
     });
   }
@@ -140,7 +139,7 @@ class Questionn extends React.Component {
         <QuestionDiv>
           <div style={{fontWeight: '600', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
           </div>
-          <div style={{ fontSize: '14px', color: 'grey'}}>
+          <div style={{ fontSize: '14px', color: 'grey', width: '400px'}}>
             Helpful?
             {this.renderHelpfulButton()}
             {this.renderReportButton()}

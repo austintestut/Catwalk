@@ -5,15 +5,16 @@ import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
 import Reviews from './components/Reviews.jsx';
 import Container from './AK/Container';
 import Overview from './Overview/Overview';
+import styled from 'styled-components';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       currentPageItemId: 17450, // hard coded landing page
-
+      questions: [],
       relatedProductIds: [],
-      productData: [],
+      productData: {},
       rating: 0,
       characteristics: [],
       totalReviews: 0
@@ -22,12 +23,32 @@ class App extends React.Component {
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getRating = this.getRating.bind(this);
     this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
+    this.getProductQuestions = this.getProductQuestions.bind(this);
+    this.fetcher = this.fetcher.bind(this);
+
   }
 
   componentDidMount() {
+    this.fetcher();
+  }
+
+  // add any axios requests here
+  fetcher() {
     this.getProductInfo(this.state.currentPageItemId);
     this.getRating(this.state.currentPageItemId);
     this.getRelatedItemIds(this.state.currentPageItemId);
+    this.getProductQuestions();
+  }
+
+  getProductQuestions() {
+    // will need to change the ID parameter below to be dynamic, maybe use params obj
+    axios({
+      url: `/questions/${this.state.currentPageItemId}`,
+      method: 'get',
+    })
+      .then((data) => {
+        this.setState({ questions: data.data.results });
+      });
   }
 
   // fetch related items
@@ -42,7 +63,6 @@ class App extends React.Component {
         console.log('ERR Axios get product from client', err);
       });
   }
-
 
   // get the category, name, default price
   getProductInfo(id) {
@@ -92,12 +112,15 @@ class App extends React.Component {
   handleItemClick(id) {
     this.setState({
       currentPageItemId: id
+    }, () => {
+      this.fetcher();
     });
   }
 
   render() {
     return (
       <div>
+        <TopBar>Wozniak</TopBar>
         <br />
         <br />
         <Overview />
@@ -109,11 +132,17 @@ class App extends React.Component {
           rating={this.state.rating}
           characteristics={this.state.characteristics}
         />
-        <Container />
+        <Container currentPageItemID={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
         <Reviews />
       </div>
     );
   }
 }
 
+const TopBar = styled.div`
+width: 100%;
+height: 100%;
+background-image: linear-gradient(#ff0019, #790a04);
+height: 50px;
+`
 export default App;

@@ -97,6 +97,8 @@ const StyledUpBtn = styled.button`
   border-radius: 50%;
   ${StyledUpBtn}:hover {
     opacity: 1;
+  &:hover {
+    cursor: pointer;
   }
 `
 const StyledDownBtn = styled.button`
@@ -113,6 +115,8 @@ const StyledDownBtn = styled.button`
   border-radius: 50%;
   ${StyledDownBtn}:hover {
     opacity: 1;
+  &:hover {
+    cursor: pointer;
   }
 `
 

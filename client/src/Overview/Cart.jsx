@@ -149,9 +149,13 @@ const StyledCartBtn = styled.button`
   height: 50px;
   width: 150px;
   top: 50px;
-  background-color: #e11a2b;
+  background-image: linear-gradient(#ff0019, #790a04);
   color: white;
   order: 3;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `
 const StyledSizeBtn = styled.select`
   position: relative;

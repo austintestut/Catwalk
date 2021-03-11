@@ -9,33 +9,38 @@ top: 0;
 width: 100%;
 height: 100%;
 overflow: auto;
-background-color: rgb(0,0,0);
-background-color: rgba(0,0,0,0.4);
+background-color: rgba(128,128,128,0.5);
 `;
 const ModalForm = styled.form`
+display: flex;
+flex-direction: column;
 background-color: #fefefe;
 margin: 15% auto;
 padding: 20px;
-border: 1px solid #888;
+border: 2px solid gray;
 width: 80%;
 `;
+const XButton = styled.button`
+width: 50px;
+align-self: flex-end;
+`
 
-const QuestionModal = function ({ show, hideQModal, submitQuestion }) {
+const QuestionModal = function ({ show, hideQModal, submitQuestion, productName }) {
   if (!show) {
     return null;
   }
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitQuestion}>
-        <button style={{float: 'right'}}onClick={hideQModal}>X</button>
-        <h2>Ask Your Question</h2>
-        <h4>About (the product name here)</h4>
-        <p>What is your question?</p>
-        <input maxLength="1000" />
-        <p>What is your nickname?</p>
+        <XButton style={{float: 'right', justifyContent: 'flex-end'}}onClick={hideQModal}>X</XButton>
+        <h2 style={{alignSelf: 'center' }}>Ask Your Question:</h2>
+        <h4 style={{alignSelf: 'center' }}>About {productName}</h4>
+        <p style={{fontSize: '25px', alignSelf: 'center'}}>What is your question?</p>
+        <textarea style={{height: '150px'}}maxLength="1000" />
+        <p style={{fontSize: '25px', alignSelf: 'center'}}>What is your nickname?</p>
         <input placeholder="Example: jackson11!" maxLength="60" />
         <p>(For privacy reasons, do not use your full name or email address)</p>
-        <p>Send us an email!</p>
+        <p style={{fontSize: '25px', alignSelf: 'center'}}>Send us an email!</p>
         <input placeholder="Why did you like the product or not?" maxLength="60" />
         <p>For authentication reasons only -  you will not be emailed</p>
         <button type="submit">Submit Your Question</button>

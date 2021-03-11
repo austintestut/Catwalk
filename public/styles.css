@@ -10,6 +10,15 @@
   font-size: 16px;
 }
 
+html{
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  padding: 0;
+}
+
 .reviews {
   font-family: 'Arial', 'Avenir Black';
 }
@@ -67,6 +76,15 @@
 .austinButtons:hover {
   cursor: pointer;
   font-weight: bold;
+}
+
+.bigButton {
+  color: white;
+  background-image: linear-gradient(#ff0019, #790a04);
+}
+.bigButton:hover {
+  cursor: pointer;
+  text-decoration: underline !important;
 }
 
 /*

@@ -17,24 +17,31 @@ margin-bottom: 50px;
 width: 90%;
 max-height: 90vh;
 overflow-y: auto;
+border: 1px gray solid;
+border-radius: 4px;
+padding: 10px;
 `;
+
+const ButtonsDiv = styled.div`
+margin-top: 30px;
+width: 100%;
+height: 50px;
+`
 
 class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showQ: false,
-      questions: [],
       questionsToShow: 4,
       isMaxQuestions: false,
-      currentProductID: 17762,
       displayedQuestions: [],
       searching: false,
     };
     this.showQModal = this.showQModal.bind(this);
     this.hideQModal = this.hideQModal.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
-    this.getProductQuestions = this.getProductQuestions.bind(this);
+    // this.getProductQuestions = this.getProductQuestions.bind(this);
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
     this.increaseHelpful = this.increaseHelpful.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -42,7 +49,6 @@ class Container extends React.Component {
   }
 
   componentDidMount() {
-    this.getProductQuestions();
   }
 
   handleSearch(e) {
@@ -55,21 +61,21 @@ class Container extends React.Component {
     }
   }
 
-  getProductQuestions() {
-    // will need to change the ID parameter below to be dynamic, maybe use params obj
-    const ID = 17762;
-    axios({
-      url: `/questions/${ID}`,
-      method: 'get',
-    })
-      .then((data) => {
-        this.setState({ questions: data.data.results });
-        console.log(data.data.results);
-      });
-  }
+  // getProductQuestions() {
+  //   console.log(this.props.currentPageItemID)
+  //   // will need to change the ID parameter below to be dynamic, maybe use params obj
+  //   axios({
+  //     url: `/questions/${this.props.currentPageItemID}`,
+  //     method: 'get',
+  //   })
+  //     .then((data) => {
+  //       console.log(data.data.results);
+  //       this.setState({ questions: data.data.results });
+  //     });
+  // }
 
   displaySearchQuestions(text) {
-    const filtered = this.state.questions.filter(
+    const filtered = this.props.questions.filter(
       (question) => question.question_body.includes(text),
     );
     return filtered;
@@ -84,7 +90,7 @@ class Container extends React.Component {
 
   showMoreQuestions() {
     this.setState({ questionsToShow: this.state.questionsToShow += 2 });
-    if (this.state.questionsToShow > this.state.questions.length) {
+    if (this.state.questionsToShow >= this.props.questions.length) {
       this.setState({ isMaxQuestions: true });
     }
   }
@@ -103,35 +109,25 @@ class Container extends React.Component {
 
   submitQuestion(event) {
     event.preventDefault();
-    console.log('submitting question')
-    const ID = 17762;
     axios({
-      url: `/questions/${ID}`,
+      url: `/questions/${this.props.currentPageItemID}`,
       method: 'post',
       data: {
-        body: event.target[0].value,
-        name: event.target[1].value,
-        email: event.target[2].value,
+        body: event.target[1].value,
+        name: event.target[2].value,
+        email: event.target[3].value,
         product_id: ID,
       },
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=17761',
-      method: 'get',
-    })
-      .then((data) => {
-        this.setState({ questions: data.data.results });
-        // console.log(data.data.results);
+    }).then(() => {
+      axios({
+        url: `/questions/${this.props.currentPageItemID}`,
+        method: 'get',
       })
-      .then(() => {
-        axios({
-          headers: {
-            Authorization: TOKEN,
-          },
-          url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/111326/answers',
-          method: 'get',
-        }).then((data) => {
-          // console.log(data.data);
+        .then((data) => {
+          this.setState({ questions: data.data.results });
         });
-      });
+    }
+      );
   }
 
   render() {
@@ -139,25 +135,28 @@ class Container extends React.Component {
       <ContainerDiv>
         <SearchBar handleSearch={this.handleSearch} />
         <QuestionList
-          questions={this.state.questions}
+          questions={this.props.questions}
           showAns={this.showAnsModal}
           howMany={this.state.questionsToShow}
           increaseHelpful={this.increaseHelpful}
           searching={this.state.searching}
           displayedQuestions={this.state.displayedQuestions}
         />
-
-        <ShowMoreQuestionsButton
+        <ButtonsDiv >
+          <ShowMoreQuestionsButton
           showMoreQuestions={this.showMoreQuestions}
           isMaxQuestions={this.state.isMaxQuestions}
         />
 
         <AddQuestionButton showQModal={this.showQModal} />
+        </ButtonsDiv>
+
 
         <QuestionModal
           show={this.state.showQ}
           hideQModal={this.hideQModal}
           submitQuestion={this.submitQuestion}
+          productName={this.props.productName}
         />
       </ContainerDiv>
     );
