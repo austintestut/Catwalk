@@ -59,6 +59,9 @@ const StyledUpBtn = styled.button`
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 `
 const StyledDownBtn = styled.button`
   position: relative;
@@ -71,6 +74,9 @@ const StyledDownBtn = styled.button`
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export default Carousel;
