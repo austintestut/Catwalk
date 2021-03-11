@@ -119,8 +119,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
-        <TopBar>Wozniak</TopBar>
+      <div>
+        <TopBar>
+          <p style={{fontSize: '24px'}}>Wozniak</p>
+        </TopBar>
         <br />
         <br />
         <Overview />
@@ -146,7 +148,7 @@ background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
 position: fixed;
 z-index: 999;
-margin:-top 0;
+margin-top: 0;
 padding-top:0;
 `
 export default App;
