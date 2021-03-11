@@ -10,7 +10,6 @@ display: flex;
 justify-content: space-between;
 font-family: Arial;
 padding-top: 15px;
-
 `;
 const RedButton = styled.button`
 color: white;
