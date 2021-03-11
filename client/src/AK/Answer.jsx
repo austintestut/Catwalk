@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import dateFormatter from '../global_functions/dateFormatter';
 
 const StyledButton = styled.button`
-font-family: Lucida Sans, Helvetica, Arial, sans-serif;
+font-family: Arial;
 margin-left: 10px;
 text-decoration: underline;
 background: none;
@@ -23,10 +23,11 @@ font-weight: normal;
 `;
 const AnswerButtonsDiv = styled.div`
 display: flex;
-justify-content: flex-end;
+justify-content: flex-start;
 align-items: center;
 margin-bottom: 35px;
 color: gray;
+width: 200px;
 
 `;
 
@@ -75,7 +76,6 @@ class Answer extends React.Component {
 
   reportAnswer() {
     const { id } = this.props.ans;
-    console.log('calling Report Answer on answer:', id);
     axios({
       url: `/answers/${id}/report`,
       method: 'put',
@@ -96,7 +96,7 @@ class Answer extends React.Component {
       <AnswerDiv>
         <div style={{width: '65%'}}>
           <p>
-            A: {this.props.ans.body}
+            <b>A: </b>{this.props.ans.body}
           </p>
           <p style={{ fontSize: '14px' }}>by {this.props.ans.answerer_name}, {dateFormatter(this.props.ans.date)}
           </p>

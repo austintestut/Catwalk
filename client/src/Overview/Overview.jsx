@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import TOKEN from './config.js';
 
 import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
@@ -23,6 +22,9 @@ class Overview extends React.Component {
       selectedSize: '',
       sizeId: '',
     };
+    this.getProduct = this.getProduct.bind(this);
+    this.getStylish = this.getStylish.bind(this);
+
     this.getProducts = this.getProducts.bind(this);
     this.getStyles = this.getStyles.bind(this);
     this.getRatingAndReviews = this.getRatingAndReviews.bind(this);
@@ -33,19 +35,44 @@ class Overview extends React.Component {
 
 
   componentDidMount() {
-    this.getProducts(18025);
-    this.getStyles(18025);
+    this.getProduct(18025);
+    //this.getProducts(18025);
+    // this.getStyles(18025);
+    this.getStylish(18025);
     //this.getRatingAndReviews(18025);
   }
 
+  getProduct(id) {
+    axios.get(`/products/${id}`)
+      .then((res) => {
+        this.setState({
+          products: res.data
+        })
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
+
+  getStylish(id) {
+    axios.get(`/products/${id}/styles`)
+      .then((res) => {
+        this.setState({
+          styles: res.data.results
+        })
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
 
   getProducts(id) {
-    const options = {headers: {'Authorization': 'TOKEN'}}
+    const options = {headers: {'Authorization': ''}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, options)
       .then((res) => {
         this.setState({
           products: res.data
-        });
+        }, ()=>{console.log(this.state.products)});
       })
       .catch((err) => {
         console.error(err);
@@ -53,12 +80,12 @@ class Overview extends React.Component {
   }
 
   getStyles(id) {
-    const options = {headers: {'Authorization': 'TOKEN'}}
+    const options = {headers: {'Authorization': ''}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, options)
       .then((res) => {
         this.setState({
           styles: res.data.results
-        });
+        }, ()=>{console.log(this.state.styles)});
       })
       .catch((err) => {
         console.error(err);
@@ -74,7 +101,7 @@ class Overview extends React.Component {
       let whole = sum/arr.length;
       return (Math.round(whole * 4) / 4).toFixed(2)
     }
-    const options = {headers: {'Authorization': 'TOKEN'}}
+    const options = {headers: {'Authorization': ''}}
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${id}`, options)
       .then((res) => {
         this.setState({
@@ -143,6 +170,7 @@ class Overview extends React.Component {
 const OverviewMain = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: 10%;
 `
 const SelectionContainer = styled.div`
  display: flex;
@@ -161,6 +189,7 @@ const Info = styled.div`
 `
 const StyledCart = styled.div`
   display: flex;
+  height: 25%;
 `
 const StyledDesc = styled.div`
   display: flex;

@@ -18,10 +18,11 @@ app.use(express.json());
  don't forget to access data.data on your client side as well (see .then)
 */
 app.get(`/products/:id`, (req, res) => {
+
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.id}`, {
 
     headers: {
-      Authorization: TOKEN,
+      Authorization: config.TOKEN,
     },
   })
     .then((data) => {

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import up from '../../../images/chevron-up.png';
+import down from '../../../images/chevron-down.png';
 
-const Carousel = ({thumbs, thumbsMain, curMain, next, prev}) => {
+const Carousel = ({thumbs, thumbsMain, curMain, selected, next, prev, selector}) => {
 
   const getIndex = (num, length) => {
     if (num >= length) {
@@ -13,7 +15,7 @@ const Carousel = ({thumbs, thumbsMain, curMain, next, prev}) => {
 
   return (
     <div>
-      <button onClick={next}>up</button>
+      <StyledUpBtn onClick={next}/>
 
       {thumbs.map((pic, index) => {
 
@@ -33,7 +35,7 @@ const Carousel = ({thumbs, thumbsMain, curMain, next, prev}) => {
           </div>
         )
       })}
-      <button onClick={prev}>down</button>
+      <StyledDownBtn onClick={prev}/>
     </div>
   )
 }
@@ -44,6 +46,37 @@ const Thumbnail = styled.img`
   width: 65px;
   margin-bottom: 5px;
   cursor: pointer;
+`
+const StyledUpBtn = styled.button`
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  background-image: url(${up});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const StyledDownBtn = styled.button`
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  background-image: url(${down});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export default Carousel;

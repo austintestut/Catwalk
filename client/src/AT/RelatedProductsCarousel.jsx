@@ -11,7 +11,7 @@ flex-wrap: nowrap;
 gap: 32.25px;
 align-items: flex-start;
 justify-content: left;
-height: 450px;
+height: 370px;
 overflow: hidden;
 `;
 const StyledProductCard = styled.div`

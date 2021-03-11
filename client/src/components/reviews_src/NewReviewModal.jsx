@@ -191,7 +191,7 @@ class NewReviewModal extends React.Component {
                 <button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
                 <span>
                   <button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
-                  <Errors errors={this.state.errors}/>
+                  <Errors errors={this.state.errors} />
                 </span>
                 {this.state.urlWindow && (
                   <UrlWindow>

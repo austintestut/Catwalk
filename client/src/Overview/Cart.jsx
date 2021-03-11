@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledCart = styled.div`
-
-`
 
 const checkStock = (totalStock) => {
   if (totalStock === 0) {
@@ -43,14 +40,11 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
     return (
       <StyledCart>
         <form>
-          <h2>Cart</h2>
-          <label>
-            Size Selector
-            <select onChange={handleSize}>
+            <StyledSizeBtn onChange={handleSize}>
               <option
               defaultValue='Select Size'
               >
-                Select Size
+                Select a Size
               </option>
               {Object.keys(allSizes).map((sizeId) => {
                 return (
@@ -63,16 +57,13 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
                   </option>
                 )
               })}
-            </select>
-          </label>
-          <br/>
-          <label>
-            Quantity Selector
-            <select>
+            </StyledSizeBtn>
+
+            <StyledQtyBtn>
               <option
               defaultValue='-'
               >
-                -
+                Qty:
               </option>
               {checkStock(totalStock).map((qt) => {
                 return (
@@ -84,10 +75,9 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
                   </option>
                 )
               })}
-            </select>
-          </label>
-          <br/>
-          <button>Add to Cart</button>
+            </StyledQtyBtn>
+            <br></br>
+          <StyledCartBtn>Add to Cart</StyledCartBtn>
         </form>
       </StyledCart>
     )
@@ -112,14 +102,11 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
   return (
     <StyledCart>
     <form>
-      <h2>Cart</h2>
-      <label>
-            Size Selector
-            <select onChange={handleSize}>
+            <StyledSizeBtn onChange={handleSize}>
               <option
               defaultValue='Select Size'
               >
-                Select Size
+                Select a Size
               </option>
               {Object.keys(allSizes).map((sizeId) => {
                 return (
@@ -132,16 +119,12 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
                   </option>
                 )
               })}
-            </select>
-          </label>
-      <br/>
-      <label>
-            Quantity Selector
-            <select>
+            </StyledSizeBtn>
+            <StyledQtyBtn>
               <option
               defaultValue='-'
               >
-                -
+                Qty
               </option>
               {checkStock(totalStock).map((qt) => {
                 return (
@@ -153,14 +136,51 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
                   </option>
                 )
               })}
-            </select>
-          </label>
-      <br/>
-      <button>Add to Cart</button>
+            </StyledQtyBtn>
+            <br></br>
+      <StyledCartBtn>Add to Cart</StyledCartBtn>
     </form>
     </StyledCart>
   )
   }
 };
+
+const StyledCart = styled.div`
+  position: relative;
+  width: 100%;
+`
+
+const StyledCartBtn = styled.button`
+  position: relative;
+  height: 50px;
+  width: 150px;
+  top: 50px;
+  background-image: linear-gradient(#ff0019, #790a04);
+  color: white;
+  order: 3;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`
+const StyledSizeBtn = styled.select`
+  position: relative;
+  height: 50px;
+  width: 150px;
+  top: 25px;
+  background-color: silver;
+  color: black;
+  order: 1;
+`
+const StyledQtyBtn = styled.select`
+  position: relative;
+  height: 50px;
+  width: 50px;
+  top: 25px;
+  left: 10px;
+  background-color: silver;
+  color: black;
+  order: 2;
+`
 
 export default Cart;
