@@ -100,6 +100,10 @@ body.no-scroll{
   font-family: Arial;
 }
 
+.reviews input[type='radio'] {
+  transform: scale(1.25);
+}
+
 /*
 color: #e11a2b
 color: white

@@ -185,7 +185,7 @@ class NewReviewModal extends React.Component {
                 </div>
                 <div>
                   <h4>Review Body</h4>
-                  <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block' }} />
+                  <textarea rows="6" name="body"  placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block' }} />
                   <small>{this.state.count}</small>
                 </div>
                 <button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
