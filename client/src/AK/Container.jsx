@@ -92,7 +92,7 @@ class Container extends React.Component {
 
   showMoreQuestions() {
     this.setState({ questionsToShow: this.state.questionsToShow += 2 });
-    if (this.state.questionsToShow > this.state.questions.length) {
+    if (this.state.questionsToShow >= this.state.questions.length) {
       this.setState({ isMaxQuestions: true });
     }
   }
@@ -116,9 +116,9 @@ class Container extends React.Component {
       url: `/questions/${ID}`,
       method: 'post',
       data: {
-        body: event.target[0].value,
-        name: event.target[1].value,
-        email: event.target[2].value,
+        body: event.target[1].value,
+        name: event.target[2].value,
+        email: event.target[3].value,
         product_id: ID,
       },
     }).then(() => {
