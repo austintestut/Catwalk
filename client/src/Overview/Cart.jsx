@@ -8,7 +8,6 @@ const checkStock = (totalStock) => {
   } else {
     if (totalStock < 15) {
       return Array.from({length: totalStock}, (_, i) => i + 1)
-    //console.log([...Array(totalStock).keys()]) // 0 =>total
     } else {
       return Array.from({length: 15}, (_, i) => i + 1);
     }
@@ -17,7 +16,7 @@ const checkStock = (totalStock) => {
 
 const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
   if (selected) {
-    //console.log('Selected Stlye', selected)
+
     let allSkus = [];
     let allSizes = {};
     let totalStock;
@@ -29,8 +28,6 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
       for (let key in allSkus) {
         allSizes[key] = allSkus[key].size
       }
-      //console.log(allSizes);
-      //console.log(allSkus);
     }
 
     if (selectedSize) {
@@ -92,8 +89,6 @@ const Cart = ( {styles, selected, selectedSize, handleSize} ) => {
     for (let key in allSkus) {
       allSizes[key] = allSkus[key].size
     }
-    //console.log(allSizes);
-    //console.log(allSkus);
 
 
   if (selectedSize) {
@@ -149,7 +144,6 @@ const StyledCart = styled.div`
   position: relative;
   width: 100%;
 `
-
 const StyledCartBtn = styled.button`
   position: relative;
   height: 50px;

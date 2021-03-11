@@ -4,7 +4,7 @@ import QuestionList from './AK/QuestionList.jsx';
 import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
 import Reviews from './components/Reviews.jsx';
 import Container from './AK/Container';
-// import Overview from './Overview/Overview';
+import Overview from './Overview/Overview';
 
 class App extends React.Component {
   constructor() {
@@ -100,7 +100,7 @@ class App extends React.Component {
       <div>
         <br />
         <br />
-        {/* <Overview/> */}
+        <Overview />
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
           handleItemClick={this.handleItemClick}

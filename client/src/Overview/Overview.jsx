@@ -15,19 +15,16 @@ class Overview extends React.Component {
     this.state = {
       products: {},
       styles: [],
-      reviews: null,
       ratings: [],
       totalReviews: undefined,
       selectedStyle: '',
       selectedSize: '',
       sizeId: '',
     };
-    this.getProduct = this.getProduct.bind(this);
-    this.getStylish = this.getStylish.bind(this);
 
-    this.getProducts = this.getProducts.bind(this);
+    this.getProduct = this.getProduct.bind(this);
+    this.getReviewData = this.getReviewData.bind(this);
     this.getStyles = this.getStyles.bind(this);
-    this.getRatingAndReviews = this.getRatingAndReviews.bind(this);
     this.handleStyleSelect = this.handleStyleSelect.bind(this);
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
 
@@ -35,11 +32,9 @@ class Overview extends React.Component {
 
 
   componentDidMount() {
-    this.getProduct(18025);
-    //this.getProducts(18025);
-    this.getStyles(18025);
-    //this.getStylish(18025);
-    //this.getRatingAndReviews(18025);
+    this.getProduct(17450);
+    this.getStyles(17450);
+    this.getReviewData(17450)
   }
 
   getProduct(id) {
@@ -54,7 +49,7 @@ class Overview extends React.Component {
       })
   }
 
-  getStylish(id) {
+  getStyles(id) {
     axios.get(`/products/${id}/styles`)
       .then((res) => {
         this.setState({
@@ -66,33 +61,7 @@ class Overview extends React.Component {
       })
   }
 
-  getProducts(id) {
-    const options = {headers: {'Authorization': ''}}
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}`, options)
-      .then((res) => {
-        this.setState({
-          products: res.data
-        }, ()=>{console.log(this.state.products)});
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
-
-  getStyles(id) {
-    const options = {headers: {'Authorization': ''}}
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, options)
-      .then((res) => {
-        this.setState({
-          styles: res.data.results
-        }, ()=>{console.log(this.state.styles)});
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
-
-  getRatingAndReviews(id) {
+  getReviewData(id) {
     const getAvg = (arr) => {
       let sum = 0;
       for (let i = 0; i < arr.length; i++) {
@@ -101,8 +70,8 @@ class Overview extends React.Component {
       let whole = sum/arr.length;
       return (Math.round(whole * 4) / 4).toFixed(2)
     }
-    const options = {headers: {'Authorization': ''}}
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${id}`, options)
+
+    axios.get(`/reviews/meta/${id}`)
       .then((res) => {
         this.setState({
           ratings: getAvg(Object.values(res.data.ratings)),
@@ -110,14 +79,15 @@ class Overview extends React.Component {
         })
       })
       .catch((err) => {
-        console.error(err)
+        console.error(err);
       })
   }
 
   handleStyleSelect(event) {
+    console.log(event.target);
     this.setState({
       selectedStyle: event.target.value
-    }, ()=>{console.log(this.state.selectedStyle)});
+    });
   }
 
   handleSizeSelect(event, id) {
@@ -134,13 +104,15 @@ class Overview extends React.Component {
         <Images>
           <ImageGallery
           selected={this.state.selectedStyle}
+          handleSelect={this.handleStyleSelect}
           />
         </Images>
         <SelectionContainer>
         <Info>
           <ProductInfo
           products={this.state.products}
-          reviews={this.state.reviews}
+          rating={this.state.ratings}
+          reviews={this.state.totalReviews}
           styles={this.state.styles}
           selected={this.state.selectedStyle}
           handleSelect={this.handleStyleSelect}

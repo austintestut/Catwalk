@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import left from '../../../images/chevron-left.png';
 import right from '../../../images/chevron-right.png';
-
 import Carousel from './Carousel.jsx';
 
 class ImageGallery extends React.Component {
@@ -33,16 +32,15 @@ class ImageGallery extends React.Component {
 
 
   componentDidMount() {
-   this.getStyles(18025);
+   this.getStyles(17450);
   }
 
   getStyles(id) {
-    const options = {headers: {'Authorization': ''}}
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}/styles`, options)
+    axios.get(`/products/${id}/styles`)
       .then((res) => {
         this.setState({
           styles: res.data.results
-        }, ()=>{this.getPhotos(this.state.styles)});
+        })
       })
       .catch((err) => {
         console.error(err);
@@ -55,7 +53,7 @@ class ImageGallery extends React.Component {
     if (styles !== undefined) {
       for (let i = 0; i < styles.length; i++) {
         let pic = styles[i].photos[0].url;
-        let thumb = styles[i].photos[0].thumbnail_url;
+        let thumb = [styles[i].photos[0].thumbnail_url, styles[i].style_id];
         main.push(pic);
         thumbs.push(thumb);
         this.setState({
@@ -71,7 +69,7 @@ class ImageGallery extends React.Component {
     let current = this.state.thumbsMain;
     this.setState({
       thumbsMain: (current === length - 1 ? 0 : current + 1)
-    })
+    }, ()=>{console.log(this.state.thumbsMain)})
   }
 
   prevThumb() {
@@ -95,7 +93,7 @@ class ImageGallery extends React.Component {
     let current = this.state.curMain;
     this.setState({
       curMain: (current === 0 ? length - 1 : current - 1)
-    })
+    }, ()=>{console.log(this.state.curMain)})
   }
 
   zoomClick() {
@@ -160,6 +158,7 @@ class ImageGallery extends React.Component {
           prev={this.prevThumb}
           selected={this.props.selected}
           selector={this.selector}
+          handleSelect={this.props.handleSelect}
           />
 
       </ThumbsContainer>
@@ -196,12 +195,16 @@ const StyledPrevBtn = styled.button`
   width: 40px;
   left: 10%;
   bottom: 50%;
+  opacity: 0.80;
   background-image: url(${left});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  ${StyledPrevBtn}:hover {
+    opacity: 1;
+  }
 `
 const StyledNextBtn = styled.button`
   position: absolute;
@@ -209,12 +212,16 @@ const StyledNextBtn = styled.button`
   width: 40px;
   left: 85%;
   bottom: 50%;
+  opacity: 0.80;
   background-image: url(${right});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  ${StyledNextBtn}:hover {
+    opacity: 1;
+  }
 `
 
 export default ImageGallery;
