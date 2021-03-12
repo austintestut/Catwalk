@@ -97,8 +97,6 @@ class OutfitCard extends React.Component {
       otherUrls: [],
       styleNames: [],
       cardCharacteristics: {},
-      // comparison modal showing or not
-      modalShowing: false,
       totalReviews: 0,
       otherImagesShowing: false,
       styleSalePrices: {},

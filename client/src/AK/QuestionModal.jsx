@@ -12,6 +12,7 @@ overflow: auto;
 background-color: rgba(128,128,128,0.5);
 `;
 const ModalForm = styled.form`
+color: black;
 display: flex;
 flex-direction: column;
 background-color: #fefefe;
