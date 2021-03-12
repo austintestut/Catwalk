@@ -88,6 +88,7 @@ const ThumbnailCarousel = ({ handleThumbnailCarouselLeftButtonClick, handleThumb
                 src={image}
                 // for some reason, adding a key messes up the spacing in the carousel...
                 alt={styleNames[otherUrls.indexOf(image)]}
+                key={image + styleNames[otherUrls.indexOf(image)]}
                 onClick={() => handleOtherImageClick(otherUrls.indexOf(image))}
                 thumbnailXindex={thumbnailXindex}
               />

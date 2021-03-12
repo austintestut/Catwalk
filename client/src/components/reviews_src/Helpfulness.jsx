@@ -62,7 +62,10 @@ class Helpfulness extends React.Component {
                     fontSize: '16px',
                   }}
                   onClick={(e) => {
+                    debugger;
                     e.preventDefault();
+                    const { reviews } = handler;
+                    const { id } = this.props;
                     reviews.update(id, 'report');
                     this.setState({ clicked: true, report: false });
                 }} >Report
