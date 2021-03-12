@@ -15,7 +15,7 @@ const ProductInfo = ( {product, reviews, rating, styles, selected, handleSelect}
       <div>
         <div>
           <StarStatic number={rating} />
-          Read all {reviews} reviews
+          Read all <a href='#' onClick={scrollToBottom}>{reviews}</a>  reviews
         </div>
         <StyledCategory>{product.category}:</StyledCategory>
         <StyledName>{product.name}</StyledName>
