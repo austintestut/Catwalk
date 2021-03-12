@@ -43,9 +43,14 @@ font-size: 16px;
   outline-color: black;
 }
 `
-const XButton = styled.button`
+const XButton = styled.i`
 width: 50px;
 align-self: flex-end;
+text-shadow: 0 0 1px #000;
+color: white;
+&:hover{
+  cursor: pointer;
+}
 `
 
 const QuestionModal = function ({ show, hideQModal, submitQuestion, productName }) {
@@ -55,7 +60,7 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion, productName 
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitQuestion}>
-        <XButton style={{float: 'right', justifyContent: 'flex-end'}}onClick={hideQModal}>X</XButton>
+        <XButton className="fas fa-times fa-lg" style={{float: 'right', justifyContent: 'flex-end'}}onClick={hideQModal}></XButton>
         <h2 style={{alignSelf: 'center' }}>Ask Your Question:</h2>
         <h4 style={{alignSelf: 'center' }}>About {productName}</h4>
         <p style={{fontSize: '25px', alignSelf: 'center'}}>What is your question?</p>

@@ -138,7 +138,7 @@ class App extends React.Component {
       <div>
         <TopBar>
         <TitleP>Wozniak</TitleP>
-          <p style={{fontFamily: 'Courier New '}}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
+          <p style={{fontFamily: 'Courier New '}}>by Alex Shold, Austin Testut, Austin Killough, and Robert Strange</p>
         </TopBar>
         <StyledDarkModeButton onClick={this.darkToggle}>Toggle Dark Mode</StyledDarkModeButton>
         <br />
