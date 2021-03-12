@@ -22,7 +22,7 @@ class NewReviewModal extends React.Component {
       summary: '',
       body: '',
       images: [],
-      count: '250 characters remaining',
+      count: '50 characters remaining',
       errors: {},
       image1: '',
       image2: '',
@@ -61,7 +61,7 @@ class NewReviewModal extends React.Component {
             summary: '',
             body: '',
             images: [],
-            count: '250 characters remaining',
+            count: '50 characters remaining',
             image1: '',
             image2: '',
             image3: '',
@@ -89,7 +89,7 @@ class NewReviewModal extends React.Component {
   }
 
   characterChecker(e) {
-    let remaining = 250 - e.target.value.length;
+    let remaining = 50 - e.target.value.length;
     if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
     this.setState({ count: 'minimum reached' });
   }

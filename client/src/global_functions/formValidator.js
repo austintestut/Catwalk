@@ -28,7 +28,7 @@ const formValidator = (stateObj, type, imgState) => {
     else if (email.length > 60 || !checkEmail(email)) { errors.email = ('invalid email'); }
     if (summary.length > 60) { errors.summary = ('invalid review summary'); }
     if (body.length === 0) { errors.body = ('review body required'); }
-    else if (body.length < 250 || body.length > 1000) { errors.body = ('invalid review body'); }
+    else if (body.length < 50 || body.length > 1000) { errors.body = ('invalid review body'); }
     if (stars === null) { errors.rating = ('rating required'); }
   }
 
