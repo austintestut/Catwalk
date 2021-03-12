@@ -41,7 +41,7 @@ ${StyledAddButton}:hover {
 const StyledLeftOutfitButtonContainer = styled.div`
 ${props => props.outfitLeftArrow && css`
 z-index: 2;
-box-shadow: 20px 0 15px 0 rgba(100, 100, 100, 0.4);
+box-shadow: 50px 0 17px 0 rgba(255, 255, 255, 1);
 `};
 `;
 const OutfitCarousel = ({
