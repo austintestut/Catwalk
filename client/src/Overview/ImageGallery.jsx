@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import left from '../../../images/chevron-left.png';
 import right from '../../../images/chevron-right.png';
-
 import Carousel from './Carousel.jsx';
 
 class ImageGallery extends React.Component {
@@ -24,16 +23,14 @@ class ImageGallery extends React.Component {
     this.prevThumb = this.prevThumb.bind(this);
     this.getStyles = this.getStyles.bind(this);
     this.getPhotos = this.getPhotos.bind(this);
-
     this.zoomClick = this.zoomClick.bind(this);
     this.selector = this.selector.bind(this);
 
-    this.mainPicRef = React.createRef();
   }
 
 
   componentDidMount() {
-   this.getStyles(18025);
+   this.getStyles(17450);
   }
 
   getStyles(id) {
@@ -41,7 +38,7 @@ class ImageGallery extends React.Component {
       .then((res) => {
         this.setState({
           styles: res.data.results
-        }, ()=>{this.getPhotos(this.state.styles)});
+        }, ()=>{this.getPhotos(this.state.styles)})
       })
       .catch((err) => {
         console.error(err);
@@ -54,7 +51,7 @@ class ImageGallery extends React.Component {
     if (styles !== undefined) {
       for (let i = 0; i < styles.length; i++) {
         let pic = styles[i].photos[0].url;
-        let thumb = styles[i].photos[0].thumbnail_url;
+        let thumb = [styles[i].photos[0].thumbnail_url, styles[i].style_id];
         main.push(pic);
         thumbs.push(thumb);
         this.setState({
@@ -127,6 +124,7 @@ class ImageGallery extends React.Component {
            backgroundSize: 'cover',
            backgroundRepeat: 'no-repeat',
          }
+
           return (
             <div key={index}>
               {index === (this.props.selected ? this.selector(this.props.selected) : this.state.curMain) && (
@@ -159,6 +157,7 @@ class ImageGallery extends React.Component {
           prev={this.prevThumb}
           selected={this.props.selected}
           selector={this.selector}
+          handleSelect={this.props.handleSelect}
           />
 
       </ThumbsContainer>
@@ -195,12 +194,15 @@ const StyledPrevBtn = styled.button`
   width: 40px;
   left: 10%;
   bottom: 50%;
+  opacity: 0.80;
   background-image: url(${left});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  ${StyledPrevBtn}:hover {
+    opacity: 1;
   &:hover {
     cursor: pointer;
   }
@@ -211,12 +213,15 @@ const StyledNextBtn = styled.button`
   width: 40px;
   left: 85%;
   bottom: 50%;
+  opacity: 0.80;
   background-image: url(${right});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: transparent;
   border-radius: 50%;
+  ${StyledNextBtn}:hover {
+    opacity: 1;
   &:hover {
     cursor: pointer;
   }

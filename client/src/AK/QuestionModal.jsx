@@ -17,6 +17,7 @@ backdrop-filter: blur(5px);
 `;
 const ModalForm = styled.form`
 position: fixed;
+color: black;
 display: flex;
 flex-direction: column;
 background-color: #fefefe;

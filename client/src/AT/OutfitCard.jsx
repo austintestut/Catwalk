@@ -63,7 +63,7 @@ border-style: solid none solid none;
 border-width: 2px;
 bottom: 65px;
 grid-row: 2;
-grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;
+grid-template-columns: 1fr 8fr 1fr;
 grid-column-gap: 2%;
 height: 57px;
 width: auto;
@@ -97,8 +97,6 @@ class OutfitCard extends React.Component {
       otherUrls: [],
       styleNames: [],
       cardCharacteristics: {},
-      // comparison modal showing or not
-      modalShowing: false,
       totalReviews: 0,
       otherImagesShowing: false,
       styleSalePrices: {},
@@ -107,7 +105,8 @@ class OutfitCard extends React.Component {
       strikethroughPrice: 0,
       thumbnailCarouselShowingIndexes: [0, 1, 2, 3],
       thumbnailRightArrow: true,
-      thumbnailLeftArrow: false
+      thumbnailLeftArrow: false,
+      thumbnailXindex: 0
     };
     this.handleImageMouseOver = this.handleImageMouseOver.bind(this);
     this.handleImageMouseLeave = this.handleImageMouseLeave.bind(this);
@@ -279,7 +278,8 @@ class OutfitCard extends React.Component {
       newIndexes.push(this.state.thumbnailCarouselShowingIndexes[i] + 4);
     }
     this.setState({
-      thumbnailCarouselShowingIndexes: newIndexes
+      thumbnailCarouselShowingIndexes: newIndexes,
+      thumbnailXindex: this.state.thumbnailXindex - 182
     }, () => this.checkIfThumbnailButtonsShouldRender());
   }
 
@@ -289,7 +289,8 @@ class OutfitCard extends React.Component {
       newIndexes.push(this.state.thumbnailCarouselShowingIndexes[i] - 4);
     }
     this.setState({
-      thumbnailCarouselShowingIndexes: newIndexes
+      thumbnailCarouselShowingIndexes: newIndexes,
+      thumbnailXindex: this.state.thumbnailXindex + 182
     }, () => this.checkIfThumbnailButtonsShouldRender());
   }
 
@@ -318,6 +319,7 @@ class OutfitCard extends React.Component {
                 otherUrls={this.state.otherUrls}
                 thumbnailCarouselShowingIndexes={this.state.thumbnailCarouselShowingIndexes}
                 styleNames={this.state.styleNames}
+                thumbnailXindex={this.state.thumbnailXindex}
               />
             </StyledOtherImageContainer>
             )}

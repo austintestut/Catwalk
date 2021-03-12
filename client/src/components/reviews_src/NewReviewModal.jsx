@@ -110,6 +110,7 @@ class NewReviewModal extends React.Component {
       maxWidth: '95%',
     };
     const modalContentStyle = {
+      color: 'black',
       backgroundColor: 'transparent',
       width: '95%',
       height: '95%',

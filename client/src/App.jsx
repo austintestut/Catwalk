@@ -17,7 +17,8 @@ class App extends React.Component {
       productData: {},
       rating: 0,
       characteristics: [],
-      totalReviews: 0
+      totalReviews: 0,
+      shadeOfCarouselFade: 'white'
     };
     this.handleItemClick = this.handleItemClick.bind(this);
     this.getProductInfo = this.getProductInfo.bind(this);
@@ -25,7 +26,7 @@ class App extends React.Component {
     this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.fetcher = this.fetcher.bind(this);
-
+    this.darkToggle = this.darkToggle.bind(this);
   }
 
   componentDidMount() {
@@ -117,16 +118,36 @@ class App extends React.Component {
     });
   }
 
+  darkToggle() {
+    let app = document.getElementById('app');
+    if (app.classList.contains('darkmode')) {
+      app.classList.toggle('darkmode');
+      this.setState({
+        shadeOfCarouselFade: 'white'
+      });
+    } else {
+      app.classList.toggle('darkmode');
+      this.setState({
+        shadeOfCarouselFade: 'black'
+      });
+    }
+  }
+
   render() {
     return (
       <div>
         <TopBar>
-          <TitleP>Wozniak</TitleP>
+        <TitleP>Wozniak</TitleP>
           <p style={{fontFamily: 'Courier New '}}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
         </TopBar>
+        <StyledDarkModeButton onClick={this.darkToggle}>Toggle Dark Mode</StyledDarkModeButton>
         <br />
         <br />
-        <Overview />
+        <Overview
+        product={this.state.productData}
+        rating={this.state.rating}
+        reviews={this.state.totalReviews}
+        />
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
           handleItemClick={this.handleItemClick}
@@ -134,6 +155,7 @@ class App extends React.Component {
           productData={this.state.productData}
           rating={this.state.rating}
           characteristics={this.state.characteristics}
+          shadeOfCarouselFade={this.state.shadeOfCarouselFade}
         />
         <Container currentPageItemId={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
         <Reviews />
@@ -154,6 +176,22 @@ align-items: center;
 width: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
+<<<<<<< HEAD
 
 `
+=======
+`;
+const StyledDarkModeButton = styled.button`
+position: fixed;
+top: 0;
+right: 0;
+height: 50px;
+font-family: inherit;
+background-image: linear-gradient(white, silver);
+&:hover {
+  cursor: pointer;
+  background-image: linear-gradient(silver, white);
+}
+`;
+>>>>>>> 1d4683c089bf110dfe3c259ed3f2fdc12c181eef
 export default App;

@@ -19,6 +19,11 @@ body{
   padding: 0;
 }
 
+.darkmode {
+  background-color: black;
+  color: white;
+}
+
 .reviews {
   font-family: 'Arial', 'Avenir Black';
 }
