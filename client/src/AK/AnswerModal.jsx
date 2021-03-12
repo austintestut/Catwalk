@@ -22,7 +22,7 @@ flex-direction: column;
 background-color: #fefefe;
 padding: 20px 50px;
 border: 2px solid gray;
-`
+`;
 
 const ModalInput = styled.input`
 margin: 5px;
@@ -40,7 +40,7 @@ font-size: 16px;
   outline: bold;
   outline-color: black;
 }
-`
+`;
 const XButton = styled.i`
 width: 50px;
 align-self: flex-end;
@@ -49,8 +49,7 @@ color: white;
 &:hover{
   cursor: pointer;
 }
-`
-
+`;
 
 const AnswerModal = function ({ showing, hide, submitAnswer, productName, questionBody }) {
   if (!showing) {
@@ -59,20 +58,19 @@ const AnswerModal = function ({ showing, hide, submitAnswer, productName, questi
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitAnswer}>
-        <XButton className="fas fa-times fa-lg" style={{float: 'right'}} onClick={hide}></XButton>
-        <h2 style={{alignSelf: 'center'}}>Your Answer</h2>
-        <h4 style={{alignSelf: 'center'}}>About {productName}</h4>
+        <XButton className="fas fa-times fa-lg" style={{ float: 'right' }} onClick={hide} />
+        <h2 style={{ alignSelf: 'center' }}>Your Answer</h2>
+        <h4 style={{ alignSelf: 'center' }}>About {productName}</h4>
         <ModalQInput maxLength="1000" />
-        <p style={{fontSize: '20px', alignSelf: 'center'}}> What is your nickname?</p>
+        <p style={{ fontSize: '20px', alignSelf: 'center' }}> What is your nickname?</p>
         <ModalInput placeholder="Example: jackson11!" maxLength="60" />
-        <p style={{color: 'gray'}}>For privacy reasons, do not use your full name or email address</p>
-        <p style={{fontSize: '20px', alignSelf: 'center'}}>Send us an email!</p>
+        <p style={{ color: 'gray' }}>For privacy reasons, do not use your full name or email address</p>
+        <p style={{ fontSize: '20px', alignSelf: 'center' }}>Send us an email!</p>
         <ModalInput placeholder="Example: jack@email.com" maxLength="60" />
-        <p style={{color: 'gray'}}>For authentication reasons only - you will not be emailed</p>
+        <p style={{ color: 'gray' }}>For authentication reasons only - you will not be emailed</p>
         {/* <p style={{fontSize: '25px', alignSelf: 'center'}}>Upload Your Photos:</p>
         <ModalInput type="file" accept="image/*" multiple /> */}
         <button type="submit">Submit Your Answer</button>
-
 
       </ModalForm>
     </ModalDiv>
