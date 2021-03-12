@@ -1,5 +1,6 @@
 import React from 'react';
 import handler from '../../global_functions/handler';
+import UrlWindow from '../new_review_components/UrlWindow';
 
 class Helpfulness extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class Helpfulness extends React.Component {
     this.state = {
       clicked: false,
       count: helpfulness,
+      report: false,
     };
     this.click = this.click.bind(this);
   }
@@ -23,20 +25,57 @@ class Helpfulness extends React.Component {
         reviews.update(id, 'helpful');
       }
       if (name === 'report') {
-        reviews.update(id, 'report');
-        this.setState({ clicked: true });
+        this.setState({ report: true });
       }
     }
   }
 
   render() {
     let { count } = this.state;
+    const { removeReview, index } = this.props;
     return (
       <div style={{fontSize: '90%', color: 'grey' }}>
         <span>Helpful? </span>
         <span name="helpful" className="helpful austinButtons" onClick={this.click} style={{ textDecoration: 'underline' }}>Yes</span>
         <span> ({ count })    |    </span>
         <span name="report" className="helpful austinButtons" onClick = {this.click} style={{ textDecoration: 'underline' }}>Report</span>
+        {this.state.report && (
+          <UrlWindow title="FEC-Wozniak: Report Abuse">
+              <div>
+                <h1 style={{ fontFamily: 'Avenir Black' }}>Report abuse</h1>
+                <p style={{ fontFamily: 'Ariel' }}>If you find this content inappropriate
+                  and think it should be removed from the
+                  FEC-Wozniak site, let us know by clicking the button below.
+                </p>
+                <br />
+                <button
+                  type="submit"
+                  style={{
+                    marginTop: '0',
+                    backgroundColor: '#e11a2b',
+                    border: 'none',
+                    outline: '0',
+                    color: 'white',
+                    padding: '15px 32px',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    fontSize: '16px',
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const { reviews } = handler;
+                    const { id } = this.props;
+                    reviews.update(id, 'report');
+                    this.setState(
+                      { clicked: true, report: false },
+                      removeReview(index),
+                    );
+                }} >Report
+                </button>
+            </div>
+          </UrlWindow>
+        )}
       </div>
     );
   }

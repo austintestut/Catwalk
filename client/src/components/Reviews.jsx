@@ -45,6 +45,7 @@ class Reviews extends React.Component {
   }
 
   updateReviews(sort = 'relevant', recCounts = null, id = null) {
+    this.clearFilters();
     const { reviewsMeta } = this.state;
     let recommend = recCounts;
     let productId = id;
@@ -82,7 +83,7 @@ class Reviews extends React.Component {
     if (currentFilters) {
       this.setState(
         { currentFilters: [] },
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }),
+        () => {if (e) {window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); } },
       );
     }
   }

@@ -8,7 +8,7 @@ import Helpfulness from './Helpfulness';
 import Response from './Response';
 import ImgModal from './ImgModal';
 
-const ReviewTile = ({ review, length, index }) => {
+const ReviewTile = ({ review, length, index, removeReview }) => {
   const tileStyle = {
     marginBottom: '4px',
     marginTop: '4px',
@@ -47,7 +47,12 @@ const ReviewTile = ({ review, length, index }) => {
       {imageMap()}
       { /* <ImgModal /> */ }
       <Response response={review.response} />
-      <Helpfulness helpfulness={review.helpfulness} id={review.review_id} />
+      <Helpfulness
+        helpfulness={review.helpfulness}
+        id={review.review_id}
+        removeReview={removeReview}
+        index={index}
+      />
     </div>
   );
 };
