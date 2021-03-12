@@ -52,6 +52,7 @@ z-index: 2;
 width: 100%;
 height: 100%;
 overflow: auto;
+backdrop-filter: blur(5px);
 animation: ${modalFade} .35s;
 animation-fill-mode: forwards;
 `;
@@ -111,7 +112,7 @@ const StyledModalX = styled.i`
 color: white;
 position: relative;
 top: 21.5%;
-left: 68.5%;
+left: 63.5%;
 text-shadow: 0 0 1px #000;
 ${StyledModalX}:hover {
   cursor: pointer;
