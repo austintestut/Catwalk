@@ -135,7 +135,7 @@ class App extends React.Component {
           rating={this.state.rating}
           characteristics={this.state.characteristics}
         />
-        <Container currentPageItemID={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
+        <Container currentPageItemId={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
         <Reviews />
       </div>
     );

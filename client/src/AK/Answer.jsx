@@ -57,7 +57,7 @@ class Answer extends React.Component {
     if (this.state.helped) {
      return (
         <>
-          <StyledButton
+          <StyledButton style={{fontWeight: 'bold'}}
           disabled
           >Thank you for your feedback! ({this.props.ans.helpfulness + 1})
           </StyledButton>

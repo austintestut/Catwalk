@@ -21,8 +21,8 @@ const ShowMoreQuestionsButton = function ({ showMoreQuestions, isMaxQuestions })
     );
   }
   return (
-    <div />
-  );
+    <div></div>
+    )
 };
 
 export default ShowMoreQuestionsButton;

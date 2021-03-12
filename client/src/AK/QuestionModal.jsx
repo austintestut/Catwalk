@@ -20,14 +20,27 @@ position: fixed;
 display: flex;
 flex-direction: column;
 background-color: #fefefe;
-padding: 20px 50px;
-border: 2px solid gray;
+padding: 15px 30px;
+border: 5px solid black;
+align-items: center;
 
 `;
 
 const ModalInput = styled.input`
 margin: 5px;
 width: 100%;
+&:focus{
+  outline: bold;
+  outline-color: black;
+}
+`
+const ModalQInput = styled.textarea`
+height: 110px;
+font-size: 16px;
+&:focus{
+  outline: bold;
+  outline-color: black;
+}
 `
 const XButton = styled.button`
 width: 50px;
@@ -45,13 +58,13 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion, productName 
         <h2 style={{alignSelf: 'center' }}>Ask Your Question:</h2>
         <h4 style={{alignSelf: 'center' }}>About {productName}</h4>
         <p style={{fontSize: '25px', alignSelf: 'center'}}>What is your question?</p>
-        <textarea style={{height: '150px'}}maxLength="1000" />
+        <ModalQInput maxLength="1000" />
         <p style={{fontSize: '25px', alignSelf: 'center'}}>What is your nickname?</p>
         <ModalInput placeholder="Example: jackson11!" maxLength="60" />
-        <p>(For privacy reasons, do not use your full name or email address)</p>
+        <p style={{color: 'gray'}}>For privacy reasons, do not use your full name or email address</p>
         <p style={{fontSize: '25px', alignSelf: 'center'}}>Send us an email!</p>
-        <ModalInput placeholder="Why did you like the product or not?" maxLength="60" />
-        <p>For authentication reasons only -  you will not be emailed</p>
+        <ModalInput placeholder="example: jack11@gmail.com" maxLength="60" />
+        <p style={{color: 'gray'}}>For authentication reasons only -  you will not be emailed</p>
         <button type="submit">Submit Your Question</button>
 
 
