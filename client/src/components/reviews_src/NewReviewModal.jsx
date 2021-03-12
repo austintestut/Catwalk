@@ -38,7 +38,6 @@ class NewReviewModal extends React.Component {
     this.hoist = this.hoist.bind(this);
     this.toggleUrlWindow = this.toggleUrlWindow.bind(this);
     this.addImageState = this.addImageState.bind(this);
-    // this.characterChecker = this.characterChecker.bind(this);
   }
 
   handleSubmit(e) {
@@ -46,7 +45,6 @@ class NewReviewModal extends React.Component {
     const { meta } = this.props;
     const { reviews } = handler;
     let errors = formValidator(this.state);
-    console.log(!(Object.values(errors).length));
     if (!Object.values(errors).length) {
       reviews.post(
         reviewBodyConstructor(this.state, meta),
@@ -72,7 +70,6 @@ class NewReviewModal extends React.Component {
         },
       );
     }
-    console.log(errors);
     this.setState({ errors });
   }
 
@@ -149,10 +146,7 @@ class NewReviewModal extends React.Component {
       left: '50%',
       transform: 'translate(-50%, -50%)',
       top: '50%',
-      // height: '100%',
-      // overflow: 'auto',
       backgroundColor: 'transparent',
-      // maxHeight: 'calc(100vh - 50px)',
     };
     const modalContentStyle = {
       borderRadius: '5px',
@@ -181,7 +175,8 @@ class NewReviewModal extends React.Component {
       width: '100vw',
       height: '100vh',
       backgroundColor: 'rgba(128,128,128,0.5)',
-      backdropFilter: 'blur(5px)'
+      backdropFilter: 'blur(5px)',
+      color: 'black,'
     };
 
     const formStyle = {

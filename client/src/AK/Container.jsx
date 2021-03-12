@@ -63,19 +63,6 @@ class Container extends React.Component {
     }
   }
 
-  // getProductQuestions() {
-  //   console.log(this.props.currentPageItemID)
-  //   // will need to change the ID parameter below to be dynamic, maybe use params obj
-  //   axios({
-  //     url: `/questions/${this.props.currentPageItemID}`,
-  //     method: 'get',
-  //   })
-  //     .then((data) => {
-  //       console.log(data.data.results);
-  //       this.setState({ questions: data.data.results });
-  //     });
-  // }
-
   displaySearchQuestions(text) {
     const filtered = this.props.questions.filter(
       (question) => question.question_body.includes(text),
