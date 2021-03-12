@@ -40,7 +40,7 @@ ${StyledAddButton}:hover {
 `;
 const StyledLeftOutfitButtonContainer = styled.div`
 ${props => props.outfitLeftArrow && css`
-z-index: 2;
+z-index: 1;
 box-shadow: 50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
