@@ -83,7 +83,7 @@ class Reviews extends React.Component {
     if (currentFilters) {
       this.setState(
         { currentFilters: [] },
-        () => {debugger; if (e) {window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); } },
+        () => {if (e) {window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); } },
       );
     }
   }

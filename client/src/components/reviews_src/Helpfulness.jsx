@@ -32,6 +32,7 @@ class Helpfulness extends React.Component {
 
   render() {
     let { count } = this.state;
+    const { removeReview, index } = this.props;
     return (
       <div style={{fontSize: '90%', color: 'grey' }}>
         <span>Helpful? </span>
@@ -62,12 +63,14 @@ class Helpfulness extends React.Component {
                     fontSize: '16px',
                   }}
                   onClick={(e) => {
-                    debugger;
                     e.preventDefault();
                     const { reviews } = handler;
                     const { id } = this.props;
                     reviews.update(id, 'report');
-                    this.setState({ clicked: true, report: false });
+                    this.setState(
+                      { clicked: true, report: false },
+                      removeReview(index),
+                    );
                 }} >Report
                 </button>
             </div>

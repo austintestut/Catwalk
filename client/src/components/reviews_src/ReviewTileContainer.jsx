@@ -1,7 +1,7 @@
 import React from 'react';
 import ReviewTile from './ReviewTile';
 
-const ReviewTileContainer = ({ reviews, show }) => {
+const ReviewTileContainer = ({ reviews, show, removeReview }) => {
   const showReviews = reviews.slice(0, show);
   const reviewTileStyle = {
     overflow: '-moz-scrollbars-vertical',
@@ -16,7 +16,11 @@ const ReviewTileContainer = ({ reviews, show }) => {
   return (
     <div style={reviewTileStyle} id="review-tile-container">
       {showReviews.map((review, index) => (
-        <ReviewTile review={review} index={index} length={showReviews.length} />
+        <ReviewTile review={review}
+          index={index}
+          length={showReviews.length}
+          removeReview={removeReview}
+        />
       ))}
     </div>
   );

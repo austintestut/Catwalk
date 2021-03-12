@@ -14,6 +14,7 @@ class ReviewList extends React.Component {
     };
     this.addReviews = this.addReviews.bind(this);
     this.setFilters = this.setFilters.bind(this);
+    this.removeReview = this.removeReview.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -47,6 +48,15 @@ class ReviewList extends React.Component {
     );
   }
 
+  removeReview(index) {
+    const { reviews } = this.state
+    const newList = reviews.slice();
+    newList.splice(index, 1);
+    this.setState({
+      reviews: newList,
+    });
+  }
+
   addReviews(e) {
     e.preventDefault();
     this.setState(
@@ -72,7 +82,7 @@ class ReviewList extends React.Component {
     return (
       <div style={{ ...containerStyle }}>
         <ReviewsSort total={reviews.length} updateReviews={updateReviews} />
-        <ReviewTileContainer reviews={reviews} show={show} />
+        <ReviewTileContainer reviews={reviews} show={show} removeReview={this.removeReview} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
         <NewReviewModal
           characteristics={characteristics}
