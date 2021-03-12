@@ -2,42 +2,70 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ModalDiv = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
 position: fixed;
-z-index: 1;
+z-index: 100;
 left: 0;
 top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgb(0,0,0);
-background-color: rgba(0,0,0,0.4);
+width: 100vw;
+height: 100vh;
+/* overflow: auto; */
+background-color: rgba(128,128,128,0.5);
+backdrop-filter: blur(5px);
 `;
 const ModalForm = styled.form`
+position: fixed;
+display: flex;
+flex-direction: column;
 background-color: #fefefe;
-margin: 15% auto;
-padding: 20px;
-border: 1px solid #888;
-width: 80%;
+padding: 20px 50px;
+border: 2px solid gray;
+`
 
+const ModalInput = styled.input`
+margin: 5px;
+width: 100%;
+&:focus{
+  outline: bold;
+  outline-color: black;
+}
 `;
-const AnswerModal = function ({ showing, hide, submitAnswer }) {
+
+const ModalQInput = styled.textarea`
+height: 110px;
+font-size: 16px;
+&:focus{
+  outline: bold;
+  outline-color: black;
+}
+`
+const XButton = styled.button`
+width: 50px;
+align-self: flex-end;
+`
+
+
+const AnswerModal = function ({ showing, hide, submitAnswer, productName, questionBody }) {
   if (!showing) {
     return null;
   }
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitAnswer}>
-        <button style={{float: 'right'}} onClick={hide}>X</button>
-        <p>Your Answer</p>
-        <input maxLength="1000" />
-        <p>What is your nickname?</p>
-        <input placeholder="Example: jackson11!" maxLength="60" />
-        <p>(For privacy reasons, do not use your full name or email address)</p>
-        <p>Send us an email!</p>
-        <input placeholder="Example: jack@email.com" maxLength="60" />
-        <p>For authentication reasons only -  you will not be emailed</p>
-        <p>Upload Your Photos:</p>
-        <input type="file" accept="image/*" multiple />
+        <XButton style={{float: 'right'}} onClick={hide}>X</XButton>
+        <h2 style={{alignSelf: 'center'}}>Your Answer</h2>
+        <h4 style={{alignSelf: 'center'}}>About {productName}</h4>
+        <ModalQInput maxLength="1000" />
+        <p style={{fontSize: '20px', alignSelf: 'center'}}> What is your nickname?</p>
+        <ModalInput placeholder="Example: jackson11!" maxLength="60" />
+        <p style={{color: 'gray'}}>For privacy reasons, do not use your full name or email address</p>
+        <p style={{fontSize: '20px', alignSelf: 'center'}}>Send us an email!</p>
+        <ModalInput placeholder="Example: jack@email.com" maxLength="60" />
+        <p style={{color: 'gray'}}>For authentication reasons only - you will not be emailed</p>
+        {/* <p style={{fontSize: '25px', alignSelf: 'center'}}>Upload Your Photos:</p>
+        <ModalInput type="file" accept="image/*" multiple /> */}
         <button type="submit">Submit Your Answer</button>
 
 

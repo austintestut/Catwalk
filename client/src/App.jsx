@@ -136,7 +136,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <TopBar>Wozniak</TopBar>
+        <TopBar>
+        <TitleP>Wozniak</TitleP>
+          <p style={{fontFamily: 'Courier New '}}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
+        </TopBar>
         <StyledDarkModeButton onClick={this.darkToggle}>Toggle Dark Mode</StyledDarkModeButton>
         <br />
         <br />
@@ -154,14 +157,22 @@ class App extends React.Component {
           characteristics={this.state.characteristics}
           shadeOfCarouselFade={this.state.shadeOfCarouselFade}
         />
-        <Container currentPageItemID={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
+        <Container currentPageItemId={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
         <Reviews />
       </div>
     );
   }
 }
 
+const TitleP = styled.p`
+font-family: Courier New;
+font-size: 24px;
+`
+
 const TopBar = styled.div`
+display: flex;
+justify-content: space-around;
+align-items: center;
 width: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;

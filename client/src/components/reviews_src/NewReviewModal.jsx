@@ -133,6 +133,7 @@ class NewReviewModal extends React.Component {
       width: '100vw',
       height: '100vh',
       backgroundColor: 'rgba(128,128,128,0.5)',
+      backdropFilter: 'blur(5px)'
     };
 
     const formStyle = {
