@@ -137,14 +137,14 @@ class App extends React.Component {
     return (
       <div>
         <TopBar>
-        <TitleP>Wozniak</TitleP>
-          <p style={{fontFamily: 'Courier New '}}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
+          <TitleP>Wozniak</TitleP>
+          <p style={{ fontFamily: 'Courier New ' }}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
         </TopBar>
-        <StyledDarkModeButton onClick={this.darkToggle}>Toggle Dark Mode</StyledDarkModeButton>
+        <StyledDarkModeButton onClick={this.darkToggle}>🌙</StyledDarkModeButton>
         <Overview
-        product={this.state.productData}
-        rating={this.state.rating}
-        reviews={this.state.totalReviews}
+          product={this.state.productData}
+          rating={this.state.rating}
+          reviews={this.state.totalReviews}
         />
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
@@ -155,7 +155,7 @@ class App extends React.Component {
           characteristics={this.state.characteristics}
           shadeOfCarouselFade={this.state.shadeOfCarouselFade}
         />
-        <Container currentPageItemId={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
+        <Container currentPageItemId={this.state.currentPageItemId} questions={this.state.questions} productName={this.state.productData.name} />
         <Reviews
           productId={this.state.currentPageItemId}
           name={this.state.productData.name}
@@ -183,11 +183,15 @@ position: absolute;
 top: 0;
 right: 0;
 height: 50px;
+width: 75px;
 font-family: inherit;
 background-image: linear-gradient(white, silver);
 &:hover {
   cursor: pointer;
   background-image: linear-gradient(silver, white);
 }
+filter: grayscale(100%);
+font-size: 17.5px;
 `;
 export default App;
+

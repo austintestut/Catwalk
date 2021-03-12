@@ -3,7 +3,7 @@ import React from 'react';
 const Response = ({ response }) => {
   if (response) {
     return (
-      <fragment>
+      <>
         <div style={{
           backgroundColor: '#F0F0F0',
           padding: '5px',
@@ -18,7 +18,7 @@ const Response = ({ response }) => {
           <span>{response}</span>
         </div>
         <br />
-      </fragment>
+      </>
     );
   }
   return null;
