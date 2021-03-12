@@ -141,8 +141,6 @@ class App extends React.Component {
           <p style={{fontFamily: 'Courier New '}}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
         </TopBar>
         <StyledDarkModeButton onClick={this.darkToggle}>Toggle Dark Mode</StyledDarkModeButton>
-        <br />
-        <br />
         <Overview
         product={this.state.productData}
         rating={this.state.rating}
