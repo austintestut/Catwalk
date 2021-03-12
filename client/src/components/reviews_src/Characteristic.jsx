@@ -46,10 +46,8 @@ const Characteristic = ({ item }) => {
 
   const textStyle = {
     textAlign: 'left',
-    // margin: '8px',
     fontSize: '14px',
     marginBottom: '2px',
-    // color: 'silver',
   };
 
   return (

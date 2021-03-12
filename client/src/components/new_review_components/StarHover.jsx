@@ -44,13 +44,10 @@ class StarHover extends React.Component {
   }
 
   makeStars() {
-    // const emptyStar = <i class="far fa-star"/>;
-    // const solidStar = <i class="fas fa-star"/>;
     let { count } = this.state;
     let stars = [];
     const style = {
       color: '#e11a2b',
-      // textShadow: '0 0 3px black',
     }
     for (let x = 0; x < 5; x++) {
       if (count > x) {
@@ -72,7 +69,7 @@ class StarHover extends React.Component {
       return '      (please select a rating)';
     }
     hoist('stars', count);
-    return // `     ${count} Stars`;
+    return;
   }
 
   render() {

@@ -13,7 +13,6 @@ const Errors = ({ errors }) => {
       }}>
         <ul>
           {errors.map((error) => {
-            console.log(error);
             if (error !== 'invalid url') {
               return (<li>{error}</li>);
             }

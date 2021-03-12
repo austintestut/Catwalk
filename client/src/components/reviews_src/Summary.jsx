@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Summary = ({ summary }) => {
-  if (summary) { return <fragment><div style={{ fontWeight: 'bold' }}>{summary}</div><br/></fragment>; }
+  if (summary) { return <><div style={{ fontWeight: 'bold' }}>{summary}</div><br/></>; }
   return null;
 };
 

@@ -17,7 +17,7 @@ background-image: linear-gradient(#ff0019, #790a04);
 &:hover {
   cursor: pointer;
 }
-`
+`;
 
 const StyledButton = styled.button`
 margin-left: 8px;
@@ -70,10 +70,11 @@ class Questionn extends React.Component {
       url: `/questions/${this.props.question.question_id}/answers`,
       method: 'post',
       data: {
-        body: event.target[1].value,
-        name: event.target[2].value,
-        email: event.target[3].value,
+        body: event.target[0].value,
+        name: event.target[1].value,
+        email: event.target[2].value,
       },
+    }).then(() => {
     });
   }
 
@@ -95,14 +96,14 @@ class Questionn extends React.Component {
 
   renderHelpfulButton() {
     if (this.state.helped) {
-      return (<StyledButton style={{fontWeight: 'bold'}}> Thank you for your feedback! ({this.props.question.question_helpfulness + 1})</StyledButton>)
+      return (<StyledButton style={{ fontWeight: 'bold' }}> Thank you for your feedback! ({this.props.question.question_helpfulness + 1})</StyledButton>);
     }
-    return (<StyledButton onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness + this.state.QhelpfulCounter})</StyledButton>)
+    return (<StyledButton onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness + this.state.QhelpfulCounter})</StyledButton>);
   }
 
   renderReportButton() {
     if (this.state.reported) {
-      return (<StyledButton style={{color: 'red'}}> Reported</StyledButton>)
+      return (<StyledButton style={{ color: 'red' }}> Reported</StyledButton>);
     }
     return <StyledButton onClick={this.reportQuestion}> Report</StyledButton>;
   }
@@ -137,9 +138,9 @@ class Questionn extends React.Component {
     return (
       <div style={{ width: '100%' }}>
         <QuestionDiv>
-          <div style={{fontWeight: '600', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
+          <div style={{ fontWeight: '600', fontSize: '16px', width: '50%' }}>Q: {this.props.question.question_body}
           </div>
-          <div style={{ fontSize: '12px', color: 'grey', width: '400px'}}>
+          <div style={{ fontSize: '12px', color: 'grey', width: '400px' }}>
             Helpful?
             {this.renderHelpfulButton()}
             {this.renderReportButton()}
