@@ -42,7 +42,6 @@ font-size: 16px;
 }
 `;
 const XButton = styled.i`
-width: 50px;
 align-self: flex-end;
 text-shadow: 0 0 1px #000;
 color: white;
@@ -58,7 +57,7 @@ const AnswerModal = function ({ showing, hide, submitAnswer, productName, questi
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitAnswer}>
-        <XButton className="fas fa-times fa-lg" style={{ float: 'right' }} onClick={hide} />
+        <XButton className="fas fa-times fa-lg" onClick={hide} />
         <h2 style={{ alignSelf: 'center' }}>Your Answer</h2>
         <h4 style={{ alignSelf: 'center' }}>About {productName}</h4>
         <ModalQInput maxLength="1000" />

@@ -156,6 +156,7 @@ const StyledCartBtn = styled.button`
     cursor: pointer;
     text-decoration: underline;
   }
+  font-size: 16px;
 `
 const StyledSizeBtn = styled.select`
   position: relative;
