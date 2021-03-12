@@ -3,7 +3,6 @@ const formValidator = (stateObj, type, imgState) => {
     recommend, nickname, email, summary, body, stars, characteristics,
     image1, image2, image3, image4, image5
   } = stateObj;
-  debugger;
   let images = [image1, image2, image3, image4, image5];
   let viableImages = [];
 
@@ -34,7 +33,6 @@ const formValidator = (stateObj, type, imgState) => {
   }
 
   images.forEach((image, index) => {
-    debugger;
     if (image !== '') {
       if (checkImg(image)) {
         viableImages.push(image);

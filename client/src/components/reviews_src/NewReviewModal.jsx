@@ -121,26 +121,51 @@ class NewReviewModal extends React.Component {
 
   render() {
     const { characteristics } = this.props;
+    const textInputStyle = {
+      padding: '10px 5px',
+      margin: '0px 0',
+      border: '1px solid silver',
+      borderRadius: '5px',
+      boxSizing: 'border-box',
+      fontSize: '14px',
+      fontFamily: 'Arial',
+    };
+    const buttonStyle = {
+      marginTop: '10px',
+      backgroundColor: '#e11a2b',
+      border: 'none',
+      outline: '0',
+      color: 'white',
+      padding: '15px 32px',
+      textAlign: 'center',
+      textDecoration: 'none',
+      display: 'inline-block',
+      fontSize: '16px',
+    };
+
     const modalStyle = {
       position: 'fixed',
       zIndex: 1,
       left: '50%',
-      transform: 'translateX(-50%)',
-      top: '10%',
-      height: '100%',
+      transform: 'translate(-50%, -50%)',
+      top: '50%',
+      // height: '100%',
+      // overflow: 'auto',
       backgroundColor: 'transparent',
-      maxHeight: 'calc(100vh - 50px)',
-      maxWidth: '95%',
+      // maxHeight: 'calc(100vh - 50px)',
     };
     const modalContentStyle = {
-      backgroundColor: 'transparent',
-      width: '95%',
-      height: '95%',
+      borderRadius: '5px',
+      backgroundColor: 'white',
+      width: '100%',
+      height: '100%',
+      maxHeight: 'calc(100vh - 50px)',
+      maxWidth: 'calc(100vw - 50px)',
     };
 
     const modalButtonStyle = {
-      right: -15,
-      top: 7,
+      right: -70,
+      top: 10,
       color: 'white',
       zIndex: 2,
       position: 'absolute',
@@ -170,8 +195,8 @@ class NewReviewModal extends React.Component {
       return (
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
+          <i className="fas fa-times fa-lg modal-close" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
             <div style={{ ...modalContentStyle }}>
-              <i className="fas fa-times fa-lg modal-close" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
               <div style={{ ...formStyle }} className="new-review">
                 { /* ------------------------------->>FORM HERE<<------------------------------*/ }
                 <div style={{ justifyContent: 'center', textAlign: 'center' }}>
@@ -219,13 +244,14 @@ class NewReviewModal extends React.Component {
                 </span>
                 {this.state.urlWindow && (
                   <UrlWindow>
-                    <h1>Link your pictures here</h1>
-                    <input type="text" name="image1" placeholder="Image URL here" value={this.state.image1} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image1') }} /><br /><br />
-                    <input type="text" name="image2" placeholder="Image URL here" value={this.state.image2} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image2') }} /><br /><br />
-                    <input type="text" name="image3" placeholder="Image URL here" value={this.state.image3} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image3') }} /><br /><br />
-                    <input type="text" name="image4" placeholder="Image URL here" value={this.state.image4} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image4') }} /><br /><br />
-                    <input type="text" name="image5" placeholder="Image URL here" value={this.state.image5} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image5') }} /><br /><br />
+                    <h1 style={{fontFamily: 'Avenir Black' }}>Link your pictures here</h1>
+                    <input type="text" style={{ ...textInputStyle }} name="image1" placeholder="Image URL here" value={this.state.image1} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image1') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image2" placeholder="Image URL here" value={this.state.image2} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image2') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image3" placeholder="Image URL here" value={this.state.image3} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image3') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image4" placeholder="Image URL here" value={this.state.image4} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image4') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image5" placeholder="Image URL here" value={this.state.image5} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image5') }} /><br /><br />
                     <button
+                      style={{ ...buttonStyle }}
                       type="submit"
                       onClick={() => {
                         let check = formValidator(this.state, 'image', this.addImageState);
