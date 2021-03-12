@@ -67,19 +67,19 @@ const StyledHeader = styled.h3`
 `;
 const StyledLeftRelatedButtonContainer = styled.div`
 ${props => props.relatedLeftArrow && css`
-z-index: 2;
+z-index: 1;
 box-shadow: 50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
 const StyledRightRelatedButtonContainer = styled.div`
 ${props => props.relatedRightArrow && css`
-z-index: 2;
+z-index: 1;
 box-shadow: -50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
 const StyledRightOutfitButtonContainer = styled.div`
 ${props => props.outfitRightArrow && css`
-z-index: 2;
+z-index: 1;
 box-shadow: -50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
