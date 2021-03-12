@@ -184,7 +184,7 @@ class NewReviewModal extends React.Component {
 
     const formStyle = {
       padding: '5%',
-      paddingTop: 0,
+      paddingTop: '5px',
       width: '800px',
       height: 'auto',
       backgroundColor: 'white',

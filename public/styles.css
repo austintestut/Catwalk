@@ -72,6 +72,11 @@ body{
   cursor: pointer;
 }
 
+.thumbnail:hover {
+  size: 110%;
+  cursor: pointer;
+}
+
 .remove-filters {
   all: none
 }

@@ -97,7 +97,7 @@ class ImgModal extends React.Component {
     }
     if (url) {
       return (
-        <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
+        <img src={url} className="thumbnail" style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
       );
     }
     return null;
