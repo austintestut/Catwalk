@@ -80,7 +80,7 @@ box-shadow: -50px 0 17px 0 rgba(255, 255, 255, 1);
 const StyledRightOutfitButtonContainer = styled.div`
 ${props => props.outfitRightArrow && css`
 z-index: 2;
-box-shadow: -50px 17px 0 rgba(255, 255, 255, 1);
+box-shadow: -50px 0 17px 0 rgba(255, 255, 255, 1);
 `};
 `;
 class RelatedProductsAndOutfits extends React.Component {
@@ -105,17 +105,6 @@ class RelatedProductsAndOutfits extends React.Component {
       translatedXrp: 0,
       translatedXoutfit: 0
     };
-
-    /*
-      relatedProductIds: [],
-      productData: [],
-      rating: 0,
-      characteristics: [],
-      totalReviews: 0
-    */
-
-    // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
-    // this.outfitProductIds = [18076, 17858, 17763, 18076, 17068]; // for testing
 
     this.handleRelatedCarouselRight = this.handleRelatedCarouselRight.bind(this);
     this.handleRelatedCarouselLeft = this.handleRelatedCarouselLeft.bind(this);
