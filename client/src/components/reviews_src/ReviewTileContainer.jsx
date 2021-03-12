@@ -6,15 +6,15 @@ const ReviewTileContainer = ({ reviews, show }) => {
   const reviewTileStyle = {
     overflow: '-moz-scrollbars-vertical',
     overflowY: 'scroll',
-    height: '85vh',
-
+    maxHeight: '85vh',
     // borderBottom: '3px solid silver',
     borderRadius: '1px',
+    width: '100%',
     //borderTop: '1px solid grey',
   };
 
   return (
-    <div style={reviewTileStyle}>
+    <div style={reviewTileStyle} id="review-tile-container">
       {showReviews.map((review, index) => (
         <ReviewTile review={review} index={index} length={showReviews.length} />
       ))}

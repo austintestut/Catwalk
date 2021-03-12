@@ -5,15 +5,14 @@ const Response = ({ response }) => {
     return (
       <fragment>
         <div style={{
-          backgroundColor: 'silver',
+          backgroundColor: '#F0F0F0',
           padding: '5px',
-          borderRadius: '5px',
+          borderRadius: '0',
           fontSize: '90%',
           marginRight: '5px',
-          color: 'white',
-          textShadow: '0 0 1px #000',
+          color: 'black',
         }}>
-          <span style={{ fontWeight: 'bold' }}>Response:</span>
+          <span style={{ fontWeight: 'bolder' }}>Response:</span>
           <br />
           <br />
           <span>{response}</span>

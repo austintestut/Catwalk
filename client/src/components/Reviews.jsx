@@ -31,6 +31,19 @@ class Reviews extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId) {
+      const { reviews } = handler;
+      const { productId } = this.props;
+      reviews.getMeta(productId,
+        (response) => {
+          this.setState({ reviewsMeta: response.data });
+          let { recommended, product_id } = response.data;
+          this.updateReviews('relevant', recommended, product_id);
+        });
+    }
+  }
+
   updateReviews(sort = 'relevant', recCounts = null, id = null) {
     const { reviewsMeta } = this.state;
     let recommend = recCounts;
@@ -57,20 +70,26 @@ class Reviews extends React.Component {
     const { currentFilters } = this.state;
     const filterVal = e.target.getAttribute('value');
     if (currentFilters.indexOf(filterVal) === -1) {
-      this.setState({ currentFilters: [...currentFilters, filterVal] });
+      this.setState(
+        { currentFilters: [...currentFilters, filterVal] },
+      );
     }
   }
 
   clearFilters(e) {
-    e.preventDefault();
+    if (e) { e.preventDefault(); }
     const { currentFilters } = this.state;
     if (currentFilters) {
-      this.setState({ currentFilters: [] });
+      this.setState(
+        { currentFilters: [] },
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }),
+      );
     }
   }
 
   render() {
     const { reviewsData, reviewsMeta, currentFilters } = this.state;
+    const { name } = this.props;
     const characteristics = Object.keys(reviewsMeta.characteristics);
     const flexContainerStyle = {
       paddingTop: '0px',
@@ -96,6 +115,7 @@ class Reviews extends React.Component {
           characteristics={characteristics}
           meta={reviewsMeta}
           updateReviews={this.updateReviews}
+          name={name}
         />
       </div>
     );
