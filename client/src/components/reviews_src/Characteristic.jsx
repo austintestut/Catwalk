@@ -7,21 +7,31 @@ const Characteristic = ({ item }) => {
   //item = ["Size", {"id": 59528, "value": "3.2500000000000000"}];
   const qualities = characteristic[item[0]];
   const containerStyle = {
+    paddingTop: '5px',
     width: '249px',
-    height: '18px',
+    height: '13px',
   };
   const barStyle = {
     width: '80px',
-    height: '12px',
+    height: '8px',
     backgroundColor: 'silver',
   };
   const triangleStyle = {
     width: 0,
     height: 0,
-    borderLeft: '6px solid transparent',
-    borderRight: '6px solid transparent',
-    borderTop: '12px solid #e11a2b',
+    marginTop: '-4px',
+    borderLeft: '7px solid transparent',
+    borderRight: '7px solid transparent',
+    borderTop: '14px solid #e11a2b',
     position: 'absolute',
+    marginLeft: `${((item[1].value) / 5) * 237}px`, // 237 = max slider right, 0 = max left
+  };
+
+  const rectangleStyle = {
+    width: '5px',
+    height: '15px',
+    marginTop: '-5px',
+    color: '#e11a2b',
     marginLeft: `${((item[1].value) / 5) * 237}px`, // 237 = max slider right, 0 = max left
   };
   const textContainerStyle = {
@@ -36,11 +46,9 @@ const Characteristic = ({ item }) => {
 
   const textStyle = {
     textAlign: 'left',
-    // margin: '8px',
     fontSize: '14px',
     marginBottom: '2px',
-    // color: 'silver',
-  }
+  };
 
   return (
     <div style={{ width: '249px' }}>

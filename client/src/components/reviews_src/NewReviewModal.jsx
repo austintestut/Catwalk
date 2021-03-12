@@ -6,6 +6,7 @@ import reviewBodyConstructor from '../new_review_components/reviewBodyConstructo
 import handler from '../../global_functions/handler';
 import Errors from '../new_review_components/Errors';
 import UrlWindow from '../new_review_components/UrlWindow';
+import ImageSpan from '../new_review_components/ImageSpan';
 
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
@@ -22,7 +23,12 @@ class NewReviewModal extends React.Component {
       body: '',
       images: [],
       count: '250 characters remaining',
-      errors: [],
+      errors: {},
+      image1: '',
+      image2: '',
+      image3: '',
+      image4: '',
+      image5: '',
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.characterChecker = this.characterChecker.bind(this);
@@ -31,7 +37,7 @@ class NewReviewModal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.hoist = this.hoist.bind(this);
     this.toggleUrlWindow = this.toggleUrlWindow.bind(this);
-    // this.characterChecker = this.characterChecker.bind(this);
+    this.addImageState = this.addImageState.bind(this);
   }
 
   handleSubmit(e) {
@@ -39,8 +45,7 @@ class NewReviewModal extends React.Component {
     const { meta } = this.props;
     const { reviews } = handler;
     let errors = formValidator(this.state);
-    if (!errors) {
-      debugger;
+    if (!Object.values(errors).length) {
       reviews.post(
         reviewBodyConstructor(this.state, meta),
         () => {
@@ -55,11 +60,16 @@ class NewReviewModal extends React.Component {
             body: '',
             images: [],
             count: '250 characters remaining',
+            image1: '',
+            image2: '',
+            image3: '',
+            image4: '',
+            image5: '',
+            imageErrors: [],
           });
         },
       );
     }
-    console.log(errors);
     this.setState({ errors });
   }
 
@@ -69,16 +79,16 @@ class NewReviewModal extends React.Component {
     this.setState({ [name]: val }, cb(e));
   }
 
-  toggleUrlWindow(bool) {
-    this.setState({
-      urlWindow: bool,
-    });
+  getColor(name) {
+    if (this.state.errors[name]) {
+      return 'red';
+    }
   }
 
-  hoist(name, value) {
-    if (this.state[name] !== value) {
-      this.setState({ [name]: value });
-    }
+  characterChecker(e) {
+    let remaining = 250 - e.target.value.length;
+    if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
+    this.setState({ count: 'minimum reached' });
   }
 
   toggleModal(e) {
@@ -90,34 +100,67 @@ class NewReviewModal extends React.Component {
     });
   }
 
-  characterChecker(e) {
-    let remaining = 250 - e.target.value.length;
-    if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
-    this.setState({ count: 'minimum reached' });
+  hoist(name, value) {
+    if (this.state[name] !== value) {
+      this.setState({ [name]: value });
+    }
+  }
+
+  toggleUrlWindow(bool) {
+    this.setState({
+      urlWindow: bool,
+    });
+  }
+
+  addImageState(arr) {
+    this.setState({ images: arr });
   }
 
   render() {
     const { characteristics } = this.props;
+    const textInputStyle = {
+      padding: '10px 5px',
+      margin: '0px 0',
+      border: '1px solid silver',
+      borderRadius: '5px',
+      boxSizing: 'border-box',
+      fontSize: '14px',
+      fontFamily: 'Arial',
+    };
+    const buttonStyle = {
+      marginTop: '10px',
+      backgroundColor: '#e11a2b',
+      border: 'none',
+      outline: '0',
+      color: 'white',
+      padding: '15px 32px',
+      textAlign: 'center',
+      textDecoration: 'none',
+      display: 'inline-block',
+      fontSize: '16px',
+    };
+
     const modalStyle = {
       position: 'fixed',
       zIndex: 1,
       left: '50%',
-      transform: 'translateX(-50%)',
-      top: '3%',
-      height: '100%',
+      transform: 'translate(-50%, -50%)',
+      top: '50%',
       backgroundColor: 'transparent',
-      maxHeight: 'calc(100vh - 50px)',
-      maxWidth: '95%',
     };
     const modalContentStyle = {
-      backgroundColor: 'transparent',
-      width: '95%',
-      height: '95%',
+      borderRadius: '5px',
+      backgroundColor: 'white',
+      width: '100%',
+      height: '100%',
+      maxHeight: 'calc(100vh - 50px)',
+      maxWidth: 'calc(100vw - 50px)',
+      color: 'black', // <-- dark mode?
     };
 
     const modalButtonStyle = {
-      right: -15,
-      top: 7,
+      right: -70,
+      top: 10,
       color: 'white',
       zIndex: 2,
       position: 'absolute',
@@ -132,32 +175,32 @@ class NewReviewModal extends React.Component {
       width: '100vw',
       height: '100vh',
       backgroundColor: 'rgba(128,128,128,0.5)',
+      backdropFilter: 'blur(5px)',
     };
 
     const formStyle = {
-      padding: '3%',
-      paddingTop: 0,
-      width: '60vw',
+      padding: '5%',
+      paddingTop: '5px',
+      width: '800px',
       height: 'auto',
       backgroundColor: 'white',
       borderRadius: '5px',
-      overflow: 'auto',
     };
     /* ---------------------------------------------------------------------------------*/
     if (this.state.open) {
       return (
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
+          <i className="fas fa-times fa-lg modal-close" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
             <div style={{ ...modalContentStyle }}>
-              <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
               <div style={{ ...formStyle }} className="new-review">
                 { /* ------------------------------->>FORM HERE<<------------------------------*/ }
                 <div style={{ justifyContent: 'center', textAlign: 'center' }}>
                   <h2>New Review</h2>
-                  <h3>Tell us what you think</h3>
+                  <h3>Tell us what you think about {this.props.name}</h3>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-                  <StarHover hoist={this.hoist} />
+                  <StarHover hoist={this.hoist} error={this.state.errors.rating} />
                   <div style={{ justifyContent: 'flex-end' }}>
                     <h4>Do you recommend this product?</h4>
                     <div onChange={this.handleChange} style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -171,34 +214,53 @@ class NewReviewModal extends React.Component {
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
                   <div style={{ justifyContent: 'flex-start' }}>
                     <h4>Nickname:</h4>
-                    <input type="text" name="nickname" placeholder="Example: Jackson111" value={this.state.nickname} onChange={this.handleChange} style={{ width: '350px' }}/><br />
+                    <input type="text" name="nickname" placeholder="Example: Jackson111" value={this.state.nickname} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('nickname') }}/><br />
                     <small>for privacy reasons do not use your full name or email</small>
                   </div>
                   <div style={{ justifyContent: 'flex-end', float: 'right' }}>
                     <h4>Email:</h4>
-                    <input type="text" name="email" placeholder="Example: Jackson111@email.com" style={{ width: '350px' }} value={this.state.email} onChange={this.handleChange} /><br />
+                    <input type="text" name="email" placeholder="Example: Jackson111@email.com" style={{ width: '350px', borderColor: this.getColor('email') }} value={this.state.email} onChange={this.handleChange} /><br />
                     <small>for privacy reasons do not use your full name or email</small>
                   </div>
                 </div>
                 <div>
                   <h4>Review Summary</h4>
-                  <input type="text" name="summary" placeholder="Example: Best Purchase Ever!" style={{ width: '99.5%' }} value={this.state.summary} onChange={this.handleChange} />
+                  <input type="text" name="summary" placeholder="Example: Best Purchase Ever!" style={{ width: '99.5%', borderColor: this.getColor('summary') }} value={this.state.summary} onChange={this.handleChange} />
                 </div>
                 <div>
                   <h4>Review Body</h4>
-                  <textarea rows="6" name="body" placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block' }} />
-                  <small>{this.state.count}</small>
+                  <textarea rows="6" name="body"  placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block', borderColor: this.getColor('body') }} />
+                  <small style = {{ color: this.getColor('body') }}>{this.state.count}</small>
                 </div>
-                <button className="bigButton"onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
+                <div style={{ display: 'inline-block' }}><button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>< ImageSpan images={this.state.images}/></div>
+
                 <span>
-                  <button className="bigButton"onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
-                  <Errors errors={this.state.errors}/>
+                  <button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
+                  <Errors errors={Object.values(this.state.errors)} />
                 </span>
                 {this.state.urlWindow && (
                   <UrlWindow>
-                    <h1>Little Window :)</h1>
-                    <p>Look at how small I am</p>
-                    <button onClick={() => {this.toggleUrlWindow(false)}} >Close me!</button>
+                    <h1 style={{fontFamily: 'Avenir Black' }}>Link your pictures here</h1>
+                    <input type="text" style={{ ...textInputStyle }} name="image1" placeholder="Image URL here" value={this.state.image1} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image1') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image2" placeholder="Image URL here" value={this.state.image2} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image2') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image3" placeholder="Image URL here" value={this.state.image3} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image3') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image4" placeholder="Image URL here" value={this.state.image4} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image4') }} /><br /><br />
+                    <input type="text" style={{ ...textInputStyle }} name="image5" placeholder="Image URL here" value={this.state.image5} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image5') }} /><br /><br />
+                    <button
+                      style={{ ...buttonStyle }}
+                      type="submit"
+                      onClick={() => {
+                        let check = formValidator(this.state, 'image', this.addImageState);
+                        if (!check) {
+                          this.toggleUrlWindow(false);
+                          return;
+                        }
+                        this.setState({
+                          errors: check,
+                        });
+                      }}
+                    > Submit
+                    </button>
                   </UrlWindow>
                 )}
                 { /* ---------------------------------------------------------------------------*/ }
@@ -208,7 +270,7 @@ class NewReviewModal extends React.Component {
         </div>
       );
     }
-    return <button className="bigButton"style={{float: 'right'}} onClick={this.toggleModal}>Add A Review +</button>;
+    return <button style={{float: 'right'}} onClick={this.toggleModal}>Add A Review +</button>;
   }
 }
 

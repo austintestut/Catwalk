@@ -18,6 +18,7 @@ class App extends React.Component {
       rating: 0,
       characteristics: [],
       totalReviews: 0,
+      shadeOfCarouselFade: 'white',
       styles: [],
       mainPics: [],
       thumbs: [],
@@ -30,7 +31,7 @@ class App extends React.Component {
     this.getStyles = this.getStyles.bind(this);
     this.getPhotos = this.getPhotos.bind(this);
     this.fetcher = this.fetcher.bind(this);
-
+    this.darkToggle = this.darkToggle.bind(this);
   }
 
   componentDidMount() {
@@ -152,12 +153,29 @@ class App extends React.Component {
     });
   }
 
+  darkToggle() {
+    let app = document.getElementById('app');
+    if (app.classList.contains('darkmode')) {
+      app.classList.toggle('darkmode');
+      this.setState({
+        shadeOfCarouselFade: 'white'
+      });
+    } else {
+      app.classList.toggle('darkmode');
+      this.setState({
+        shadeOfCarouselFade: 'black'
+      });
+    }
+  }
+
   render() {
     return (
       <div>
-        <TopBar>Wozniak</TopBar>
-        <br />
-        <br />
+        <TopBar>
+          <TitleP>Wozniak</TitleP>
+          <p style={{ fontFamily: 'Courier New ' }}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
+        </TopBar>
+        <StyledDarkModeButton onClick={this.darkToggle}>🌙</StyledDarkModeButton>
         <Overview
         product={this.state.productData}
         styles={this.state.styles}
@@ -173,18 +191,45 @@ class App extends React.Component {
           productData={this.state.productData}
           rating={this.state.rating}
           characteristics={this.state.characteristics}
+          shadeOfCarouselFade={this.state.shadeOfCarouselFade}
         />
-        <Container currentPageItemID={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
-        <Reviews />
+        <Container currentPageItemId={this.state.currentPageItemId} questions={this.state.questions} productName={this.state.productData.name} />
+        <Reviews
+          productId={this.state.currentPageItemId}
+          name={this.state.productData.name}
+        />
       </div>
     );
   }
 }
 
+const TitleP = styled.p`
+font-family: Courier New;
+font-size: 24px;
+`
+
 const TopBar = styled.div`
+display: flex;
+justify-content: space-around;
+align-items: center;
 width: 100%;
-height: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
-`
+`;
+const StyledDarkModeButton = styled.button`
+position: absolute;
+top: 0;
+right: 0;
+height: 50px;
+width: 75px;
+font-family: inherit;
+background-image: linear-gradient(white, silver);
+&:hover {
+  cursor: pointer;
+  background-image: linear-gradient(silver, white);
+}
+filter: grayscale(100%);
+font-size: 17.5px;
+`;
 export default App;
+

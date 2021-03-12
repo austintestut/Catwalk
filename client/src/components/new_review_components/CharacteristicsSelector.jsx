@@ -31,25 +31,22 @@ class CharacteristicsSelector extends React.Component {
     if (!this.state[item]) { text = 'None Selected'; }
     else { text = characteristic[item][this.state[item]]; }
     const radioStyle = {
-      //border: '1px solid black',
       width: '18%',
       display: 'inline-block',
       textAlign: 'center',
     };
     const radioStyleInline1 = {
-      //border: '1px solid black',
       width: '18%',
     };
     const radioStyleInline2 = {
-      //border: '1px solid black',
       width: '18%',
       float: 'right',
     };
     if (characteristics.length > 2) {
       return (
         <div style={{ ...radioStyle }} onChange={this.handleChange}>
-          <h4 style={{marginBottom: '5px'}}>{item}</h4>
-          <p style={{ fontSize: '80%', margin: '5px' }}>{text}</p>
+          <h4 style={{marginBottom: 0 }}>{item}</h4>
+          <p style={{ fontSize: '80%', margin: '5px', marginTop: 0 }}>{text}</p>
           <input type="radio" name={item} value="1" /><br />
           <input type="radio" name={item} value="2" /><br />
           <input type="radio" name={item} value="3" /><br />
@@ -65,10 +62,10 @@ class CharacteristicsSelector extends React.Component {
       <div style={{ ...thisStyle }} onChange={this.handleChange}>
         <h4 style={{marginBottom: '5px'}}>{item}</h4>
         <p style={{ fontSize: '80%', margin: '5px', marginLeft: '0px' }}>{text}</p>
-        <input type="radio" name={item} value="1" />
-        <input type="radio" name={item} value="2" />
-        <input type="radio" name={item} value="3" />
-        <input type="radio" name={item} value="4" />
+        <input type="radio" name={item} value="1" /><span style={{ width: '8px', display: 'inline-block' }} />
+        <input type="radio" name={item} value="2" /><span style={{ width: '8px', display: 'inline-block' }} />
+        <input type="radio" name={item} value="3" /><span style={{ width: '8px', display: 'inline-block' }} />
+        <input type="radio" name={item} value="4" /><span style={{ width: '8px', display: 'inline-block' }} />
         <input type="radio" name={item} value="5" />
       </div>
     );

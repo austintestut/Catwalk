@@ -5,13 +5,19 @@ const Errors = ({ errors }) => {
     return (
       <div style={{
         float: 'right',
-        fontSize: '60%',
-        color: 'red',
+        fontSize: '80%',
+        color: '#e11a2b',
+        marginTop: '-15px',
         marginRight: '10px',
-        width: '150px',
+        width: '200px',
       }}>
         <ul>
-          {errors.map((error) => <li>{error}</li>)}
+          {errors.map((error) => {
+            if (error !== 'invalid url') {
+              return (<li>{error}</li>);
+            }
+            return null;
+          })}
         </ul>
       </div>
     );

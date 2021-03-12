@@ -25,13 +25,13 @@ const ReviewTile = ({ review, length, index }) => {
   const imageMap = () => {
     if (review.photos.length) {
       return (
-        <fragment>
+        <>
           <br />
           <span>
             {review.photos.map((img) => <ImgModal url={img.url} />)}
           </span>
           <br />< br />
-        </fragment>
+        </>
       );
     }
     return <br />;
@@ -40,7 +40,7 @@ const ReviewTile = ({ review, length, index }) => {
   return (
     <div style={{ ...tileStyle }}>
       <StarStatic number={review.rating} />
-      <div style={{ float: 'right', paddingRight: '10px' }}>{review.reviewer_name}, {dateFormatter(review.date)}</div><br/><br/>
+      <div style={{ float: 'right', paddingRight: '10px', fontSize: '90%' }}>{review.reviewer_name} <span style={{ color: 'silver' }}>on</span> {dateFormatter(review.date)}</div><br/><br/>
       <Summary summary={review.summary} />
       <Recommend bool={review.recommend} />
       <Body body={review.body} />

@@ -12,7 +12,7 @@ height: 50px;
 font-size: 20px;
 &:focus {
   outline: bold;
-  outline-color: red;
+  outline-color: silver;
 }
 `;
 

@@ -1,12 +1,11 @@
 import React from 'react';
 
-const ColoredBar = ({ total, count }) => {
+const ColoredBar = ({ total, count, backgroundColor, borderColor }) => {
   const containerStyle = {
     width: '200px',
     height: '12px',
-    backgroundColor: 'white',
-    // margin: '5px',
-    border: '1px solid silver',
+    backgroundColor: backgroundColor || 'white',
+    border: borderColor || '1px solid silver',
     marginLeft: '5px',
     display: 'inline-block',
   };

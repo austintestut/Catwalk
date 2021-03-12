@@ -1,15 +1,3 @@
-#urlWindow button, input[type="button"] {
-  margin-top: 10px;
-  background-color:#e11a2b;
-  /*border: 2px solid grey;*/
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
 html{
   margin: 0;
   padding: 0;
@@ -19,23 +7,29 @@ body{
   padding: 0;
 }
 
+.darkmode {
+  background-color: black;
+  color: white;
+}
+
 .reviews {
   font-family: 'Arial', 'Avenir Black';
 }
 
 .reviews h1 {
   font-family: 'Avenir Black';
-  font-weight: bold;
 }
 
 .reviews .new-review h4{
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 14px;
+  margin-bottom: 0px;
   font-family: 'Avenir Black';
 }
 .reviews .new-review h3{
   margin-top: 5px;
+  margin-bottom: 0px;
   font-family: 'Avenir Black';
+  padding: 0px;
 }
 .reviews .new-review h2{
   margin-bottom: 5px;
@@ -57,6 +51,18 @@ body{
   font-size: 16px;
 }
 
+.reviews small {
+  color: darkgrey;
+}
+
+.reviews button:hover{
+  cursor: pointer;
+}
+
+.modal-close:hover{
+  cursor: pointer;
+}
+
 
 .reviews, input[type="radio"] {
   margin: '10px';
@@ -68,16 +74,42 @@ body{
 
 .filter:hover {
   font-weight: bold;
+  cursor: pointer;
+}
+
+.thumbnail:hover {
+  size: 110%;
+  cursor: pointer;
 }
 
 .remove-filters {
   all: none
+}
+.remove-filters:hover{
+  cursor: pointer;
 }
 .austinButtons:hover {
   cursor: pointer;
   font-weight: bold;
 }
 
+body.no-scroll{
+  overflow: hidden;
+}
+
+.reviews textarea, input[type=text]{
+  padding: 10px 5px;
+  margin: 0px 0;
+  border: 1px solid silver;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size:14px;
+  font-family: Arial;
+}
+
+.reviews input[type='radio'] {
+  transform: scale(1.25);
+}
 .bigButton {
   color: white;
   background-image: linear-gradient(#ff0019, #790a04);

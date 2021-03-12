@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
+import $ from 'jquery';
 
-// MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class ImgModal extends React.Component {
   constructor(props) {
     super(props);
@@ -12,30 +12,38 @@ class ImgModal extends React.Component {
 
   toggleModal(e) {
     e.preventDefault();
+    if (!this.state.open) {
+      $('html, body').css({
+        overflow: 'hidden',
+      });
+    }
+    else {
+      $('html, body').css({
+        overflow: 'auto',
+      });
+    }
     this.setState({ open: !this.state.open });
   }
 
   render() {
     let { url } = this.props;
     const modalStyle = {
-      // display: 'none', /* Hidden by default <<<<<<<<<<<<------------- */
       position: 'fixed',
       zIndex: 1,
       left: '50%',
-      transform: 'translateX(-50%)',
-      top: '3%',
-      height: '100%',
-      // overflow: 'auto',
+      transform: 'translate(-50%, -50%)',
+      top: '50%',
       backgroundColor: 'transparent',
       maxHeight: 'calc(100vh - 50px)',
-      maxWidth: '95%',
-      // borderRadius: '10px',
     };
     const modalContentStyle = {
+      color: 'black',
       borderRadius: '5px',
       backgroundColor: 'white',
       width: '100%',
       height: '100%',
+      maxHeight: 'calc(100vh - 50px)',
+      maxWidth: 'calc(100vw - 50px)',
       overflow: '-moz-scrollbars-vertical',
       overflowY: 'scroll',
     };
@@ -50,7 +58,6 @@ class ImgModal extends React.Component {
     };
 
     const imgStyle = {
-      // borderRadius: '2%',
       background: 'white',
     };
 
@@ -76,7 +83,7 @@ class ImgModal extends React.Component {
         <div name="overlay" style={{ ...overlayStyle }}>
           <div style={{ ...modalStyle }}>
             <div style={{ ...modalContentStyle }}>
-              <i className="fas fa-times fa-lg" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
+              <i className="fas fa-times fa-lg modal-close" style={{ ...modalButtonStyle }} onClick={this.toggleModal} />
               <img src={url} alt="" style={{ ...imgStyle }} />
             </div>
           </div>
@@ -85,7 +92,7 @@ class ImgModal extends React.Component {
     }
     if (url) {
       return (
-        <img src={url} style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
+        <img src={url} className="thumbnail" style={{ ...thumbStyle }} alt="" onClick={this.toggleModal}/>
       );
     }
     return null;

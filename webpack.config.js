@@ -19,7 +19,7 @@ module.exports = {
           options: {
             presets: ['@babel/preset-react', '@babel/preset-env']
           }
-        }
+        },
       },
       { test: /\.(png|jpeg)$/, use: 'url-loader' },
     ]

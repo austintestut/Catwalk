@@ -23,9 +23,11 @@ padding: 10px;
 `;
 
 const ButtonsDiv = styled.div`
+display: flex;
 margin-top: 30px;
 width: 100%;
 height: 50px;
+
 `
 
 class Container extends React.Component {
@@ -41,7 +43,6 @@ class Container extends React.Component {
     this.showQModal = this.showQModal.bind(this);
     this.hideQModal = this.hideQModal.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
-    // this.getProductQuestions = this.getProductQuestions.bind(this);
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
     this.increaseHelpful = this.increaseHelpful.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -60,19 +61,6 @@ class Container extends React.Component {
       this.setState({ searching: false });
     }
   }
-
-  // getProductQuestions() {
-  //   console.log(this.props.currentPageItemID)
-  //   // will need to change the ID parameter below to be dynamic, maybe use params obj
-  //   axios({
-  //     url: `/questions/${this.props.currentPageItemID}`,
-  //     method: 'get',
-  //   })
-  //     .then((data) => {
-  //       console.log(data.data.results);
-  //       this.setState({ questions: data.data.results });
-  //     });
-  // }
 
   displaySearchQuestions(text) {
     const filtered = this.props.questions.filter(
@@ -110,24 +98,23 @@ class Container extends React.Component {
   submitQuestion(event) {
     event.preventDefault();
     axios({
-      url: `/questions/${this.props.currentPageItemID}`,
+      url: `/questions/${this.props.currentPageItemId}`,
       method: 'post',
       data: {
         body: event.target[1].value,
         name: event.target[2].value,
         email: event.target[3].value,
-        product_id: ID,
+        product_id: this.props.currentPageItemId,
       },
     }).then(() => {
       axios({
-        url: `/questions/${this.props.currentPageItemID}`,
+        url: `/questions/${this.props.currentPageItemId}`,
         method: 'get',
-      })
-        .then((data) => {
-          this.setState({ questions: data.data.results });
-        });
-    }
-      );
+      }).then((data) => {
+          this.setState({ questions: data.data.results, showQ: false });
+        })
+    }).catch((error)=>{console.error(error)})
+
   }
 
   render() {
@@ -141,6 +128,7 @@ class Container extends React.Component {
           increaseHelpful={this.increaseHelpful}
           searching={this.state.searching}
           displayedQuestions={this.state.displayedQuestions}
+          productName={this.props.productName}
         />
         <ButtonsDiv >
           <ShowMoreQuestionsButton

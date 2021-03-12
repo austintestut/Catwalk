@@ -4,6 +4,10 @@ import StyleSelector from './StyleSelector.jsx';
 import StarStatic from '../components/reviews_src/StarStatic.jsx';
 
 const ProductInfo = ( {product, reviews, rating, styles, selected, handleSelect} ) => {
+  const scrollToBottom = (e) => {
+    e.preventDefault()
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
 
   if (selected) {
     return (
@@ -11,7 +15,7 @@ const ProductInfo = ( {product, reviews, rating, styles, selected, handleSelect}
       <div>
         <div>
           <StarStatic number={rating} />
-          Read all {reviews} reviews
+          Read all <a href='#' onClick={scrollToBottom}>{reviews}</a>  reviews
         </div>
         <StyledCategory>{product.category}:</StyledCategory>
         <StyledName>{product.name}</StyledName>
@@ -50,7 +54,7 @@ const ProductInfo = ( {product, reviews, rating, styles, selected, handleSelect}
       <div key={product.id}>
       <div>
           <StarStatic number={rating} />
-           Read all <a href='#'>{reviews}</a> reviews
+           Read all <a href='#' onClick={scrollToBottom}>{reviews}</a> reviews
         </div>
         <StyledCategory>{product.category}:</StyledCategory>
         <StyledName>{product.name}</StyledName>
