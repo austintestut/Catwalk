@@ -17,7 +17,8 @@ class App extends React.Component {
       productData: {},
       rating: 0,
       characteristics: [],
-      totalReviews: 0
+      totalReviews: 0,
+      shadeOfCarouselFade: 'white'
     };
     this.handleItemClick = this.handleItemClick.bind(this);
     this.getProductInfo = this.getProductInfo.bind(this);
@@ -25,7 +26,7 @@ class App extends React.Component {
     this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.fetcher = this.fetcher.bind(this);
-
+    this.darkToggle = this.darkToggle.bind(this);
   }
 
   componentDidMount() {
@@ -117,10 +118,26 @@ class App extends React.Component {
     });
   }
 
+  darkToggle() {
+    let app = document.getElementById('app');
+    if (app.classList.contains('darkmode')) {
+      app.classList.toggle('darkmode');
+      this.setState({
+        shadeOfCarouselFade: 'white'
+      });
+    } else {
+      app.classList.toggle('darkmode');
+      this.setState({
+        shadeOfCarouselFade: 'black'
+      });
+    }
+  }
+
   render() {
     return (
       <div>
         <TopBar>Wozniak</TopBar>
+        <StyledDarkModeButton onClick={this.darkToggle}>Toggle Dark Mode</StyledDarkModeButton>
         <br />
         <br />
         <Overview
@@ -135,6 +152,7 @@ class App extends React.Component {
           productData={this.state.productData}
           rating={this.state.rating}
           characteristics={this.state.characteristics}
+          shadeOfCarouselFade={this.state.shadeOfCarouselFade}
         />
         <Container currentPageItemID={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
         <Reviews />
@@ -147,5 +165,17 @@ const TopBar = styled.div`
 width: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
-`
+`;
+const StyledDarkModeButton = styled.button`
+position: fixed;
+top: 0;
+right: 0;
+height: 50px;
+font-family: inherit;
+background-image: linear-gradient(white, silver);
+&:hover {
+  cursor: pointer;
+  background-image: linear-gradient(silver, white);
+}
+`;
 export default App;

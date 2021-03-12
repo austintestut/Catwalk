@@ -41,7 +41,7 @@ ${StyledAddButton}:hover {
 const StyledLeftOutfitButtonContainer = styled.div`
 ${props => props.outfitLeftArrow && css`
 z-index: 2;
-box-shadow: 50px 0 17px 0 rgba(255, 255, 255, 1);
+box-shadow: 50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
 const OutfitCarousel = ({
@@ -51,7 +51,8 @@ const OutfitCarousel = ({
   handleItemClick,
   checkIfButtonsShouldRender,
   translatedXoutfit,
-  outfitLeftArrow
+  outfitLeftArrow,
+  shadeOfCarouselFade
 }) => {
   let productsToShow = outfitProductIds;
 
@@ -63,7 +64,8 @@ const OutfitCarousel = ({
 
   return (
     <StyledContainer>
-      <StyledLeftOutfitButtonContainer outfitLeftArrow={outfitLeftArrow}>
+      <StyledLeftOutfitButtonContainer shadeOfCarouselFade={shadeOfCarouselFade}
+      outfitLeftArrow={outfitLeftArrow}>
       <StyledAddButton onClick={() => storeOutfitItem(currentPageItemId)}>+</StyledAddButton>
       </StyledLeftOutfitButtonContainer>
       <StyledOutfitContainer key='StyledOutfitContainer'>
