@@ -18,12 +18,17 @@ class App extends React.Component {
       characteristics: [],
       totalReviews: 0,
       shadeOfCarouselFade: 'white',
+      styles: [],
+      mainPics: [],
+      thumbs: [],
     };
     this.handleItemClick = this.handleItemClick.bind(this);
     this.getProductInfo = this.getProductInfo.bind(this);
     this.getRating = this.getRating.bind(this);
     this.getRelatedItemIds = this.getRelatedItemIds.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
+    this.getStyles = this.getStyles.bind(this);
+    this.getPhotos = this.getPhotos.bind(this);
     this.fetcher = this.fetcher.bind(this);
     this.darkToggle = this.darkToggle.bind(this);
   }
@@ -38,6 +43,7 @@ class App extends React.Component {
     this.getRating(this.state.currentPageItemId);
     this.getRelatedItemIds(this.state.currentPageItemId);
     this.getProductQuestions();
+    this.getStyles(this.state.currentPageItemId);
   }
 
   getProductQuestions() {
@@ -109,6 +115,35 @@ class App extends React.Component {
       });
   }
 
+  getStyles(id) {
+    axios.get(`/products/${id}/styles`)
+      .then((res) => {
+        this.setState({
+          styles: res.data.results
+        }, ()=>{this.getPhotos(this.state.styles)})
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
+
+  getPhotos(styles) {
+    let main = [];
+    let thumbs = [];
+    if (styles !== undefined) {
+      for (let i = 0; i < styles.length; i++) {
+        let pic = styles[i].photos[0].url;
+        let thumb = [styles[i].photos[0].thumbnail_url, styles[i].style_id];
+        main.push(pic);
+        thumbs.push(thumb);
+        this.setState({
+          mainPics: main,
+          thumbs: thumbs
+        })
+      }
+    }
+  }
+
   handleItemClick(id) {
     this.setState({
       currentPageItemId: id,
@@ -139,13 +174,14 @@ class App extends React.Component {
           <TitleP>Wozniak</TitleP>
           <p style={{ fontFamily: 'Courier New ' }}>by Alex Shold, Austin Testut, Austin Killough, and Robert Strange</p>
         </TopBar>
-        <StyledDarkModeButton onClick={this.darkToggle}>Toggle Dark Mode</StyledDarkModeButton>
-        <br />
-        <br />
+        <StyledDarkModeButton onClick={this.darkToggle}>🌙</StyledDarkModeButton>
         <Overview
-          product={this.state.productData}
-          rating={this.state.rating}
-          reviews={this.state.totalReviews}
+        product={this.state.productData}
+        styles={this.state.styles}
+        rating={this.state.rating}
+        reviews={this.state.totalReviews}
+        mainPics={this.state.mainPics}
+        thumbs={this.state.thumbs}
         />
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
@@ -184,11 +220,15 @@ position: absolute;
 top: 0;
 right: 0;
 height: 50px;
+width: 75px;
 font-family: inherit;
 background-image: linear-gradient(white, silver);
 &:hover {
   cursor: pointer;
   background-image: linear-gradient(silver, white);
 }
+filter: grayscale(100%);
+font-size: 17.5px;
 `;
 export default App;
+

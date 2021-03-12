@@ -31,17 +31,14 @@ class CharacteristicsSelector extends React.Component {
     if (!this.state[item]) { text = 'None Selected'; }
     else { text = characteristic[item][this.state[item]]; }
     const radioStyle = {
-      //border: '1px solid black',
       width: '18%',
       display: 'inline-block',
       textAlign: 'center',
     };
     const radioStyleInline1 = {
-      //border: '1px solid black',
       width: '18%',
     };
     const radioStyleInline2 = {
-      //border: '1px solid black',
       width: '18%',
       float: 'right',
     };

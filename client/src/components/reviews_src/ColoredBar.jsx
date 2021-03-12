@@ -5,7 +5,6 @@ const ColoredBar = ({ total, count, backgroundColor, borderColor }) => {
     width: '200px',
     height: '12px',
     backgroundColor: backgroundColor || 'white',
-    // margin: '5px',
     border: borderColor || '1px solid silver',
     marginLeft: '5px',
     display: 'inline-block',

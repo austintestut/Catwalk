@@ -22,7 +22,8 @@ flex-direction: column;
 background-color: #fefefe;
 padding: 20px 50px;
 border: 2px solid gray;
-`;
+color: black;
+`
 
 const ModalInput = styled.input`
 margin: 5px;

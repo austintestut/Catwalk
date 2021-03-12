@@ -55,7 +55,6 @@ app.get('/questions/:id', (req, res) => {
 });
 
 app.post('/questions/:id', (req, res) => {
-  console.log(req.body);
   axios({
     headers: {
       Authorization: config.TOKEN,
@@ -64,7 +63,6 @@ app.post('/questions/:id', (req, res) => {
     method: 'post',
     data: req.body,
   }).then((data) => {
-    console.log('Posted!');
     res.send(data);
   }).catch((error) => {
     res.send(error);
@@ -72,8 +70,6 @@ app.post('/questions/:id', (req, res) => {
 });
 
 app.post('/questions/:id/answers', (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
   axios({
     headers: {
       Authorization: config.TOKEN,
@@ -155,8 +151,6 @@ app.get('/reviews/meta/:id', (req, res) => {
 });
 
 app.get('/reviews/:product_id/:sort/:count', (req, res) => {
-  console.log('not meta');
-  console.log(req.params);
   let { product_id, sort, count} = req.params;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${product_id}&count=${count}&sort=${sort}`, {
     headers: {
@@ -179,7 +173,6 @@ app.get(`/products/:id/styles`, (req, res) => {
     }
   })
     .then((data) => {
-      // console.log(data.data.results);
       res.status(200).send(data.data);
     })
     .catch((err) => {
@@ -210,7 +203,6 @@ app.post(`/reviews`, (req, res) => {
     },
   })
     .then((data) => {
-      console.log('success')
       res.status(201).send(data.data);
     })
     .catch((err) => {
@@ -220,21 +212,15 @@ app.post(`/reviews`, (req, res) => {
 });
 
 app.put(`/reviews/:review_id/:method`, (req, res) => {
-  // not working????
-  console.log(req.params);
   const { review_id, method } = req.params;
-  // method === 'helpful' || 'report'
   if (!method) { method = 'helpful'; }
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${review_id}/${method}`;
-  console.log(url);
   axios.put(url, req.body, {
     headers: {
       Authorization: TOKEN,
     },
   })
     .then((data) => {
-      console.log('good');
-      //console.log(data);
       res.status(201).send(data.data);
     })
     .catch((err) => {
