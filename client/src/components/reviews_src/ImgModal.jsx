@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
 
-// MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class ImgModal extends React.Component {
   constructor(props) {
     super(props);
@@ -29,17 +28,13 @@ class ImgModal extends React.Component {
   render() {
     let { url } = this.props;
     const modalStyle = {
-      // display: 'none', /* Hidden by default <<<<<<<<<<<<------------- */
       position: 'fixed',
       zIndex: 1,
       left: '50%',
       transform: 'translate(-50%, -50%)',
       top: '50%',
-      // height: '100%',
-      // overflow: 'auto',
       backgroundColor: 'transparent',
       maxHeight: 'calc(100vh - 50px)',
-      // borderRadius: '10px',
     };
     const modalContentStyle = {
       color: 'black',
@@ -63,7 +58,6 @@ class ImgModal extends React.Component {
     };
 
     const imgStyle = {
-      // borderRadius: '2%',
       background: 'white',
     };
 

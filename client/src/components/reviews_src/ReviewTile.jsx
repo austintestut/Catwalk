@@ -25,13 +25,13 @@ const ReviewTile = ({ review, length, index }) => {
   const imageMap = () => {
     if (review.photos.length) {
       return (
-        <fragment>
+        <>
           <br />
           <span>
             {review.photos.map((img) => <ImgModal url={img.url} />)}
           </span>
           <br />< br />
-        </fragment>
+        </>
       );
     }
     return <br />;

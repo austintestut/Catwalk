@@ -43,7 +43,6 @@ class Container extends React.Component {
     this.showQModal = this.showQModal.bind(this);
     this.hideQModal = this.hideQModal.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
-    // this.getProductQuestions = this.getProductQuestions.bind(this);
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
     this.increaseHelpful = this.increaseHelpful.bind(this);
     this.handleSearch = this.handleSearch.bind(this);

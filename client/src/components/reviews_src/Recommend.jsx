@@ -9,11 +9,11 @@ const Recommend = ({ bool }) => {
   }
   if (bool !== false) {
     return (
-      <fragment>
+      <>
       <div style={{ ...style}}>
         <span style={{ ...checkStyle }}>✓</span> I recommend this product
       </div><br />
-      </fragment>
+      </>
     )}
   return null;
 };
