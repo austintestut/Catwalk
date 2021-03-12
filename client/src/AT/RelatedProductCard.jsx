@@ -112,7 +112,7 @@ const StyledModalX = styled.i`
 color: white;
 position: relative;
 top: 21.5%;
-left: 68.5%;
+left: 63.5%;
 text-shadow: 0 0 1px #000;
 ${StyledModalX}:hover {
   cursor: pointer;
