@@ -20,6 +20,7 @@ z-index: 2;
 margin: auto;
 margin-top: 10%;
 height: auto;
+color:black;
 width: 40%;
 text-align: center;
 border: solid;
