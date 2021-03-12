@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import MoreReviews from './MoreReviews';
 import ReviewsSort from './ReviewsSort';
 import ReviewTileContainer from './ReviewTileContainer';
@@ -21,7 +22,10 @@ class ReviewList extends React.Component {
       this.setFilters();
     }
     if (prevProps.reviews !== reviews) {
-      this.setState({ reviews });
+      this.setState({
+        reviews,
+        show: 2,
+      });
     }
   }
 
@@ -33,15 +37,26 @@ class ReviewList extends React.Component {
           newList.push(review);
         }
       });
-      this.setState({ reviews: [...newList] });
+      this.setState(
+        { reviews: [...newList] },
+      );
       return;
     }
-    this.setState({ reviews: this.props.reviews });
+    this.setState(
+      { reviews: this.props.reviews },
+    );
   }
 
   addReviews(e) {
     e.preventDefault();
-    this.setState({ show: this.state.show + 2 });
+    this.setState(
+      { show: this.state.show + 2 },
+      () => {
+        const container = document.getElementById('review-tile-container');
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+      },
+    );
   }
 
   render() {
@@ -51,6 +66,7 @@ class ReviewList extends React.Component {
       alignSelf: 'flex-end stretch',
       margin: '10px',
       marginTop: '0px',
+      width: '100%',
     };
 
     return (
@@ -58,7 +74,11 @@ class ReviewList extends React.Component {
         <ReviewsSort total={reviews.length} updateReviews={updateReviews} />
         <ReviewTileContainer reviews={reviews} show={show} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
-        <NewReviewModal characteristics={characteristics} meta={this.props.meta}/>
+        <NewReviewModal
+          characteristics={characteristics}
+          meta={this.props.meta}
+          name={this.props.name}
+        />
       </div>
     );
   }

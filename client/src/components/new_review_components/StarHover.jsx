@@ -14,6 +14,12 @@ class StarHover extends React.Component {
     this.makeText = this.makeText.bind(this);
   }
 
+  errorColor() {
+    if (this.props.error) {
+      return 'red';
+    }
+  }
+
   clickToggle(e) {
     const { clicked } = this.state;
     const { hoist } = this.props;
@@ -42,14 +48,18 @@ class StarHover extends React.Component {
     // const solidStar = <i class="fas fa-star"/>;
     let { count } = this.state;
     let stars = [];
+    const style = {
+      color: '#e11a2b',
+      // textShadow: '0 0 3px black',
+    }
     for (let x = 0; x < 5; x++) {
       if (count > x) {
         stars.push(
-          <i class="fas fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle} />);
+          <i class="fas fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle} style={{ ...style }}/>);
         continue
       }
       stars.push(
-      <i class="far fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle}/>);
+      <i class="far fa-star fa-lg" value={x + 1} onMouseEnter={this.hoverCount} onMouseLeave={this.resetCount} onClick={this.clickToggle} style={{ ...style }}/>);
     }
     return stars;
   }
@@ -72,8 +82,10 @@ class StarHover extends React.Component {
     }
     return (
       <div style={{ ...filterStyle }}>
-        <h4 style={{color: "black"}}>Overall Rating</h4>
-       <span>{this.makeStars()}<small style={{color: "black"}}>{this.makeText()}</small></span>
+        <h4 style={{ color: 'black' }}>Overall Rating</h4>
+        <span>
+          {this.makeStars()}<small style={{ color: this.errorColor() }}>{this.makeText()}</small>
+        </span>
       </div>
     );
   }
