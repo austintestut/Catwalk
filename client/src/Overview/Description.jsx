@@ -15,6 +15,7 @@ const Description = ( {product} ) => {
     </div>
   )
 }
+
 const StlyedSlogan = styled.h3`
   font-family: Arial, avenier;
 `

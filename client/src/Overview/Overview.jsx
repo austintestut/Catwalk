@@ -13,40 +13,30 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: {},
-      styles: [],
       selectedStyle: '',
       selectedSize: '',
       sizeId: '',
     };
 
-    this.getStyles = this.getStyles.bind(this);
     this.handleStyleSelect = this.handleStyleSelect.bind(this);
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
 
   }
 
-  componentDidMount() {
-    this.getStyles(17450);
-  }
-
-  getStyles(id) {
-    axios.get(`/products/${id}/styles`)
-      .then((res) => {
+  handleStyleSelect(event) {
+    if (this.selectedStyle !== '') {
+      this.setState({
+        selectedStyle: ''
+      }, ()=>{
         this.setState({
-          styles: res.data.results
+          selectedStyle: event.target.value
         })
       })
-      .catch((err) => {
-        console.error(err);
+    } else {
+      this.setState({
+        selectedStyle: event.target.value
       })
-  }
-
-  handleStyleSelect(event) {
-    console.log(event.target);
-    this.setState({
-      selectedStyle: event.target.value
-    });
+    }
   }
 
   handleSizeSelect(event, id) {
@@ -62,8 +52,11 @@ class Overview extends React.Component {
       <OverviewMain>
         <Images>
           <ImageGallery
+          styles={this.props.styles}
           selected={this.state.selectedStyle}
           handleSelect={this.handleStyleSelect}
+          mainPics={this.props.mainPics}
+          thumbs={this.props.thumbs}
           />
         </Images>
         <SelectionContainer>
@@ -72,14 +65,14 @@ class Overview extends React.Component {
           product={this.props.product}
           rating={this.props.rating}
           reviews={this.props.reviews}
-          styles={this.state.styles}
+          styles={this.props.styles}
           selected={this.state.selectedStyle}
           handleSelect={this.handleStyleSelect}
           />
         </Info>
         <StyledCart>
           <Cart
-          styles={this.state.styles}
+          styles={this.props.styles}
           selected={this.state.selectedStyle}
           selectedSize={this.state.selectedSize}
           handleSize={this.handleSizeSelect}
