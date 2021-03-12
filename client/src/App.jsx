@@ -176,10 +176,6 @@ align-items: center;
 width: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
-<<<<<<< HEAD
-
-`
-=======
 `;
 const StyledDarkModeButton = styled.button`
 position: fixed;
@@ -193,5 +189,4 @@ background-image: linear-gradient(white, silver);
   background-image: linear-gradient(silver, white);
 }
 `;
->>>>>>> 1d4683c089bf110dfe3c259ed3f2fdc12c181eef
 export default App;
