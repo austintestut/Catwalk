@@ -11,7 +11,13 @@ const Errors = ({ errors }) => {
         width: '150px',
       }}>
         <ul>
-          {errors.map((error) => <li>{error}</li>)}
+          {errors.map((error) => {
+            console.log(error);
+            if (error !== 'invalid url') {
+              return (<li>{error}</li>);
+            }
+            return null;
+          })}
         </ul>
       </div>
     );

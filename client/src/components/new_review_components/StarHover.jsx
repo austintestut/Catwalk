@@ -14,6 +14,12 @@ class StarHover extends React.Component {
     this.makeText = this.makeText.bind(this);
   }
 
+  errorColor() {
+    if (this.props.error) {
+      return 'red';
+    }
+  }
+
   clickToggle(e) {
     const { clicked } = this.state;
     const { hoist } = this.props;
@@ -76,7 +82,9 @@ class StarHover extends React.Component {
     return (
       <div style={{ ...filterStyle }}>
         <h4>Overall Rating</h4>
-       <span>{this.makeStars()}<small>{this.makeText()}</small></span>
+        <span>
+          {this.makeStars()}<small style={{ color: this.errorColor() }}>{this.makeText()}</small>
+        </span>
       </div>
     );
   }

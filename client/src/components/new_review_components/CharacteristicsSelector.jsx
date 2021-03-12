@@ -65,10 +65,10 @@ class CharacteristicsSelector extends React.Component {
       <div style={{ ...thisStyle }} onChange={this.handleChange}>
         <h4 style={{marginBottom: '5px'}}>{item}</h4>
         <p style={{ fontSize: '80%', margin: '5px', marginLeft: '0px' }}>{text}</p>
-        <input type="radio" name={item} value="1" />
-        <input type="radio" name={item} value="2" />
-        <input type="radio" name={item} value="3" />
-        <input type="radio" name={item} value="4" />
+        <input type="radio" name={item} value="1" /><span style={{ width: '8px', display: 'inline-block' }} />
+        <input type="radio" name={item} value="2" /><span style={{ width: '8px', display: 'inline-block' }} />
+        <input type="radio" name={item} value="3" /><span style={{ width: '8px', display: 'inline-block' }} />
+        <input type="radio" name={item} value="4" /><span style={{ width: '8px', display: 'inline-block' }} />
         <input type="radio" name={item} value="5" />
       </div>
     );

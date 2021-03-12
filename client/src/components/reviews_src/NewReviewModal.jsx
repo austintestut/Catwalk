@@ -6,6 +6,7 @@ import reviewBodyConstructor from '../new_review_components/reviewBodyConstructo
 import handler from '../../global_functions/handler';
 import Errors from '../new_review_components/Errors';
 import UrlWindow from '../new_review_components/UrlWindow';
+import ImageSpan from '../new_review_components/ImageSpan';
 
 // MODAL CLOSE ICON NEEDS TO LOCK ON SCROLL <<<<<-------- BUG
 class NewReviewModal extends React.Component {
@@ -23,6 +24,11 @@ class NewReviewModal extends React.Component {
       images: [],
       count: '250 characters remaining',
       errors: {},
+      image1: '',
+      image2: '',
+      image3: '',
+      image4: '',
+      image5: '',
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.characterChecker = this.characterChecker.bind(this);
@@ -31,6 +37,7 @@ class NewReviewModal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.hoist = this.hoist.bind(this);
     this.toggleUrlWindow = this.toggleUrlWindow.bind(this);
+    this.addImageState = this.addImageState.bind(this);
     // this.characterChecker = this.characterChecker.bind(this);
   }
 
@@ -39,7 +46,6 @@ class NewReviewModal extends React.Component {
     const { meta } = this.props;
     const { reviews } = handler;
     let errors = formValidator(this.state);
-    debugger;
     console.log(!(Object.values(errors).length));
     if (!Object.values(errors).length) {
       reviews.post(
@@ -56,6 +62,12 @@ class NewReviewModal extends React.Component {
             body: '',
             images: [],
             count: '250 characters remaining',
+            image1: '',
+            image2: '',
+            image3: '',
+            image4: '',
+            image5: '',
+            imageErrors: [],
           });
         },
       );
@@ -70,16 +82,16 @@ class NewReviewModal extends React.Component {
     this.setState({ [name]: val }, cb(e));
   }
 
-  toggleUrlWindow(bool) {
-    this.setState({
-      urlWindow: bool,
-    });
+  getColor(name) {
+    if (this.state.errors[name]) {
+      return 'red';
+    }
   }
 
-  hoist(name, value) {
-    if (this.state[name] !== value) {
-      this.setState({ [name]: value });
-    }
+  characterChecker(e) {
+    let remaining = 250 - e.target.value.length;
+    if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
+    this.setState({ count: 'minimum reached' });
   }
 
   toggleModal(e) {
@@ -91,17 +103,20 @@ class NewReviewModal extends React.Component {
     });
   }
 
-  characterChecker(e) {
-    let remaining = 250 - e.target.value.length;
-    if (remaining > 0) { this.setState({ count: `${remaining} characters remaining` }); return; }
-    this.setState({ count: 'minimum reached' });
+  hoist(name, value) {
+    if (this.state[name] !== value) {
+      this.setState({ [name]: value });
+    }
   }
 
-  getColor(name) {
-    debugger;
-    if (this.state.errors[name]) {
-      return 'red';
-    }
+  toggleUrlWindow(bool) {
+    this.setState({
+      urlWindow: bool,
+    });
+  }
+
+  addImageState(arr) {
+    this.setState({ images: arr });
   }
 
   render() {
@@ -164,7 +179,7 @@ class NewReviewModal extends React.Component {
                   <h3>Tell us what you think</h3>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-                  <StarHover hoist={this.hoist} />
+                  <StarHover hoist={this.hoist} error={this.state.errors.rating} />
                   <div style={{ justifyContent: 'flex-end' }}>
                     <h4>Do you recommend this product?</h4>
                     <div onChange={this.handleChange} style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -194,18 +209,36 @@ class NewReviewModal extends React.Component {
                 <div>
                   <h4>Review Body</h4>
                   <textarea rows="6" name="body"  placeholder="Why did you like this product or not" value={this.state.body} onChange={(e) =>{this.handleChange(e, this.characterChecker)}} style={{ width: '99.5%', resize: 'none', display: 'block', borderColor: this.getColor('body') }} />
-                  <small>{this.state.count}</small>
+                  <small style = {{ color: this.getColor('body') }}>{this.state.count}</small>
                 </div>
-                <button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>
+                <div style={{ display: 'inline-block' }}><button onClick={()=>{ this.toggleUrlWindow(true) }}>Add Images</button>< ImageSpan images={this.state.images}/></div>
+
                 <span>
                   <button onClick={this.handleSubmit} style={{ float: 'right' }}type="submit">Submit</button>
                   <Errors errors={Object.values(this.state.errors)} />
                 </span>
                 {this.state.urlWindow && (
                   <UrlWindow>
-                    <h1>Little Window :)</h1>
-                    <p>Look at how small I am</p>
-                    <button onClick={() => {this.toggleUrlWindow(false)}} >Close me!</button>
+                    <h1>Link your pictures here</h1>
+                    <input type="text" name="image1" placeholder="Image URL here" value={this.state.image1} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image1') }} /><br /><br />
+                    <input type="text" name="image2" placeholder="Image URL here" value={this.state.image2} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image2') }} /><br /><br />
+                    <input type="text" name="image3" placeholder="Image URL here" value={this.state.image3} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image3') }} /><br /><br />
+                    <input type="text" name="image4" placeholder="Image URL here" value={this.state.image4} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image4') }} /><br /><br />
+                    <input type="text" name="image5" placeholder="Image URL here" value={this.state.image5} onChange={this.handleChange} style={{ width: '350px', borderColor: this.getColor('image5') }} /><br /><br />
+                    <button
+                      type="submit"
+                      onClick={() => {
+                        let check = formValidator(this.state, 'image', this.addImageState);
+                        if (!check) {
+                          this.toggleUrlWindow(false);
+                          return;
+                        }
+                        this.setState({
+                          errors: check,
+                        });
+                      }}
+                    > Submit
+                    </button>
                   </UrlWindow>
                 )}
                 { /* ---------------------------------------------------------------------------*/ }
