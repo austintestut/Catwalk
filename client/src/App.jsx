@@ -1,11 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import QuestionList from './AK/QuestionList.jsx';
+import styled from 'styled-components';
 import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
-import Reviews from './components/Reviews.jsx';
+import Reviews from './components/Reviews';
 import Container from './AK/Container';
 import Overview from './Overview/Overview';
-import styled from 'styled-components';
 
 class App extends React.Component {
   constructor() {
@@ -63,7 +62,7 @@ class App extends React.Component {
     axios.get(`/products/${id}/related`)
       .then((data) => {
         this.setState({
-          relatedProductIds: data.data
+          relatedProductIds: data.data,
         });
       })
       .catch((err) => {
@@ -76,7 +75,7 @@ class App extends React.Component {
     axios.get(`/products/${id}`)
       .then((data) => {
         this.setState({
-          productData: data.data
+          productData: data.data,
         });
       })
       .catch((err) => {
@@ -84,20 +83,20 @@ class App extends React.Component {
       });
   }
 
-  //get rating
+  // get rating
   getRating(id) {
     axios.get(`/reviews/meta/${id}`)
       .then((data) => {
-        let ratings = data.data.ratings;
-        let oneStars = ratings['1'] || 0;
-        let twoStars = ratings['2'] || 0;
-        let threeStars = ratings['3'] || 0;
-        let fourStars = ratings['4'] || 0;
-        let fiveStars = ratings['5'] || 0;
+        const { ratings } = data.data;
+        const oneStars = ratings['1'] || 0;
+        const twoStars = ratings['2'] || 0;
+        const threeStars = ratings['3'] || 0;
+        const fourStars = ratings['4'] || 0;
+        const fiveStars = ratings['5'] || 0;
 
-        let totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
+        const totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
 
-        let reviewStars = (oneStars * 1)
+        const reviewStars = (oneStars * 1)
           + (twoStars * 2) + (threeStars * 3)
           + (fourStars * 4) + (fiveStars * 5);
 
@@ -106,9 +105,9 @@ class App extends React.Component {
           rating = 0;
         }
         this.setState({
-          rating: rating,
+          rating,
           characteristics: data.data.characteristics,
-          totalReviews: totalReviews
+          totalReviews,
         });
       })
       .catch((err) => {
@@ -147,23 +146,23 @@ class App extends React.Component {
 
   handleItemClick(id) {
     this.setState({
-      currentPageItemId: id
+      currentPageItemId: id,
     }, () => {
       this.fetcher();
     });
   }
 
   darkToggle() {
-    let app = document.getElementById('app');
+    const app = document.getElementById('app');
     if (app.classList.contains('darkmode')) {
       app.classList.toggle('darkmode');
       this.setState({
-        shadeOfCarouselFade: 'white'
+        shadeOfCarouselFade: 'white',
       });
     } else {
       app.classList.toggle('darkmode');
       this.setState({
-        shadeOfCarouselFade: 'black'
+        shadeOfCarouselFade: 'black',
       });
     }
   }
@@ -173,7 +172,7 @@ class App extends React.Component {
       <div>
         <TopBar>
           <TitleP>Wozniak</TitleP>
-          <p style={{ fontFamily: 'Courier New ' }}>by Alex Shold, Austin Testut, Austin Elwell, and Robert Strange</p>
+          <p style={{ fontFamily: 'Courier New ' }}>by Alex Shold, Austin Testut, Austin Killough, and Robert Strange</p>
         </TopBar>
         <StyledDarkModeButton onClick={this.darkToggle}>🌙</StyledDarkModeButton>
         <Overview
@@ -206,7 +205,7 @@ class App extends React.Component {
 const TitleP = styled.p`
 font-family: Courier New;
 font-size: 24px;
-`
+`;
 
 const TopBar = styled.div`
 display: flex;

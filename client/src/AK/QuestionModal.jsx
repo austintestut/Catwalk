@@ -34,7 +34,7 @@ width: 100%;
   outline: bold;
   outline-color: black;
 }
-`
+`;
 const ModalQInput = styled.textarea`
 height: 110px;
 font-size: 16px;
@@ -42,11 +42,16 @@ font-size: 16px;
   outline: bold;
   outline-color: black;
 }
-`
-const XButton = styled.button`
+`;
+const XButton = styled.i`
 width: 50px;
 align-self: flex-end;
-`
+text-shadow: 0 0 1px #000;
+color: white;
+&:hover{
+  cursor: pointer;
+}
+`;
 
 const QuestionModal = function ({ show, hideQModal, submitQuestion, productName }) {
   if (!show) {
@@ -55,19 +60,18 @@ const QuestionModal = function ({ show, hideQModal, submitQuestion, productName 
   return (
     <ModalDiv>
       <ModalForm onSubmit={submitQuestion}>
-        <XButton style={{float: 'right', justifyContent: 'flex-end'}}onClick={hideQModal}>X</XButton>
-        <h2 style={{alignSelf: 'center' }}>Ask Your Question:</h2>
-        <h4 style={{alignSelf: 'center' }}>About {productName}</h4>
-        <p style={{fontSize: '25px', alignSelf: 'center'}}>What is your question?</p>
+        <XButton className="fas fa-times fa-lg" style={{ float: 'right', justifyContent: 'flex-end' }} onClick={hideQModal} />
+        <h2 style={{ alignSelf: 'center' }}>Ask Your Question:</h2>
+        <h4 style={{ alignSelf: 'center' }}>About {productName}</h4>
+        <p style={{ fontSize: '25px', alignSelf: 'center' }}>What is your question?</p>
         <ModalQInput maxLength="1000" />
-        <p style={{fontSize: '25px', alignSelf: 'center'}}>What is your nickname?</p>
+        <p style={{ fontSize: '25px', alignSelf: 'center' }}>What is your nickname?</p>
         <ModalInput placeholder="Example: jackson11!" maxLength="60" />
-        <p style={{color: 'gray'}}>For privacy reasons, do not use your full name or email address</p>
-        <p style={{fontSize: '25px', alignSelf: 'center'}}>Send us an email!</p>
+        <p style={{ color: 'gray' }}>For privacy reasons, do not use your full name or email address</p>
+        <p style={{ fontSize: '25px', alignSelf: 'center' }}>Send us an email!</p>
         <ModalInput placeholder="example: jack11@gmail.com" maxLength="60" />
-        <p style={{color: 'gray'}}>For authentication reasons only -  you will not be emailed</p>
+        <p style={{ color: 'gray' }}>For authentication reasons only -  you will not be emailed</p>
         <button type="submit">Submit Your Question</button>
-
 
       </ModalForm>
     </ModalDiv>

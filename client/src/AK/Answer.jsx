@@ -55,10 +55,11 @@ class Answer extends React.Component {
 
   renderHelpfulButton() {
     if (this.state.helped) {
-     return (
+      return (
         <>
-          <StyledButton style={{fontWeight: 'bold'}}
-          disabled
+          <StyledButton
+            style={{ fontWeight: 'bold' }}
+            disabled
           >Thank you for your feedback! ({this.props.ans.helpfulness + 1})
           </StyledButton>
         </>
@@ -86,7 +87,7 @@ class Answer extends React.Component {
 
   renderReportButton() {
     if (this.state.reported) {
-      return (<StyledButton disabled style={{color: 'red'}}> Reported</StyledButton>)
+      return (<StyledButton disabled style={{ color: 'red' }}> Reported</StyledButton>);
     }
     return <StyledButton onClick={this.reportAnswer}> Report</StyledButton>;
   }
@@ -94,7 +95,7 @@ class Answer extends React.Component {
   render() {
     return (
       <AnswerDiv>
-        <div style={{width: '65%'}}>
+        <div style={{ width: '65%' }}>
           <p>
             <b>A: </b>{this.props.ans.body}
           </p>

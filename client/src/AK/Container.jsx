@@ -28,7 +28,7 @@ margin-top: 30px;
 width: 100%;
 height: 50px;
 
-`
+`;
 
 class Container extends React.Component {
   constructor(props) {
@@ -96,14 +96,13 @@ class Container extends React.Component {
   }
 
   submitQuestion(event) {
-    event.preventDefault();
     axios({
       url: `/questions/${this.props.currentPageItemId}`,
       method: 'post',
       data: {
-        body: event.target[1].value,
-        name: event.target[2].value,
-        email: event.target[3].value,
+        body: event.target[0].value,
+        name: event.target[1].value,
+        email: event.target[2].value,
         product_id: this.props.currentPageItemId,
       },
     }).then(() => {
@@ -111,10 +110,9 @@ class Container extends React.Component {
         url: `/questions/${this.props.currentPageItemId}`,
         method: 'get',
       }).then((data) => {
-          this.setState({ questions: data.data.results, showQ: false });
-        })
-    }).catch((error)=>{console.error(error)})
-
+        this.setState({ questions: data.data.results, showQ: false });
+      });
+    }).catch((error) => { console.error(error); });
   }
 
   render() {
@@ -130,15 +128,14 @@ class Container extends React.Component {
           displayedQuestions={this.state.displayedQuestions}
           productName={this.props.productName}
         />
-        <ButtonsDiv >
+        <ButtonsDiv>
           <ShowMoreQuestionsButton
-          showMoreQuestions={this.showMoreQuestions}
-          isMaxQuestions={this.state.isMaxQuestions}
-        />
+            showMoreQuestions={this.showMoreQuestions}
+            isMaxQuestions={this.state.isMaxQuestions}
+          />
 
-        <AddQuestionButton showQModal={this.showQModal} />
+          <AddQuestionButton showQModal={this.showQModal} />
         </ButtonsDiv>
-
 
         <QuestionModal
           show={this.state.showQ}
