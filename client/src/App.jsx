@@ -158,7 +158,10 @@ class App extends React.Component {
           shadeOfCarouselFade={this.state.shadeOfCarouselFade}
         />
         <Container currentPageItemId={this.state.currentPageItemId}questions={this.state.questions}productName={this.state.productData.name}/>
-        <Reviews />
+        <Reviews
+          productId={this.state.currentPageItemId}
+          name={this.state.productData.name}
+        />
       </div>
     );
   }
@@ -178,7 +181,7 @@ background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
 `;
 const StyledDarkModeButton = styled.button`
-position: fixed;
+position: absolute;
 top: 0;
 right: 0;
 height: 50px;
