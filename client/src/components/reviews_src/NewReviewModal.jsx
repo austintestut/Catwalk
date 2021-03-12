@@ -161,6 +161,7 @@ class NewReviewModal extends React.Component {
       height: '100%',
       maxHeight: 'calc(100vh - 50px)',
       maxWidth: 'calc(100vw - 50px)',
+      color: 'black', // <-- dark mode?
     };
 
     const modalButtonStyle = {
@@ -180,6 +181,7 @@ class NewReviewModal extends React.Component {
       width: '100vw',
       height: '100vh',
       backgroundColor: 'rgba(128,128,128,0.5)',
+      backdropFilter: 'blur(5px)'
     };
 
     const formStyle = {
@@ -201,7 +203,7 @@ class NewReviewModal extends React.Component {
                 { /* ------------------------------->>FORM HERE<<------------------------------*/ }
                 <div style={{ justifyContent: 'center', textAlign: 'center' }}>
                   <h2>New Review</h2>
-                  <h3>Tell us what you think</h3>
+                  <h3>Tell us what you think about {this.props.name}</h3>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
                   <StarHover hoist={this.hoist} error={this.state.errors.rating} />

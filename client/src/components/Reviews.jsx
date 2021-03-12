@@ -89,6 +89,7 @@ class Reviews extends React.Component {
 
   render() {
     const { reviewsData, reviewsMeta, currentFilters } = this.state;
+    const { name } = this.props;
     const characteristics = Object.keys(reviewsMeta.characteristics);
     const flexContainerStyle = {
       paddingTop: '0px',
@@ -114,6 +115,7 @@ class Reviews extends React.Component {
           characteristics={characteristics}
           meta={reviewsMeta}
           updateReviews={this.updateReviews}
+          name={name}
         />
       </div>
     );

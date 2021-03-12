@@ -42,6 +42,7 @@ class ImgModal extends React.Component {
       // borderRadius: '10px',
     };
     const modalContentStyle = {
+      color: 'black',
       borderRadius: '5px',
       backgroundColor: 'white',
       width: '100%',

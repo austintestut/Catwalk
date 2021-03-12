@@ -7,10 +7,11 @@ const QuestionListDiv = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
+width: 100%;
 
 `;
 
-const QuestionList = function ({ questions, howMany, increaseHelpful, searching, displayedQuestions }) {
+const QuestionList = function ({ questions, howMany, increaseHelpful, searching, displayedQuestions, productName }) {
   let list = questions;
   if (searching) {
     list = displayedQuestions;
@@ -23,6 +24,7 @@ const QuestionList = function ({ questions, howMany, increaseHelpful, searching,
           key={question.question_id}
           answers={question.answers}
           increaseHelpful={increaseHelpful}
+          productName={productName}
         />
       ))}
     </QuestionListDiv>

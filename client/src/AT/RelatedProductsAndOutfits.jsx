@@ -29,10 +29,12 @@ border-radius: 50%;
 border-width: 2px;
 font-size: 20px;
 text-align: center;
+transition: transform .3s;
 ${StyledLeftButton}:hover {
   filter: contrast(70%);
   cursor: pointer;
   box-shadow: 0 0 15px rgba(115, 13, 21, .5);
+  transform: translate(-5px);
 }
 `;
 const StyledRightButton = styled.button`
@@ -40,7 +42,7 @@ height: 50px;
 width: 50px;
 position: relative;
 top: 160px;
-left: 15%;
+left: 10%;
 background-image: url(${RightArrow});
 background-position: center;
 background-size: cover;
@@ -50,32 +52,35 @@ border-width: 1px;
 font-size: 20px;
 border-radius: 50%;
 text-align: center;
+transition: transform .3s;
 ${StyledRightButton}:hover {
   filter: contrast(70%);
   cursor: pointer;
   box-shadow: 0 0 15px rgba(115, 13, 21, .5);
+  transform: translate(5px);
 }
 `;
 const StyledHeader = styled.h3`
+  font-family: Arial;
   padding-left: 12%;
-  width: auto;
+  margin-bottom: -4px;
 `;
 const StyledLeftRelatedButtonContainer = styled.div`
 ${props => props.relatedLeftArrow && css`
-z-index: 2;
-box-shadow: 20px 0 15px 0 rgba(100, 100, 100, 0.4);
+z-index: 1;
+box-shadow: 50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
 const StyledRightRelatedButtonContainer = styled.div`
 ${props => props.relatedRightArrow && css`
-z-index: 2;
-box-shadow: -20px 0 15px 0 rgba(100, 100, 100, 0.4);
+z-index: 1;
+box-shadow: -50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
 const StyledRightOutfitButtonContainer = styled.div`
 ${props => props.outfitRightArrow && css`
-z-index: 2;
-box-shadow: -20px 0 15px 0 rgba(100, 100, 100, 0.4);
+z-index: 1;
+box-shadow: -50px 0 17px 0 ` + props.shadeOfCarouselFade + `;
 `};
 `;
 class RelatedProductsAndOutfits extends React.Component {
@@ -101,17 +106,6 @@ class RelatedProductsAndOutfits extends React.Component {
       translatedXoutfit: 0
     };
 
-    /*
-      relatedProductIds: [],
-      productData: [],
-      rating: 0,
-      characteristics: [],
-      totalReviews: 0
-    */
-
-    // this.relatedProductIds = [17762, 18025, 17763, 17858, 18076, 17068, 17069, 17070]; // for testing
-    // this.outfitProductIds = [18076, 17858, 17763, 18076, 17068]; // for testing
-
     this.handleRelatedCarouselRight = this.handleRelatedCarouselRight.bind(this);
     this.handleRelatedCarouselLeft = this.handleRelatedCarouselLeft.bind(this);
     this.handleOutfitCarouselRight = this.handleOutfitCarouselRight.bind(this);
@@ -130,7 +124,7 @@ class RelatedProductsAndOutfits extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.relatedProductIds !== this.props.relatedProductIds) {
-      this.renderRightButtonToggleForRelatedProducts();
+        this.renderRightButtonToggleForRelatedProducts();
     }
   }
 
@@ -250,9 +244,10 @@ class RelatedProductsAndOutfits extends React.Component {
   render() {
     return (
       <div>
-        <StyledHeader>RELATED PRODUCTS</StyledHeader>
+        <StyledHeader>Related Products</StyledHeader>
         <StyledCarouselContainer>
-          <StyledLeftRelatedButtonContainer relatedLeftArrow={this.state.relatedLeftArrow}>
+          <StyledLeftRelatedButtonContainer shadeOfCarouselFade={this.props.shadeOfCarouselFade}
+          relatedLeftArrow={this.state.relatedLeftArrow}>
             {this.state.relatedLeftArrow && <StyledLeftButton onClick={() => { this.handleRelatedCarouselLeft(); this.checkIfButtonsShouldRender(); }}></StyledLeftButton>}
           </StyledLeftRelatedButtonContainer>
           <RelatedProductsCarousel
@@ -265,7 +260,8 @@ class RelatedProductsAndOutfits extends React.Component {
             currentCharacteristics={this.props.characteristics}
             translatedXrp={this.state.translatedXrp}
           />
-          <StyledRightRelatedButtonContainer relatedRightArrow={this.state.relatedRightArrow}>
+          <StyledRightRelatedButtonContainer shadeOfCarouselFade={this.props.shadeOfCarouselFade}
+          relatedRightArrow={this.state.relatedRightArrow}>
             {this.state.relatedRightArrow && (
               <StyledRightButton
                 onClick={() => {
@@ -275,7 +271,7 @@ class RelatedProductsAndOutfits extends React.Component {
             )}
           </StyledRightRelatedButtonContainer>
         </StyledCarouselContainer>
-        <StyledHeader>YOUR OUTFIT</StyledHeader>
+        <StyledHeader>Your Outfit</StyledHeader>
         <StyledCarouselContainer>
           <div>
             {this.state.outfitLeftArrow && <StyledLeftButton onClick={() => { this.handleOutfitCarouselLeft(); this.checkIfButtonsShouldRender(); }}></StyledLeftButton>}
@@ -289,8 +285,10 @@ class RelatedProductsAndOutfits extends React.Component {
             checkIfButtonsShouldRender={this.checkIfButtonsShouldRender}
             translatedXoutfit={this.state.translatedXoutfit}
             outfitLeftArrow={this.state.outfitLeftArrow}
+            shadeOfCarouselFade={this.props.shadeOfCarouselFade}
           />
-          <StyledRightOutfitButtonContainer outfitRightArrow={this.state.outfitRightArrow}>
+          <StyledRightOutfitButtonContainer shadeOfCarouselFade={this.props.shadeOfCarouselFade}
+          outfitRightArrow={this.state.outfitRightArrow}>
             {this.state.outfitRightArrow && (
               <StyledRightButton
                 onClick={() => {

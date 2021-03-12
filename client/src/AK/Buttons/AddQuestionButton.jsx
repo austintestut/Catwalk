@@ -6,6 +6,7 @@ height: 50px;
 width: 150px;
 margin-left: 5%;
 color: white;
+font-size: 16px;
 background-image: linear-gradient(#ff0019, #790a04);
 &:hover {
   cursor: pointer;
@@ -15,7 +16,7 @@ background-image: linear-gradient(#ff0019, #790a04);
 
 const AddQuestionButton = function ({ showQModal }) {
   return (
-    <StyledAddQuestionButton onClick={showQModal}>add question</StyledAddQuestionButton>
+    <StyledAddQuestionButton onClick={showQModal}>Add Question</StyledAddQuestionButton>
   );
 };
 

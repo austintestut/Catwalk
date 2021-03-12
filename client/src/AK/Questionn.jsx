@@ -10,7 +10,6 @@ display: flex;
 justify-content: space-between;
 font-family: Arial;
 padding-top: 15px;
-
 `;
 const RedButton = styled.button`
 color: white;
@@ -71,9 +70,9 @@ class Questionn extends React.Component {
       url: `/questions/${this.props.question.question_id}/answers`,
       method: 'post',
       data: {
-        body: event.target[0].value,
-        name: event.target[1].value,
-        email: event.target[2].value,
+        body: event.target[1].value,
+        name: event.target[2].value,
+        email: event.target[3].value,
       },
     });
   }
@@ -96,7 +95,7 @@ class Questionn extends React.Component {
 
   renderHelpfulButton() {
     if (this.state.helped) {
-      return (<StyledButton disabled> Thank you for your feedback! ({this.props.question.question_helpfulness + 1})</StyledButton>)
+      return (<StyledButton style={{fontWeight: 'bold'}}> Thank you for your feedback! ({this.props.question.question_helpfulness + 1})</StyledButton>)
     }
     return (<StyledButton onClick={this.markQuestionHelpful}> Yes ({this.props.question.question_helpfulness + this.state.QhelpfulCounter})</StyledButton>)
   }
@@ -140,7 +139,7 @@ class Questionn extends React.Component {
         <QuestionDiv>
           <div style={{fontWeight: '600', fontSize: '16px', width: '50%'}}>Q: {this.props.question.question_body}
           </div>
-          <div style={{ fontSize: '14px', color: 'grey', width: '300px'}}>
+          <div style={{ fontSize: '12px', color: 'grey', width: '400px'}}>
             Helpful?
             {this.renderHelpfulButton()}
             {this.renderReportButton()}
@@ -151,6 +150,8 @@ class Questionn extends React.Component {
           hide={this.hideAnsModal}
           showing={this.state.showingAnsModal}
           submitAnswer={this.submitAnswer}
+          productName={this.props.productName}
+          questionBody={this.props.question.question_body}
         />
         <AnswerList
           answers={myAnswers}

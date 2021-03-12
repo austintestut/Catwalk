@@ -27,7 +27,7 @@ justify-content: flex-start;
 align-items: center;
 margin-bottom: 35px;
 color: gray;
-width: 200px;
+width: 400px;
 
 `;
 
@@ -57,7 +57,7 @@ class Answer extends React.Component {
     if (this.state.helped) {
      return (
         <>
-          <StyledButton
+          <StyledButton style={{fontWeight: 'bold'}}
           disabled
           >Thank you for your feedback! ({this.props.ans.helpfulness + 1})
           </StyledButton>

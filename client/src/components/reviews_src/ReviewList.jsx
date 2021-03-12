@@ -74,7 +74,11 @@ class ReviewList extends React.Component {
         <ReviewsSort total={reviews.length} updateReviews={updateReviews} />
         <ReviewTileContainer reviews={reviews} show={show} />
         <MoreReviews show={show} length={reviews.length} addReviews={this.addReviews} />
-        <NewReviewModal characteristics={characteristics} meta={this.props.meta}/>
+        <NewReviewModal
+          characteristics={characteristics}
+          meta={this.props.meta}
+          name={this.props.name}
+        />
       </div>
     );
   }
