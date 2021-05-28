@@ -111,7 +111,7 @@ font-weight: bold;
 const StyledModalX = styled.i`
 color: white;
 position: relative;
-top: 21.5%;
+top: 25.5%;
 left: 63.5%;
 text-shadow: 0 0 1px #000;
 ${StyledModalX}:hover {
@@ -341,7 +341,6 @@ class RelatedProductCard extends React.Component {
       <>
         {this.state.modalShowing && (
           <StyledModalContainer onClick={this.toggleModal}>
-            <StyledModalX className="fas fa-times fa-lg" onClick={this.toggleModal}/>
             <ComparisonModal
               handleInnerModalClick={this.handleInnerModalClick}
               name={this.state.productData.name}
@@ -349,6 +348,7 @@ class RelatedProductCard extends React.Component {
               currentProductData={this.props.currentProductData}
               currentRating={this.props.currentRating}
               currentCharacteristics={this.props.currentCharacteristics}
+              toggleModal={this.toggleModal}
             />
           </StyledModalContainer>
         )}

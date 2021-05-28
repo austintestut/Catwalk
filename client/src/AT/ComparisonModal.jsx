@@ -1,7 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import styled, { css, keyframes } from 'styled-components';
-import StarStatic from '.././components/reviews_src/StarStatic.jsx';
+import React from "react";
+import axios from "axios";
+import styled, { css, keyframes } from "styled-components";
+import StarStatic from ".././components/reviews_src/StarStatic.jsx";
 
 const fadein = keyframes`
 from {
@@ -12,26 +12,47 @@ to {
 }
 `;
 const StyledModalBox = styled.div`
-display: grid;
-grid-template-columns: 2fr 1fr 2fr;
-background-color: white;
-align: center;
-top: 50%;
-z-index: 2;
-margin: auto;
-margin-top: 10%;
-height: auto;
-color:black;
-width: 30%;
-text-align: center;
-border: solid;
-border-width: 2px;
-border-radius: 10px;
-animation: ${fadein} 0.35s;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  background-color: white;
+  align: center;
+  top: 50%;
+  z-index: 2;
+  margin: auto;
+  margin-top: 10%;
+  height: auto;
+  color: black;
+  width: 30%;
+  text-align: center;
+  border: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  animation: ${fadein} 0.35s;
 `;
-const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics, currentProductData, currentRating, currentCharacteristics }) => {
+const StyledModalX = styled.i`
+  color: white;
+  position: absolute;
+  top: 23.5%;
+  right: 36%;
+  text-shadow: 0 0 1px #000;
+  ${StyledModalX}:hover {
+    cursor: pointer;
+  }
+`;
+
+const ComparisonModal = ({
+  toggleModal,
+  handleInnerModalClick,
+  name,
+  cardCharacteristics,
+  currentProductData,
+  currentRating,
+  currentCharacteristics,
+}) => {
   let categories = [];
-  let categorySet = new Set(Object.keys(cardCharacteristics).concat(Object.keys(currentCharacteristics)));
+  let categorySet = new Set(
+    Object.keys(cardCharacteristics).concat(Object.keys(currentCharacteristics))
+  );
   categorySet.forEach((element) => categories.push(element));
   categories.sort();
   let currentItemValues = [];
@@ -50,29 +71,44 @@ const ComparisonModal = ({ handleInnerModalClick, name, cardCharacteristics, cur
   }
   return (
     <StyledModalBox onClick={handleInnerModalClick}>
+      <StyledModalX className="fas fa-times fa-lg" onClick={toggleModal} />
       <div>
-        <h3><br></br></h3>
+        <h3>
+          <br></br>
+        </h3>
         <h4>{currentProductData.name}</h4>
         {currentItemValues.map((value) => {
-          if (typeof(value) !== 'string') {
-            return (<div>{value}</div>);
+          if (typeof value !== "string") {
+            return <div>{value}</div>;
           }
-          return (<div key={value}><StarStatic number={value} /></div>);
+          return (
+            <div key={value}>
+              <StarStatic number={value} />
+            </div>
+          );
         })}
       </div>
       <div>
         <h3>Comparing</h3>
         <h4>Characteristic</h4>
-        {categories.map((category) => (<div key={category}>{category}</div>))}
+        {categories.map((category) => (
+          <div key={category}>{category}</div>
+        ))}
       </div>
       <div>
-        <h3><br></br></h3>
+        <h3>
+          <br></br>
+        </h3>
         <h4>{name}</h4>
         {cardItemValues.map((value) => {
-          if (typeof(value) !== 'string') {
-            return (<div>{value}</div>);
+          if (typeof value !== "string") {
+            return <div>{value}</div>;
           }
-          return (<div key={value}><StarStatic number={value} /></div>);
+          return (
+            <div key={value}>
+              <StarStatic number={value} />
+            </div>
+          );
         })}
       </div>
       <h3></h3>
