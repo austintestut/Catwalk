@@ -172,7 +172,7 @@ class App extends React.Component {
       <div>
         <TopBar>
           <TitleP>Catwalk</TitleP>
-          <p style={{ fontFamily: 'Courier New ' }}>by Alex Shold, Austin Testut, Austin Killough, and Robert Strange</p>
+          <p style={{ fontFamily: 'Courier New ', fontSize: '18px' }}>by Alex Shold, Austin Testut, Austin Killough, and Robert Strange</p>
         </TopBar>
         <StyledDarkModeButton onClick={this.darkToggle}>🌙</StyledDarkModeButton>
         <Overview
@@ -204,7 +204,7 @@ class App extends React.Component {
 
 const TitleP = styled.p`
 font-family: Courier New;
-font-size: 24px;
+font-size: 32px;
 color: white;
 `;
 
@@ -217,6 +217,7 @@ background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
 color: white;
 `;
+
 const StyledDarkModeButton = styled.button`
 position: absolute;
 top: 0;
