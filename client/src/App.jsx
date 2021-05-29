@@ -205,6 +205,7 @@ class App extends React.Component {
 const TitleP = styled.p`
 font-family: Courier New;
 font-size: 24px;
+color: white;
 `;
 
 const TopBar = styled.div`
@@ -214,6 +215,7 @@ align-items: center;
 width: 100%;
 background-image: linear-gradient(#ff0019, #790a04);
 height: 50px;
+color: white;
 `;
 const StyledDarkModeButton = styled.button`
 position: absolute;
