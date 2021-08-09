@@ -166,6 +166,7 @@ class RelatedProductCard extends React.Component {
   getProductInfo(id) {
     axios.get(`/products/${id}`)
       .then((data) => {
+        console.log(id, data)
         this.setState({
           productData: data.data,
           showingStylePrice: data.data.default_price

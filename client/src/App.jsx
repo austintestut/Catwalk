@@ -1,10 +1,10 @@
-import React from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import RelatedProductsAndOutfits from './AT/RelatedProductsAndOutfits';
-import Reviews from './components/Reviews';
-import Container from './AK/Container';
-import Overview from './Overview/Overview';
+import React from "react";
+import axios from "axios";
+import styled from "styled-components";
+import RelatedProductsAndOutfits from "./AT/RelatedProductsAndOutfits";
+import Reviews from "./components/Reviews";
+import Container from "./AK/Container";
+import Overview from "./Overview/Overview";
 
 class App extends React.Component {
   constructor() {
@@ -17,7 +17,7 @@ class App extends React.Component {
       rating: 0,
       characteristics: [],
       totalReviews: 0,
-      shadeOfCarouselFade: 'white',
+      shadeOfCarouselFade: "white",
       styles: [],
       mainPics: [],
       thumbs: [],
@@ -48,57 +48,64 @@ class App extends React.Component {
 
   getProductQuestions() {
     // will need to change the ID parameter below to be dynamic, maybe use params obj
-    axios({
-      url: `/questions/${this.state.currentPageItemId}`,
-      method: 'get',
-    })
-      .then((data) => {
-        this.setState({ questions: data.data.results });
-      });
+    axios.get(`/questions/${this.state.currentPageItemId}`).then((data) => {
+      this.setState({ questions: data.data.results });
+    });
   }
 
   // fetch related items
   getRelatedItemIds(id) {
-    axios.get(`/products/${id}/related`)
+    axios
+      .get(`/products/${id}/related`)
       .then((data) => {
         this.setState({
           relatedProductIds: data.data,
         });
       })
       .catch((err) => {
-        console.log('ERR Axios get product from client', err);
+        console.log("ERR Axios get product from client", err);
       });
   }
 
   // get the category, name, default price
   getProductInfo(id) {
-    axios.get(`/products/${id}`)
+    axios
+      .get(`/products/${id}`)
       .then((data) => {
         this.setState({
           productData: data.data,
         });
       })
       .catch((err) => {
-        console.log('ERR Axios get product from client', err);
+        console.log("ERR Axios get product from client", err);
       });
   }
 
   // get rating
   getRating(id) {
-    axios.get(`/reviews/meta/${id}`)
+    axios
+      .get(`/reviews/meta/${id}`)
       .then((data) => {
         const { ratings } = data.data;
-        const oneStars = ratings['1'] || 0;
-        const twoStars = ratings['2'] || 0;
-        const threeStars = ratings['3'] || 0;
-        const fourStars = ratings['4'] || 0;
-        const fiveStars = ratings['5'] || 0;
+        const oneStars = ratings["1"] || 0;
+        const twoStars = ratings["2"] || 0;
+        const threeStars = ratings["3"] || 0;
+        const fourStars = ratings["4"] || 0;
+        const fiveStars = ratings["5"] || 0;
 
-        const totalReviews = parseInt(oneStars) + parseInt(twoStars) + parseInt(threeStars) + parseInt(fourStars) + parseInt(fiveStars);
+        const totalReviews =
+          parseInt(oneStars) +
+          parseInt(twoStars) +
+          parseInt(threeStars) +
+          parseInt(fourStars) +
+          parseInt(fiveStars);
 
-        const reviewStars = (oneStars * 1)
-          + (twoStars * 2) + (threeStars * 3)
-          + (fourStars * 4) + (fiveStars * 5);
+        const reviewStars =
+          oneStars * 1 +
+          twoStars * 2 +
+          threeStars * 3 +
+          fourStars * 4 +
+          fiveStars * 5;
 
         let rating = reviewStars / totalReviews;
         if (totalReviews === 0) {
@@ -111,20 +118,26 @@ class App extends React.Component {
         });
       })
       .catch((err) => {
-        console.log('ERR getting average star rating from client', err);
+        console.log("ERR getting average star rating from client", err);
       });
   }
 
   getStyles(id) {
-    axios.get(`/products/${id}/styles`)
+    axios
+      .get(`/products/${id}/styles`)
       .then((res) => {
-        this.setState({
-          styles: res.data.results
-        }, ()=>{this.getPhotos(this.state.styles)})
+        this.setState(
+          {
+            styles: res.data.results,
+          },
+          () => {
+            this.getPhotos(this.state.styles);
+          }
+        );
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
 
   getPhotos(styles) {
@@ -138,31 +151,34 @@ class App extends React.Component {
         thumbs.push(thumb);
         this.setState({
           mainPics: main,
-          thumbs: thumbs
-        })
+          thumbs: thumbs,
+        });
       }
     }
   }
 
   handleItemClick(id) {
-    this.setState({
-      currentPageItemId: id,
-    }, () => {
-      this.fetcher();
-    });
+    this.setState(
+      {
+        currentPageItemId: id,
+      },
+      () => {
+        this.fetcher();
+      }
+    );
   }
 
   darkToggle() {
-    const app = document.getElementById('app');
-    if (app.classList.contains('darkmode')) {
-      app.classList.toggle('darkmode');
+    const app = document.getElementById("app");
+    if (app.classList.contains("darkmode")) {
+      app.classList.toggle("darkmode");
       this.setState({
-        shadeOfCarouselFade: 'white',
+        shadeOfCarouselFade: "white",
       });
     } else {
-      app.classList.toggle('darkmode');
+      app.classList.toggle("darkmode");
       this.setState({
-        shadeOfCarouselFade: 'black',
+        shadeOfCarouselFade: "black",
       });
     }
   }
@@ -172,16 +188,20 @@ class App extends React.Component {
       <div>
         <TopBar>
           <TitleP>Catwalk</TitleP>
-          <p style={{ fontFamily: 'Courier New ', fontSize: '18px' }}>by Alex Shold, Austin Testut, Austin Killough, and Robert Strange</p>
+          <p style={{ fontFamily: "Courier New ", fontSize: "18px" }}>
+            by Alex Shold, Austin Testut, Austin Killough, and Robert Strange
+          </p>
         </TopBar>
-        <StyledDarkModeButton onClick={this.darkToggle}>🌙</StyledDarkModeButton>
+        <StyledDarkModeButton onClick={this.darkToggle}>
+          🌙
+        </StyledDarkModeButton>
         <Overview
-        product={this.state.productData}
-        styles={this.state.styles}
-        rating={this.state.rating}
-        reviews={this.state.totalReviews}
-        mainPics={this.state.mainPics}
-        thumbs={this.state.thumbs}
+          product={this.state.productData}
+          styles={this.state.styles}
+          rating={this.state.rating}
+          reviews={this.state.totalReviews}
+          mainPics={this.state.mainPics}
+          thumbs={this.state.thumbs}
         />
         <RelatedProductsAndOutfits
           currentPageItemId={this.state.currentPageItemId}
@@ -192,7 +212,11 @@ class App extends React.Component {
           characteristics={this.state.characteristics}
           shadeOfCarouselFade={this.state.shadeOfCarouselFade}
         />
-        <Container currentPageItemId={this.state.currentPageItemId} questions={this.state.questions} productName={this.state.productData.name} />
+        <Container
+          currentPageItemId={this.state.currentPageItemId}
+          questions={this.state.questions}
+          productName={this.state.productData.name}
+        />
         <Reviews
           productId={this.state.currentPageItemId}
           name={this.state.productData.name}
@@ -203,35 +227,34 @@ class App extends React.Component {
 }
 
 const TitleP = styled.p`
-font-family: Courier New;
-font-size: 32px;
-color: white;
+  font-family: Courier New;
+  font-size: 32px;
+  color: white;
 `;
 
 const TopBar = styled.div`
-display: flex;
-justify-content: space-around;
-align-items: center;
-width: 100%;
-background-image: linear-gradient(#ff0019, #790a04);
-height: 50px;
-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background-image: linear-gradient(#ff0019, #790a04);
+  height: 50px;
+  color: white;
 `;
 
 const StyledDarkModeButton = styled.button`
-position: absolute;
-top: 0;
-right: 0;
-height: 50px;
-width: 75px;
-font-family: inherit;
-background-image: linear-gradient(white, silver);
-&:hover {
-  cursor: pointer;
-  background-image: linear-gradient(silver, white);
-}
-filter: grayscale(100%);
-font-size: 17.5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  width: 75px;
+  font-family: inherit;
+  background-image: linear-gradient(white, silver);
+  &:hover {
+    cursor: pointer;
+    background-image: linear-gradient(silver, white);
+  }
+  filter: grayscale(100%);
+  font-size: 17.5px;
 `;
 export default App;
-

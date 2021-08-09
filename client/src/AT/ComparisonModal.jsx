@@ -32,7 +32,7 @@ const StyledModalBox = styled.div`
 const StyledModalX = styled.i`
   color: white;
   position: absolute;
-  top: 23.5%;
+  top: 19.5%;
   right: 36%;
   text-shadow: 0 0 1px #000;
   ${StyledModalX}:hover {
