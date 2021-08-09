@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/FEC-Wozniak/FEC-Catwalk#readme",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "css": "^3.0.0",
@@ -33,6 +35,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
+    "react-test-renderer": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.1",
